@@ -1,0 +1,10 @@
+debug/database.o
+debug/login.o
+debug/main.o
+debug/mainmenuwidget.o
+debug/mainwindow.o
+debug/restaurantwidget.o
+debug/moc_login.o
+debug/moc_mainmenuwidget.o
+debug/moc_mainwindow.o
+debug/moc_restaurantwidget.o
