@@ -1,6 +1,6 @@
 #include "restaurantwidget.h"
 #include "ui_restaurantwidget.h"
-#include <QMessageBox>
+#include <QDialog>
 
 
 RestaurantWidget::RestaurantWidget(QWidget *parent) :
@@ -29,11 +29,12 @@ RestaurantWidget::~RestaurantWidget()
 ///
 void RestaurantWidget::on_confirmButton_pressed()
 {
-    QMessageBox confirmTrip = QMessageBox();
-    confirmTrip.setText("Are you sure?");
-    confirmTrip.setModal(true);
-    confirmTrip.setWindowTitle("Confirm");
-    confirmTrip.show();
+    // A quick cancel/confirm popup, could be expanded on later include a brief summary of their trip
+//    QDialog confirmTrip = QDialog("Are you sure?");
+//    confirmTrip.set("Are you sure?");
+//    confirmTrip.setModal(true);
+//    confirmTrip.setWindowTitle("Confirm");
+//    confirmTrip.show();
 }
 
 

@@ -15,9 +15,10 @@ public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
 
-    bool isValidUser();
+signals:
+    void transmit_validUser(const bool& valid);
 
-private slots:
+public slots:
     void on_passwordlineEdit_returnPressed();
 
     void on_logInButton_pressed();

@@ -8,18 +8,18 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+    this->validUser = false;
+
+    QObject::connect(this,
+                     SIGNAL(transmit_validUser(bool)),
+                     parent,
+                     SLOT(parent->recieve_loginAttempt(bool)));
 }
 
 Login::~Login()
 {
     delete ui;
 }
-
-bool Login::isValidUser()
-{
-    return validUser;
-}
-
 
 ///
 /// \brief Login::on_passwordlineEdit_returnPressed
@@ -29,10 +29,8 @@ bool Login::isValidUser()
 void Login::on_passwordlineEdit_returnPressed()
 {
     // skipping authentication step for now
-
-    this->
+    on_logInButton_pressed();
 }
-
 
 ///
 /// \brief Login::on_logInButton_pressed
@@ -41,7 +39,11 @@ void Login::on_passwordlineEdit_returnPressed()
 ///
 void Login::on_logInButton_pressed()
 {
-    // bring user to the main menu widget
+    // bring user to the main menu widget, skipping authentication for now
+    this->validUser = true;
+
+
+    emit transmit_validUser(this->validUser);
 }
 
 ///

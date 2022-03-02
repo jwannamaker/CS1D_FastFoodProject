@@ -10,10 +10,23 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // initially opens to loginPage
     ui->stackedWidget->setCurrentWidget(ui->loginPage);
+
+    QObject::connect(ui->loginPage,
+                     SIGNAL(ui->loginPage->transmit_validUser(bool)),
+                     this,
+                     SLOT(this->recieve_loginAttempt(bool)));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::recieve_loginAttempt(const bool& valid)
+{
+    if (valid)
+        ui->stackedWidget->setCurrentWidget(ui->mainMenuPage);
+    ui->stackedWidget->show();
 }

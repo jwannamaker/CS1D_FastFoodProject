@@ -531,6 +531,9 @@ release/moc_mainwindow.cpp: ../FastFoodApp/mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../FastFoodApp/restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
 		../FastFoodApp/mainmenuwidget.h \
@@ -1710,6 +1713,9 @@ release/main.o: ../FastFoodApp/main.cpp ../FastFoodApp/mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../FastFoodApp/restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
 		../FastFoodApp/mainmenuwidget.h \
@@ -2053,6 +2059,9 @@ release/mainwindow.o: ../FastFoodApp/mainwindow.cpp ../FastFoodApp/mainwindow.h 
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../FastFoodApp/restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
 		../FastFoodApp/mainmenuwidget.h \
@@ -2281,8 +2290,7 @@ release/restaurantwidget.o: ../FastFoodApp/restaurantwidget.cpp ../FastFoodApp/r
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMessageBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QDialog \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\restaurantwidget.o ..\FastFoodApp\restaurantwidget.cpp
 

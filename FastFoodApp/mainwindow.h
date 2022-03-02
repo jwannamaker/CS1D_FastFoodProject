@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPushButton>
+#include <QObject>
 #include "restaurantwidget.h"
 #include "mainmenuwidget.h"
 #include "login.h"
@@ -17,6 +19,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+signals:
+
+public slots:
+    void recieve_loginAttempt(const bool& valid);
 
 private:
     Ui::MainWindow *ui;
