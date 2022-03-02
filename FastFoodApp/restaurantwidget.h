@@ -15,6 +15,9 @@ public:
     explicit RestaurantWidget(QWidget *parent = nullptr);
     ~RestaurantWidget();
 
+signals:
+    void transmit_cancel();
+
 private slots:
     void on_confirmButton_pressed();
 

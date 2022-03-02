@@ -35,6 +35,7 @@ void RestaurantWidget::on_confirmButton_pressed()
 //    confirmTrip.setModal(true);
 //    confirmTrip.setWindowTitle("Confirm");
 //    confirmTrip.show();
+
 }
 
 
@@ -45,6 +46,8 @@ void RestaurantWidget::on_confirmButton_pressed()
 ///
 void RestaurantWidget::on_cancelButton_pressed()
 {
-    this->destroy();
+    emit transmit_cancel();
 }
+
+
 

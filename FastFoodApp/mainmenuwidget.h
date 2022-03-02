@@ -15,6 +15,10 @@ public:
     explicit MainMenuWidget(QWidget *parent = nullptr);
     ~MainMenuWidget();
 
+signals:
+    void transmit_logout();
+    void transmit_restaurantView();
+
 private slots:
     void on_logOutButton_pressed();
 

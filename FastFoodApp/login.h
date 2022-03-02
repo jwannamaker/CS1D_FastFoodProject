@@ -16,7 +16,7 @@ public:
     ~Login();
 
 signals:
-    void transmit_validUser(const bool& valid);
+    void transmit_validUser(bool valid);
 
 public slots:
     void on_passwordlineEdit_returnPressed();

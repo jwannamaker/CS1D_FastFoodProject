@@ -30,7 +30,7 @@ public:
     QLabel *label;
     QLineEdit *usernameLineEdit;
     QLabel *label_2;
-    QLineEdit *passwordlineEdit;
+    QLineEdit *passwordLineEdit;
     QPushButton *logInButton;
     QPushButton *clearButton;
     QSpacerItem *verticalSpacer_2;
@@ -61,11 +61,11 @@ public:
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
 
-        passwordlineEdit = new QLineEdit(Login);
-        passwordlineEdit->setObjectName(QString::fromUtf8("passwordlineEdit"));
-        passwordlineEdit->setEchoMode(QLineEdit::Password);
+        passwordLineEdit = new QLineEdit(Login);
+        passwordLineEdit->setObjectName(QString::fromUtf8("passwordLineEdit"));
+        passwordLineEdit->setEchoMode(QLineEdit::Password);
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, passwordlineEdit);
+        formLayout->setWidget(1, QFormLayout::FieldRole, passwordLineEdit);
 
         logInButton = new QPushButton(Login);
         logInButton->setObjectName(QString::fromUtf8("logInButton"));

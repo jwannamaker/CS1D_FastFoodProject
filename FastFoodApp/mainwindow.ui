@@ -14,41 +14,9 @@
    <string>Fast Food Planner</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QStackedWidget" name="stackedWidget">
-      <property name="currentIndex">
-       <number>2</number>
-      </property>
-      <widget class="Login" name="loginPage"/>
-      <widget class="MainMenuWidget" name="mainMenuPage"/>
-      <widget class="RestaurantWidget" name="restaurantsPage"/>
-      <widget class="QWidget" name="orderHistoryPage"/>
-     </widget>
-    </item>
-   </layout>
+   <layout class="QGridLayout" name="gridLayout"/>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>Login</class>
-   <extends>QWidget</extends>
-   <header>login.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>RestaurantWidget</class>
-   <extends>QWidget</extends>
-   <header>restaurantwidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>MainMenuWidget</class>
-   <extends>QWidget</extends>
-   <header>mainmenuwidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

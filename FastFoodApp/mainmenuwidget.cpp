@@ -19,7 +19,7 @@ MainMenuWidget::~MainMenuWidget()
 void MainMenuWidget::on_logOutButton_pressed()
 {
     // switch the top widget on the stacked widget to the login widget
-
+    emit transmit_logout();
 }
 
 
@@ -30,5 +30,5 @@ void MainMenuWidget::on_orderHistoryButton_pressed()
 
 void MainMenuWidget::on_restaurantsButton_pressed()
 {
-
+    emit transmit_restaurantView();
 }

@@ -13,11 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QWidget>
-#include "login.h"
-#include "mainmenuwidget.h"
-#include "restaurantwidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -26,11 +22,6 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QGridLayout *gridLayout;
-    QStackedWidget *stackedWidget;
-    Login *loginPage;
-    MainMenuWidget *mainMenuPage;
-    RestaurantWidget *restaurantsPage;
-    QWidget *orderHistoryPage;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -41,29 +32,9 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         gridLayout = new QGridLayout(centralwidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        stackedWidget = new QStackedWidget(centralwidget);
-        stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        loginPage = new Login();
-        loginPage->setObjectName(QString::fromUtf8("loginPage"));
-        stackedWidget->addWidget(loginPage);
-        mainMenuPage = new MainMenuWidget();
-        mainMenuPage->setObjectName(QString::fromUtf8("mainMenuPage"));
-        stackedWidget->addWidget(mainMenuPage);
-        restaurantsPage = new RestaurantWidget();
-        restaurantsPage->setObjectName(QString::fromUtf8("restaurantsPage"));
-        stackedWidget->addWidget(restaurantsPage);
-        orderHistoryPage = new QWidget();
-        orderHistoryPage->setObjectName(QString::fromUtf8("orderHistoryPage"));
-        stackedWidget->addWidget(orderHistoryPage);
-
-        gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
-
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
-
-        stackedWidget->setCurrentIndex(2);
-
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi

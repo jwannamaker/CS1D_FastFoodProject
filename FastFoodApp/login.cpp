@@ -9,11 +9,6 @@ Login::Login(QWidget *parent) :
 {
     ui->setupUi(this);
     this->validUser = false;
-
-    QObject::connect(this,
-                     SIGNAL(transmit_validUser(bool)),
-                     parent,
-                     SLOT(parent->recieve_loginAttempt(bool)));
 }
 
 Login::~Login()
@@ -28,7 +23,6 @@ Login::~Login()
 ///
 void Login::on_passwordlineEdit_returnPressed()
 {
-    // skipping authentication step for now
     on_logInButton_pressed();
 }
 
@@ -39,9 +33,8 @@ void Login::on_passwordlineEdit_returnPressed()
 ///
 void Login::on_logInButton_pressed()
 {
-    // bring user to the main menu widget, skipping authentication for now
-    this->validUser = true;
-
+    // dummy data for now
+    this->validUser = (ui->usernameLineEdit->text() == QString("username") && ui->passwordLineEdit->text() == QString("password"));
 
     emit transmit_validUser(this->validUser);
 }
@@ -54,6 +47,6 @@ void Login::on_logInButton_pressed()
 void Login::on_clearButton_pressed()
 {
     ui->usernameLineEdit->clear();
-    ui->passwordlineEdit->clear();
+    ui->passwordLineEdit->clear();
 }
 
