@@ -88,7 +88,7 @@
     <widget class="QWidget" name="RestaurantViewWidget" native="true">
      <property name="minimumSize">
       <size>
-       <width>450</width>
+       <width>550</width>
        <height>0</height>
       </size>
      </property>

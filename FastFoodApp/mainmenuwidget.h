@@ -7,6 +7,13 @@ namespace Ui {
 class MainMenuWidget;
 }
 
+///
+/// \class MainMenuWidget
+///
+/// \brief The MainMenuWidget class
+/// A widget for the main menu of the app. Forms the basis for
+/// all interactions with the Fast Food Planner.
+///
 class MainMenuWidget : public QWidget
 {
     Q_OBJECT

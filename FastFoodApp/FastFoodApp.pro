@@ -14,6 +14,7 @@ SOURCES += \
     main.cpp \
     mainmenuwidget.cpp \
     mainwindow.cpp \
+    restaurantviewwidget.cpp \
     restaurantwidget.cpp
 
 HEADERS += \
@@ -21,6 +22,7 @@ HEADERS += \
     login.h \
     mainmenuwidget.h \
     mainwindow.h \
+    restaurantviewwidget.h \
     restaurantwidget.h
 
 FORMS += \

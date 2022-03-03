@@ -99,7 +99,7 @@ public:
 
         RestaurantViewWidget = new QWidget(RestaurantWidget);
         RestaurantViewWidget->setObjectName(QString::fromUtf8("RestaurantViewWidget"));
-        RestaurantViewWidget->setMinimumSize(QSize(450, 0));
+        RestaurantViewWidget->setMinimumSize(QSize(550, 0));
 
         gridLayout->addWidget(RestaurantViewWidget, 0, 2, 2, 1);
 

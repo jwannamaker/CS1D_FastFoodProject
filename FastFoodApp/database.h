@@ -3,6 +3,11 @@
 
 #include <QtSql>
 
+///
+/// \class Database
+/// \brief The Database class
+/// Manages a connection to the database (.sqlite)
+///
 class Database
 {
 public:

@@ -7,6 +7,13 @@ namespace Ui {
 class Login;
 }
 
+///
+/// \class Login
+///
+/// \brief The Login class
+///
+/// A widget for the login page of the app.
+///
 class Login : public QWidget
 {
     Q_OBJECT
