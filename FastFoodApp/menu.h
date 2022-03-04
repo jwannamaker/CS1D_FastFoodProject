@@ -10,14 +10,14 @@
 /// \brief The Menu class
 ///
 /// A class to wrap interactions with a vector containing all of the items
-/// a menu can have, such as editiing a menu item, creating or deleting a
+/// a menu can have, such as editing a menu item, creating or deleting a
 /// menu item, placing an order, getting the sum for that order, and more.
 ///
 class Menu
 {
 public:
     ///
-    /// \brief The Item struct
+    /// \brief The Item class
     ///
     /// Represents any single memu item. Attributes include a name and a price.
     ///
@@ -25,6 +25,9 @@ public:
     {
         QString name;
         double price;
+
+        Item();
+        Item(QString name, double price) : name{name}, price{price} {}
     };
 
     ///

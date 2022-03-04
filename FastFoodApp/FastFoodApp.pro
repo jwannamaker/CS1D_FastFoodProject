@@ -10,7 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     customer.cpp \
-    database.cpp \
+    databasehelper.cpp \
     login.cpp \
     main.cpp \
     mainmenuwidget.cpp \
@@ -22,7 +22,8 @@ SOURCES += \
 
 HEADERS += \
     customer.h \
-    database.h \
+    databasehelper.h \
+    header.h \
     login.h \
     mainmenuwidget.h \
     mainwindow.h \

@@ -55,6 +55,9 @@ private:
     /// \brief visited.
     ///
     /// A vector containing which restaurants this Customer has visited.
+    /// *Idea: this doesn't have to be a vector of restaurants, but instead can be a vector of ints
+    /// storing the IDs of the restaurants they have visited. This would save memory and would simplify
+    /// the process of determining the total distance traveled for a certain trip.
     ///
     std::vector<Restaurant> visited;
 };

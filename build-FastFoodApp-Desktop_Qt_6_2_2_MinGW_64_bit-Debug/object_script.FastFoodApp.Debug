@@ -1,8 +1,11 @@
-debug/database.o
+debug/customer.o
+debug/databasehelper.o
 debug/login.o
 debug/main.o
 debug/mainmenuwidget.o
 debug/mainwindow.o
+debug/menu.o
+debug/restaurant.o
 debug/restaurantviewwidget.o
 debug/restaurantwidget.o
 debug/moc_login.o

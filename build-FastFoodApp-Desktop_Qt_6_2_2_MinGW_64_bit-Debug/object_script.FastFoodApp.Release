@@ -1,8 +1,11 @@
-release/database.o
+release/customer.o
+release/databasehelper.o
 release/login.o
 release/main.o
 release/mainmenuwidget.o
 release/mainwindow.o
+release/menu.o
+release/restaurant.o
 release/restaurantviewwidget.o
 release/restaurantwidget.o
 release/moc_login.o

@@ -1,7 +1,7 @@
 #include "restaurantwidget.h"
 #include "ui_restaurantwidget.h"
 #include <QDialog>
-
+#include "header.h"
 
 RestaurantWidget::RestaurantWidget(QWidget *parent) :
     QWidget(parent),
@@ -9,6 +9,7 @@ RestaurantWidget::RestaurantWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->initialLocationLineEdit->setText("Saddleback");
+
 }
 
 RestaurantWidget::~RestaurantWidget()
@@ -37,7 +38,8 @@ void RestaurantWidget::on_confirmButton_pressed()
 //    confirmTrip.show();
 
 
-    emit transmit_cancel();
+
+//    emit transmit_cancel();
 }
 
 

@@ -8,6 +8,7 @@
 #include "restaurantwidget.h"
 #include "mainmenuwidget.h"
 #include "login.h"
+//#include "header.h"
 
 namespace Ui {
 class MainWindow;

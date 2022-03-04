@@ -2,6 +2,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "login.h"
+#include "restaurant.h"
+#include "databasehelper.h"
 #include "restaurantwidget.h"
 #include "mainmenuwidget.h"
 
@@ -45,6 +47,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // by default, opens to the login page first
     stackedWidget->setCurrentWidget(loginPage);
     setCentralWidget(stackedWidget);
+
+    //std::vector<Restaurant> restaurants;
+    // testing populating global restaurants vector
+    Restaurant::list.push_back(Restaurant(0, "Please Work")); //Would this push two of the same resturant instances?
+    DatabaseHelper dbHelper;
+    dbHelper.createRestaurantTable();
 }
 
 MainWindow::~MainWindow()
