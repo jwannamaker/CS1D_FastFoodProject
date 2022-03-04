@@ -33,7 +33,7 @@ void DatabaseHelper::setSourceFile(QString sourceFile)
 void DatabaseHelper::populateRestaurants()
 {
 	QFile file(sourceFile);
-    if(file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream inputStream(&file);
         QString line;
@@ -41,48 +41,54 @@ void DatabaseHelper::populateRestaurants()
         double distance,price;
         int numOfMenuItems,numOfResturantDists;
         Restaurant newResturant;
-        //Menu newMenu;
-        //std::vector<double> listOfDistances;
-        //Item newItem;
 
 
         while(!inputStream.atEnd())
         {
-            line = inputStream.readLine();
-            newResturant.setName(line.mid(30)); //Gets name of the resturant
+            Menu newMenu;
 
+            //Gets name of the resturant
             line = inputStream.readLine();
-            newResturant.setID(line.remove(QRegularExpression("\\D+")).toInt()); //Sets number of resturant
+            newResturant.setName(line.mid(30));
 
+            //Gets ID of the resturant
             line = inputStream.readLine();
-            numOfResturantDists = line.remove(QRegularExpression("\\D+")).toInt(); //Gets number of resturant locations.
-            //listOfDistances.reserve(numOfResturantDists+1);
+            newResturant.setID(line.remove(QRegularExpression("\\D+")).toInt());
+
+            //Gets number of resturant locations.
+            line = inputStream.readLine();
+            numOfResturantDists = line.remove(QRegularExpression("\\D+")).toInt();
+
+            std::vector<double> listOfDistances(numOfResturantDists+1,0.0);
             for(int index = 1; index <= numOfResturantDists; index++) //Repeat based on the number of resturant locations.
             {
+                //Places distances into vector
                 inputStream >> id >> distance;
-                //listOfDistances[index] = distance;
+                listOfDistances[index] = distance;
             }
             inputStream.skipWhiteSpace();
 
+            //Sets index[0] of list to dist to saddleback.
             line = inputStream.readLine();
-            //listOfDistances[0] = line.remove(QRegularExpression("\\s\\D+")).toDouble(); //Sets index0 of list to dist to saddleback.
+            listOfDistances[0] = line.remove(QRegularExpression("\\s\\D+")).toDouble();
 
+            //Gets number of menu items.
             line = inputStream.readLine();
-            numOfMenuItems = line.remove(QRegularExpression("\\D+")).toInt(); //Gets number of menu items.
+            numOfMenuItems = line.remove(QRegularExpression("\\D+")).toInt();
             for(int index = 0; index < numOfMenuItems; index++) //Repeat based on the number of menu items.
             {
+                //Adds items to the menu
                 line = inputStream.readLine();
                 inputStream >> price;
-                //newItem.name = line;
-                //newItem.price = price;
-                //newMenu.addItem(newItem);
+                newMenu.addItem(Menu::Item(line,price));
                 inputStream.skipWhiteSpace();
             }
-            //newResturant.setMenu(newMenu);
-            //newResturant.setDistances(listOfDistances);
+            newResturant.setMenu(newMenu);
+            newResturant.setDistances(listOfDistances);
             inputStream.skipWhiteSpace();
 
-            Restaurant::list.push_back(newResturant); //Adds resturant to general list of resturants
+            //Adds resturant to general list of resturants
+            Restaurant::list.push_back(newResturant);
         }
 
         file.close();
@@ -95,7 +101,8 @@ void DatabaseHelper::createRestaurantTable()
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS parent ( ID int PRIMARY KEY, Name varchar(255) )");
 
-	for (Restaurant insert : Restaurant::list)
+    query.exec("INSERT INTO parent VALUES ('0', 'Saddleback')");
+    for (Restaurant& insert : Restaurant::list)
 	{
         query.exec("INSERT INTO parent VALUES ("+ QString::number(insert.getID()) +", '"+
                                                 insert.getName() +"')");
@@ -103,43 +110,42 @@ void DatabaseHelper::createRestaurantTable()
 }
 
 void DatabaseHelper::createDistancesTable()
-{
-    /* 
+{ 
     QSqlQuery query(database);
-    query.exec(CREATE TABLE IF NOT EXISTS distances (ParentID int FOREIGN KEY, ToID int, Distance double));
+    query.exec("CREATE TABLE IF NOT EXISTS distances ( ParentID int, ToID int, Distance numeric, UNIQUE('ParentID','ToID','Distance'))");
+    query.exec("INSERT INTO distances VALUES ('0', '0', '0')");
 
-    for (Restaurant insert: Restaurant::list)
+    for (Restaurant& insert: Restaurant::list)
     {
         //Gets distance to saddleback.
         query.exec("INSERT INTO distances VALUES ("+ QString::number(insert.getID()) +
                                                   ", '0', "+
-                                                  QString::number(insert.getDistance(Restaurant::list[0])) +")");
+                                                  QString::number(insert.getDistance(0)) +")");
         //Gets distance to every restaurant.
-        for(int index = 0; index < Restaurant::list.size(); index++) 
+        for(unsigned int index = 0; index < Restaurant::list.size(); index++)
         {
             query.exec("INSERT INTO distances VALUES ("+ QString::number(insert.getID()) +
-                                                      ", "+ QString::number(Restaurant::list[index].getID()) +
-                                                      ", "+ QString::number(insert.getDistance(Restaurant::list[index])) +")");
+                                                      ", "+ QString::number(Restaurant::list.at(index).getID()) +
+                                                      ", "+ QString::number(insert.getDistance(index+1)) +")");
         }
     }
     
-    */
 }
 
-/*
+
 void DatabaseHelper::createMenuTable()
 {
-
     QSqlQuery query(database);
-    query.exec("CREATE TABLE IF NOT EXISTS menu ( ParentID int FOREIGN KEY, Name varchar(255), Price double )");
-
-    for (int index = 0; index < restaurants.size(); index++)
+    query.exec("CREATE TABLE IF NOT EXISTS menu ( ParentID int, Name varchar(255), Price numeric, UNIQUE('ParentID','Name','Price'))");
+    for (Restaurant& insert: Restaurant::list)
     {
-        Menu readMenu = restaurants[index].GetMenu();
-        for (int index2 = 0; index2++ < readMenu.size(); index2++)
+        Menu readMenu = insert.getMenu();
+        for (unsigned int index = 0; index < readMenu.getItems()->size(); index++)
         {
-            query.exec("INSERT INTO menu VALUES ("+ restaurants[index].getID() +", '"+ readMenu.getItems()->at(index2).name +"', "+ QString::number(readMenu.getItems()->at(index2).price)  +")");
+            query.exec("INSERT INTO menu VALUES ("+ QString::number(insert.getID()) +
+                       ", '"+ readMenu.getItems()->at(index).name +
+                       "', "+ QString::number(readMenu.getItems()->at(index).price)  +")");
         }
     }
 }
-*/
+

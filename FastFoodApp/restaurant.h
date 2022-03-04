@@ -35,37 +35,37 @@ public:
     Restaurant(int ID, QString name);
 
     ///
-    /// \brief SetName
+    /// \brief setName
     /// \param name
     ///
     void setName(QString name);
 
     ///
-    /// \brief GetName
+    /// \brief getName
     /// \return
     ///
     QString getName() const;
 
     ///
-    /// \brief SetID
+    /// \brief setID
     /// \param id
     ///
     void setID(int ID);
 
     ///
-    /// \brief GetID
+    /// \brief getID
     /// \return
     ///
     int getID() const;
 
     ///
-    /// \brief SetDistances
+    /// \brief setDistances
     /// \param dists
     ///
     void setDistances(std::vector<double> distances);
 
     ///
-    /// \brief GetDistance
+    /// \brief getDistance
     ///
     /// get the distance from the current restaurant to the specified restaurant
     /// \return
@@ -73,14 +73,22 @@ public:
     double getDistance(const Restaurant& other) const;
 
     ///
-    /// \brief SetMenu
+    /// \brief getDistance
+    ///
+    /// get the distance from the current restaurant to the specified restaurant id
+    /// \return
+    ///
+    double getDistance(int otherID) const;
+
+    ///
+    /// \brief setMenu
     /// \param newMenu
     ///
     void setMenu(Menu menu);
 
 
     ///
-    /// \brief GetMenu
+    /// \brief getMenu
     /// \return
     ///
     Menu getMenu() const;
@@ -91,7 +99,6 @@ private:
     Menu menu;
 };
 
-// allocating the memory 
-std::vector<Restaurant> Restaurant::list;
+
 
 #endif // RESTAURANT_H

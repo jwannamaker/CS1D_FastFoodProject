@@ -5,7 +5,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QFile>
-#include "header.h"
+#include "restaurant.h"
+#include "menu.h"
 
 
 ///
@@ -46,6 +47,7 @@ public:
     ///
     void createRestaurantTable();
     void createDistancesTable();
+    void createMenuTable();
 
 private:
     QSqlDatabase database;

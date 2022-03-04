@@ -2,14 +2,14 @@
 
 Restaurant::Restaurant()
 {
-    Restuarant::list.push_back(this);
+    //Restuarant::list.push_back(this);
 }
 
 Restaurant::Restaurant(int ID, QString name)
  {
     this->ID = ID;
     this->name = name;
-    Restaurant::list.push_back(this);
+    //Restaurant::list.push_back(this);
  }
 
 void Restaurant::setName(QString name)
@@ -29,7 +29,12 @@ void Restaurant::setDistances(std::vector<double> distances)
 
 double Restaurant::getDistance(const Restaurant& other) const
 {
-    return this->distances[other.getID()];
+    return distances[other.getID()];
+}
+
+double Restaurant::getDistance(int otherID) const
+{
+    return distances[otherID];
 }
 
 void Restaurant::setMenu(Menu menu)
@@ -51,3 +56,6 @@ QString Restaurant::getName() const
 {
    return name;
 }
+
+// allocating the memory
+std::vector<Restaurant> Restaurant::list;
