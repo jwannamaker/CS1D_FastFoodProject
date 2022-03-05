@@ -95,15 +95,23 @@ void DatabaseHelper::populateRestaurants()
     }
 }
 
+void DatabaseHelper::loadRestaurantsFromDatabase()
+{
+    //This function will populate the static restaurant vector.
+    //Note: Ignore id 0 of table parent when inserting restaurants into the
+    //vector since it isn't technically a restaurant.
+}
 
 void DatabaseHelper::createRestaurantTable()
 {
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS parent ( ID int PRIMARY KEY, Name varchar(255) )");
 
+    //Inserts Saddleback as Restaurant index[0]
     query.exec("INSERT INTO parent VALUES ('0', 'Saddleback')");
-    for (Restaurant& insert : Restaurant::list)
+    for (const Restaurant& insert : Restaurant::list)
 	{
+        //Inserts Restaurants and their corresponding IDs
         query.exec("INSERT INTO parent VALUES ("+ QString::number(insert.getID()) +", '"+
                                                 insert.getName() +"')");
 	}
@@ -113,9 +121,8 @@ void DatabaseHelper::createDistancesTable()
 { 
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS distances ( ParentID int, ToID int, Distance numeric, UNIQUE('ParentID','ToID','Distance'))");
-    query.exec("INSERT INTO distances VALUES ('0', '0', '0')");
 
-    for (Restaurant& insert: Restaurant::list)
+    for (const Restaurant& insert: Restaurant::list)
     {
         //Gets distance to saddleback.
         query.exec("INSERT INTO distances VALUES ("+ QString::number(insert.getID()) +
@@ -137,11 +144,13 @@ void DatabaseHelper::createMenuTable()
 {
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS menu ( ParentID int, Name varchar(255), Price numeric, UNIQUE('ParentID','Name','Price'))");
-    for (Restaurant& insert: Restaurant::list)
+
+    for (const Restaurant& insert: Restaurant::list)
     {
         Menu readMenu = insert.getMenu();
         for (unsigned int index = 0; index < readMenu.getItems()->size(); index++)
         {
+            //Inserts the menu items for each corresponding restaurant
             query.exec("INSERT INTO menu VALUES ("+ QString::number(insert.getID()) +
                        ", '"+ readMenu.getItems()->at(index).name +
                        "', "+ QString::number(readMenu.getItems()->at(index).price)  +")");

@@ -29,12 +29,23 @@ void Restaurant::setDistances(std::vector<double> distances)
 
 double Restaurant::getDistance(const Restaurant& other) const
 {
-    return distances[other.getID()];
+    double distance;
+    if(int(distances.size()) <= other.getID())
+    {
+        distance = other.getDistance(this->ID);
+    }
+    else
+    {
+        distance = distances.at(other.getID());
+    }
+    return distance;
 }
 
 double Restaurant::getDistance(int otherID) const
 {
-    return distances[otherID];
+    //Warning: This method can only be called if the vector of distances of the current
+    //restaurant includes the distance to the other restaurant.
+    return distances.at(otherID);
 }
 
 void Restaurant::setMenu(Menu menu)

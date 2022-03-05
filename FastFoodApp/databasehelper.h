@@ -41,6 +41,8 @@ public:
     ///
     void populateRestaurants();
 
+    void loadRestaurantsFromDatabase();
+
     ///
     /// \brief createRestaurantTable
     /// This method creates and populates a table in the database ("restaurant_data.sqlite")
