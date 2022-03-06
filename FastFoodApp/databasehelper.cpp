@@ -5,14 +5,11 @@ DatabaseHelper::DatabaseHelper()
     QString databasePath = "restaurant_data.sqlite";
     database = QSqlDatabase::addDatabase("QSQLITE");
 	database.setDatabaseName(databasePath);
-	if(database.open())
-	{
+
+    if(database.open())
         qDebug() << "Opened database Successfully";
-	}
-	else
-	{
+    else
         qDebug() << "Did not open database successfully";
-	}
 
     sourceFile = "source_data1.txt";
 } 

@@ -7,8 +7,8 @@
 #include <QStackedWidget>
 #include "restaurantwidget.h"
 #include "mainmenuwidget.h"
+#include "menuwidget.h"
 #include "login.h"
-//#include "header.h"
 
 namespace Ui {
 class MainWindow;
