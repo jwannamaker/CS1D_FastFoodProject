@@ -18,7 +18,6 @@ SOURCES += \
     menu.cpp \
     menuwidget.cpp \
     restaurant.cpp \
-    restaurantviewwidget.cpp \
     restaurantwidget.cpp
 
 HEADERS += \
@@ -31,7 +30,6 @@ HEADERS += \
     menu.h \
     menuwidget.h \
     restaurant.h \
-    restaurantviewwidget.h \
     restaurantwidget.h
 
 FORMS += \

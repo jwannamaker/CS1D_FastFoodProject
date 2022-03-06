@@ -1,8 +1,5 @@
 #include "mainmenuwidget.h"
 #include "ui_mainmenuwidget.h"
-#include "mainwindow.h"
-#include "restaurantwidget.h"
-#include "login.h"
 
 MainMenuWidget::MainMenuWidget(QWidget *parent) :
     QWidget(parent),

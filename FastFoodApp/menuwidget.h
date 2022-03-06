@@ -2,6 +2,7 @@
 #define MENUWIDGET_H
 
 #include <QWidget>
+#include "menu.h"
 
 namespace Ui {
 class MenuWidget;
@@ -14,6 +15,9 @@ class MenuWidget : public QWidget
 public:
     explicit MenuWidget(QWidget *parent = nullptr);
     ~MenuWidget();
+
+signals:
+    void transmit_confirmOrder();
 
 private slots:
     void on_confirmButton_pressed();
