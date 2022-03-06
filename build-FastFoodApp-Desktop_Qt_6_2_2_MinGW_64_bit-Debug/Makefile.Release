@@ -1203,23 +1203,9 @@ release/databasehelper.o: ../FastFoodApp/databasehelper.cpp ../FastFoodApp/datab
 		C:/Qt/6.2.2/mingw_64/include/QtSql/QSqlDatabase \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QFile \
-		../FastFoodApp/header.h \
 		../FastFoodApp/restaurant.h \
 		../FastFoodApp/menu.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
-		../FastFoodApp/customer.h \
-		../FastFoodApp/login.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
-		../FastFoodApp/mainwindow.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMainWindow \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qmainwindow.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QStackedWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstackedwidget.h \
-		../FastFoodApp/restaurantwidget.h \
-		../FastFoodApp/mainmenuwidget.h
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QString
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\databasehelper.o ..\FastFoodApp\databasehelper.cpp
 
 release/login.o: ../FastFoodApp/login.cpp ../FastFoodApp/login.h \
@@ -1353,64 +1339,18 @@ release/login.o: ../FastFoodApp/login.cpp ../FastFoodApp/login.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		ui_login.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qeventloop.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfutureinterface.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qmutex.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qresultstore.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture_impl.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qthreadpool.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qthread.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qelapsedtimer.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qrunnable.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qexception.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qlocale.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QFormLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qformlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGraphicsView \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicsview.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qscrollarea.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qframe.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGridLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLabel \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlabel.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpicture.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextdocument.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
 		../FastFoodApp/mainmenuwidget.h \
 		../FastFoodApp/mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QStackedWidget \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstackedwidget.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qframe.h \
 		../FastFoodApp/restaurantwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\login.o ..\FastFoodApp\login.cpp
 
@@ -1710,57 +1650,17 @@ release/mainmenuwidget.o: ../FastFoodApp/mainmenuwidget.cpp ../FastFoodApp/mainm
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		ui_mainmenuwidget.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qeventloop.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfutureinterface.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qmutex.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qresultstore.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture_impl.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qthreadpool.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qthread.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qelapsedtimer.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qrunnable.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qexception.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qlocale.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGraphicsView \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicsview.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpainter.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qscrollarea.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qframe.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGridLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLabel \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlabel.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpicture.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextdocument.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		../FastFoodApp/mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QStackedWidget \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstackedwidget.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qframe.h \
 		../FastFoodApp/restaurantwidget.h \
 		../FastFoodApp/login.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainmenuwidget.o ..\FastFoodApp\mainmenuwidget.cpp
@@ -1910,32 +1810,6 @@ release/mainwindow.o: ../FastFoodApp/mainwindow.cpp C:/Qt/6.2.2/mingw_64/include
 		../FastFoodApp/mainmenuwidget.h \
 		../FastFoodApp/login.h \
 		ui_mainwindow.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qeventloop.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfutureinterface.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qmutex.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qresultstore.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture_impl.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qthreadpool.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qthread.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qelapsedtimer.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qrunnable.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qexception.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qlocale.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGridLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
 		../FastFoodApp/restaurant.h \
 		../FastFoodApp/menu.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
@@ -1946,6 +1820,7 @@ release/mainwindow.o: ../FastFoodApp/mainwindow.cpp C:/Qt/6.2.2/mingw_64/include
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QtCoreDepends \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractanimation.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstracteventdispatcher.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qeventloop.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractitemmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractnativeeventfilter.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractproxymodel.h \
@@ -1957,6 +1832,7 @@ release/mainwindow.o: ../FastFoodApp/mainwindow.cpp C:/Qt/6.2.2/mingw_64/include
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearraymatcher.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcache.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcborarray.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcborvalue.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qdatetime.h \
@@ -1971,6 +1847,19 @@ release/mainwindow.o: ../FastFoodApp/mainwindow.cpp C:/Qt/6.2.2/mingw_64/include
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcollator.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcommandlineoption.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcommandlineparser.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfutureinterface.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmutex.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qresultstore.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qthreadpool.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qthread.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qelapsedtimer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qrunnable.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qexception.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcryptographichash.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qdir.h \
@@ -2082,9 +1971,7 @@ release/mainwindow.o: ../FastFoodApp/mainwindow.cpp C:/Qt/6.2.2/mingw_64/include
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qtsqlversion.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/QSqlDatabase \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/QSqlQuery \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QFile \
-		../FastFoodApp/header.h \
-		../FastFoodApp/customer.h
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QFile
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\FastFoodApp\mainwindow.cpp
 
 release/menu.o: ../FastFoodApp/menu.cpp ../FastFoodApp/menu.h \
@@ -2442,67 +2329,6 @@ release/restaurantwidget.o: ../FastFoodApp/restaurantwidget.cpp ../FastFoodApp/r
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		ui_restaurantwidget.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qeventloop.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfutureinterface.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qmutex.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qresultstore.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture_impl.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qthreadpool.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qthread.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qelapsedtimer.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qrunnable.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qexception.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qlocale.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGridLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLabel \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlabel.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qframe.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpicture.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextdocument.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListView \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistview.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstyleoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qvalidator.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qslider.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractslider.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstyle.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabbar.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qrubberband.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QDialog \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qdialog.h \
 		../FastFoodApp/header.h \
@@ -2517,6 +2343,8 @@ release/restaurantwidget.o: ../FastFoodApp/restaurantwidget.cpp ../FastFoodApp/r
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QtCoreDepends \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractanimation.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstracteventdispatcher.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qeventloop.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractitemmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractnativeeventfilter.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractproxymodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qanimationgroup.h \
@@ -2527,10 +2355,12 @@ release/restaurantwidget.o: ../FastFoodApp/restaurantwidget.cpp ../FastFoodApp/r
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearraymatcher.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcache.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcborarray.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcborvalue.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qdatetime.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcborcommon.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qregularexpression.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/quuid.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcbormap.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcborstream.h \
@@ -2540,6 +2370,19 @@ release/restaurantwidget.o: ../FastFoodApp/restaurantwidget.cpp ../FastFoodApp/r
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcollator.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcommandlineoption.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcommandlineparser.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfutureinterface.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmutex.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qresultstore.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qthreadpool.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qthread.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qelapsedtimer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qrunnable.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qexception.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qcryptographichash.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qdir.h \
@@ -2556,6 +2399,7 @@ release/restaurantwidget.o: ../FastFoodApp/restaurantwidget.cpp ../FastFoodApp/r
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuturesynchronizer.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuturewatcher.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qidentityproxymodel.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qjnienvironment.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QScopedPointer \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qjniobject.h \
@@ -2631,6 +2475,21 @@ release/restaurantwidget.o: ../FastFoodApp/restaurantwidget.cpp ../FastFoodApp/r
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstyleditemdelegate.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qrubberband.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqlrelationaltablemodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqltablemodel.h \
@@ -2643,6 +2502,9 @@ release/restaurantwidget.o: ../FastFoodApp/restaurantwidget.cpp ../FastFoodApp/r
 		../FastFoodApp/mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qmainwindow.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QStackedWidget \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstackedwidget.h \
 		../FastFoodApp/mainmenuwidget.h

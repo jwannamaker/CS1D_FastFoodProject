@@ -16,6 +16,7 @@ SOURCES += \
     mainmenuwidget.cpp \
     mainwindow.cpp \
     menu.cpp \
+    menuwidget.cpp \
     restaurant.cpp \
     restaurantviewwidget.cpp \
     restaurantwidget.cpp
@@ -28,6 +29,7 @@ HEADERS += \
     mainmenuwidget.h \
     mainwindow.h \
     menu.h \
+    menuwidget.h \
     restaurant.h \
     restaurantviewwidget.h \
     restaurantwidget.h
@@ -36,6 +38,7 @@ FORMS += \
     login.ui \
     mainmenuwidget.ui \
     mainwindow.ui \
+    menuwidget.ui \
     restaurantwidget.ui
 
 # Default rules for deployment.
