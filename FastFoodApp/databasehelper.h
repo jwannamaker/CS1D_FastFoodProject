@@ -36,10 +36,10 @@ public:
     ///
     /// \brief populateRestaurants
     /// This method parses the sourceFile (default value is "source_data1.txt"), and
-    /// stores the relevant data into Restaurant::list, which is a static vector
-    /// containing every Restaurant instance.
+    /// stores the relevant data into a vector of restaurants containing every Restaurant
+    /// instance. The vector is then returned.
     ///
-    void populateRestaurants();
+    std::vector<Restaurant> populateRestaurants();
 
     void loadRestaurantsFromDatabase();
 
@@ -47,17 +47,17 @@ public:
     /// \brief createRestaurantTable
     /// This method creates and populates a table in the database ("restaurant_data.sqlite")
     ///
-    void createRestaurantTable();
+    void createRestaurantTable(const std::vector<Restaurant> &restaurantList);
 
     ///
     /// \brief createDistancesTable
     ///
-    void createDistancesTable();
+    void createDistancesTable(const std::vector<Restaurant> &restaurantList);
 
     ///
     /// \brief createMenuTable
     ///
-    void createMenuTable();
+    void createMenuTable(const std::vector<Restaurant> &restaurantList);
 
 private:
     QSqlDatabase database;

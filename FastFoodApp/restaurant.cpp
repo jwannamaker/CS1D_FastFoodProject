@@ -1,18 +1,19 @@
 #include "restaurant.h"
 
 // Allocating the memory for a vector of Restaurant objects
-std::vector<Restaurant> Restaurant::list = std::vector<Restaurant>(10);
+//DatabaseHelper dbHelper = DatabaseHelper();
+//std::vector<Restaurant> Restaurant::list = dbHelper.populateRestaurants();
 
 Restaurant::Restaurant()
 {
-    Restaurant::list.push_back(*this);
+//    Restaurant::list.push_back(*this);
 }
 
 Restaurant::Restaurant(int ID, QString name)
 {
     this->ID = ID;
     this->name = name;
-    Restaurant::list.push_back(*this);
+//    Restaurant::list.push_back(*this);
 }
 
 void Restaurant::setName(QString name)

@@ -5,6 +5,7 @@
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
 #include <vector>
+#include <QDebug>
 #include "menu.h"
 
 ///
@@ -22,7 +23,7 @@ public:
     /// Static member of Restaurant, contains every Restuarant object created
     /// throughout the program.
     ///
-    static std::vector<Restaurant> list;
+    //static std::vector<Restaurant> list;
 
     ///
     /// \brief Restaurant
@@ -92,7 +93,6 @@ public:
     ///
     void setMenu(Menu menu);
 
-
     ///
     /// \brief getMenu
     /// \return
@@ -103,7 +103,6 @@ private:
     QString name;
     std::vector<double> distances;
     Menu menu;
-    double totalRevenue;
 };
 
 #endif // RESTAURANT_H

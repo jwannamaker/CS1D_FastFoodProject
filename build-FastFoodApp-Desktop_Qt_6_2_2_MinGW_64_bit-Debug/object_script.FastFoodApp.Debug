@@ -7,9 +7,11 @@ debug/mainwindow.o
 debug/menu.o
 debug/menuwidget.o
 debug/restaurant.o
+debug/restaurantbutton.o
 debug/restaurantwidget.o
 debug/moc_login.o
 debug/moc_mainmenuwidget.o
 debug/moc_mainwindow.o
 debug/moc_menuwidget.o
+debug/moc_restaurantbutton.o
 debug/moc_restaurantwidget.o
