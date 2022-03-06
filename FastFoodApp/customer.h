@@ -51,6 +51,10 @@ public:
     double getTripDistance() const;
 
 private:
+    QString username;
+    QString password;
+
+
     ///
     /// \brief visited.
     ///

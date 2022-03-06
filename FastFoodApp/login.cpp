@@ -33,7 +33,8 @@ void Login::on_passwordlineEdit_returnPressed()
 ///
 void Login::on_logInButton_pressed()
 {
-    // dummy data for now
+    // TODO: Add a table into restaurant_data.sqlite called "User Data" or the like, and create the functionality
+    // to authenticate a username and password pair based on the contents of that table
     this->validUser = (ui->usernameLineEdit->text() == QString("username") && ui->passwordLineEdit->text() == QString("password"));
 
     emit transmit_validUser(this->validUser);

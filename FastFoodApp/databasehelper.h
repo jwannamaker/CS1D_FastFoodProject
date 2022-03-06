@@ -48,7 +48,15 @@ public:
     /// This method creates and populates a table in the database ("restaurant_data.sqlite")
     ///
     void createRestaurantTable();
+
+    ///
+    /// \brief createDistancesTable
+    ///
     void createDistancesTable();
+
+    ///
+    /// \brief createMenuTable
+    ///
     void createMenuTable();
 
 private:
