@@ -5,6 +5,7 @@
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
 #include <vector>
+#include <QDebug>
 #include "menu.h"
 
 ///
@@ -17,6 +18,14 @@ class Restaurant
 {
 public:
     ///
+    /// \brief list
+    ///
+    /// Static member of Restaurant, contains every Restuarant object created
+    /// throughout the program.
+    ///
+    //static std::vector<Restaurant> list;
+
+    ///
     /// \brief Restaurant
     ///
     /// Default constructor. No arguments passed.
@@ -24,61 +33,75 @@ public:
     Restaurant();
 
     ///
-    /// \brief SetName
+    /// \brief Restaurant
+    /// \param id
+    /// \param name
+    /// Alt constructor.
+    ///
+    Restaurant(int ID, QString name);
+
+    ///
+    /// \brief setName
     /// \param name
     ///
-    void SetName(QString name);
+    void setName(QString name);
 
     ///
-    /// \brief GetName
+    /// \brief getName
     /// \return
     ///
-    QString GetName() const
-    {
-        return resturantName;
-    }
+    QString getName() const;
 
     ///
-    /// \brief SetID
+    /// \brief setID
     /// \param id
     ///
-    void SetID(int id);
+    void setID(int ID);
 
     ///
-    /// \brief SetDistances
+    /// \brief getID
+    /// \return
+    ///
+    int getID() const;
+
+    ///
+    /// \brief setDistances
     /// \param dists
     ///
-    void SetDistances(std::vector<double> dists);
+    void setDistances(std::vector<double> distances);
 
     ///
-    /// \brief GetDistance
+    /// \brief getDistance
     ///
     /// get the distance from the current restaurant to the specified restaurant
-    /// \return
+    /// \param other the other Restaurant top find distance between
+    /// \return double representing miles to the other restaurant
     ///
-    double GetDistance(Restaurant);
+    double getDistance(const Restaurant& other) const;
 
     ///
-    /// \brief SetMenu
+    /// \brief getDistance
+    ///
+    /// get the distance from the current restaurant to the specified restaurant id
+    /// \return
+    ///
+    double getDistance(int otherID) const;
+
+    ///
+    /// \brief setMenu
     /// \param newMenu
     ///
-    void SetMenu(Menu newMenu);
+    void setMenu(Menu menu);
 
     ///
-    /// \brief GetID
+    /// \brief getMenu
     /// \return
     ///
-    int GetID() const {return resturantID;}
-
-    ///
-    /// \brief GetMenu
-    /// \return
-    ///
-    Menu GetMenu() const {return menu;}
+    Menu getMenu() const;
 private:
-    QString resturantName;
-    int resturantID;
-    std::vector<double> distancesToOthers;
+    int ID;
+    QString name;
+    std::vector<double> distances;
     Menu menu;
 };
 

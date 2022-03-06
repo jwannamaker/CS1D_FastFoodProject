@@ -10,31 +10,34 @@ CONFIG += c++11
 
 SOURCES += \
     customer.cpp \
-    database.cpp \
+    databasehelper.cpp \
     login.cpp \
     main.cpp \
     mainmenuwidget.cpp \
     mainwindow.cpp \
     menu.cpp \
+    menuwidget.cpp \
     restaurant.cpp \
-    restaurantviewwidget.cpp \
+    restaurantbutton.cpp \
     restaurantwidget.cpp
 
 HEADERS += \
     customer.h \
-    database.h \
+    databasehelper.h \
     login.h \
     mainmenuwidget.h \
     mainwindow.h \
     menu.h \
+    menuwidget.h \
     restaurant.h \
-    restaurantviewwidget.h \
+    restaurantbutton.h \
     restaurantwidget.h
 
 FORMS += \
     login.ui \
     mainmenuwidget.ui \
     mainwindow.ui \
+    menuwidget.ui \
     restaurantwidget.ui
 
 # Default rules for deployment.
