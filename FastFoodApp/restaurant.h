@@ -16,7 +16,12 @@
 class Restaurant
 {
 public:
-    
+    ///
+    /// \brief list
+    ///
+    /// Static member of Restaurant, contains every Restuarant object created
+    /// throughout the program.
+    ///
     static std::vector<Restaurant> list;
 
     ///
@@ -68,7 +73,8 @@ public:
     /// \brief getDistance
     ///
     /// get the distance from the current restaurant to the specified restaurant
-    /// \return
+    /// \param other the other Restaurant top find distance between
+    /// \return double representing miles to the other restaurant
     ///
     double getDistance(const Restaurant& other) const;
 
@@ -93,12 +99,15 @@ public:
     ///
     Menu getMenu() const;
 private:
-    QString name;
     int ID;
+    QString name;
     std::vector<double> distances;
     Menu menu;
+    double totalRevenue;
 };
 
 
+// Allocating the memory for a vector of Restaurant objects
+std::vector<Restaurant> Restaurant::list;
 
 #endif // RESTAURANT_H

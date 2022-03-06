@@ -2,6 +2,7 @@
 #define RESTAURANTWIDGET_H
 
 #include <QWidget>
+#include "restaurant.h"
 
 namespace Ui {
 class RestaurantWidget;

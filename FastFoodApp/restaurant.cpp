@@ -2,14 +2,14 @@
 
 Restaurant::Restaurant()
 {
-    //Restuarant::list.push_back(this);
+    Restaurant::list.push_back(*this);
 }
 
 Restaurant::Restaurant(int ID, QString name)
  {
     this->ID = ID;
     this->name = name;
-    //Restaurant::list.push_back(this);
+    Restaurant::list.push_back(*this);
  }
 
 void Restaurant::setName(QString name)
@@ -67,6 +67,3 @@ QString Restaurant::getName() const
 {
    return name;
 }
-
-// allocating the memory
-std::vector<Restaurant> Restaurant::list;

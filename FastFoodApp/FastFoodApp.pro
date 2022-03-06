@@ -23,7 +23,6 @@ SOURCES += \
 HEADERS += \
     customer.h \
     databasehelper.h \
-    header.h \
     login.h \
     mainmenuwidget.h \
     mainwindow.h \

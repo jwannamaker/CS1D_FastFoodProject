@@ -1,7 +1,6 @@
 #include "restaurantwidget.h"
 #include "ui_restaurantwidget.h"
 #include <QDialog>
-#include "header.h"
 
 RestaurantWidget::RestaurantWidget(QWidget *parent) :
     QWidget(parent),

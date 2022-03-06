@@ -1,4 +1,4 @@
-Name of Fast Food restaurant: MacDonald’s
+Name of Fast Food restaurant: MacDonaldâ€™s
 Fast Food restaurant number 1
 Distance (miles) to other Fast Food restaurants - 10 
 1 0.0 
@@ -58,7 +58,7 @@ Chicken taco
 Chicken burrito
 6.99
 
-Name of Fast Food restaurant: Domino’s Pizza
+Name of Fast Food restaurant: Dominoâ€™s Pizza
 Fast Food restaurant number 3
 Distance (miles) to other Fast Food restaurants - 10  
 1 15.4
@@ -161,7 +161,7 @@ Medium coke
 
 
 
-Name of Fast Food restaurant: Wendy’s
+Name of Fast Food restaurant: Wendyâ€™s
 Fast Food restaurant number 7
 Distance (miles) to other Fast Food restaurants - 10 
 1 5.8
@@ -234,7 +234,7 @@ Chicken tortilla soup
 5.29
  
 
-Name of Fast Food restaurant: Papa John’s Pizza
+Name of Fast Food restaurant: Papa Johnâ€™s Pizza
 Fast Food restaurant number 10
 Distance (miles) to other Fast Food restaurants - 10 
 1 3.5
