@@ -6,6 +6,7 @@ MenuWidget::MenuWidget(QWidget *parent) :
     ui(new Ui::MenuWidget)
 {
     ui->setupUi(this);
+
 }
 
 MenuWidget::~MenuWidget()

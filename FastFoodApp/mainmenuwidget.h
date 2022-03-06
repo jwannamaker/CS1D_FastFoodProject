@@ -2,10 +2,6 @@
 #define MAINMENUWIDGET_H
 
 #include <QWidget>
-#include "mainwindow.h"
-#include "restaurantwidget.h"
-#include "menuwidget.h"
-#include "login.h"
 
 namespace Ui {
 class MainMenuWidget;

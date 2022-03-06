@@ -1,11 +1,9 @@
-#include <QDebug>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "login.h"
-#include "restaurant.h"
-#include "databasehelper.h"
 #include "restaurantwidget.h"
 #include "mainmenuwidget.h"
+#include "menuwidget.h"
+#include "login.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

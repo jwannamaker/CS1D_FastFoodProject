@@ -106,8 +106,4 @@ private:
     double totalRevenue;
 };
 
-
-// Allocating the memory for a vector of Restaurant objects
-std::vector<Restaurant> Restaurant::list;
-
 #endif // RESTAURANT_H
