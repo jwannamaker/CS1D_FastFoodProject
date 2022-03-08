@@ -1,0 +1,11 @@
+<RCC version="1.0">
+    <qresource prefix="data">
+        <file alias="source_data1.txt">source_data1.txt</file>
+        <file alias="source_data2.txt">source_data2.txt</file>
+    </qresource>
+    <qresource prefix="images">
+        <file alias="rest_menu_icon.png">rest_menu_icon.png</file>
+        <file alias="food_icon.png">food_icon.png</file>
+        <file alias="food_image.png">food_image.png</file>
+    </qresource>
+</RCC>
