@@ -95,9 +95,12 @@ bool DatabaseHelper::AuthenticateUser(QString username, QString password)
     bool validUser = false;
     QSqlQuery query(database);
 
-    //Pushing test authentication values in the table. Statements below can be removed.
-    //query.exec("CREATE TABLE IF NOT EXISTS users ( Username varchar(255), Password varchar(255), UNIQUE('Username') )");
-    //query.exec("INSERT INTO users VALUES ('username', 'password')");
+    //If the users table hasn't been added yet to the database, it will add it and insert a generic login
+    if(query.exec("CREATE TABLE IF NOT EXISTS users ( Username varchar(255), Password varchar(255), UNIQUE('Username') )"))
+    {
+        //Generic login information: username, password.
+        query.exec("INSERT INTO users VALUES ('username', 'password')");
+    }
 
     if(query.exec("SELECT Username, Password FROM users"))
     {

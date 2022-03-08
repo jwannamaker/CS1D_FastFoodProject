@@ -22,10 +22,10 @@ Login::~Login()
 ///
 /// User pressed enter key, validate the input using the database.
 ///
-void Login::on_passwordlineEdit_returnPressed()
-{
-    on_logInButton_pressed();
-}
+//void Login::on_passwordlineEdit_returnPressed()
+//{
+//    on_logInButton_pressed();
+//}
 
 ///
 /// \brief Login::on_logInButton_pressed
