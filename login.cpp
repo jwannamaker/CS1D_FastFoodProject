@@ -2,7 +2,6 @@
 #include "ui_login.h"
 #include "mainmenuwidget.h"
 #include "mainwindow.h"
-#include <QPixmap>
 
 Login::Login(QWidget *parent) :
     QWidget(parent),
