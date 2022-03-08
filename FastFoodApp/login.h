@@ -2,6 +2,7 @@
 #define LOGIN_H
 
 #include <QWidget>
+#include "databasehelper.h"
 
 namespace Ui {
 class Login;

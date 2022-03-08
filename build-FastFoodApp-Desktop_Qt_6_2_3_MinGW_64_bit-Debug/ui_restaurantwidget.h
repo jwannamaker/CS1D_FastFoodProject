@@ -17,6 +17,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -37,13 +38,14 @@ public:
     QSpacerItem *verticalSpacer;
     QPushButton *confirmButton;
     QPushButton *cancelButton;
-    QWidget *RestaurantViewWidget;
+    QScrollArea *scrollArea_restaurants;
+    QWidget *scrollArea;
 
     void setupUi(QWidget *RestaurantWidget)
     {
         if (RestaurantWidget->objectName().isEmpty())
             RestaurantWidget->setObjectName(QString::fromUtf8("RestaurantWidget"));
-        RestaurantWidget->resize(639, 479);
+        RestaurantWidget->resize(672, 479);
         gridLayout = new QGridLayout(RestaurantWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         verticalLayout_2 = new QVBoxLayout();
@@ -97,11 +99,16 @@ public:
 
         gridLayout->addLayout(verticalLayout_2, 0, 0, 2, 2);
 
-        RestaurantViewWidget = new QWidget(RestaurantWidget);
-        RestaurantViewWidget->setObjectName(QString::fromUtf8("RestaurantViewWidget"));
-        RestaurantViewWidget->setMinimumSize(QSize(550, 0));
+        scrollArea_restaurants = new QScrollArea(RestaurantWidget);
+        scrollArea_restaurants->setObjectName(QString::fromUtf8("scrollArea_restaurants"));
+        scrollArea_restaurants->setMinimumSize(QSize(550, 0));
+        scrollArea_restaurants->setWidgetResizable(true);
+        scrollArea = new QWidget();
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setGeometry(QRect(0, 0, 548, 463));
+        scrollArea_restaurants->setWidget(scrollArea);
 
-        gridLayout->addWidget(RestaurantViewWidget, 0, 2, 2, 1);
+        gridLayout->addWidget(scrollArea_restaurants, 0, 2, 1, 1);
 
 
         retranslateUi(RestaurantWidget);
