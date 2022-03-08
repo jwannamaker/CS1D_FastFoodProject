@@ -77,6 +77,7 @@ void RestaurantWidget::restaurantClicked()
     //Get the tile clicked and send to restaurant menu
     Button *clickedButton = qobject_cast<Button *>(sender());
     qDebug() << "Restaurant Clicked";
+
     emit transmit_viewRestMenu(Restaurant());
 }
 

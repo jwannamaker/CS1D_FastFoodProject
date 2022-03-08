@@ -21,6 +21,7 @@ public:
 
     QSize sizeHint() const override;
 private:
+
     QLabel *textLine1;
     QLabel *textLine2;
 };
