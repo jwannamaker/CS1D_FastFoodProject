@@ -1,6 +1,5 @@
 #include "restaurantwidget.h"
 
-
 RestaurantWidget::RestaurantWidget(const std::vector<Restaurant>& restaurantList, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RestaurantWidget)

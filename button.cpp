@@ -1,18 +1,25 @@
 #include "button.h"
 
-Button::Button(const QString &text1, const QString text2, const QString &iconFilePath, QWidget *parent)
+Button::Button(const QString &top, const QString& bottom, const QString &iconFilePath, QWidget *parent)
     : QPushButton(parent)
 {
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
 
-    textLine1 = new QLabel(text1);
-    textLine2 = new QLabel(text2);
+    topText = new QLabel(top);
+    bottomText = new QLabel(bottom);
 
     QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(textLine1);
-    layout->addWidget(textLine2);
-    this->setLayout(layout);
+    layout->addWidget(topText, Qt::AlignmentFlag(Qt::AlignHCenter));
+    layout->addWidget(bottomText, Qt::AlignmentFlag(Qt::AlignHCenter));
     this->setIcon(QPixmap(iconFilePath));
+    this->setIconSize(QSize(40, 40));
+    this->setLayout(layout);
+}
+
+Button::Button(const Restaurant& rest, QWidget* parent)
+    : QPushButton(parent)
+{
+
 }
 
 QSize Button::sizeHint() const

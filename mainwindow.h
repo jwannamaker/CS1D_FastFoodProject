@@ -27,11 +27,11 @@ public:
 signals:
 
 public slots:
-    void recieve_loginAttempt(bool valid);
+    void recieve_loginAttempt(bool);
     void recieve_logout();
     void recieve_restaurantView();
     void recieve_mainMenu();
-    void recieve_viewMenu(Restaurant rest);
+    void recieve_viewMenu(Restaurant);
 
 private:
     DatabaseHelper dbHelper;

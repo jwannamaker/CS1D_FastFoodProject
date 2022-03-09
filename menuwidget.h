@@ -19,7 +19,7 @@ public:
     ~MenuWidget();
 
 signals:
-    void transmit_confirmOrder();
+    void transmit_confirmOrder(std::vector<Menu::Item>);
     void transmit_cancelOrder();
 
 private slots:
