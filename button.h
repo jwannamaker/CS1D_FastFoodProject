@@ -20,9 +20,9 @@ class Button : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit Button(const Restaurant& subject, QWidget *parent = nullptr);
-    explicit Button(const Menu& subject, QWidget *parent = nullptr);
-    explicit Button(const QString &topText, const QString &bottomText, const QString &iconFilePath, QWidget *parent = nullptr);
+    explicit Button(const Restaurant& rest, QWidget *parent = nullptr);
+    explicit Button(const Menu::Item& item, QWidget *parent = nullptr);
+    explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
     ///
     /// \brief setImage
@@ -30,9 +30,15 @@ public:
     ///
     void setImage(QPixmap image);
 
+    ///
+    /// \brief sizeHint
+    /// \return
+    ///
     QSize sizeHint() const override;
+
+    QLabel getTopText() const;
+
 private:
-    QPixmap *image;
     QLabel *topText;
     QLabel *bottomText;
 };

@@ -2,6 +2,7 @@
 #define MENUWIDGET_H
 
 #include <QWidget>
+#include "button.h"
 #include "restaurant.h"
 #include "menu.h"
 
@@ -15,7 +16,7 @@ class MenuWidget : public QWidget
 
 public:
     explicit MenuWidget(QWidget *parent = nullptr);
-    explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
+    explicit MenuWidget(const std::vector<Menu::Item>& itemList, QWidget *parent = nullptr);
     ~MenuWidget();
 
 signals:
@@ -29,8 +30,18 @@ private slots:
 
     void on_cancelButton_pressed();
 
+     void itemClicked();
+
 private:
+    const int MAX_COL = 5;
+
     Ui::MenuWidget *ui;
+
+    //Creates a button for a menu item
+    Button *createButton(Menu::Item item, const char *member);
+
+    //data members
+    QVector<Button*> itemButtons;
 };
 
 #endif // MENUWIDGET_H
