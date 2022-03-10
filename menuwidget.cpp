@@ -14,6 +14,7 @@ MenuWidget::MenuWidget(const std::vector<Menu::Item>& itemList, QWidget *parent)
     ui(new Ui::MenuWidget)
 {
 
+<<<<<<< Updated upstream
     std::vector<Menu::Item> menuItems = currentRestaurant.getMenu().getItems();
     qDebug() << "Menu items size" << menuItems.size();
 
@@ -42,6 +43,9 @@ MenuWidget::MenuWidget(const std::vector<Menu::Item>& itemList, QWidget *parent)
         }
     }
 
+=======
+    qDebug() << "Menu items size" << itemList.size();
+>>>>>>> Stashed changes
     //Create the buttons
     for (Menu::Item item : itemList)
         itemButtons.append(createButton(item, SLOT(itemClicked())));
