@@ -68,7 +68,7 @@ void DatabaseHelper::populateRestaurants()
                 //Adds items to the menu
                 line = inputStream.readLine();
                 inputStream >> price;
-                newMenu.addItem(Menu::Item(line,price));
+                newMenu.addItem(Item(line,price));
                 inputStream.skipWhiteSpace();
             }
             newResturant.setMenu(newMenu);
@@ -161,7 +161,7 @@ void DatabaseHelper::createMenuTable(const std::vector<Restaurant> &restaurantLi
     for (const Restaurant& insert: restaurantList)
     {
         Menu readMenu = insert.getMenu();
-        for (unsigned int index = 0; index < readMenu.getItems()->size(); index++)
+        for (unsigned int index = 0; index < readMenu.getItems().size(); index++)
         {
             //Inserts the menu items for each corresponding restaurant
             query.exec("INSERT INTO menu VALUES ("+ QString::number(insert.getID()) +

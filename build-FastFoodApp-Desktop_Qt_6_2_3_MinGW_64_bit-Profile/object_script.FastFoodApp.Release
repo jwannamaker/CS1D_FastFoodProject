@@ -1,0 +1,17 @@
+release/customer.o
+release/databasehelper.o
+release/login.o
+release/main.o
+release/mainmenuwidget.o
+release/mainwindow.o
+release/menu.o
+release/menuwidget.o
+release/restaurant.o
+release/restaurantbutton.o
+release/restaurantwidget.o
+release/moc_login.o
+release/moc_mainmenuwidget.o
+release/moc_mainwindow.o
+release/moc_menuwidget.o
+release/moc_restaurantbutton.o
+release/moc_restaurantwidget.o

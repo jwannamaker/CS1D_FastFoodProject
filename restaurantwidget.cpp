@@ -4,6 +4,8 @@ RestaurantWidget::RestaurantWidget(const std::vector<Restaurant>& restaurantList
     QWidget(parent),
     ui(new Ui::RestaurantWidget)
 {
+    restaurantListCopy = restaurantList;
+
     ui->setupUi(this);
     ui->initialLocationLineEdit->setText("Saddleback");
 
@@ -74,17 +76,40 @@ void RestaurantWidget::on_cancelButton_pressed()
 void RestaurantWidget::restaurantClicked()
 {
     //Get the tile clicked and send to restaurant menu
-    Button *clickedButton = qobject_cast<Button *>(sender());
+    RestaurantButton *clickedButton = qobject_cast<RestaurantButton *>(sender());
     qDebug() << "Restaurant Clicked";
+    qDebug() << clickedButton->getRestaurantName()->text();
 
-    emit transmit_viewRestMenu(Restaurant::list.at(3));
+    MenuWidget *mv = new MenuWidget(findRestaurant(clickedButton->getRestaurantName()->text()));
+    mv->show();
+    emit transmit_viewRestMenu(Restaurant());
+
+
+
 }
 
-Button *RestaurantWidget::createButton(Restaurant rest, const char *member)
+RestaurantButton *RestaurantWidget::createButton(Restaurant rest, const char *member)
 {
     Button *button = new Button(rest);
     connect(button, SIGNAL(clicked()), this, member);
     return button;
+}
+
+Restaurant RestaurantWidget::findRestaurant(QString restName)
+{
+    for (size_t i = 0; i < restaurantListCopy.size(); i++)
+
+    {
+        if (restName == restaurantListCopy[i].getName())
+        {
+            return restaurantListCopy[i];
+        }
+    }
+
+    qDebug() << "Restaurant not found \n";
+    Restaurant temp;
+
+    return temp;
 }
 
 

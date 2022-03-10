@@ -1,5 +1,4 @@
 #include "menuwidget.h"
-#include "ui_menuwidget.h"
 
 MenuWidget::MenuWidget(QWidget *parent) :
     QWidget(parent),
@@ -14,7 +13,34 @@ MenuWidget::MenuWidget(const std::vector<Menu::Item>& itemList, QWidget *parent)
     QWidget(parent),
     ui(new Ui::MenuWidget)
 {
+
+    std::vector<Item> menuItems = currentRestaurant.getMenu().getItems();
+    qDebug() << "Menu items size" << menuItems.size();
+
     ui->setupUi(this);
+    //Create the restaurant buttons
+    for (size_t i = 0; i < menuItems.size(); ++i)
+        menuButtons.append(createButton(menuItems[i], SLOT(menuClicked())));
+
+    //Create Grid for restaurant icons
+    QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_menu);
+    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+
+    //Add restaurants to window
+    int row = 0;
+    int col = 0;
+
+    for (size_t i = 0; i < menuItems.size(); i++)
+    {
+        mainLayout->addWidget(menuButtons[i], row, col);
+        col++;
+
+        if (col >= MAX_ITEMS_COLS)
+        {
+            row++;
+            col = 0;
+        }
+    }
 
     //Create the buttons
     for (Menu::Item item : itemList)

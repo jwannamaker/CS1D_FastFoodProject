@@ -5,6 +5,11 @@
 #include "button.h"
 #include "restaurant.h"
 #include "menu.h"
+#include "menubutton.h"
+#include "ui_menuwidget.h"
+#include "menu.h"
+
+const int MAX_ITEMS_COLS = 2;
 
 namespace Ui {
 class MenuWidget;
