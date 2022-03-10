@@ -34,3 +34,9 @@ void MainMenuWidget::on_restaurantsButton_pressed()
 {
     emit transmit_restaurantView();
 }
+
+void MainMenuWidget::on_revenueButton_pressed()
+{
+    emit transmit_revenueView();
+}
+

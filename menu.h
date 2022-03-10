@@ -21,13 +21,35 @@ public:
     ///
     /// Represents any single memu item. Attributes include a name and a price.
     ///
-    struct Item
+    class Item
     {
-        QString name;
-        double price;
-
+    public:
         Item();
         Item(QString name, double price) : name{name}, price{price} {}
+
+        QString getName() const
+        {
+            return name;
+        }
+
+        void setName(QString name)
+        {
+            this->name = name;
+        }
+
+        double getPrice() const
+        {
+            return price;
+        }
+
+        void setPrice(double price)
+        {
+            this->price = price;
+        }
+
+    private:
+        QString name;
+        double price;
     };
 
     ///

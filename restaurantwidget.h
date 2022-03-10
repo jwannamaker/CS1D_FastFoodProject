@@ -7,12 +7,10 @@
 #include <QLineEdit>
 #include <QDialog>
 #include "restaurant.h"
+#include "menu.h"
 #include "button.h"
 #include "databasehelper.h"
 #include "ui_restaurantwidget.h"
-
-//Number of restaurnts per row
-const int MAX_COLZ = 5;
 
 QT_BEGIN_NAMESPACE
 class QLineEdit;
@@ -44,6 +42,9 @@ private slots:
     void restaurantClicked();
 
 private:
+    //Number of restaurnts per row
+    const int MAX_COL = 5;
+
     Ui::RestaurantWidget *ui;
 
     //Creates a button for restaurant

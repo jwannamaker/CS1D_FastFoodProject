@@ -54,7 +54,6 @@ private:
     QString username;
     QString password;
 
-
     ///
     /// \brief visited.
     ///

@@ -1,6 +1,5 @@
 #include "restaurantwidget.h"
 
-
 RestaurantWidget::RestaurantWidget(const std::vector<Restaurant>& restaurantList, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RestaurantWidget)
@@ -25,7 +24,7 @@ RestaurantWidget::RestaurantWidget(const std::vector<Restaurant>& restaurantList
         mainLayout->addWidget(restaurantButtons[i], row, col);
         col++;
 
-        if (col >= MAX_COLZ)
+        if (col >= MAX_COL)
         {
             row++;
             col = 0;
@@ -78,12 +77,12 @@ void RestaurantWidget::restaurantClicked()
     Button *clickedButton = qobject_cast<Button *>(sender());
     qDebug() << "Restaurant Clicked";
 
-    emit transmit_viewRestMenu(Restaurant());
+    emit transmit_viewRestMenu();
 }
 
 Button *RestaurantWidget::createButton(Restaurant rest, const char *member)
 {
-    Button *button = new Button(rest.getName(), QString::number(rest.getDistance(0)) + " miles away", ":images/food_icon.png");
+    Button *button = new Button(rest);
     connect(button, SIGNAL(clicked()), this, member);
     return button;
 }
