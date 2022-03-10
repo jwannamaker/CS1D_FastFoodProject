@@ -13,6 +13,16 @@
 /// a menu can have, such as editing a menu item, creating or deleting a
 /// menu item, placing an order, getting the sum for that order, and more.
 ///
+///
+struct Item
+{
+    QString name;
+    double price;
+
+    Item();
+    Item(QString name, double price) : name{name}, price{price} {}
+};
+
 class Menu
 {
 public:
@@ -21,14 +31,7 @@ public:
     ///
     /// Represents any single memu item. Attributes include a name and a price.
     ///
-    struct Item
-    {
-        QString name;
-        double price;
 
-        Item();
-        Item(QString name, double price) : name{name}, price{price} {}
-    };
 
     ///
     /// \brief Menu
@@ -57,7 +60,7 @@ public:
     /// Returns a pointer to the list of menu items.
     /// \return Pointer to this instance's vector containing all the menu's items.
     ///
-    std::vector<Item>* getItems();
+    std::vector<Item> getItems();
 
 private:
     ///
