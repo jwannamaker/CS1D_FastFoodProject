@@ -15,6 +15,12 @@ public:
     explicit RevenueWidget(QWidget *parent = nullptr);
     ~RevenueWidget();
 
+signals:
+    void transmit_cancel();
+
+private slots:
+    void on_cancelButton_pressed();
+
 private:
     Ui::RevenueWidget *ui;
 };
