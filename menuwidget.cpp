@@ -49,7 +49,7 @@ MenuWidget::~MenuWidget()
 
 void MenuWidget::on_confirmButton_pressed()
 {
-
+    // go through listWidget and update restuarant's revenue with total from order
 
     emit transmit_confirmOrder(std::vector<Menu::Item>());
 }

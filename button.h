@@ -14,7 +14,7 @@
 #include "restaurant.h"
 #include "menu.h"
 
-const int TILE_SIZE = 100;
+const int TILE_SIZE = 50;
 
 class Button : public QPushButton
 {

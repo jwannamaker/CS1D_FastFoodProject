@@ -9,7 +9,7 @@
 #include "menu.h"
 #include "button.h"
 
-const int MAX_ITEMS_COLS = 2;
+const int MAX_ITEMS_COLS = 5;
 
 namespace Ui {
 class MenuWidget;

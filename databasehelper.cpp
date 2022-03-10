@@ -165,10 +165,8 @@ void DatabaseHelper::createMenuTable(const std::vector<Restaurant> &restaurantLi
         {
             //Inserts the menu items for each corresponding restaurant
             query.exec("INSERT INTO menu VALUES ("+ QString::number(insert.getID()) +
-                       ", '"+ readMenu.getItems()->at(index).getName() +
-                       "', "+ QString::number(readMenu.getItems()->at(index).getPrice())  +")");
                        ", '"+ readMenu.getItems().at(index).getName() +
-                       "', "+ QString::number(readMenu.getItems().at(index).getPrice())  +")");
+                       "', "+ QString::number(readMenu.getItems().at(index).getPrice()) +")");
         }
     }
 }
