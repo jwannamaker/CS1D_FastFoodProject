@@ -4,9 +4,9 @@
 #include <QWidget>
 #include "restaurant.h"
 #include "menu.h"
-#include "menubutton.h"
 #include "ui_menuwidget.h"
 #include "menu.h"
+#include "button.h"
 
 const int MAX_ITEMS_COLS = 2;
 
@@ -38,10 +38,10 @@ private slots:
 
 private:
 
-    MenuButton *createButton(Item item, const char *member);
+    Button *createButton(Menu::Item item, const char *member);
 
     Ui::MenuWidget *ui;
-    QVector<MenuButton*> menuButtons;
+    QVector<Button*> menuButtons;
 };
 
 #endif // MENUWIDGET_H

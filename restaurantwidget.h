@@ -7,7 +7,7 @@
 #include <QLineEdit>
 #include <QDialog>
 #include "restaurant.h"
-#include "restaurantbutton.h"
+#include "button.h"
 #include "databasehelper.h"
 #include "ui_restaurantwidget.h"
 #include "menuwidget.h"
@@ -52,10 +52,10 @@ private:
     Ui::RestaurantWidget *ui;
 
     //Creates a button for restaurant
-    RestaurantButton *createButton(Restaurant rest, const char *member);
+    Button *createButton(Restaurant rest, const char *member);
 
     //data members
-    QVector<RestaurantButton*> restaurantButtons;
+    QVector<Button*> restaurantButtons;
     std::vector<Restaurant> restaurantListCopy;
 };
 

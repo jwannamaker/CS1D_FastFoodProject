@@ -12,7 +12,7 @@ MenuWidget::MenuWidget(const Restaurant &currentRestaurant, QWidget *parent) :
     ui(new Ui::MenuWidget)
 {
 
-    std::vector<Item> menuItems = currentRestaurant.getMenu().getItems();
+    std::vector<Menu::Item> menuItems = currentRestaurant.getMenu().getItems();
     qDebug() << "Menu items size" << menuItems.size();
 
     ui->setupUi(this);
@@ -68,13 +68,13 @@ void MenuWidget::on_cancelButton_pressed()
 void MenuWidget:: menuClicked()
 {
     //Get the tile clicked and send to restaurant menu
-    MenuButton *clickedButton = qobject_cast<MenuButton *>(sender());
+    Button *clickedButton = qobject_cast<Button *>(sender());
     qDebug() << "Menu button Clicked: " << clickedButton->text();
 }
 
-MenuButton *MenuWidget::createButton(Item item, const char *member)
+Button *MenuWidget::createButton(Menu::Item item, const char *member)
 {
-    MenuButton *button = new MenuButton(item);
+    Button *button = new Button(item);
     connect(button, SIGNAL(clicked()), this, member);
     return button;
 }

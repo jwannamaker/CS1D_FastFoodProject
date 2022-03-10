@@ -76,21 +76,20 @@ void RestaurantWidget::on_cancelButton_pressed()
 void RestaurantWidget::restaurantClicked()
 {
     //Get the tile clicked and send to restaurant menu
-    RestaurantButton *clickedButton = qobject_cast<RestaurantButton *>(sender());
+    Button *clickedButton = qobject_cast<Button *>(sender());
     qDebug() << "Restaurant Clicked";
-    qDebug() << clickedButton->getRestaurantName()->text();
-
-    MenuWidget *mv = new MenuWidget(findRestaurant(clickedButton->getRestaurantName()->text()));
-    mv->show();
-    emit transmit_viewRestMenu(Restaurant());
+    qDebug() << clickedButton->getTopText()->text();
 
 
+    //MenuWidget *mv = new MenuWidget(findRestaurant(clickedButton->getRestaurantName()->text()));
+    //mv->show();
+    emit transmit_viewRestMenu(findRestaurant(clickedButton->getTopText()->text()));
 
 }
 
-RestaurantButton *RestaurantWidget::createButton(Restaurant rest, const char *member)
+Button *RestaurantWidget::createButton(Restaurant rest, const char *member)
 {
-    RestaurantButton *button = new RestaurantButton(rest.getName(), QString::number(rest.getDistance(0)) + " miles away", ":images/food_icon.png");
+    Button *button = new Button(rest);
     connect(button, SIGNAL(clicked()), this, member);
     return button;
 }

@@ -94,5 +94,7 @@ void MainWindow::recieve_mainMenu()
 
 void MainWindow::recieve_viewMenu(Restaurant rest)
 {
-    stackedWidget->setCurrentWidget(menuPage);
+    MenuWidget *mw = new MenuWidget(rest);
+    stackedWidget->addWidget(mw);
+    stackedWidget->setCurrentWidget(mw);
 }
