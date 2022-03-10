@@ -29,6 +29,7 @@ public:
 signals:
     void transmit_logout();
     void transmit_restaurantView();
+    void transmit_revenueView();
 
 private slots:
     void on_logOutButton_pressed();
@@ -36,6 +37,8 @@ private slots:
     void on_orderHistoryButton_pressed();
 
     void on_restaurantsButton_pressed();
+
+    void on_revenueButton_pressed();
 
 private:
     Ui::MainMenuWidget *ui;

@@ -30,7 +30,7 @@ public:
     /// stores the relevant data into a vector of restaurants containing every Restaurant
     /// instance. The vector is then returned.
     ///
-    std::vector<Restaurant> populateRestaurants();
+    void populateRestaurants();
 
     void loadRestaurantsFromDatabase();
 

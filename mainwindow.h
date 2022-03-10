@@ -10,6 +10,7 @@
 #include "restaurantwidget.h"
 #include "mainmenuwidget.h"
 #include "menuwidget.h"
+#include "revenuewidget.h"
 #include "login.h"
 
 namespace Ui {
@@ -27,11 +28,12 @@ public:
 signals:
 
 public slots:
-    void recieve_loginAttempt(bool valid);
+    void recieve_loginAttempt(bool);
     void recieve_logout();
     void recieve_restaurantView();
     void recieve_mainMenu();
-    void recieve_viewMenu(Restaurant rest);
+    void recieve_viewMenu(Restaurant);
+    void recieve_viewRevenue();
 
 private:
     DatabaseHelper dbHelper;
@@ -41,6 +43,7 @@ private:
     MainMenuWidget* mainMenuPage;
     MenuWidget* menuPage;
     RestaurantWidget* restaurantPage;
+    RevenueWidget* revenuePage;
 };
 
 #endif // MAINWINDOW_H

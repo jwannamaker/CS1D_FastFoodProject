@@ -17,7 +17,7 @@ DatabaseHelper::~DatabaseHelper()
     database.removeDatabase("SQLITE");
 }
 
- std::vector<Restaurant> DatabaseHelper::populateRestaurants()
+void DatabaseHelper::populateRestaurants()
 {
     QFile file(":data/source_data1.txt");
     std::vector<Restaurant> restaurantList;
@@ -80,7 +80,8 @@ DatabaseHelper::~DatabaseHelper()
         }
         file.close();
     }
-    return restaurantList;
+    Restaurant::list.resize(restaurantList.size());
+    Restaurant::list = std::vector<Restaurant>(restaurantList);
 }
 
 void DatabaseHelper::loadRestaurantsFromDatabase()
@@ -160,12 +161,14 @@ void DatabaseHelper::createMenuTable(const std::vector<Restaurant> &restaurantLi
     for (const Restaurant& insert: restaurantList)
     {
         Menu readMenu = insert.getMenu();
-        for (unsigned int index = 0; index < readMenu.getItems()->size(); index++)
+        for (unsigned int index = 0; index < readMenu.getItems().size(); index++)
         {
             //Inserts the menu items for each corresponding restaurant
             query.exec("INSERT INTO menu VALUES ("+ QString::number(insert.getID()) +
-                       ", '"+ readMenu.getItems()->at(index).name +
-                       "', "+ QString::number(readMenu.getItems()->at(index).price)  +")");
+                       ", '"+ readMenu.getItems()->at(index).getName() +
+                       "', "+ QString::number(readMenu.getItems()->at(index).getPrice())  +")");
+                       ", '"+ readMenu.getItems().at(index).getName() +
+                       "', "+ QString::number(readMenu.getItems().at(index).getPrice())  +")");
         }
     }
 }

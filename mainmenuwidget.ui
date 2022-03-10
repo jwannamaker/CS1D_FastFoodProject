@@ -47,6 +47,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="revenueButton">
+       <property name="text">
+        <string>Revenue</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="orderHistoryButton">
        <property name="text">
         <string>Order History</string>

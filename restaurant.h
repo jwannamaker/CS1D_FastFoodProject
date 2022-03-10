@@ -23,7 +23,7 @@ public:
     /// Static member of Restaurant, contains every Restuarant object created
     /// throughout the program.
     ///
-    //static std::vector<Restaurant> list;
+    static std::vector<Restaurant> list;
 
     ///
     /// \brief Restaurant

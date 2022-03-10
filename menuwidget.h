@@ -2,8 +2,14 @@
 #define MENUWIDGET_H
 
 #include <QWidget>
+#include "button.h"
 #include "restaurant.h"
 #include "menu.h"
+#include "ui_menuwidget.h"
+#include "menu.h"
+#include "button.h"
+
+const int MAX_ITEMS_COLS = 2;
 
 namespace Ui {
 class MenuWidget;
@@ -19,7 +25,7 @@ public:
     ~MenuWidget();
 
 signals:
-    void transmit_confirmOrder();
+    void transmit_confirmOrder(std::vector<Menu::Item>);
     void transmit_cancelOrder();
 
 private slots:
@@ -29,8 +35,18 @@ private slots:
 
     void on_cancelButton_pressed();
 
+    void itemClicked();
+
 private:
+    const int MAX_COL = 5;
+
     Ui::MenuWidget *ui;
+
+    //Creates a button for a menu item
+    Button *createButton(Menu::Item item, const char *member);
+
+    //data members
+    QVector<Button*> itemButtons;
 };
 
 #endif // MENUWIDGET_H

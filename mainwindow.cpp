@@ -11,6 +11,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // initializing connection to database
+    dbHelper = DatabaseHelper();
+    dbHelper.populateRestaurants();
+
     // initially opens to loginPage
     stackedWidget = new QStackedWidget;
 
@@ -34,11 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
                      this,
                      SLOT(recieve_restaurantView()));
 
-    dbHelper = DatabaseHelper();
-    std::vector<Restaurant> restaurantList = dbHelper.populateRestaurants();
-
     // initializing restaurant page
-    restaurantPage = new RestaurantWidget(restaurantList);
+    restaurantPage = new RestaurantWidget(Restaurant::list);
     stackedWidget->addWidget(restaurantPage);
     QObject::connect(restaurantPage,
                      SIGNAL(transmit_cancel()),
@@ -49,13 +50,11 @@ MainWindow::MainWindow(QWidget *parent) :
                      this,
                      SLOT(recieve_viewMenu(Restaurant)));
 
-    // initializing menu page
-    menuPage = new MenuWidget();
-    stackedWidget->addWidget(menuPage);
-    QObject::connect(menuPage,
-                     SIGNAL(transmit_cancelOrder()),
-                     this,
-                     SLOT(recieve_restaurantView()));
+
+
+    // initializing the revenue page
+    revenuePage = new RevenueWidget();
+    stackedWidget->addWidget(revenuePage);
 
     // by default, opens to the login page first
     stackedWidget->setCurrentWidget(loginPage);
@@ -94,5 +93,17 @@ void MainWindow::recieve_mainMenu()
 
 void MainWindow::recieve_viewMenu(Restaurant rest)
 {
+    // initializing menu page
+    menuPage = new MenuWidget(rest);
+    stackedWidget->addWidget(menuPage);
+    QObject::connect(menuPage,
+                     SIGNAL(transmit_cancelOrder()),
+                     this,
+                     SLOT(recieve_restaurantView()));
     stackedWidget->setCurrentWidget(menuPage);
+}
+
+void MainWindow::recieve_viewRevenue()
+{
+
 }
