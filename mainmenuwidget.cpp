@@ -7,7 +7,7 @@ MainMenuWidget::MainMenuWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     QGraphicsScene* mainMenuScene = new QGraphicsScene();
-    mainMenuScene->addPixmap(QPixmap(":images/rest_menu_icon.png"));
+    mainMenuScene->addPixmap(QPixmap(":images/03.jpg"));
     ui->graphicsView->setScene(mainMenuScene);
     ui->graphicsView->setBaseSize(250, 250);
     ui->graphicsView->show();

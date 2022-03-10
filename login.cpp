@@ -8,6 +8,13 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+
+    QGraphicsScene* mainMenuScene = new QGraphicsScene();
+    mainMenuScene->addPixmap(QPixmap(":images/01.jpg"));
+    ui->graphicsView->setScene(mainMenuScene);
+    ui->graphicsView->setBaseSize(250, 250);
+    ui->graphicsView->show();
+
     this->validUser = false;
 }
 
