@@ -34,6 +34,8 @@ public:
 
     void loadRestaurantsFromDatabase();
 
+    bool AuthenticateUser(QString username, QString password);
+
     ///
     /// \brief createRestaurantTable
     /// This method creates and populates a table in the database ("restaurant_data.sqlite")

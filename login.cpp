@@ -17,6 +17,16 @@ Login::~Login()
 }
 
 ///
+/// \brief Login::on_passwordlineEdit_returnPressed
+///
+/// User pressed enter key, validate the input using the database.
+///
+//void Login::on_passwordlineEdit_returnPressed()
+//{
+//    on_logInButton_pressed();
+//}
+
+///
 /// \brief Login::on_logInButton_pressed
 ///
 /// User pressed the "Log In" button, validate the input based on the database.
@@ -25,8 +35,9 @@ void Login::on_logInButton_pressed()
 {
     // TODO: Add a table into restaurant_data.sqlite called "User Data" or the like, and create the functionality
     // to authenticate a username and password pair based on the contents of that table
-
-    this->validUser = (ui->usernameLineEdit->text() == QString("username") && ui->passwordLineEdit->text() == QString("password"));
+    //this->validUser = (ui->usernameLineEdit->text() == QString("username") && ui->passwordLineEdit->text() == QString("password"));
+    DatabaseHelper dbHelper;
+    this->validUser = dbHelper.AuthenticateUser(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
 
     emit transmit_validUser(this->validUser);
 }

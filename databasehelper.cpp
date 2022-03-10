@@ -91,6 +91,32 @@ void DatabaseHelper::loadRestaurantsFromDatabase()
     //vector since it isn't technically a restaurant.
 }
 
+bool DatabaseHelper::AuthenticateUser(QString username, QString password)
+{
+    bool validUser = false;
+    QSqlQuery query(database);
+
+    //If the users table hasn't been added yet to the database, it will add it and insert a generic login
+    if(query.exec("CREATE TABLE IF NOT EXISTS users ( Username varchar(255), Password varchar(255), UNIQUE('Username') )"))
+    {
+        //Generic login information: username, password.
+        query.exec("INSERT INTO users VALUES ('username', 'password')");
+    }
+
+    if(query.exec("SELECT Username, Password FROM users"))
+    {
+        while(query.next() && !validUser)
+        {
+            if(query.value(0).toString() == username && query.value(1).toString() == password)
+            {
+                validUser = true;
+            }
+        }
+    }
+
+    return validUser;
+}
+
 void DatabaseHelper::createRestaurantTable(const std::vector<Restaurant> &restaurantList)
 {
     QSqlQuery query(database);
