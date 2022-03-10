@@ -19,7 +19,7 @@ signals:
     void transmit_cancel();
 
 private slots:
-    void on_cancelButton_pressed();
+    void on_BacktoMain_pressed();
 
 private:
     Ui::RevenueWidget *ui;
