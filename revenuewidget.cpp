@@ -14,3 +14,9 @@ RevenueWidget::~RevenueWidget()
 {
     delete ui;
 }
+
+void RevenueWidget::on_BacktoMain_pressed()
+{
+    emit transmit_cancel();
+}
+
