@@ -36,7 +36,7 @@ public:
     ///
     QSize sizeHint() const override;
 
-    QLabel getTopText() const;
+    QLabel *getTopText() const;
 
 private:
     QLabel *topText;

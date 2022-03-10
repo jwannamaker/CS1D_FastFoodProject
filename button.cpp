@@ -22,8 +22,8 @@ Button::Button(const Menu::Item& item, QWidget* parent)
     : QPushButton(parent)
 {
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
-    topText = new QLabel(item.getName());
-    bottomText = new QLabel(QString::number(item.getPrice()));
+    topText = new QLabel(item.name);
+    bottomText = new QLabel(QString::number(item.price));
     this->setImage(QPixmap(":images/rest_menu_icon.png"));
 }
 
@@ -45,7 +45,7 @@ QSize Button::sizeHint() const
     return size;
 }
 
-QLabel Button::getTopText() const
+QLabel *Button::getTopText() const
 {
-    return QLabel(topText);
+    return topText;
 }

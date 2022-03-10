@@ -7,7 +7,6 @@
 #include <QLineEdit>
 #include <QDialog>
 #include "restaurant.h"
-#include "menu.h"
 #include "button.h"
 #include "databasehelper.h"
 #include "ui_restaurantwidget.h"
@@ -31,7 +30,7 @@ public:
     explicit RestaurantWidget(const std::vector<Restaurant>& restaurantList, QWidget *parent = nullptr);
     ~RestaurantWidget();
 
-    //Function takes restauarnt name input and checks if the restaurant
+    //Function takes restaurant name input and checks if the restaurant
     //is on restaurantListCopy
     Restaurant findRestaurant(QString restName);
 
@@ -53,11 +52,10 @@ private:
     Ui::RestaurantWidget *ui;
 
     //Creates a button for restaurant
-    RestaurantButton *createButton(Restaurant rest, const char *member);
+    Button *createButton(Restaurant rest, const char *member);
 
     //data members
-    QVector<RestaurantButton*> restaurantButtons;
-    std::vector<Restaurant> restaurantListCopy;
+    QVector<Button*> restaurantButtons;
 };
 
 

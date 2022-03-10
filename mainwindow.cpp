@@ -100,9 +100,9 @@ void MainWindow::recieve_mainMenu()
 
 void MainWindow::recieve_viewMenu(Restaurant rest)
 {
-    menuPage = new MenuWidget(*rest.getMenu().getItems());
-    stackedWidget->addWidget(menuPage);
-    stackedWidget->setCurrentWidget(menuPage);
+    MenuWidget *mw = new MenuWidget(rest);
+    stackedWidget->addWidget(mw);
+    stackedWidget->setCurrentWidget(mw);
 }
 
 void MainWindow::recieve_viewRevenue()

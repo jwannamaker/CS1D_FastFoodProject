@@ -5,9 +5,9 @@
 #include "button.h"
 #include "restaurant.h"
 #include "menu.h"
-#include "menubutton.h"
 #include "ui_menuwidget.h"
 #include "menu.h"
+#include "button.h"
 
 const int MAX_ITEMS_COLS = 2;
 

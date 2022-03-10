@@ -68,7 +68,7 @@ void DatabaseHelper::populateRestaurants()
                 //Adds items to the menu
                 line = inputStream.readLine();
                 inputStream >> price;
-                newMenu.addItem(Item(line,price));
+                newMenu.addItem(Menu::Item(line,price));
                 inputStream.skipWhiteSpace();
             }
             newResturant.setMenu(newMenu);
