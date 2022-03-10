@@ -57,6 +57,13 @@ MainWindow::MainWindow(QWidget *parent) :
                      this,
                      SLOT(recieve_restaurantView()));
 
+
+    // initializing the revenue page
+    revenuePage = new RevenueWidget();
+    stackedWidget->addWidget(revenuePage);
+    QObject::connect(revenuePage,
+                     SIGNAL(transmit_revenueView))
+
     // by default, opens to the login page first
     stackedWidget->setCurrentWidget(loginPage);
     setCentralWidget(stackedWidget);

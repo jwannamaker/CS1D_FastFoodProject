@@ -30,7 +30,7 @@ private slots:
 
     void on_cancelButton_pressed();
 
-     void itemClicked();
+    void itemClicked();
 
 private:
     const int MAX_COL = 5;
