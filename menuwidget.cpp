@@ -7,6 +7,7 @@ MenuWidget::MenuWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->subtotalLineEdit->setText(QString::number(0.00));
+    ui->subtotalLineEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
 }
 
 MenuWidget::MenuWidget(const std::vector<Menu::Item>& itemList, QWidget *parent) :
@@ -47,6 +48,8 @@ MenuWidget::~MenuWidget()
 
 void MenuWidget::on_confirmButton_pressed()
 {
+
+
     emit transmit_confirmOrder(std::vector<Menu::Item>());
 }
 

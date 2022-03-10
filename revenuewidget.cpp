@@ -6,6 +6,8 @@ RevenueWidget::RevenueWidget(QWidget *parent) :
     ui(new Ui::RevenueWidget)
 {
     ui->setupUi(this);
+
+
 }
 
 RevenueWidget::~RevenueWidget()

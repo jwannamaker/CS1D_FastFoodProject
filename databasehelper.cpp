@@ -17,7 +17,7 @@ DatabaseHelper::~DatabaseHelper()
     database.removeDatabase("SQLITE");
 }
 
- std::vector<Restaurant> DatabaseHelper::populateRestaurants()
+void DatabaseHelper::populateRestaurants()
 {
     QFile file(":data/source_data1.txt");
     std::vector<Restaurant> restaurantList;
@@ -80,7 +80,8 @@ DatabaseHelper::~DatabaseHelper()
         }
         file.close();
     }
-    return restaurantList;
+    Restaurant::list.resize(10);
+    Restaurant::list = std::vector<Restaurant>(restaurantList);
 }
 
 void DatabaseHelper::loadRestaurantsFromDatabase()
