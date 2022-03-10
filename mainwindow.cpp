@@ -50,13 +50,6 @@ MainWindow::MainWindow(QWidget *parent) :
                      this,
                      SLOT(recieve_viewMenu(Restaurant)));
 
-    // initializing menu page
-    menuPage = new MenuWidget();
-    stackedWidget->addWidget(menuPage);
-    QObject::connect(menuPage,
-                     SIGNAL(transmit_cancelOrder()),
-                     this,
-                     SLOT(recieve_restaurantView()));
 
 
     // initializing the revenue page
@@ -100,9 +93,14 @@ void MainWindow::recieve_mainMenu()
 
 void MainWindow::recieve_viewMenu(Restaurant rest)
 {
-    MenuWidget *mw = new MenuWidget(rest);
-    stackedWidget->addWidget(mw);
-    stackedWidget->setCurrentWidget(mw);
+    // initializing menu page
+    menuPage = new MenuWidget(rest);
+    stackedWidget->addWidget(menuPage);
+    QObject::connect(menuPage,
+                     SIGNAL(transmit_cancelOrder()),
+                     this,
+                     SLOT(recieve_restaurantView()));
+    stackedWidget->setCurrentWidget(menuPage);
 }
 
 void MainWindow::recieve_viewRevenue()

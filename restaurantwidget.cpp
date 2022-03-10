@@ -76,18 +76,9 @@ void RestaurantWidget::restaurantClicked()
     //Get the tile clicked and send to restaurant menu
     Button *clickedButton = qobject_cast<Button *>(sender());
     qDebug() << "Restaurant Clicked";
-<<<<<<< Updated upstream
     qDebug() << clickedButton->getTopText()->text();
 
-
-    //MenuWidget *mv = new MenuWidget(findRestaurant(clickedButton->getRestaurantName()->text()));
-    //mv->show();
-    emit transmit_viewRestMenu(findRestaurant(clickedButton->getTopText()->text()));
-=======
-    qDebug() << clickedButton->getTopText().text();
->>>>>>> Stashed changes
-
-    Restaurant temp = findRestaurant(clickedButton->getTopText().text());
+    Restaurant temp = findRestaurant(clickedButton->getTopText()->text());
     emit transmit_viewRestMenu(temp);
 }
 
@@ -100,6 +91,7 @@ Button *RestaurantWidget::createButton(Restaurant rest, const char *member)
 
 Restaurant RestaurantWidget::findRestaurant(QString restName)
 {
+    for (size_t i = 0; i < Restaurant::list.size(); i++)
 
     {
         if (restName == Restaurant::list[i].getName())

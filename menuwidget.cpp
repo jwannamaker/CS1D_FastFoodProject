@@ -9,19 +9,17 @@ MenuWidget::MenuWidget(QWidget *parent) :
     ui->subtotalLineEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
 }
 
-MenuWidget::MenuWidget(const std::vector<Menu::Item>& itemList, QWidget *parent) :
+MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MenuWidget)
 {
-
-<<<<<<< Updated upstream
     std::vector<Menu::Item> menuItems = currentRestaurant.getMenu().getItems();
     qDebug() << "Menu items size" << menuItems.size();
 
     ui->setupUi(this);
     //Create the restaurant buttons
     for (size_t i = 0; i < menuItems.size(); ++i)
-        menuButtons.append(createButton(menuItems[i], SLOT(menuClicked())));
+        itemButtons.append(createButton(menuItems[i], SLOT(itemClicked())));
 
     //Create Grid for restaurant icons
     QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_menu);
@@ -33,37 +31,10 @@ MenuWidget::MenuWidget(const std::vector<Menu::Item>& itemList, QWidget *parent)
 
     for (size_t i = 0; i < menuItems.size(); i++)
     {
-        mainLayout->addWidget(menuButtons[i], row, col);
-        col++;
-
-        if (col >= MAX_ITEMS_COLS)
-        {
-            row++;
-            col = 0;
-        }
-    }
-
-=======
-    qDebug() << "Menu items size" << itemList.size();
->>>>>>> Stashed changes
-    //Create the buttons
-    for (Menu::Item item : itemList)
-        itemButtons.append(createButton(item, SLOT(itemClicked())));
-
-    //Create Grid for item icons
-    QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_menu);
-    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
-
-    //Add items to window
-    int row = 0;
-    int col = 0;
-
-    for (size_t i = 0; i < itemList.size(); i++)
-    {
         mainLayout->addWidget(itemButtons[i], row, col);
         col++;
 
-        if (col >= MAX_COL)
+        if (col >= MAX_ITEMS_COLS)
         {
             row++;
             col = 0;

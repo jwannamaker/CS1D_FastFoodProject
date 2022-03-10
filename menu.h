@@ -14,20 +14,9 @@
 /// menu item, placing an order, getting the sum for that order, and more.
 ///
 ///
-
-
 class Menu
 {
 public:
-
-        struct Item
-        {
-            QString name;
-            double price;
-
-            Item();
-            Item(QString name, double price) : name{name}, price{price} {}
-        };
     ///
     /// \brief The Item class
     ///
