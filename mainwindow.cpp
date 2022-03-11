@@ -33,6 +33,10 @@ MainWindow::MainWindow(QWidget *parent) :
                      SIGNAL(transmit_restaurantView()),
                      this,
                      SLOT(recieve_restaurantView()));
+    QObject::connect(mainMenuPage,
+                     SIGNAL(transmit_revenueView()),
+                     this,
+                     SLOT(recieve_revenueView()));
 
     dbHelper = DatabaseHelper();
     std::vector<Restaurant> restaurantList = dbHelper.populateRestaurants();
@@ -59,10 +63,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     // initializing the revenue page
-    revenuePage = new RevenueWidget();
+    revenuePage = new RevenueWidget(restaurantList);
     stackedWidget->addWidget(revenuePage);
     QObject::connect(revenuePage,
-                     SIGNAL(transmit_revenueView))
+                     SIGNAL(transmit_exitRevenue()),
+                     this,
+                     SLOT(recieve_mainMenu()));
 
     // by default, opens to the login page first
     stackedWidget->setCurrentWidget(loginPage);
@@ -102,4 +108,9 @@ void MainWindow::recieve_mainMenu()
 void MainWindow::recieve_viewMenu(Restaurant rest)
 {
     stackedWidget->setCurrentWidget(menuPage);
+}
+
+void MainWindow::recieve_revenueView()
+{
+    stackedWidget->setCurrentWidget(revenuePage);
 }

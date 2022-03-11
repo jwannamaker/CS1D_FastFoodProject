@@ -33,7 +33,7 @@ public slots:
     void recieve_restaurantView();
     void recieve_mainMenu();
     void recieve_viewMenu(Restaurant);
-    void recieve_viewRevenue();
+    void recieve_revenueView();
 
 private:
     DatabaseHelper dbHelper;

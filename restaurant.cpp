@@ -7,12 +7,14 @@
 Restaurant::Restaurant()
 {
 //    Restaurant::list.push_back(*this);
+    this->revenue = 0.0;
 }
 
 Restaurant::Restaurant(int ID, QString name)
 {
     this->ID = ID;
     this->name = name;
+    this->revenue = 0.0;
 //    Restaurant::list.push_back(*this);
 }
 
@@ -70,4 +72,14 @@ Menu Restaurant::getMenu() const
 QString Restaurant::getName() const
 {
    return name;
+}
+
+void Restaurant::setRevenue(double revenue)
+{
+    this->revenue = revenue;
+}
+
+double Restaurant::getRevenue() const
+{
+    return revenue;
 }

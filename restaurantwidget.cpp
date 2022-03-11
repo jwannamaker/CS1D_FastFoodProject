@@ -77,7 +77,7 @@ void RestaurantWidget::restaurantClicked()
     Button *clickedButton = qobject_cast<Button *>(sender());
     qDebug() << "Restaurant Clicked";
 
-    emit transmit_viewRestMenu();
+    emit transmit_viewRestMenu(Restaurant());
 }
 
 Button *RestaurantWidget::createButton(Restaurant rest, const char *member)

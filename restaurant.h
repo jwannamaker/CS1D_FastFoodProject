@@ -98,11 +98,16 @@ public:
     /// \return
     ///
     Menu getMenu() const;
+
+    void setRevenue(double revenue);
+
+    double getRevenue() const;
 private:
     int ID;
     QString name;
     std::vector<double> distances;
     Menu menu;
+    double revenue;
 };
 
 #endif // RESTAURANT_H
