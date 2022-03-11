@@ -91,19 +91,19 @@ void DatabaseHelper::loadRestaurantsFromDatabase()
     //vector since it isn't technically a restaurant.
 }
 
-bool DatabaseHelper::AuthenticateUser(QString username, QString password)
+bool DatabaseHelper::AuthenticateUser(Customer newUser)
 {
     bool validUser = false;
     QSqlQuery query(database);
 
     //If the users table hasn't been added yet to the database, it will add it and insert a generic login
-    if(query.exec("CREATE TABLE IF NOT EXISTS users ( Username varchar(255), Password varchar(255), UNIQUE('Username') )"))
+    if(query.exec("CREATE TABLE IF NOT EXISTS users ( Username varchar(255) UNIQUE, Password varchar(255) )"))
     {
         //Generic login information: username, password.
         query.exec("INSERT INTO users VALUES ('username', 'password')");
     }
 
-    if(query.exec("SELECT Username, Password FROM users"))
+    if(query.exec("SELECT * FROM users"))
     {
         while(query.next() && !validUser)
         {

@@ -34,6 +34,15 @@ public:
     //is on restaurantListCopy
     Restaurant findRestaurant(QString restName);
 
+    ///
+    /// \brief getTripDistance
+    ///
+    /// Calculates the distance this Customer has traveled so far by traversing the
+    /// list of restaurants in the listWidget.
+    /// \return Double indicating the total miles in a Customer's trip.
+    ///
+    double getTripDistance() const;
+
 signals:
     void transmit_cancel();
     void transmit_viewRestMenu(Restaurant rest);
