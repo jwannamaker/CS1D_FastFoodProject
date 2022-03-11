@@ -48,7 +48,7 @@ public:
     /// Adds the passed Restaurant to the list of Restaurants the current
     /// user has already visited.
     ///
-    void createNewOrder(Restaurant);
+    void createNewOrder(Restaurant rest);
 
     ///
     /// \brief getTripDistance
@@ -59,9 +59,21 @@ public:
     ///
     double getTripDistance() const;
 
+    ///
+    /// \brief getUsername
+    /// \return
+    ///
+    QString getUsername() const;
+
+    ///
+    /// \brief getPassword
+    /// \return
+    ///
+    QString getPassword() const;
+
 private:
-    QString username;
-    QString password;
+    QString     username;
+    QString     password;
 };
 
 #endif // CUSTOMER_H

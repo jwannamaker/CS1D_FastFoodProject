@@ -16,16 +16,6 @@ Login::~Login()
 }
 
 ///
-/// \brief Login::on_passwordlineEdit_returnPressed
-///
-/// User pressed enter key, validate the input using the database.
-///
-//void Login::on_passwordlineEdit_returnPressed()
-//{
-//    on_logInButton_pressed();
-//}
-
-///
 /// \brief Login::on_logInButton_pressed
 ///
 /// User pressed the "Log In" button, validate the input based on the database.
@@ -33,7 +23,12 @@ Login::~Login()
 void Login::on_logInButton_pressed()
 {
     DatabaseHelper dbHelper;
-    emit transmit_validUser(dbHelper.AuthenticateUser(ui->usernameLineEdit->text(), ui->passwordLineEdit->text()));
+    Customer newUser = Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
+
+    if (dbHelper.authenticateUser(newUser))
+        emit transmit_validUser(newUser);
+    else
+        emit transmit_invalidUser();
 }
 
 ///

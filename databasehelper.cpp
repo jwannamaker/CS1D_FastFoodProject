@@ -91,74 +91,64 @@ void DatabaseHelper::loadRestaurantsFromDatabase()
     //vector since it isn't technically a restaurant.
 }
 
-bool DatabaseHelper::AuthenticateUser(Customer newUser)
+bool DatabaseHelper::authenticateUser(Customer user)
 {
-    bool validUser = false;
     QSqlQuery query(database);
 
     //If the users table hasn't been added yet to the database, it will add it and insert a generic login
     if(query.exec("CREATE TABLE IF NOT EXISTS users ( Username varchar(255) UNIQUE, Password varchar(255) )"))
-    {
-        //Generic login information: username, password.
         query.exec("INSERT INTO users VALUES ('username', 'password')");
-    }
 
     if(query.exec("SELECT * FROM users"))
-    {
-        while(query.next() && !validUser)
-        {
-            if(query.value(0).toString() == username && query.value(1).toString() == password)
-            {
-                validUser = true;
-            }
-        }
-    }
+        while(query.next())
+            if(query.value(0).toString() == user.getUsername() && query.value(1).toString() == user.getPassword())
+                return true;
 
-    return validUser;
+    return false;
 }
 
-void DatabaseHelper::createRestaurantTable(const std::vector<Restaurant> &restaurantList)
+void DatabaseHelper::createRestaurantTable()
 {
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS parent ( ID int PRIMARY KEY, Name varchar(255) )");
 
     //Inserts Saddleback as Restaurant index[0]
     query.exec("INSERT INTO parent VALUES ('0', 'Saddleback')");
-    for (const Restaurant& insert : restaurantList)
+    for (const Restaurant& insert : Restaurant::list)
     {
         //Inserts Restaurants and their corresponding IDs
-        query.exec("INSERT INTO parent VALUES ("+ QString::number(insert.getID()) +", '"+
-                                                insert.getName() +"')");
+        query.exec("INSERT INTO parent VALUES (" + QString::number(insert.getID()) + ", '" +
+                                                insert.getName() + "')");
     }
 }
 
-void DatabaseHelper::createDistancesTable(const std::vector<Restaurant> &restaurantList)
+void DatabaseHelper::createDistancesTable()
 {
     QSqlQuery query(database);
-    query.exec("CREATE TABLE IF NOT EXISTS distances ( ParentID int, ToID int, Distance numeric, UNIQUE('ParentID','ToID','Distance'))");
+    query.exec("CREATE TABLE IF NOT EXISTS distances ( ParentID int, ToID int, Distance numeric, UNIQUE('ParentID', 'ToID', 'Distance'))");
 
-    for (const Restaurant& insert : restaurantList)
+    for (const Restaurant& insert : Restaurant::list)
     {
         //Gets distance to saddleback.
         query.exec("INSERT INTO distances VALUES ("+ QString::number(insert.getID()) +
                                                   ", '0', "+
                                                   QString::number(insert.getDistance(0)) +")");
         //Gets distance to every restaurant.
-        for(unsigned int index = 0; index < restaurantList.size(); index++)
+        for(unsigned int index = 0; index < Restaurant::list.size(); index++)
         {
-            query.exec("INSERT INTO distances VALUES ("+ QString::number(insert.getID()) +
-                                                      ", "+ QString::number(restaurantList.at(index).getID()) +
-                                                      ", "+ QString::number(insert.getDistance(index+1)) +")");
+            query.exec("INSERT INTO distances VALUES (" + QString::number(insert.getID()) + ", " +
+                                                      QString::number(Restaurant::list.at(index).getID()) + ", " +
+                                                      QString::number(insert.getDistance(index+1)) + ")");
         }
     }
 }
 
-void DatabaseHelper::createMenuTable(const std::vector<Restaurant> &restaurantList)
+void DatabaseHelper::createMenuTable()
 {
     QSqlQuery query(database);
-    query.exec("CREATE TABLE IF NOT EXISTS menu ( ParentID int, Name varchar(255), Price numeric, UNIQUE('ParentID','Name','Price'))");
+    query.exec("CREATE TABLE IF NOT EXISTS menu ( ParentID int, Name varchar(255), Price numeric, UNIQUE('ParentID', 'Name', 'Price'))");
 
-    for (const Restaurant& insert: restaurantList)
+    for (const Restaurant& insert : Restaurant::list)
     {
         Menu readMenu = insert.getMenu();
         for (unsigned int index = 0; index < readMenu.getItems().size(); index++)

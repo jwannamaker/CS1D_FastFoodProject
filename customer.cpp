@@ -1,4 +1,5 @@
 #include "customer.h"
+#include "databasehelper.h"
 
 Customer::Customer()
 {
@@ -14,5 +15,16 @@ Customer::Customer(QString username, QString password)
 
 bool Customer::isAdmin()
 {
-    return DatabaseHelper::authenticateUser(this);
+    DatabaseHelper dbHelper;
+    return dbHelper.authenticateUser(*this);
+}
+
+QString Customer::getUsername() const
+{
+    return username;
+}
+
+QString Customer::getPassword() const
+{
+    return password;
 }
