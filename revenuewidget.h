@@ -14,6 +14,7 @@ class RevenueWidget : public QWidget
 public:
     explicit RevenueWidget(QWidget *parent = nullptr);
     ~RevenueWidget();
+    double getTotalRevenue();
 
 signals:
     void transmit_cancel();
