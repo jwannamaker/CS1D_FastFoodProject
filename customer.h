@@ -42,24 +42,6 @@ public:
     bool isAdmin();
 
     ///
-    /// \brief createNewOrder.
-    ///
-    /// Functionality to create a new order for the current user.
-    /// Adds the passed Restaurant to the list of Restaurants the current
-    /// user has already visited.
-    ///
-    void createNewOrder(Restaurant rest);
-
-    ///
-    /// \brief getTripDistance
-    ///
-    /// Calculates the distance this Customer has traveled so far by traversing the
-    /// list of visited restaurants.
-    /// \return Double indicating the total miles in a Customer's trip.
-    ///
-    double getTripDistance() const;
-
-    ///
     /// \brief getUsername
     /// \return
     ///

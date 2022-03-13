@@ -45,6 +45,16 @@ double Restaurant::getDistance(int otherID) const
     return distances.at(otherID);
 }
 
+double Restaurant::getTripDistance(std::vector<int> tripIDList) const
+{
+    double totalDistance = 0;
+
+    for (int otherID : tripIDList)
+        totalDistance += getDistance(otherID);
+
+    return totalDistance;
+}
+
 void Restaurant::setMenu(Menu menu)
 {
     this->menu = menu;

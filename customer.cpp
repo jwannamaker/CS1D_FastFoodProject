@@ -3,7 +3,8 @@
 
 Customer::Customer()
 {
-
+    username = "username";
+    password = "password";
 }
 
 Customer::Customer(QString username, QString password)
