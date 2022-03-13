@@ -70,7 +70,21 @@ void MenuWidget::itemClicked()
 {
     //Get the tile clicked and send to restaurant menu
     Button *clickedButton = qobject_cast<Button *>(sender());
-    qDebug() << "Menu button Clicked: " << clickedButton->text();
+    qDebug() << "Menu button Clicked: " << clickedButton->getTopText()->text();
+
+    QString menuItemText = clickedButton->getTopText()->text();
+    QListWidgetItem *menuItem = new QListWidgetItem(menuItemText);
+    QList<QListWidgetItem *> items = ui->listWidget_menuItems->findItems(menuItemText, Qt::MatchExactly);
+    if (items.size() == 0)
+    {
+        ui->listWidget_menuItems->addItem(menuItem);
+    }
+    else
+    {
+         //update quantity of item selected
+         qDebug() << "Menu item already added";
+    }
+
 }
 
 Button *MenuWidget::createButton(Menu::Item item, const char *member)
