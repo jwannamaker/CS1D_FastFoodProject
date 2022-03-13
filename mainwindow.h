@@ -24,26 +24,48 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-signals:
+    void initializeNewUser();
 
 public slots:
-    void recieve_loginAttempt(bool);
+    void recieve_loginSuccess(Customer);
+
+    ///
+    /// \brief recieve_logout
+    /// Switches the top widget of the stacked widget to the login widget
+    ///
     void recieve_logout();
+
+    ///
+    /// \brief recieve_restaurantView
+    ///
     void recieve_restaurantView();
+
+    ///
+    /// \brief recieve_mainMenu
+    ///
     void recieve_mainMenu();
-    void recieve_viewMenu(Restaurant);
-    void recieve_viewRevenue();
+
+    ///
+    /// \brief recieve_viewMenu
+    /// \param Restaurant rest
+    ///
+    void recieve_viewMenu(Restaurant rest);
+
+    ///
+    /// \brief recieve_viewRevenue
+    ///
+    void recieve_revenueView();
 
 private:
-    DatabaseHelper dbHelper;
-    Ui::MainWindow *ui;
-    QStackedWidget *stackedWidget;
-    Login* loginPage;
-    MainMenuWidget* mainMenuPage;
-    MenuWidget* menuPage;
-    RestaurantWidget* restaurantPage;
-    RevenueWidget* revenuePage;
+    DatabaseHelper      dbHelper;
+    Customer            user;
+    Ui::MainWindow*     ui;
+    QStackedWidget*     stackedWidget;
+    Login*              loginPage;
+    MainMenuWidget*     mainMenuPage;
+    MenuWidget*         menuPage;
+    RestaurantWidget*   restaurantPage;
+    RevenueWidget*      revenuePage;
 };
 
 #endif // MAINWINDOW_H

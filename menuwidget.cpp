@@ -14,18 +14,18 @@ MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
     ui(new Ui::MenuWidget)
 {
     std::vector<Menu::Item> menuItems = currentRestaurant.getMenu().getItems();
-    qDebug() << "Menu items size" << menuItems.size();
 
     ui->setupUi(this);
-    //Create the restaurant buttons
+
+    //Create the menu item buttons
     for (size_t i = 0; i < menuItems.size(); ++i)
         itemButtons.append(createButton(menuItems[i], SLOT(itemClicked())));
 
-    //Create Grid for restaurant icons
+    //Create Grid for menu item icons
     QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_menu);
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
-    //Add restaurants to window
+    //Add menu items to window
     int row = 0;
     int col = 0;
 

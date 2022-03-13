@@ -32,16 +32,10 @@ void Restaurant::setDistances(std::vector<double> distances)
 
 double Restaurant::getDistance(const Restaurant& other) const
 {
-    double distance;
     if(int(distances.size()) <= other.getID())
-    {
-        distance = other.getDistance(this->ID);
-    }
+        return other.getDistance(ID);
     else
-    {
-        distance = distances.at(other.getID());
-    }
-    return distance;
+        return distances.at(other.getID());
 }
 
 double Restaurant::getDistance(int otherID) const
@@ -49,6 +43,16 @@ double Restaurant::getDistance(int otherID) const
     //Warning: This method can only be called if the vector of distances of the current
     //restaurant includes the distance to the other restaurant.
     return distances.at(otherID);
+}
+
+double Restaurant::getTripDistance(std::vector<int> tripIDList) const
+{
+    double totalDistance = 0;
+
+    for (int otherID : tripIDList)
+        totalDistance += getDistance(otherID);
+
+    return totalDistance;
 }
 
 void Restaurant::setMenu(Menu menu)
@@ -69,4 +73,14 @@ Menu Restaurant::getMenu() const
 QString Restaurant::getName() const
 {
    return name;
+}
+
+void Restaurant::setRevenue(double revenue)
+{
+    this->revenue = revenue;
+}
+
+double Restaurant::getRevenue() const
+{
+    return revenue;
 }
