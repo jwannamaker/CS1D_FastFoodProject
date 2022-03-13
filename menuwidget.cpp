@@ -13,6 +13,11 @@ MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MenuWidget)
 {
+    //Save the restaurant passed in to menu widget class member
+    this->currentRestaurant = currentRestaurant;
+
+    subTotal = 0;
+
     std::vector<Menu::Item> menuItems = currentRestaurant.getMenu().getItems();
 
     ui->setupUi(this);
@@ -78,11 +83,19 @@ void MenuWidget::itemClicked()
     if (items.size() == 0)
     {
         ui->listWidget_menuItems->addItem(menuItem);
+
+        //update subtotal get item price
+        subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);
+        QString valueAsString = QString::number(subTotal);
+        ui->subtotalLineEdit->setText(valueAsString);
     }
     else
     {
-         //update quantity of item selected
-         qDebug() << "Menu item already added";
+        //update quantity of item selected
+        subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);
+        QString valueAsString = QString::number(subTotal);
+        ui->subtotalLineEdit->setText(valueAsString);
+        qDebug() << "Menu item already added, updating quantity";
     }
 
 }
@@ -92,6 +105,11 @@ Button *MenuWidget::createButton(Menu::Item item, const char *member)
     Button *button = new Button(item);
     connect(button, SIGNAL(clicked()), this, member);
     return button;
+}
+
+Restaurant MenuWidget::GetCurrentRestuarant()
+{
+    return currentRestaurant;
 }
 
 

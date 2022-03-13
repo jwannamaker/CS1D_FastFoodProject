@@ -82,6 +82,10 @@ public:
     ///
     std::vector<Item> getItems();
 
+    //take in the name of an item. If the item exists it will return the price,
+    //else it will return 0.00
+    double getItemPrice(QString item);
+
 private:
     ///
     /// \brief items

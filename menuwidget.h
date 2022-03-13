@@ -8,6 +8,7 @@
 #include "ui_menuwidget.h"
 #include "menu.h"
 #include "button.h"
+#include "restaurantwidget.h"
 
 const int MAX_ITEMS_COLS = 5;
 
@@ -23,6 +24,8 @@ public:
     explicit MenuWidget(QWidget *parent = nullptr);
     explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
+
+    Restaurant GetCurrentRestuarant();
 
 signals:
     void transmit_confirmOrder(std::vector<Menu::Item> order);
@@ -47,6 +50,15 @@ private:
 
     //data members
     QVector<Button*> itemButtons;
+
+    //Current restaurant on the widget
+    Restaurant currentRestaurant;
+
+    //Keeps track of the subtotatl when user is ordering food
+    double subTotal;
+
+    //Keeps track of item quantity
+    int quantity;
 };
 
 #endif // MENUWIDGET_H
