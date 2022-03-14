@@ -27,7 +27,11 @@ public:
     void initializeNewUser();
 
 public slots:
-    void recieve_loginSuccess(Customer);
+    ///
+    /// \brief recieve_loginSuccess
+    /// \param newUser
+    ///
+    void recieve_loginSuccess(Customer newUser);
 
     ///
     /// \brief recieve_logout
@@ -39,6 +43,11 @@ public slots:
     /// \brief recieve_restaurantView
     ///
     void recieve_restaurantView();
+
+    ///
+    /// \brief recieve_addRestaurantToTrip
+    ///
+    void recieve_addRestaurantToTrip(Restaurant);
 
     ///
     /// \brief recieve_mainMenu

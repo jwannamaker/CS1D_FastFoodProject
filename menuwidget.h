@@ -2,6 +2,8 @@
 #define MENUWIDGET_H
 
 #include <QWidget>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 #include "button.h"
 #include "restaurant.h"
 #include "menu.h"
@@ -28,13 +30,11 @@ public:
     Restaurant GetCurrentRestuarant();
 
 signals:
-    void transmit_confirmOrder(std::vector<Menu::Item> order);
+    void transmit_confirmOrder(Restaurant);
     void transmit_cancelOrder();
 
 private slots:
     void on_confirmButton_pressed();
-
-    void on_editButton_pressed();
 
     void on_cancelButton_pressed();
 
@@ -56,9 +56,6 @@ private:
 
     //Keeps track of the subtotatl when user is ordering food
     double subTotal;
-
-    //Keeps track of item quantity
-    int quantity;
 };
 
 #endif // MENUWIDGET_H

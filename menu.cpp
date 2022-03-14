@@ -2,7 +2,7 @@
 
 Menu::Menu()
 {
-
+    items = std::vector<Menu::Item>();
 }
 
 void Menu::addItem(const Item& newItem)

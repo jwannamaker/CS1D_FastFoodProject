@@ -1,7 +1,7 @@
 #include "restaurant.h"
 
 // Allocating the memory for a vector of Restaurant objects
-std::vector<Restaurant> Restaurant::list = std::vector<Restaurant>();
+std::vector<Restaurant> Restaurant::list = std::vector<Restaurant>(1);
 
 Restaurant::Restaurant()
 {

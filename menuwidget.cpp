@@ -56,15 +56,8 @@ void MenuWidget::on_confirmButton_pressed()
 {
     // go through listWidget and update restuarant's revenue with total from order
 
-    emit transmit_confirmOrder(std::vector<Menu::Item>());
+    emit transmit_confirmOrder(currentRestaurant);
 }
-
-
-void MenuWidget::on_editButton_pressed()
-{
-
-}
-
 
 void MenuWidget::on_cancelButton_pressed()
 {
@@ -78,11 +71,11 @@ void MenuWidget::itemClicked()
     qDebug() << "Menu button Clicked: " << clickedButton->getTopText()->text();
 
     QString menuItemText = clickedButton->getTopText()->text();
-    QListWidgetItem *menuItem = new QListWidgetItem(menuItemText);
-    QList<QListWidgetItem *> items = ui->listWidget_menuItems->findItems(menuItemText, Qt::MatchExactly);
+//    QTableWidgetItem *menuItem = new QTableWidgetItem(menuItemText);
+    QList<QTableWidgetItem *> items = ui->tableWidget_orderItems->findItems(menuItemText, Qt::MatchExactly);
     if (items.size() == 0)
     {
-        ui->listWidget_menuItems->addItem(menuItem);
+//        ui->tableWidget_orderItems->addItem(menuItem);
 
         //update subtotal get item price
         subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);
