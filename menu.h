@@ -95,6 +95,10 @@ public:
     //else it will return 0.00
     double getItemPrice(QString item);
 
+    //takes in the name of an item. If the item exists it will return the quantity
+    //else it will return 0
+    int getItemQuantity(QString item);
+
 private:
     ///
     /// \brief items
