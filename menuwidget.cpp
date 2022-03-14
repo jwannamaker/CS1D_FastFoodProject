@@ -90,14 +90,15 @@ void MenuWidget::itemClicked()
     QTableWidgetItem *menuItem = new QTableWidgetItem(menuItemText);
     QList<QTableWidgetItem *> items = ui->tableWidget_menuItems->findItems(menuItemText, Qt::MatchExactly);
     ui->tableWidget_menuItems->setColumnCount(3);
-    ui->tableWidget_menuItems->setRowCount(menuItemsAdded + 1);
+
 
     if (items.size() == 0)
     {
         //ui->table_menuItems->addItem(menuItem);
-
+        ui->tableWidget_menuItems->setRowCount(menuItemsAdded + 1);
         ui->tableWidget_menuItems->setItem(menuItemsAdded, 0, menuItem);
         menuItemsAdded++;
+
         //update subtotal get item price
         subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);
         QString valueAsString = QString::number(subTotal);
