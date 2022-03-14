@@ -10,20 +10,37 @@
 #include <QVBoxLayout>
 #include <QLayoutItem>
 #include <QObject>
+#include <QSize>
+#include "restaurant.h"
+#include "menu.h"
 
-const int TILE_SIZE = 100;
+const int TILE_SIZE = 50;
 
 class Button : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit Button(const QString &text1, const QString text2, const QString &iconFilePath, QWidget *parent = nullptr);
+    explicit Button(const Restaurant& rest, QWidget *parent = nullptr);
+    explicit Button(const Menu::Item& item, QWidget *parent = nullptr);
+    explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
+    ///
+    /// \brief setImage
+    /// \param image
+    ///
+    void setImage(QPixmap image);
+
+    ///
+    /// \brief sizeHint
+    /// \return
+    ///
     QSize sizeHint() const override;
-private:
 
-    QLabel *textLine1;
-    QLabel *textLine2;
+    QLabel *getTopText() const;
+
+private:
+    QLabel*     topText;
+    QLabel*     bottomText;
 };
 
 #endif // BUTTON_H

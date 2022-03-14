@@ -30,12 +30,13 @@ Login::~Login()
 ///
 void Login::on_logInButton_pressed()
 {
-    // TODO: Add a table into restaurant_data.sqlite called "User Data" or the like, and create the functionality
-    // to authenticate a username and password pair based on the contents of that table
+    DatabaseHelper dbHelper;
+    Customer newUser = Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
 
-    this->validUser = (ui->usernameLineEdit->text() == QString("username") && ui->passwordLineEdit->text() == QString("password"));
-
-    emit transmit_validUser(this->validUser);
+    if (dbHelper.authenticateUser(newUser))
+        emit transmit_validUser(newUser);
+    else
+        emit transmit_invalidUser();
 }
 
 ///

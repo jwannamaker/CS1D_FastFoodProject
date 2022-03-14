@@ -2,6 +2,8 @@
 #define LOGIN_H
 
 #include <QWidget>
+#include "customer.h"
+#include "databasehelper.h"
 
 namespace Ui {
 class Login;
@@ -20,10 +22,12 @@ class Login : public QWidget
 
 public:
     explicit Login(QWidget *parent = nullptr);
+
     ~Login();
 
 signals:
-    void transmit_validUser(bool valid);
+    void transmit_validUser(Customer newUser);
+    void transmit_invalidUser();
 
 public slots:
     void on_logInButton_pressed();
@@ -31,8 +35,7 @@ public slots:
     void on_clearButton_pressed();
 
 private:
-    Ui::Login *ui;
-    bool validUser;
+    Ui::Login*  ui;
 };
 
 #endif // LOGIN_H

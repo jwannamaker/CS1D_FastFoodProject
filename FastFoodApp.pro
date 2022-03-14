@@ -19,7 +19,8 @@ SOURCES += \
     menu.cpp \
     menuwidget.cpp \
     restaurant.cpp \
-    restaurantwidget.cpp
+    restaurantwidget.cpp \
+    revenuewidget.cpp
 
 HEADERS += \
     button.h \
@@ -31,14 +32,16 @@ HEADERS += \
     menu.h \
     menuwidget.h \
     restaurant.h \
-    restaurantwidget.h
+    restaurantwidget.h \
+    revenuewidget.h
 
 FORMS += \
     login.ui \
     mainmenuwidget.ui \
     mainwindow.ui \
     menuwidget.ui \
-    restaurantwidget.ui
+    restaurantwidget.ui \
+    revenuewidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
