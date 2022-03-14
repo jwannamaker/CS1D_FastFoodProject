@@ -56,6 +56,9 @@ private:
 
     //Keeps track of the subtotatl when user is ordering food
     double subTotal;
+
+    int menuItemsAdded;
+
 };
 
 #endif // MENUWIDGET_H

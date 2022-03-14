@@ -33,3 +33,17 @@ double Menu::getItemPrice(QString item)
     qDebug("Menu item not found");
     return 0.00;
 }
+
+int Menu::getItemQuantity(QString item)
+{
+    for (size_t i = 0; i < items.size(); i++)
+    {
+        if( items[i].getName() == item)
+        {
+            return items[i].getQuantity();
+        }
+    }
+
+    qDebug("Menu item not found");
+    return 0;
+}
