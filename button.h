@@ -14,7 +14,7 @@
 #include "restaurant.h"
 #include "menu.h"
 
-const int TILE_SIZE = 100;
+const int TILE_SIZE = 50;
 
 class Button : public QPushButton
 {
@@ -36,11 +36,11 @@ public:
     ///
     QSize sizeHint() const override;
 
-    QLabel getTopText() const;
+    QLabel *getTopText() const;
 
 private:
-    QLabel *topText;
-    QLabel *bottomText;
+    QLabel*     topText;
+    QLabel*     bottomText;
 };
 
 #endif // BUTTON_H

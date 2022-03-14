@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "restaurant.h"
-#include <vector>
 
 namespace Ui {
 class RevenueWidget;
@@ -14,14 +13,15 @@ class RevenueWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit RevenueWidget(std::vector<Restaurant> list, QWidget *parent = nullptr);
+    explicit RevenueWidget(const std::vector<Restaurant>& restaurantList, QWidget *parent = nullptr);
     ~RevenueWidget();
+    double getTotalRevenue();
 
 signals:
-    void transmit_exitRevenue();
+    void transmit_cancel();
 
 private slots:
-    void on_exitButton_clicked();
+    void on_exitButton_pressed();
 
 private:
     Ui::RevenueWidget *ui;

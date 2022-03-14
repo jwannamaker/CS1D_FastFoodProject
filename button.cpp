@@ -41,11 +41,11 @@ QSize Button::sizeHint() const
 {
     QSize size = QPushButton::sizeHint();
     size.rheight() += TILE_SIZE;
-    size.rwidth() = qMax(size.width(), size.height());
+    size.rwidth() += qMax(size.width(), size.height());
     return size;
 }
 
-QLabel Button::getTopText() const
+QLabel *Button::getTopText() const
 {
-    return QLabel(topText);
+    return topText;
 }

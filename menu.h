@@ -13,6 +13,7 @@
 /// a menu can have, such as editing a menu item, creating or deleting a
 /// menu item, placing an order, getting the sum for that order, and more.
 ///
+///
 class Menu
 {
 public:
@@ -46,10 +47,19 @@ public:
         {
             this->price = price;
         }
+        int getQuantity() const
+        {
+            return quantity;
+        }
+        void setQuantity(int quantity)
+        {
+            this->quantity = quantity;
+        }
 
     private:
         QString name;
         double price;
+        int quantity;
     };
 
     ///
@@ -79,7 +89,15 @@ public:
     /// Returns a pointer to the list of menu items.
     /// \return Pointer to this instance's vector containing all the menu's items.
     ///
-    std::vector<Item>* getItems();
+    std::vector<Item> getItems();
+
+    //take in the name of an item. If the item exists it will return the price,
+    //else it will return 0.00
+    double getItemPrice(QString item);
+
+    //takes in the name of an item. If the item exists it will return the quantity
+    //else it will return 0
+    int getItemQuantity(QString item);
 
 private:
     ///
