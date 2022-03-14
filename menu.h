@@ -47,10 +47,19 @@ public:
         {
             this->price = price;
         }
+        int getQuantity() const
+        {
+            return quantity;
+        }
+        void setQuantity(int quantity)
+        {
+            this->quantity = quantity;
+        }
 
     private:
         QString name;
         double price;
+        int quantity;
     };
 
     ///

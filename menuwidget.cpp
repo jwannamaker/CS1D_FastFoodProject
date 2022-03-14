@@ -1,4 +1,5 @@
 #include "menuwidget.h"
+#include "QTableWidget"
 
 MenuWidget::MenuWidget(QWidget *parent) :
     QWidget(parent),
@@ -7,6 +8,9 @@ MenuWidget::MenuWidget(QWidget *parent) :
     ui->setupUi(this);
     ui->subtotalLineEdit->setText(QString::number(0.00));
     ui->subtotalLineEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
+    ui->tableWidget_menuItems->setColumnCount(2);
+    ui->tableWidget_menuItems->setRowCount(8);
+
 }
 
 MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
@@ -16,7 +20,10 @@ MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
     //Save the restaurant passed in to menu widget class member
     this->currentRestaurant = currentRestaurant;
 
+    //ui->tableWidget_menuItems->setColumnCount(3);
+
     subTotal = 0;
+    menuItemsAdded = 0;
 
     std::vector<Menu::Item> menuItems = currentRestaurant.getMenu().getItems();
 
@@ -73,16 +80,23 @@ void MenuWidget::on_cancelButton_pressed()
 
 void MenuWidget::itemClicked()
 {
+    //keeps track of row where menu item is added
+    int row = 1;
     //Get the tile clicked and send to restaurant menu
     Button *clickedButton = qobject_cast<Button *>(sender());
     qDebug() << "Menu button Clicked: " << clickedButton->getTopText()->text();
 
     QString menuItemText = clickedButton->getTopText()->text();
-    QListWidgetItem *menuItem = new QListWidgetItem(menuItemText);
-    QList<QListWidgetItem *> items = ui->listWidget_menuItems->findItems(menuItemText, Qt::MatchExactly);
+    QTableWidgetItem *menuItem = new QTableWidgetItem(menuItemText);
+    QList<QTableWidgetItem *> items = ui->tableWidget_menuItems->findItems(menuItemText, Qt::MatchExactly);
     if (items.size() == 0)
     {
-        ui->listWidget_menuItems->addItem(menuItem);
+        //ui->table_menuItems->addItem(menuItem);
+        ui->tableWidget_menuItems->setColumnCount(3);
+        ui->tableWidget_menuItems->setRowCount(menuItemsAdded + 1);
+        ui->tableWidget_menuItems->setItem(menuItemsAdded, 0, menuItem);
+        menuItemsAdded++;
+
 
         //update subtotal get item price
         subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);

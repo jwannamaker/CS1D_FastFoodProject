@@ -26,10 +26,10 @@
         </widget>
        </item>
        <item>
-        <widget class="QListWidget" name="listWidget_menuItems">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
+        <widget class="QTableWidget" name="tableWidget_menuItems">
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
         </widget>
        </item>
        <item>
