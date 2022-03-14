@@ -2,12 +2,15 @@
 #define MENUWIDGET_H
 
 #include <QWidget>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 #include "button.h"
 #include "restaurant.h"
 #include "menu.h"
 #include "ui_menuwidget.h"
 #include "menu.h"
 #include "button.h"
+#include "restaurantwidget.h"
 
 const int MAX_ITEMS_COLS = 5;
 
@@ -24,14 +27,14 @@ public:
     explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
 
+    Restaurant GetCurrentRestuarant();
+
 signals:
-    void transmit_confirmOrder(std::vector<Menu::Item>);
+    void transmit_confirmOrder(Restaurant);
     void transmit_cancelOrder();
 
 private slots:
     void on_confirmButton_pressed();
-
-    void on_editButton_pressed();
 
     void on_cancelButton_pressed();
 
@@ -47,6 +50,15 @@ private:
 
     //data members
     QVector<Button*> itemButtons;
+
+    //Current restaurant on the widget
+    Restaurant currentRestaurant;
+
+    //Keeps track of the subtotatl when user is ordering food
+    double subTotal;
+
+    int menuItemsAdded;
+
 };
 
 #endif // MENUWIDGET_H

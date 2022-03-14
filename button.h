@@ -39,8 +39,8 @@ public:
     QLabel *getTopText() const;
 
 private:
-    QLabel *topText;
-    QLabel *bottomText;
+    QLabel*     topText;
+    QLabel*     bottomText;
 };
 
 #endif // BUTTON_H

@@ -41,7 +41,7 @@ private slots:
     void on_revenueButton_pressed();
 
 private:
-    Ui::MainMenuWidget *ui;
+    Ui::MainMenuWidget*     ui;
 };
 
 #endif // MAINMENUWIDGET_H

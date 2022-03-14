@@ -6,6 +6,7 @@
 #include <QSqlQuery>
 #include <QFile>
 #include "restaurant.h"
+#include "customer.h"
 #include "menu.h"
 
 ///
@@ -32,29 +33,38 @@ public:
     ///
     void populateRestaurants();
 
+    ///
+    /// \brief loadRestaurantsFromDatabase
+    ///
     void loadRestaurantsFromDatabase();
 
-    bool AuthenticateUser(QString username, QString password);
+    ///
+    /// \brief AuthenticateUser
+    /// \param user
+    /// \return bool
+    ///
+    bool authenticateUser(Customer user);
 
     ///
     /// \brief createRestaurantTable
     /// This method creates and populates a table in the database ("restaurant_data.sqlite")
     ///
-    void createRestaurantTable(const std::vector<Restaurant> &restaurantList);
+    void createRestaurantTable();
 
     ///
     /// \brief createDistancesTable
+    /// This method creates and populates a table in the database ("restaurant_data.sqlite")
     ///
-    void createDistancesTable(const std::vector<Restaurant> &restaurantList);
+    void createDistancesTable();
 
     ///
     /// \brief createMenuTable
+    /// This method creates and populates a table in the database ("restaurant_data.sqlite")
     ///
-    void createMenuTable(const std::vector<Restaurant> &restaurantList);
+    void createMenuTable();
 
 private:
     QSqlDatabase database;
 };
-
 
 #endif // DATABASE_H
