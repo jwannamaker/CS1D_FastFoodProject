@@ -10,7 +10,11 @@
 #include "button.h"
 #include "restaurantwidget.h"
 
-const int MAX_ITEMS_COLS = 5;
+//Max menu items displayed per column
+const int MAX_ITEMS_COLS = 4;
+
+//Most unique menu items you can order (temp)
+const int MAX_MENU_ITEMS = 8;
 
 namespace Ui {
 class MenuWidget;
@@ -20,12 +24,33 @@ class MenuWidget : public QWidget
 {
     Q_OBJECT
 
+    //Data type for items that were ordered
+    class OrderItem
+    {
+    public:
+        OrderItem(QString name, int quantity)
+        {
+            this->name = name;
+            this->quantity = quantity;
+        }
+
+        int GetQuantity(){return quantity;}
+        QString GetName(){return name;}
+
+        void IncrementQuantity(){quantity++;}
+
+    private:
+        QString name;
+        int quantity;
+    };
+
 public:
     explicit MenuWidget(QWidget *parent = nullptr);
     explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
 
     Restaurant GetCurrentRestuarant();
+    int GetMenuItemIndex(QString itemName);
 
 signals:
     void transmit_confirmOrder(std::vector<Menu::Item> order);
@@ -40,6 +65,8 @@ private slots:
 
     void itemClicked();
 
+    void deleteItemClicked();
+
 private:
     const int MAX_COL = 5;
 
@@ -48,8 +75,13 @@ private:
     //Creates a button for a menu item
     Button *createButton(Menu::Item item, const char *member);
 
+    //Creates a button to delete a item that had been ordered
+    Button *createDeleteButton(const char *member);
+
     //data members
     QVector<Button*> itemButtons;
+
+    QVector<Button*> deleteItemButtons;
 
     //Current restaurant on the widget
     Restaurant currentRestaurant;
@@ -57,7 +89,11 @@ private:
     //Keeps track of the subtotatl when user is ordering food
     double subTotal;
 
+    //Keeps track of the menu items added.
     int menuItemsAdded;
+
+    //Stores all the items ordered
+    std::vector<MenuWidget::OrderItem> order;
 
 };
 

@@ -47,14 +47,6 @@ public:
         {
             this->price = price;
         }
-        int getQuantity() const
-        {
-            return quantity;
-        }
-        void setQuantity(int quantity)
-        {
-            this->quantity = quantity;
-        }
 
     private:
         QString name;
@@ -94,10 +86,6 @@ public:
     //take in the name of an item. If the item exists it will return the price,
     //else it will return 0.00
     double getItemPrice(QString item);
-
-    //takes in the name of an item. If the item exists it will return the quantity
-    //else it will return 0
-    int getItemQuantity(QString item);
 
 private:
     ///

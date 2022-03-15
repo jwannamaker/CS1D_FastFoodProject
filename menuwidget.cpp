@@ -8,8 +8,6 @@ MenuWidget::MenuWidget(QWidget *parent) :
     ui->setupUi(this);
     ui->subtotalLineEdit->setText(QString::number(0.00));
     ui->subtotalLineEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
-    ui->tableWidget_menuItems->setColumnCount(2);
-    ui->tableWidget_menuItems->setRowCount(8);
 
 }
 
@@ -19,12 +17,9 @@ MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
 {
     //Save the restaurant passed in to menu widget class member
     this->currentRestaurant = currentRestaurant;
-
-    //ui->tableWidget_menuItems->setColumnCount(3);
-
+    //Initialize members
     subTotal = 0;
     menuItemsAdded = 0;
-
     std::vector<Menu::Item> menuItems = currentRestaurant.getMenu().getItems();
 
     ui->setupUi(this);
@@ -80,37 +75,75 @@ void MenuWidget::on_cancelButton_pressed()
 
 void MenuWidget::itemClicked()
 {
-    //keeps track of row where menu item is added
-    int row = 1;
-    //Get the tile clicked and send to restaurant menu
     Button *clickedButton = qobject_cast<Button *>(sender());
+
+    //Once item is clicked a order is started, Ordered
+    //items are stored in this vector
+    std::vector<Menu::Item> currentItems;
     qDebug() << "Menu button Clicked: " << clickedButton->getTopText()->text();
 
+    //Create an item with the menu item text to place in table
     QString menuItemText = clickedButton->getTopText()->text();
     QTableWidgetItem *menuItem = new QTableWidgetItem(menuItemText);
+
+    //Create a Item to add to the current Items vector
+    OrderItem orderItem(menuItemText, 0);
+
+    //Check if a menu item is in the table
     QList<QTableWidgetItem *> items = ui->tableWidget_menuItems->findItems(menuItemText, Qt::MatchExactly);
-    ui->tableWidget_menuItems->setColumnCount(3);
 
-
+    //If the menu item table is not in the table, add it to the table
     if (items.size() == 0)
     {
-        //ui->table_menuItems->addItem(menuItem);
-        ui->tableWidget_menuItems->setRowCount(menuItemsAdded + 1);
+        //Add order to vector, increment quantity, and display to table
+        order.push_back(orderItem);
+        order[menuItemsAdded].IncrementQuantity();
+        QString s = QString::number(order[menuItemsAdded].GetQuantity());
+        QTableWidgetItem *itemQuantity = new QTableWidgetItem(s);
         ui->tableWidget_menuItems->setItem(menuItemsAdded, 0, menuItem);
-        menuItemsAdded++;
+        ui->tableWidget_menuItems->setItem(menuItemsAdded, 1, itemQuantity);
+
+        //Create a button to delete ordered food item
+        deleteItemButtons.append(createDeleteButton(SLOT(deleteItemClicked())));
+        QHBoxLayout *l = new QHBoxLayout();
+        l->addWidget(deleteItemButtons[menuItemsAdded]);
+        QWidget *w = new QWidget();
+        w->setLayout(l);
+        ui->tableWidget_menuItems->setCellWidget(menuItemsAdded,2, w);
 
         //update subtotal get item price
         subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);
         QString valueAsString = QString::number(subTotal);
         ui->subtotalLineEdit->setText(valueAsString);
+
+        //menu item added. Increment
+        menuItemsAdded++;
     }
+    //Else if menu item is already in the table, increment quantity and update subtotal
     else
     {
-        //update quantity of item selected
-        subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);
-        QString valueAsString = QString::number(subTotal);
-        ui->subtotalLineEdit->setText(valueAsString);
-        qDebug() << "Menu item already added, updating quantity";
+        int menuIndex  = GetMenuItemIndex(menuItemText);
+
+        //If menu is valid continute
+        if( menuIndex != -1)
+        {
+            order[menuIndex].IncrementQuantity();
+
+            //Set item quantity to table
+            QString s = QString::number(order[menuIndex].GetQuantity());
+            QTableWidgetItem *itemQuantity = new QTableWidgetItem(s);
+            ui->tableWidget_menuItems->setItem(menuIndex, 1, itemQuantity);
+
+            //Update and display subtotal
+            subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);
+            QString valueAsString = QString::number(subTotal);
+            ui->subtotalLineEdit->setText(valueAsString);
+        }
+        else
+        {
+            qDebug() << "An error has occured";
+        }
+
     }
 
 }
@@ -122,11 +155,41 @@ Button *MenuWidget::createButton(Menu::Item item, const char *member)
     return button;
 }
 
+Button *MenuWidget::createDeleteButton(const char *member)
+{
+    Button *button = new Button("Delete", "Item");
+    connect(button, SIGNAL(clicked()), this, member);
+    return button;
+}
+
 Restaurant MenuWidget::GetCurrentRestuarant()
 {
     return currentRestaurant;
 }
 
+int MenuWidget::GetMenuItemIndex(QString itemName)
+{
+    for (int i = 0; i < MAX_MENU_ITEMS; i++)
+    {
+        if(order[i].GetName() == itemName)
+        {
+            return i;
+        }
+    }
+
+    qDebug() << "Item doesn't exist";
+    return -1;
+}
+
+void MenuWidget::deleteItemClicked()
+{
+    Button *clickedButton = qobject_cast<Button *>(sender());
+
+    clickedButton->text();
+
+
+    qDebug() << "Delete something silly!";
+}
 
 
 
