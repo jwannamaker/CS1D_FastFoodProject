@@ -87,7 +87,8 @@ void MenuWidget::itemClicked()
     QTableWidgetItem *menuItem = new QTableWidgetItem(menuItemText);
 
     //Create a Item to add to the current Items vector
-    OrderItem orderItem(menuItemText, 0);
+    //OrderItem orderItem(menuItemText, 0);
+    Menu::Item orderItem(menuItemText, 0);
 
     //Check if a menu item is in the table
     QList<QTableWidgetItem *> items = ui->tableWidget_menuItems->findItems(menuItemText, Qt::MatchExactly);
@@ -97,14 +98,14 @@ void MenuWidget::itemClicked()
     {
         //Add order to vector, increment quantity, and display to table
         order.push_back(orderItem);
-        order[menuItemsAdded].IncrementQuantity();
-        QString s = QString::number(order[menuItemsAdded].GetQuantity());
+        order[menuItemsAdded].incrementQuantity();
+        QString s = QString::number(order[menuItemsAdded].getQuantity());
         QTableWidgetItem *itemQuantity = new QTableWidgetItem(s);
         ui->tableWidget_menuItems->setItem(menuItemsAdded, 0, menuItem);
         ui->tableWidget_menuItems->setItem(menuItemsAdded, 1, itemQuantity);
 
         //Create a button to delete ordered food item
-        deleteItemButtons.append(createDeleteButton(SLOT(deleteItemClicked())));
+        deleteItemButtons.append(createButton(orderItem, SLOT(deleteItemClicked())));
         QHBoxLayout *l = new QHBoxLayout();
         l->addWidget(deleteItemButtons[menuItemsAdded]);
         QWidget *w = new QWidget();
@@ -127,10 +128,10 @@ void MenuWidget::itemClicked()
         //If menu is valid continute
         if( menuIndex != -1)
         {
-            order[menuIndex].IncrementQuantity();
+            order[menuIndex].incrementQuantity();
 
             //Set item quantity to table
-            QString s = QString::number(order[menuIndex].GetQuantity());
+            QString s = QString::number(order[menuIndex].getQuantity());
             QTableWidgetItem *itemQuantity = new QTableWidgetItem(s);
             ui->tableWidget_menuItems->setItem(menuIndex, 1, itemQuantity);
 
@@ -150,17 +151,17 @@ void MenuWidget::itemClicked()
 
 Button *MenuWidget::createButton(Menu::Item item, const char *member)
 {
-    Button *button = new Button(item);
+    Button *button = new Button(item, item.getName());
     connect(button, SIGNAL(clicked()), this, member);
     return button;
 }
 
-Button *MenuWidget::createDeleteButton(const char *member)
-{
-    Button *button = new Button("Delete", "Item");
-    connect(button, SIGNAL(clicked()), this, member);
-    return button;
-}
+//Button *MenuWidget::createDeleteButton(const char *member)
+//{
+    //Button *button = new Button("Delete", "Item");
+    //connect(button, SIGNAL(clicked()), this, member);
+    //return button;
+//}
 
 Restaurant MenuWidget::GetCurrentRestuarant()
 {
@@ -171,7 +172,7 @@ int MenuWidget::GetMenuItemIndex(QString itemName)
 {
     for (int i = 0; i < MAX_MENU_ITEMS; i++)
     {
-        if(order[i].GetName() == itemName)
+        if(order[i].getName() == itemName)
         {
             return i;
         }

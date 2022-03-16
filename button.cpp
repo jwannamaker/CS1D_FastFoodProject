@@ -18,12 +18,13 @@ Button::Button(const Restaurant& rest, QWidget* parent)
     this->setImage(QPixmap(":images/food_icon.png"));
 }
 
-Button::Button(const Menu::Item& item, QWidget* parent)
+Button::Button(const Menu::Item& item, QString itemName, QWidget* parent)
     : QPushButton(parent)
 {
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     topText = new QLabel(item.getName());
     bottomText = new QLabel(QString::number(item.getPrice()));
+    this->itemName = itemName;
     this->setImage(QPixmap(":images/rest_menu_icon.png"));
 }
 

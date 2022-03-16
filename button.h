@@ -21,7 +21,7 @@ class Button : public QPushButton
     Q_OBJECT
 public:
     explicit Button(const Restaurant& rest, QWidget *parent = nullptr);
-    explicit Button(const Menu::Item& item, QWidget *parent = nullptr);
+    explicit Button(const Menu::Item& item, QString itemName, QWidget *parent = nullptr);
     explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
     ///
@@ -41,6 +41,7 @@ public:
 private:
     QLabel*     topText;
     QLabel*     bottomText;
+    QString itemName;
 };
 
 #endif // BUTTON_H

@@ -24,26 +24,6 @@ class MenuWidget : public QWidget
 {
     Q_OBJECT
 
-    //Data type for items that were ordered
-    class OrderItem
-    {
-    public:
-        OrderItem(QString name, int quantity)
-        {
-            this->name = name;
-            this->quantity = quantity;
-        }
-
-        int GetQuantity(){return quantity;}
-        QString GetName(){return name;}
-
-        void IncrementQuantity(){quantity++;}
-
-    private:
-        QString name;
-        int quantity;
-    };
-
 public:
     explicit MenuWidget(QWidget *parent = nullptr);
     explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
@@ -76,7 +56,7 @@ private:
     Button *createButton(Menu::Item item, const char *member);
 
     //Creates a button to delete a item that had been ordered
-    Button *createDeleteButton(const char *member);
+    //Button *createDeleteButton(const char *member);
 
     //data members
     QVector<Button*> itemButtons;
@@ -93,7 +73,7 @@ private:
     int menuItemsAdded;
 
     //Stores all the items ordered
-    std::vector<MenuWidget::OrderItem> order;
+    std::vector<Menu::Item> order;
 
 };
 
