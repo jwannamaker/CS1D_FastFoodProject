@@ -55,12 +55,10 @@ private:
     //Creates a button for a menu item
     Button *createButton(Menu::Item item, const char *member);
 
-    //Creates a button to delete a item that had been ordered
-    //Button *createDeleteButton(const char *member);
-
     //data members
     QVector<Button*> itemButtons;
 
+    //
     QVector<Button*> deleteItemButtons;
 
     //Current restaurant on the widget
