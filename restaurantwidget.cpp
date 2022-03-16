@@ -5,7 +5,9 @@ RestaurantWidget::RestaurantWidget(const std::vector<Restaurant>& restaurantList
     ui(new Ui::RestaurantWidget)
 {
     ui->setupUi(this);
-    setInitialRestaurant(Restaurant::list.at(0));
+    DatabaseHelper dbhelper;
+    dbhelper.populateRestaurants();
+    setInitialRestaurant(Restaurant::list[0]);
 
     ui->tableWidget_tripRestaurants->setColumnCount(2);
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
