@@ -25,6 +25,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void initializeNewUser();
+    void initializeMainMenu();
 
 public slots:
     ///
@@ -66,8 +67,7 @@ public slots:
     void recieve_revenueView();
 
 private:
-    DatabaseHelper      dbHelper;
-    Customer            user;
+    Customer            currentUser;
     Ui::MainWindow*     ui;
     QStackedWidget*     stackedWidget;
     Login*              loginPage;

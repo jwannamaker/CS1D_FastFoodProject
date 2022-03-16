@@ -11,45 +11,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // initializing connection to database
-    dbHelper = DatabaseHelper();
-    dbHelper.populateRestaurants();
-
-    // initially opens to loginPage
+    // initializes the stacked widget with loginPage the first view
     stackedWidget = new QStackedWidget;
-    initializeNewUser();
-
-    // by default, opens to the login page first
-    stackedWidget->setCurrentWidget(loginPage);
     setCentralWidget(stackedWidget);
-
-    // initializing main menu page
-    mainMenuPage = new MainMenuWidget();
-    stackedWidget->addWidget(mainMenuPage);
-    QObject::connect(mainMenuPage,
-                     SIGNAL(transmit_logout()),
-                     this,
-                     SLOT(recieve_logout()));
-    QObject::connect(mainMenuPage,
-                     SIGNAL(transmit_restaurantView()),
-                     this,
-                     SLOT(recieve_restaurantView()));
-    QObject::connect(mainMenuPage,
-                     SIGNAL(transmit_revenueView()),
-                     this,
-                     SLOT(recieve_revenueView()));
-
-    // initializing restaurant page
-    restaurantPage = new RestaurantWidget(Restaurant::list);
-    stackedWidget->addWidget(restaurantPage);
-    QObject::connect(restaurantPage,
-                     SIGNAL(transmit_cancel()),
-                     this,
-                     SLOT(recieve_mainMenu()));
-    QObject::connect(restaurantPage,
-                     SIGNAL(transmit_viewRestMenu(Restaurant)),
-                     this,
-                     SLOT(recieve_viewMenu(Restaurant)));
+    initializeNewUser();
+    initializeMainMenu();
 }
 
 MainWindow::~MainWindow()
@@ -66,12 +32,32 @@ void MainWindow::initializeNewUser()
                      SIGNAL(transmit_validUser(Customer)),
                      this,
                      SLOT(recieve_loginSuccess(Customer)));
+    stackedWidget->setCurrentWidget(loginPage);
+}
+
+void MainWindow::initializeMainMenu()
+{
+    // initializing main menu page
+    mainMenuPage = new MainMenuWidget();
+    stackedWidget->addWidget(mainMenuPage);
+    QObject::connect(mainMenuPage,
+                     SIGNAL(transmit_logout()),
+                     this,
+                     SLOT(recieve_logout()));
+    QObject::connect(mainMenuPage,
+                     SIGNAL(transmit_restaurantView()),
+                     this,
+                     SLOT(recieve_restaurantView()));
+    QObject::connect(mainMenuPage,
+                     SIGNAL(transmit_revenueView()),
+                     this,
+                     SLOT(recieve_revenueView()));
 }
 
 void MainWindow::recieve_loginSuccess(Customer newUser)
 {
     stackedWidget->setCurrentWidget(mainMenuPage);
-    user = newUser;
+    currentUser = newUser;
     loginPage->on_clearButton_pressed();
 }
 
@@ -80,11 +66,21 @@ void MainWindow::recieve_logout()
     stackedWidget->setCurrentWidget(loginPage);
 }
 
-// may need to adjust this so that a new restaurant page instance is created each time it is displayed,
-// and include in its constructor the customer/user data such as the location they're starting from
-// or indicate if that lineEdit can be edited or not, etc.
+// new instance of restaurant widget is created upon calling of this method
+// so that most updated version of Restaurant::list is used
 void MainWindow::recieve_restaurantView()
 {
+    // initializing restaurant page
+    restaurantPage = new RestaurantWidget(Restaurant::list);
+    stackedWidget->addWidget(restaurantPage);
+    QObject::connect(restaurantPage,
+                     SIGNAL(transmit_cancel()),
+                     this,
+                     SLOT(recieve_mainMenu()));
+    QObject::connect(restaurantPage,
+                     SIGNAL(transmit_viewRestMenu(Restaurant)),
+                     this,
+                     SLOT(recieve_viewMenu(Restaurant)));
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 

@@ -8,8 +8,8 @@ MenuWidget::MenuWidget(QWidget *parent) :
     ui->setupUi(this);
     ui->subtotalLineEdit->setText(QString::number(0.00));
     ui->subtotalLineEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
-    ui->tableWidget_menuItems->setColumnCount(2);
-    ui->tableWidget_menuItems->setRowCount(8);
+    ui->tableWidget_orderItems->setColumnCount(2);
+    ui->tableWidget_orderItems->setRowCount(8);
 
 }
 
@@ -81,15 +81,15 @@ void MenuWidget::itemClicked()
 
     QString menuItemText = clickedButton->getTopText()->text();
     QTableWidgetItem *menuItem = new QTableWidgetItem(menuItemText);
-    QList<QTableWidgetItem *> items = ui->tableWidget_menuItems->findItems(menuItemText, Qt::MatchExactly);
-    ui->tableWidget_menuItems->setColumnCount(3);
+    QList<QTableWidgetItem *> items = ui->tableWidget_orderItems->findItems(menuItemText, Qt::MatchExactly);
+    ui->tableWidget_orderItems->setColumnCount(3);
 
 
     if (items.size() == 0)
     {
         //ui->table_menuItems->addItem(menuItem);
-        ui->tableWidget_menuItems->setRowCount(menuItemsAdded + 1);
-        ui->tableWidget_menuItems->setItem(menuItemsAdded, 0, menuItem);
+        ui->tableWidget_orderItems->setRowCount(menuItemsAdded + 1);
+        ui->tableWidget_orderItems->setItem(menuItemsAdded, 0, menuItem);
         menuItemsAdded++;
 
         //update subtotal get item price
