@@ -29,7 +29,11 @@ public:
     explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
 
+    //Gets the current restaurnt from the menu being displayed
     Restaurant GetCurrentRestuarant();
+
+    //Gets the index of a menu item if it exists.
+    //Returns -1, if it does not exist
     int GetMenuItemIndex(QString itemName);
 
 signals:
@@ -58,7 +62,7 @@ private:
     //data members
     QVector<Button*> itemButtons;
 
-    //
+    //Buttons used to remove an item from an order
     QVector<Button*> deleteItemButtons;
 
     //Current restaurant on the widget

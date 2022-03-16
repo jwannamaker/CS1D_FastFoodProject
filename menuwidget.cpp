@@ -141,10 +141,7 @@ void MenuWidget::itemClicked()
             ui->subtotalLineEdit->setText(valueAsString);
         }
         else
-        {
             qDebug() << "An error has occured";
-        }
-
     }
 
 }
@@ -156,13 +153,6 @@ Button *MenuWidget::createButton(Menu::Item item, const char *member)
     return button;
 }
 
-//Button *MenuWidget::createDeleteButton(const char *member)
-//{
-    //Button *button = new Button("Delete", "Item");
-    //connect(button, SIGNAL(clicked()), this, member);
-    //return button;
-//}
-
 Restaurant MenuWidget::GetCurrentRestuarant()
 {
     return currentRestaurant;
@@ -171,12 +161,7 @@ Restaurant MenuWidget::GetCurrentRestuarant()
 int MenuWidget::GetMenuItemIndex(QString itemName)
 {
     for (int i = 0; i < MAX_MENU_ITEMS; i++)
-    {
-        if(order[i].getName() == itemName)
-        {
-            return i;
-        }
-    }
+        if(order[i].getName() == itemName) return i;
 
     qDebug() << "Item doesn't exist";
     return -1;
@@ -209,14 +194,9 @@ void MenuWidget::deleteItemClicked()
             qDebug() <<"working on this";
             //delete item from the table completely
         }
-
-
     }
     else
-    {
         qDebug() << "something silly happened!";
-    }
-
 
 }
 

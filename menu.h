@@ -27,7 +27,7 @@ public:
     public:
         Item();
         Item(QString name, double price) : name{name}, price{price} {quantity = 0;}
-        Item(QString name, int quantity) : name{name}, quantity{quantity} {}
+        Item(QString name, int quantity) : name{name}, quantity{quantity} {price = 0;}
 
         QString getName() const
         {
