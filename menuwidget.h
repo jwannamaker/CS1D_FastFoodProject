@@ -23,15 +23,29 @@ class MenuWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit MenuWidget(QWidget *parent = nullptr);
     explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
 
-    Restaurant GetCurrentRestuarant();
+    ///
+    /// \brief getCurrentRestuarant
+    /// \return
+    ///
+    Restaurant getCurrentRestuarant() const;
+
+    ///
+    /// \brief updateOrderTotal
+    ///
+    void updateOrderTotal();
+
+    ///
+    /// \brief updateTableWidget
+    ///
+    void updateTableWidget();
 
 signals:
     void transmit_confirmOrder(Restaurant);
     void transmit_cancelOrder();
+    void transmit_addToOrder(Menu::Item);
 
 private slots:
     void on_confirmButton_pressed();
@@ -46,19 +60,15 @@ private:
     Ui::MenuWidget *ui;
 
     //Creates a button for a menu item
-    Button *createButton(Menu::Item item, const char *member);
+    Button *createButton(Menu::Item item);
 
     //data members
     QVector<Button*> itemButtons;
 
+    QVector<Menu::Item> orderedItems;
+
     //Current restaurant on the widget
     Restaurant currentRestaurant;
-
-    //Keeps track of the subtotatl when user is ordering food
-    double subTotal;
-
-    int menuItemsAdded;
-
 };
 
 #endif // MENUWIDGET_H

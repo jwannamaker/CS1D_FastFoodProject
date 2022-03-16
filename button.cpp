@@ -12,6 +12,8 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
 Button::Button(const Restaurant& rest, QWidget* parent)
     : QPushButton(parent)
 {
+    restaurant = &rest;
+    menuItem = nullptr;
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     topText = new QLabel(rest.getName());
     bottomText = new QLabel(QString::number(rest.getDistance(0)) + " miles away");
@@ -21,6 +23,8 @@ Button::Button(const Restaurant& rest, QWidget* parent)
 Button::Button(const Menu::Item& item, QWidget* parent)
     : QPushButton(parent)
 {
+    restaurant = nullptr;
+    menuItem = &item;
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     topText = new QLabel(item.getName());
     bottomText = new QLabel(QString::number(item.getPrice()));
@@ -45,7 +49,17 @@ QSize Button::sizeHint() const
     return size;
 }
 
-QLabel *Button::getTopText() const
+void Button::setRestaurant(const Restaurant& rest)
 {
-    return topText;
+    restaurant = &rest;
+}
+
+Restaurant Button::getRestaurant() const
+{
+    return *restaurant;
+}
+
+Menu::Item Button::getItem() const
+{
+    return *menuItem;
 }

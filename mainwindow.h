@@ -24,7 +24,15 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    ///
+    /// \brief initializeNewUser
+    ///
     void initializeNewUser();
+
+    ///
+    /// \brief initializeMainMenu
+    ///
     void initializeMainMenu();
 
 public slots:

@@ -37,12 +37,12 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Subtotal</string>
+            <string>Total</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="subtotalLineEdit">
+          <widget class="QLineEdit" name="totalLineEdit">
            <property name="readOnly">
             <bool>true</bool>
            </property>

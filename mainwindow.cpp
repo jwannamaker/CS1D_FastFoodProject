@@ -10,12 +10,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->centralwidget->setFixedSize(1000, 550);
 
     // initializes the stacked widget with loginPage the first view
     stackedWidget = new QStackedWidget;
     setCentralWidget(stackedWidget);
     initializeNewUser();
-    initializeMainMenu();
+
+    DatabaseHelper dbHelper;
+    dbHelper.populateRestaurants();
 }
 
 MainWindow::~MainWindow()
@@ -56,9 +59,10 @@ void MainWindow::initializeMainMenu()
 
 void MainWindow::recieve_loginSuccess(Customer newUser)
 {
-    stackedWidget->setCurrentWidget(mainMenuPage);
     currentUser = newUser;
     loginPage->on_clearButton_pressed();
+    initializeMainMenu();
+    stackedWidget->setCurrentWidget(mainMenuPage);
 }
 
 void MainWindow::recieve_logout()
@@ -70,6 +74,9 @@ void MainWindow::recieve_logout()
 // so that most updated version of Restaurant::list is used
 void MainWindow::recieve_restaurantView()
 {
+//    DatabaseHelper dbHelper;
+//    dbHelper.populateRestaurants();
+
     // initializing restaurant page
     restaurantPage = new RestaurantWidget(Restaurant::list);
     stackedWidget->addWidget(restaurantPage);

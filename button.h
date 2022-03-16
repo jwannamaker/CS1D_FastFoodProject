@@ -36,11 +36,29 @@ public:
     ///
     QSize sizeHint() const override;
 
-    QLabel *getTopText() const;
+    ///
+    /// \brief setRestaurant
+    /// \param rest
+    ///
+    void setRestaurant(const Restaurant& rest);
+
+    ///
+    /// \brief getRestaurant
+    /// \return
+    ///
+    Restaurant getRestaurant() const;
+
+    ///
+    /// \brief getItem
+    /// \return
+    ///
+    Menu::Item getItem() const;
 
 private:
-    QLabel*     topText;
-    QLabel*     bottomText;
+    const Restaurant*     restaurant;
+    const Menu::Item*     menuItem;
+    QLabel*               topText;
+    QLabel*               bottomText;
 };
 
 #endif // BUTTON_H

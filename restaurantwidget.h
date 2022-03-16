@@ -29,12 +29,8 @@ class RestaurantWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit RestaurantWidget(const std::vector<Restaurant>& restaurantList, QWidget *parent = nullptr);
+    explicit RestaurantWidget(std::vector<Restaurant>& restaurantList, QWidget *parent = nullptr);
     ~RestaurantWidget();
-
-    //Function takes restaurant name input and checks if the restaurant
-    //is on restaurantListCopy
-    Restaurant findRestaurant(QString restName);
 
     ///
     /// \brief getTripDistance
@@ -83,7 +79,7 @@ private:
     Restaurant initialRestaurant;
 
     //Creates a button for restaurant
-    Button *createButton(Restaurant rest, const char *member);
+    Button *createButton(Restaurant rest);
 
     // restaurants in the trip
     QVector<Restaurant> visitedRestaurants;

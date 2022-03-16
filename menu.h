@@ -25,8 +25,8 @@ public:
     class Item
     {
     public:
-        Item();
-        Item(QString name, double price) : name{name}, price{price} {}
+        Item() : name{""}, price{0}, quantity{0} {};
+        Item(QString name, double price) : name{name}, price{price}, quantity{0} {}
 
         QString getName() const
         {
@@ -47,19 +47,31 @@ public:
         {
             this->price = price;
         }
+
         int getQuantity() const
         {
             return quantity;
         }
+
         void setQuantity(int quantity)
         {
             this->quantity = quantity;
         }
 
+        void incrementQuantity()
+        {
+            quantity++;
+        }
+
+        void decrementQuantity()
+        {
+            quantity--;
+        }
+
     private:
-        QString name;
-        double price;
-        int quantity;
+        QString     name;
+        double      price;
+        int         quantity;
     };
 
     ///

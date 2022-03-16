@@ -80,8 +80,8 @@ void DatabaseHelper::populateRestaurants()
         }
         file.close();
     }
-    Restaurant::list.resize(restaurantList.size());
-    Restaurant::list = std::vector<Restaurant>(restaurantList);
+
+    Restaurant::list = restaurantList;
 }
 
 void DatabaseHelper::loadRestaurantsFromDatabase()

@@ -116,6 +116,12 @@ public:
     void setRevenue(double revenue);
 
     ///
+    /// \brief addRevenue
+    /// \param revenue
+    ///
+    void addRevenue(double revenue);
+
+    ///
     /// \brief getRevenue
     /// \return
     ///
