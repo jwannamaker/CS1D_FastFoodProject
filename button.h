@@ -38,6 +38,8 @@ public:
 
     QLabel *getTopText() const;
 
+    QString getItemName() const;
+
 private:
     QLabel*     topText;
     QLabel*     bottomText;

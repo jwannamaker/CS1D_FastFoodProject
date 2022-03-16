@@ -186,10 +186,36 @@ void MenuWidget::deleteItemClicked()
 {
     Button *clickedButton = qobject_cast<Button *>(sender());
 
-    clickedButton->text();
+    int menuIndex = GetMenuItemIndex(clickedButton->getItemName());
+
+    if( menuIndex != -1)
+    {
+        if (order[menuIndex].getQuantity() != 0)
+        {
+            order[menuIndex].decrementQuantity();
+        }
+        else
+        {
+            qDebug() <<"working on this";
+            //delete item from the table completely
+        }
+
+        //Set item quantity to table
+        QString s = QString::number(order[menuIndex].getQuantity());
+        QTableWidgetItem *itemQuantity = new QTableWidgetItem(s);
+        ui->tableWidget_menuItems->setItem(menuIndex, 1, itemQuantity);
+
+        //Update and display subtotal
+        subTotal += currentRestaurant.getMenu().getItemPrice(clickedButton->getItemName());
+        QString valueAsString = QString::number(subTotal);
+        ui->subtotalLineEdit->setText(valueAsString);
+    }
+    else
+    {
+        qDebug() << "something silly happened!";
+    }
 
 
-    qDebug() << "Delete something silly!";
 }
 
 

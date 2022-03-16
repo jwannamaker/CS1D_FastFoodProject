@@ -59,6 +59,8 @@ public:
 
         void incrementQuantity(){quantity++;}
 
+        void decrementQuantity(){quantity--;}
+
     private:
         QString name;
         double price;

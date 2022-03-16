@@ -50,3 +50,8 @@ QLabel *Button::getTopText() const
 {
     return topText;
 }
+
+QString Button::getItemName() const
+{
+    return itemName;
+}
