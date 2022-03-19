@@ -29,12 +29,14 @@ class RestaurantWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit RestaurantWidget(const std::vector<Restaurant>& restaurantList, QWidget *parent = nullptr);
+    explicit RestaurantWidget(const Customer& user, QWidget *parent = nullptr);
     ~RestaurantWidget();
 
     //Function takes restaurant name input and checks if the restaurant
     //is on restaurantListCopy
     Restaurant findRestaurant(QString restName);
+
+    void updateRestaurantButtons(const std::vector<Restaurant>& restaurantList, bool isAdmin);
 
     ///
     /// \brief getTripDistance
@@ -64,7 +66,7 @@ public:
 
 signals:
     void transmit_cancel();
-    void transmit_viewRestMenu(Restaurant rest);
+    void transmit_viewRestMenu(Restaurant& rest);
 
 private slots:
     void on_confirmButton_pressed();
@@ -73,11 +75,15 @@ private slots:
 
     void restaurantClicked();
 
+    void addRestaurants();
+
 private:
     //Number of restaurnts per row
     const int MAX_COL = 5;
 
     Ui::RestaurantWidget *ui;
+
+    QGridLayout *mainLayout;
 
     // the starting location
     Restaurant initialRestaurant;

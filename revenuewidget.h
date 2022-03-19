@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "restaurant.h"
+#include "databasehelper.h"
+#include "menuwidget.h"
 
 namespace Ui {
 class RevenueWidget;
@@ -13,7 +15,7 @@ class RevenueWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit RevenueWidget(const std::vector<Restaurant>& restaurantList, QWidget *parent = nullptr);
+    explicit RevenueWidget(QWidget *parent = nullptr);
     ~RevenueWidget();
     double getTotalRevenue();
 

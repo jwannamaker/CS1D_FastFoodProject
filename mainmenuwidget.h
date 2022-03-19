@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include "customer.h"
 
 namespace Ui {
 class MainMenuWidget;
@@ -25,6 +26,8 @@ class MainMenuWidget : public QWidget
 public:
     explicit MainMenuWidget(QWidget *parent = nullptr);
     ~MainMenuWidget();
+
+    void updateMainMenu(const Customer& user);
 
 signals:
     void transmit_logout();

@@ -10,13 +10,13 @@ MenuWidget::MenuWidget(QWidget *parent) :
     ui->subtotalLineEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
     ui->tableWidget_orderItems->setColumnCount(2);
     ui->tableWidget_orderItems->setRowCount(8);
-
 }
 
-MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
+MenuWidget::MenuWidget(Restaurant& currentRestaurant, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MenuWidget)
 {
+    itemButtons = QVector<Button*>();
     //Save the restaurant passed in to menu widget class member
     this->currentRestaurant = currentRestaurant;
 
@@ -77,9 +77,9 @@ void MenuWidget::itemClicked()
     int row = 1;
     //Get the tile clicked and send to restaurant menu
     Button *clickedButton = qobject_cast<Button *>(sender());
-    qDebug() << "Menu button Clicked: " << clickedButton->getTopText()->text();
+    qDebug() << "Menu button Clicked: " << clickedButton->getItem().getName();
 
-    QString menuItemText = clickedButton->getTopText()->text();
+    QString menuItemText = clickedButton->getItem().getName();
     QTableWidgetItem *menuItem = new QTableWidgetItem(menuItemText);
     QList<QTableWidgetItem *> items = ui->tableWidget_orderItems->findItems(menuItemText, Qt::MatchExactly);
     ui->tableWidget_orderItems->setColumnCount(3);

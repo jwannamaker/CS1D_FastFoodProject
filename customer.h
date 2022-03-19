@@ -39,7 +39,9 @@ public:
     /// Determines if the current user is logged in as an admin or not.
     /// \return True if the current user is an Admin, otherwise False.
     ///
-    bool isAdmin();
+    bool isAdmin() const;
+
+    void setAdmin(bool admin);
 
     ///
     /// \brief getUsername
@@ -56,6 +58,7 @@ public:
 private:
     QString     username;
     QString     password;
+    bool        admin;
 };
 
 #endif // CUSTOMER_H

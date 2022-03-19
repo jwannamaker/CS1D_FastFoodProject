@@ -1,42 +1,19 @@
 #include "restaurantwidget.h"
 
-RestaurantWidget::RestaurantWidget(const std::vector<Restaurant>& restaurantList, QWidget *parent) :
+RestaurantWidget::RestaurantWidget(const Customer& user, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::RestaurantWidget)
+    ui(new Ui::RestaurantWidget),
+    mainLayout(nullptr)
 {
     ui->setupUi(this);
-    DatabaseHelper dbhelper;
-    dbhelper.populateRestaurants();
-    setInitialRestaurant(Restaurant::list[0]);
+    setInitialRestaurant(globalRestaurantList[0]);
 
     ui->tableWidget_tripRestaurants->setColumnCount(2);
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(1, new QTableWidgetItem("Distance"));
     //ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(0, new QTableWidgetItem("Subtotal"));
 
-    //Create the restaurant buttons
-    for (size_t i = 0; i < restaurantList.size(); ++i)
-        restaurantButtons.append(createButton(restaurantList[i], SLOT(restaurantClicked())));
-
-    //Create Grid for restaurant icons
-    QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_restaurants);
-    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
-
-    //Add restaurants to window
-    int row = 0;
-    int col = 0;
-
-    for (size_t i = 0; i < restaurantList.size(); i++)
-    {
-        mainLayout->addWidget(restaurantButtons[i], row, col);
-        col++;
-
-        if (col >= MAX_COL)
-        {
-            row++;
-            col = 0;
-        }
-    }
+    updateRestaurantButtons(globalRestaurantList, user.isAdmin());
 }
 
 RestaurantWidget::~RestaurantWidget()
@@ -109,11 +86,16 @@ void RestaurantWidget::restaurantClicked()
 {
     //Get the tile clicked and send to restaurant menu
     Button *clickedButton = qobject_cast<Button *>(sender());
-    qDebug() << "Restaurant Clicked";
-    qDebug() << clickedButton->getTopText()->text();
+    qDebug() << "RestaurantClicked()";
+    qDebug() << clickedButton->getRestaurant().getName();
+    emit transmit_viewRestMenu(clickedButton->getRestaurant());
+}
 
-    Restaurant temp = findRestaurant(clickedButton->getTopText()->text());
-    emit transmit_viewRestMenu(temp);
+void RestaurantWidget::addRestaurants()
+{
+    DatabaseHelper dbhelper;
+    dbhelper.addRestaurants(":data/source_data2.txt");
+    updateRestaurantButtons(globalRestaurantList,false);
 }
 
 Button *RestaurantWidget::createButton(Restaurant rest, const char *member)
@@ -125,12 +107,12 @@ Button *RestaurantWidget::createButton(Restaurant rest, const char *member)
 
 Restaurant RestaurantWidget::findRestaurant(QString restName)
 {
-    for (size_t i = 0; i < Restaurant::list.size(); i++)
+    for (size_t i = 0; i < globalRestaurantList.size(); i++)
 
     {
-        if (restName == Restaurant::list[i].getName())
+        if (restName == globalRestaurantList[i].getName())
         {
-            return Restaurant::list[i];
+            return globalRestaurantList[i];
         }
     }
 
@@ -140,5 +122,46 @@ Restaurant RestaurantWidget::findRestaurant(QString restName)
     return temp;
 }
 
+void RestaurantWidget::updateRestaurantButtons(const std::vector<Restaurant>& restaurantList, bool isAdmin)
+{
+    //Create Grid for restaurant icons
+    if(mainLayout != nullptr)
+    {
+        restaurantButtons.clear();
+        delete mainLayout;
+    }
+    mainLayout = new QGridLayout(ui->scrollArea_restaurants);
+    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+
+    //Create the restaurant buttons
+    for (size_t i = 0; i < restaurantList.size(); ++i)
+        restaurantButtons.append(createButton(restaurantList[i], SLOT(restaurantClicked())));
+
+
+    //Add restaurants to window
+    int row = 0;
+    int col = 0;
+
+    for (size_t i = 0; i < restaurantList.size(); i++)
+    {
+        mainLayout->addWidget(restaurantButtons[i], row, col);
+        col++;
+
+        if (col >= MAX_COL)
+        {
+            row++;
+            col = 0;
+        }
+    }
+
+    //If the user is an admin, then the add restaurants button will be displayed
+    if(isAdmin)
+    {
+        Button *adminAddButton = new Button("Add Restaurant","from source_data2.txt");
+        connect(adminAddButton, SIGNAL(clicked()), this, SLOT(addRestaurants()));
+        restaurantButtons.append(adminAddButton);
+        mainLayout->addWidget(adminAddButton,row,col);
+    }
+}
 
 

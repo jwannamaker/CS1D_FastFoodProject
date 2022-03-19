@@ -9,18 +9,22 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
     setImage(QPixmap(":images/food_image.png"));
 }
 
-Button::Button(const Restaurant& rest, QWidget* parent)
+Button::Button(Restaurant rest, QWidget* parent)
     : QPushButton(parent)
 {
+    restaurant = &rest;
+    menuItem = nullptr;
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     topText = new QLabel(rest.getName());
     bottomText = new QLabel(QString::number(rest.getDistance(0)) + " miles away");
     this->setImage(QPixmap(":images/food_icon.png"));
 }
 
-Button::Button(const Menu::Item& item, QWidget* parent)
+Button::Button(Menu::Item item, QWidget* parent)
     : QPushButton(parent)
 {
+    restaurant = nullptr;
+    menuItem = &item;
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     topText = new QLabel(item.getName());
     bottomText = new QLabel(QString::number(item.getPrice()));
@@ -45,7 +49,17 @@ QSize Button::sizeHint() const
     return size;
 }
 
-QLabel *Button::getTopText() const
+void Button::setRestaurant(const Restaurant& rest)
 {
-    return topText;
+    restaurant = &rest;
+}
+
+Restaurant Button::getRestaurant() const
+{
+    return *restaurant;
+}
+
+Menu::Item Button::getItem() const
+{
+    return *menuItem;
 }

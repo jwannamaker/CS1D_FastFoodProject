@@ -26,7 +26,7 @@ public:
     ~Login();
 
 signals:
-    void transmit_validUser(Customer newUser);
+    void transmit_validUser(const Customer& newUser);
     void transmit_invalidUser();
 
 public slots:

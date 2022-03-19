@@ -32,7 +32,7 @@ public slots:
     /// \brief recieve_loginSuccess
     /// \param newUser
     ///
-    void recieve_loginSuccess(Customer newUser);
+    void recieve_loginSuccess(const Customer& newUser);
 
     ///
     /// \brief recieve_logout
@@ -59,7 +59,7 @@ public slots:
     /// \brief recieve_viewMenu
     /// \param Restaurant rest
     ///
-    void recieve_viewMenu(Restaurant rest);
+    void recieve_viewMenu(Restaurant& rest);
 
     ///
     /// \brief recieve_viewRevenue

@@ -20,8 +20,8 @@ class Button : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit Button(const Restaurant& rest, QWidget *parent = nullptr);
-    explicit Button(const Menu::Item& item, QWidget *parent = nullptr);
+    explicit Button(Restaurant rest, QWidget *parent = nullptr);
+    explicit Button(Menu::Item item, QWidget *parent = nullptr);
     explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
     ///
@@ -36,11 +36,29 @@ public:
     ///
     QSize sizeHint() const override;
 
-    QLabel *getTopText() const;
+    ///
+    /// \brief setRestaurant
+    /// \param rest
+    ///
+    void setRestaurant(const Restaurant& rest);
+
+    ///
+    /// \brief getRestaurant
+    /// \return
+    ///
+    Restaurant getRestaurant() const;
+
+    ///
+    /// \brief getItem
+    /// \return
+    ///
+    Menu::Item getItem() const;
 
 private:
-    QLabel*     topText;
-    QLabel*     bottomText;
+    const Restaurant*     restaurant;
+    const Menu::Item*     menuItem;
+    QLabel*               topText;
+    QLabel*               bottomText;
 };
 
-#endif // BUTTON_H
+#endif

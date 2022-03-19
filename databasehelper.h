@@ -9,6 +9,8 @@
 #include "customer.h"
 #include "menu.h"
 
+extern std::vector<Restaurant> globalRestaurantList;
+
 ///
 /// \class Database
 /// \brief The Database class
@@ -43,7 +45,9 @@ public:
     /// \param user
     /// \return bool
     ///
-    bool authenticateUser(Customer user);
+    bool authenticateUser(Customer& user);
+
+    void addRestaurants(QString filename);
 
     ///
     /// \brief createRestaurantTable

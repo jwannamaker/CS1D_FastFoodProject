@@ -26,7 +26,9 @@ void Login::on_logInButton_pressed()
     Customer newUser = Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
 
     if (dbHelper.authenticateUser(newUser))
+    {
         emit transmit_validUser(newUser);
+    }
     else
         emit transmit_invalidUser();
 }

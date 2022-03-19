@@ -5,6 +5,7 @@ Customer::Customer()
 {
     username = "username";
     password = "password";
+    admin   = false;
 }
 
 Customer::Customer(QString username, QString password)
@@ -14,10 +15,14 @@ Customer::Customer(QString username, QString password)
 }
 
 
-bool Customer::isAdmin()
+bool Customer::isAdmin() const
 {
-    DatabaseHelper dbHelper;
-    return dbHelper.authenticateUser(*this);
+    return admin;
+}
+
+void Customer::setAdmin(bool admin)
+{
+    this->admin = admin;
 }
 
 QString Customer::getUsername() const

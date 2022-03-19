@@ -1,20 +1,20 @@
 #include "revenuewidget.h"
 #include "ui_revenuewidget.h"
 
-RevenueWidget::RevenueWidget(const std::vector<Restaurant>& list, QWidget *parent) :
+RevenueWidget::RevenueWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RevenueWidget)
 {
     ui->setupUi(this);
     ui->tableWidget->setColumnCount(2);
-    ui->tableWidget->setRowCount(list.size());
+    ui->tableWidget->setRowCount(globalRestaurantList.size());
 
     // initializing contents of the table
-    for(unsigned int index = 0; index < list.size(); index++)
+    for(unsigned int index = 0; index < globalRestaurantList.size(); index++)
     {
-        QTableWidgetItem* restaurantName = new QTableWidgetItem(list[index].getName());
+        QTableWidgetItem* restaurantName = new QTableWidgetItem(globalRestaurantList[index].getName());
         ui->tableWidget->setItem(index, 0, restaurantName);
-        QTableWidgetItem* restaurantRevenue = new QTableWidgetItem("$" + QString::number(list[index].getRevenue(),'f',2));
+        QTableWidgetItem* restaurantRevenue = new QTableWidgetItem("$" + QString::number(globalRestaurantList[index].getRevenue(),'f',2));
         ui->tableWidget->setItem(index, 1, restaurantRevenue);
         ui->tableWidget->item(index, 1)->setTextAlignment(Qt::AlignRight);
     }
@@ -31,7 +31,7 @@ RevenueWidget::~RevenueWidget()
 double RevenueWidget::getTotalRevenue()
 {
     double total = 0;
-    for (Restaurant rest : Restaurant::list)
+    for (const Restaurant& rest : globalRestaurantList)
     {
         total += rest.getRevenue();
     }
