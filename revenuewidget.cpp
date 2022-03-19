@@ -8,6 +8,9 @@ RevenueWidget::RevenueWidget(const std::vector<Restaurant>& list, QWidget *paren
     ui->setupUi(this);
     ui->tableWidget->setColumnCount(2);
     ui->tableWidget->setRowCount(list.size());
+    ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Restaurant Name"));
+    ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Revenue"));
+
 
     // initializing contents of the table
     for(unsigned int index = 0; index < list.size(); index++)

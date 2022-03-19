@@ -12,8 +12,6 @@
 #include "button.h"
 #include "restaurantwidget.h"
 
-const int MAX_ITEMS_COLS = 5;
-
 namespace Ui {
 class MenuWidget;
 }
@@ -23,7 +21,7 @@ class MenuWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
+    explicit MenuWidget(Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
 
     ///
@@ -45,7 +43,7 @@ public:
 signals:
     void transmit_confirmOrder(Restaurant);
     void transmit_cancelOrder();
-    void transmit_addToOrder(Menu::Item);
+//    void transmit_addToOrder(Menu::Item);
 
 private slots:
     void on_confirmButton_pressed();
@@ -58,17 +56,10 @@ private:
     const int MAX_COL = 5;
 
     Ui::MenuWidget *ui;
-
-    //Creates a button for a menu item
-    Button *createButton(Menu::Item item);
-
-    //data members
-    QVector<Button*> itemButtons;
-
-    QVector<Menu::Item> orderedItems;
-
-    //Current restaurant on the widget
-    Restaurant currentRestaurant;
+    Button *createButton(Menu::Item* item); //Creates a button for a menu item
+    QVector<Button*> itemButtons;//data members
+    QVector<Menu::Item*> orderedItems;
+    Restaurant* currentRestaurant; //Current restaurant on the widget
 };
 
 #endif // MENUWIDGET_H

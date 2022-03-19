@@ -92,7 +92,8 @@ public:
     ///
     /// Calculates the distance this Customer has traveled so far by traversing the
     /// list of visited restaurants.
-    /// \param tripIDList is a vector of integers containing the IDs of the restaurants visited.
+    /// \param visitedList is a vector of Restaurants containing the restaurants that
+    /// a user has visited.
     /// \return Double indicating the total miles in a Customer's trip.
     ///
     double getTripDistance(std::vector<int> tripIDList) const;

@@ -5,14 +5,14 @@ std::vector<Restaurant> Restaurant::list = std::vector<Restaurant>();
 
 Restaurant::Restaurant()
 {
-//    Restaurant::list.push_back(*this);
+    // Restaurant::list.push_back(*this);
 }
 
 Restaurant::Restaurant(int ID, QString name)
 {
     this->ID = ID;
     this->name = name;
-//    Restaurant::list.push_back(*this);
+    // Restaurant::list.push_back(*this);
 }
 
 void Restaurant::setName(QString name)
@@ -45,7 +45,7 @@ double Restaurant::getDistance(int otherID) const
     return distances.at(otherID);
 }
 
-double Restaurant::getTripDistance(std::vector<int> tripIDList) const
+double Restaurant::getTripDistance(const std::vector<int> tripIDList) const
 {
     double totalDistance = 0;
 

@@ -60,14 +60,14 @@ public:
 
 signals:
     void transmit_cancel();
-    void transmit_viewRestMenu(Restaurant rest);
+    void transmit_viewRestMenu(Restaurant& rest);
 
 private slots:
     void on_confirmButton_pressed();
 
     void on_cancelButton_pressed();
 
-    void restaurantClicked();
+    void recieve_restaurantClicked(Restaurant*);
 
 private:
     //Number of restaurnts per row
@@ -79,7 +79,7 @@ private:
     Restaurant initialRestaurant;
 
     //Creates a button for restaurant
-    Button *createButton(Restaurant rest);
+    Button *createButton(Restaurant* rest);
 
     // restaurants in the trip
     QVector<Restaurant> visitedRestaurants;

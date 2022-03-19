@@ -7,6 +7,6 @@
         <file alias="rest_menu_icon.png">rest_menu_icon.png</file>
         <file alias="food_icon.png">food_icon.png</file>
         <file alias="food_image.png">food_image.png</file>
-        <file alias="delete_icon.png">delete_icon.png</file>
+        <file alias="trashbin_icon.png">trashbin_icon.png</file>
     </qresource>
 </RCC>

@@ -15,7 +15,7 @@ RestaurantWidget::RestaurantWidget(std::vector<Restaurant>& restaurantList, QWid
 
     //Create the restaurant buttons
     for (size_t i = 0; i < restaurantList.size(); ++i)
-        restaurantButtons.append(createButton(restaurantList[i]));
+        restaurantButtons.append(createButton(&restaurantList[i]));
 
     //Create Grid for restaurant icons
     QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_restaurants);
@@ -106,16 +106,16 @@ void RestaurantWidget::on_cancelButton_pressed()
     emit transmit_cancel();
 }
 
-void RestaurantWidget::restaurantClicked()
+void RestaurantWidget::recieve_restaurantClicked(Restaurant* rest)
 {
-    Button *clickedButton = qobject_cast<Button *>(sender());
-    emit transmit_viewRestMenu(clickedButton->getRestaurant());
+    qDebug() << "Restaurant clicked: " << rest->getName() << "\n";
+    emit transmit_viewRestMenu(*rest);
 }
 
-Button *RestaurantWidget::createButton(Restaurant rest)
+Button *RestaurantWidget::createButton(Restaurant* rest)
 {
-    Button *button = new Button(rest);
-    connect(button, SIGNAL(clicked()), this, SLOT(restaurantClicked()));
+    Button *button = new Button(rest, this);
+    QObject::connect(button, SIGNAL(transmit_restaurantClicked(Restaurant*)), this, SLOT(recieve_restaurantClicked(Restaurant*)));
     return button;
 }
 
