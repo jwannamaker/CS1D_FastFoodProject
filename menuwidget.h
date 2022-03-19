@@ -24,7 +24,7 @@ class MenuWidget : public QWidget
 
 public:
     explicit MenuWidget(QWidget *parent = nullptr);
-    explicit MenuWidget(Restaurant& currentRestaurant, QWidget *parent = nullptr);
+    explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
 
     Restaurant GetCurrentRestuarant();

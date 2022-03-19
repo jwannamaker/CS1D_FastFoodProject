@@ -66,7 +66,7 @@ public:
 
 signals:
     void transmit_cancel();
-    void transmit_viewRestMenu(Restaurant& rest);
+    void transmit_viewRestMenu(const Restaurant& rest);
 
 private slots:
     void on_confirmButton_pressed();

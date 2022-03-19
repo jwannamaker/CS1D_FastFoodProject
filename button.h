@@ -24,6 +24,8 @@ public:
     explicit Button(Menu::Item item, QWidget *parent = nullptr);
     explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
+    ~Button();
+
     ///
     /// \brief setImage
     /// \param image
@@ -46,13 +48,13 @@ public:
     /// \brief getRestaurant
     /// \return
     ///
-    Restaurant getRestaurant() const;
+    const Restaurant& getRestaurant() const;
 
     ///
     /// \brief getItem
     /// \return
     ///
-    Menu::Item getItem() const;
+    const Menu::Item& getItem() const;
 
 private:
     const Restaurant*     restaurant;

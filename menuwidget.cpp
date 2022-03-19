@@ -12,7 +12,7 @@ MenuWidget::MenuWidget(QWidget *parent) :
     ui->tableWidget_orderItems->setRowCount(8);
 }
 
-MenuWidget::MenuWidget(Restaurant& currentRestaurant, QWidget *parent) :
+MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MenuWidget)
 {

@@ -82,9 +82,9 @@ void MainWindow::recieve_restaurantView()
                      this,
                      SLOT(recieve_mainMenu()));
     QObject::connect(restaurantPage,
-                     SIGNAL(transmit_viewRestMenu(Restaurant&)),
+                     SIGNAL(transmit_viewRestMenu(const Restaurant&)),
                      this,
-                     SLOT(recieve_viewMenu(Restaurant&)));
+                     SLOT(recieve_viewMenu(const Restaurant&)));
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
@@ -99,9 +99,8 @@ void MainWindow::recieve_mainMenu()
     stackedWidget->setCurrentWidget(mainMenuPage);
 }
 
-void MainWindow::recieve_viewMenu(Restaurant& rest)
+void MainWindow::recieve_viewMenu(const Restaurant& rest)
 {
-    qDebug() << "recieve_viewMenu()";
     // initializing menu page
     menuPage = new MenuWidget(rest);
     stackedWidget->addWidget(menuPage);
