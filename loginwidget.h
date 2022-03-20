@@ -1,22 +1,18 @@
 #ifndef LOGINWIDGET_H
 #define LOGINWIDGET_H
+
 #include <QWidget>
-#include "ui_loginwidget.h"
 #include "customer.h"
 #include "databasehelper.h"
-
-// linking globals
-extern Customer CurrentUser;
-extern DatabaseHelper Database;
 
 namespace Ui {
 class LoginWidget;
 }
 
 ///
-/// \class LoginWidget
+/// \class Login
 ///
-/// \brief The LoginWidget class
+/// \brief The Login class
 ///
 /// A widget for the login page of the app.
 ///
@@ -25,29 +21,17 @@ class LoginWidget : public QWidget
     Q_OBJECT
 
 public:
-    ///
-    /// \brief LoginWidget
-    /// \param parent
-    ///
     explicit LoginWidget(QWidget *parent = nullptr);
 
     ~LoginWidget();
 
 signals:
-    ///
-    /// \brief transmit_validUser
-    ///
-    void transmit_validUser();
+    void transmit_validUser(Customer newUser);
+    void transmit_invalidUser();
 
 public slots:
-    ///
-    /// \brief on_logInButton_pressed
-    ///
     void on_logInButton_pressed();
 
-    ///
-    /// \brief on_clearButton_pressed
-    ///
     void on_clearButton_pressed();
 
 private:

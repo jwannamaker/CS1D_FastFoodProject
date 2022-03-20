@@ -8,10 +8,6 @@
 #include "customer.h"
 #include "restaurant.h"
 
-// linking globals
-extern Customer CurrentUser;
-extern std::vector<Restaurant> RestaurantList;
-
 ///
 /// \class Database
 /// \brief The Database class
@@ -29,27 +25,24 @@ public:
     ~DatabaseHelper();
 
     ///
-    /// \brief authenticateUser
+    /// \brief populateRestaurants
+    /// This method parses the sourceFile (default value is "source_data1.txt"), and
+    /// stores the relevant data into a vector of restaurants containing every Restaurant
+    /// instance. The vector is then returned.
     ///
-    void authenticateUser();
-
-    ///
-    /// \brief updateRestaurantDistances
-    /// This method updates the distance vectors of the given restaurant.
-    ///
-    void updateRestaurantDistances(const Restaurant& newRestaurant);
-
-    ///
-    /// \brief addRestaurants
-    /// This method parses the source file specified by filename, and stores the relevant
-    /// data into the global vector of restaurants.
-    ///
-    void addRestaurants(QString filename = ":data/source_data1.txt");
+    void populateRestaurants();
 
     ///
     /// \brief loadRestaurantsFromDatabase
     ///
     void loadRestaurantsFromDatabase();
+
+    ///
+    /// \brief AuthenticateUser
+    /// \param user
+    /// \return bool
+    ///
+    bool authenticateUser(Customer user);
 
     ///
     /// \brief createRestaurantTable

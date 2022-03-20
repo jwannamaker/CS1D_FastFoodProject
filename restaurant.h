@@ -4,21 +4,13 @@
 
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
+#include <QVector>
 #include <QDebug>
-#include "cassert"
-#include "customer.h"
 #include "item.h"
 
-class Restaurant;
-
-// linking globals
-extern Customer CurrentUser;
-extern std::vector<Restaurant> RestaurantList;
-
 // type aliases
-using Menu = std::vector<Item>;
-using Order = std::pair<Customer, std::vector<Item>>;
-using OrderList = std::vector<Order>;
+using Menu = std::vector<Item*>;
+using OrderList = std::vector<std::vector<Item*>>;
 
 ///
 /// \class Restaurant.
@@ -29,6 +21,14 @@ using OrderList = std::vector<Order>;
 class Restaurant
 {
 public:
+    ///
+    /// \brief list
+    ///
+    /// Static member of Restaurant, contains every Restuarant object created
+    /// throughout the program.
+    ///
+    static std::vector<Restaurant> list;
+
     ///
     /// \brief Restaurant
     ///
@@ -94,21 +94,9 @@ public:
     /// \brief getDistance
     ///
     /// get the distance from the current restaurant to the specified restaurant id
-    /// \return double containing
+    /// \return double containg
     ///
     double getDistance(int otherID) const;
-
-    ///
-    /// \brief getShortestDistanceID
-    /// \return
-    ///
-    int getShortestDistanceID() const;
-
-    ///
-    /// \brief getClosestRestaurant
-    /// \return
-    ///
-    Restaurant& getClosestRestaurant();
 
     ///
     /// \brief setMenu
@@ -120,7 +108,7 @@ public:
     /// \brief addMenuItem
     /// \param newItem
     ///
-    void addMenuItem(Item newItem);
+    void addMenuItem(Item* newItem);
 
     ///
     /// \brief getMenuSize
@@ -133,19 +121,13 @@ public:
     /// \param index
     /// \return
     ///
-    Item& getMenuItem(int index);
+    Item* getMenuItem(int index);
 
     ///
-    /// \brief addOrder
+    /// \brief saveOrder
     /// \param newOrder
     ///
-    void addOrder(std::vector<Item> orderItems = std::vector<Item>());
-
-    ///
-    /// \brief getLastOrder
-    /// \return
-    ///
-    std::vector<Item>& getCurrentOrder();
+    void addOrder(std::vector<Item*> newOrder);
 
     ///
     /// \brief setRevenue
@@ -160,24 +142,10 @@ public:
     void addRevenue(double revenue);
 
     ///
-    /// \brief updateRevenue
-    ///
-    void updateRevenue();
-
-    ///
     /// \brief getRevenue
     /// \return
     ///
     double getRevenue() const;
-
-    ///
-    /// \brief setDistanceAt
-    /// \param otherID
-    /// \param otherDistance
-    ///
-    void setDistanceAt(unsigned int otherID, double otherDistance);
-
-    void RemoveMenuItem(int index);
 
 private:
     int                 ID;

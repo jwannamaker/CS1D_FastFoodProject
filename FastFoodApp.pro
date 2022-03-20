@@ -9,7 +9,6 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    adminwidget.cpp \
     button.cpp \
     customer.cpp \
     databasehelper.cpp \
@@ -24,7 +23,6 @@ SOURCES += \
     revenuewidget.cpp
 
 HEADERS += \
-    adminwidget.h \
     button.h \
     customer.h \
     databasehelper.h \
@@ -38,7 +36,6 @@ HEADERS += \
     revenuewidget.h
 
 FORMS += \
-    adminwidget.ui \
     loginwidget.ui \
     mainmenuwidget.ui \
     mainwindow.ui \

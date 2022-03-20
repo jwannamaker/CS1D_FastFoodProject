@@ -1,41 +1,36 @@
 #include "loginwidget.h"
+#include "ui_loginwidget.h"
 
-///
-/// \brief LoginWidget::LoginWidget
-/// \param parent
-///
 LoginWidget::LoginWidget(QWidget *parent) :
-    QWidget(parent), ui(new Ui::LoginWidget)
+    QWidget(parent),
+    ui(new Ui::LoginWidget)
 {
     ui->setupUi(this);
 }
 
-///
-/// \brief LoginWidget::~LoginWidget
-///
 LoginWidget::~LoginWidget()
 {
     delete ui;
 }
 
 ///
-/// \brief LoginWidget::on_LoginWidgetButton_pressed
+/// \brief Login::on_logInButton_pressed
 ///
 /// User pressed the "Log In" button, validate the input based on the database.
 ///
 void LoginWidget::on_logInButton_pressed()
 {
-    CurrentUser = Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
-    Database.authenticateUser();
+    DatabaseHelper dbHelper;
+    Customer newUser = Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
 
-    if (CurrentUser.isValid())
-        emit transmit_validUser();
+    if (dbHelper.authenticateUser(newUser))
+        emit transmit_validUser(newUser);
     else
-        on_clearButton_pressed();
+        emit transmit_invalidUser();
 }
 
 ///
-/// \brief LoginWidget::on_clearButton_pressed
+/// \brief Login::on_clearButton_pressed
 ///
 /// User pressed the "Clear" button, clear all line edits.
 ///
