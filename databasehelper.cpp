@@ -31,7 +31,7 @@ void DatabaseHelper::populateRestaurants()
         int id;
         double distance,price;
         int numOfMenuItems,numOfResturantDists;
-        Restaurant newResturant;
+        Restaurant newRestaurant;
 
         while(!inputStream.atEnd())
         {
@@ -39,11 +39,11 @@ void DatabaseHelper::populateRestaurants()
 
             //Gets name of the resturant
             line = inputStream.readLine();
-            newResturant.setName(line.mid(30));
+            newRestaurant.setName(line.mid(30));
 
             //Gets ID of the resturant
             line = inputStream.readLine();
-            newResturant.setID(line.remove(QRegularExpression("\\D+")).toInt());
+            newRestaurant.setID(line.remove(QRegularExpression("\\D+")).toInt());
 
             //Gets number of resturant locations.
             line = inputStream.readLine();
@@ -73,12 +73,12 @@ void DatabaseHelper::populateRestaurants()
                 newMenu.addItem(Menu::Item(line,price));
                 inputStream.skipWhiteSpace();
             }
-            newResturant.setMenu(newMenu);
-            newResturant.setDistances(listOfDistances);
+            newRestaurant.setMenu(newMenu);
+            newRestaurant.setDistances(listOfDistances);
             inputStream.skipWhiteSpace();
 
             //Adds resturant to general list of resturants
-            restaurantList.push_back(newResturant);
+            restaurantList.push_back(newRestaurant);
         }
         file.close();
     }
@@ -101,7 +101,7 @@ bool DatabaseHelper::authenticateUser(Customer& user)
     if(query.exec("CREATE TABLE IF NOT EXISTS users ( Username varchar(255) UNIQUE, Password varchar(255), IsAdmin bool )"))
     {
         query.exec("INSERT INTO users VALUES ('username', 'password', 1)");
-        query.exec("INSERT INTO users VALUES ('normal', 'password', 0)");
+        query.exec("INSERT INTO users VALUES ('nonadmin', 'password', 0)");
     }
 
     if(query.exec("SELECT * FROM users"))
@@ -115,6 +115,16 @@ bool DatabaseHelper::authenticateUser(Customer& user)
     return false;
 }
 
+void DatabaseHelper::updateRestaurantDistances(const Restaurant& newRestaurant)
+{
+
+    //Iterates through already existing restaurants and adds the distance to new restaurant
+    for(Restaurant& oldRestaurant : globalRestaurantList)
+    {
+        oldRestaurant.setDistanceAt(newRestaurant.getID(),newRestaurant.getDistance(oldRestaurant.getID()));
+    }
+}
+
 void DatabaseHelper::addRestaurants(QString filename)
 {
     QFile file(filename);
@@ -126,7 +136,7 @@ void DatabaseHelper::addRestaurants(QString filename)
         int id;
         double distance,price;
         int numOfMenuItems,numOfResturantDists;
-        Restaurant newResturant;
+        Restaurant newRestaurant;
 
         while(!inputStream.atEnd())
         {
@@ -134,11 +144,11 @@ void DatabaseHelper::addRestaurants(QString filename)
 
             //Gets name of the resturant
             line = inputStream.readLine();
-            newResturant.setName(line.mid(30));
+            newRestaurant.setName(line.mid(30));
 
             //Gets ID of the resturant
             line = inputStream.readLine();
-            newResturant.setID(line.remove(QRegularExpression("\\D+")).toInt());
+            newRestaurant.setID(line.remove(QRegularExpression("\\D+")).toInt());
 
             //Gets number of resturant locations.
             line = inputStream.readLine();
@@ -168,12 +178,13 @@ void DatabaseHelper::addRestaurants(QString filename)
                 newMenu.addItem(Menu::Item(line,price));
                 inputStream.skipWhiteSpace();
             }
-            newResturant.setMenu(newMenu);
-            newResturant.setDistances(listOfDistances);
+            newRestaurant.setMenu(newMenu);
+            newRestaurant.setDistances(listOfDistances);
             inputStream.skipWhiteSpace();
 
             //Adds resturant to general list of resturants
-            globalRestaurantList.push_back(newResturant);
+            updateRestaurantDistances(newRestaurant);
+            globalRestaurantList.push_back(newRestaurant);
         }
         file.close();
     }

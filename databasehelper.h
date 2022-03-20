@@ -47,6 +47,8 @@ public:
     ///
     bool authenticateUser(Customer& user);
 
+    void updateRestaurantDistances(const Restaurant& newRestaurant);
+
     void addRestaurants(QString filename);
 
     ///

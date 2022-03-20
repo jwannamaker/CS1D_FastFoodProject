@@ -12,8 +12,6 @@
 #include "button.h"
 #include "restaurantwidget.h"
 
-const int MAX_ITEMS_COLS = 5;
-
 namespace Ui {
 class MenuWidget;
 }
@@ -23,14 +21,32 @@ class MenuWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit MenuWidget(QWidget *parent = nullptr);
-    explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
+    explicit MenuWidget(Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
 
-    Restaurant GetCurrentRestuarant();
+    ///
+    /// \brief getCurrentRestuarant
+    /// \return
+    ///
+    Restaurant getCurrentRestuarant() const;
+
+    ///
+    /// \brief updateOrderTotal
+    ///
+    void updateOrderTotal();
+
+    ///
+    /// \brief updateTableWidget
+    ///
+    void updateTableWidget();
+
+    ///
+    /// \brief createButtonLayout
+    ///
+    void createButtonLayout();
 
 signals:
-    void transmit_confirmOrder(Restaurant);
+    void transmit_confirmOrder(Restaurant*);
     void transmit_cancelOrder();
 
 private slots:
@@ -38,27 +54,16 @@ private slots:
 
     void on_cancelButton_pressed();
 
-    void itemClicked();
+    void recieve_itemClicked();
 
 private:
     const int MAX_COL = 5;
 
     Ui::MenuWidget *ui;
-
-    //Creates a button for a menu item
-    Button *createButton(Menu::Item item, const char *member);
-
-    //data members
-    QVector<Button*> itemButtons;
-
-    //Current restaurant on the widget
-    Restaurant currentRestaurant;
-
-    //Keeps track of the subtotatl when user is ordering food
-    double subTotal;
-
-    int menuItemsAdded;
-
+    Button *createButton(Menu::Item* item); //Creates a button for a menu item
+    QVector<Button*> itemButtons;//data members
+    QVector<Menu::Item*> orderedItems;
+    Restaurant* currentRestaurant; //Current restaurant on the widget
 };
 
 #endif // MENUWIDGET_H

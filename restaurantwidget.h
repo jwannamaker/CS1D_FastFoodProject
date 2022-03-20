@@ -36,7 +36,7 @@ public:
     //is on restaurantListCopy
     Restaurant findRestaurant(QString restName);
 
-    void updateRestaurantButtons(const std::vector<Restaurant>& restaurantList, bool isAdmin);
+    void updateRestaurantButtons(bool isAdmin);
 
     ///
     /// \brief getTripDistance
@@ -66,7 +66,7 @@ public:
 
 signals:
     void transmit_cancel();
-    void transmit_viewRestMenu(const Restaurant& rest);
+    void transmit_viewRestMenu(Restaurant& rest);
 
 private slots:
     void on_confirmButton_pressed();
@@ -79,7 +79,7 @@ private slots:
 
 private:
     //Number of restaurnts per row
-    const int MAX_COL = 5;
+    const int MAX_COL = 4;
 
     Ui::RestaurantWidget *ui;
 
@@ -89,7 +89,7 @@ private:
     Restaurant initialRestaurant;
 
     //Creates a button for restaurant
-    Button *createButton(Restaurant rest, const char *member);
+    Button *createButton(Restaurant* rest, const char *member);
 
     // restaurants in the trip
     QVector<Restaurant> visitedRestaurants;

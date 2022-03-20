@@ -9,38 +9,36 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
     setImage(QPixmap(":images/food_image.png"));
 }
 
-Button::Button(Restaurant rest, QWidget* parent)
+Button::Button(Restaurant* rest, QWidget* parent)
     : QPushButton(parent)
 {
-    restaurant = new Restaurant(rest);
+    restaurant = rest;
     menuItem = nullptr;
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
-    topText = new QLabel(rest.getName());
-    bottomText = new QLabel(QString::number(rest.getDistance(0)) + " miles away");
+    topText = new QLabel(rest->getName());
+    bottomText = new QLabel(QString::number(rest->getDistance(3)) + " miles away");
     this->setImage(QPixmap(":images/food_icon.png"));
+
+    QObject::connect(this,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(restaurantClicked()));
 }
 
-Button::Button(Menu::Item item, QWidget* parent)
+Button::Button(Restaurant* rest, Menu::Item* item, QWidget* parent)
     : QPushButton(parent)
 {
-    restaurant = nullptr;
-    menuItem = new Menu::Item(item);
+    restaurant = rest;
+    menuItem = item;
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
-    topText = new QLabel(item.getName());
-    bottomText = new QLabel(QString::number(item.getPrice()));
+    topText = new QLabel(item->getName());
+    bottomText = new QLabel(QString::number(item->getPrice()));
     this->setImage(QPixmap(":images/rest_menu_icon.png"));
-}
 
-Button::~Button()
-{
-    if(restaurant != nullptr)
-    {
-        delete restaurant;
-    }
-    if(menuItem != nullptr)
-    {
-        delete menuItem;
-    }
+    QObject::connect(this,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(itemClicked()));
 }
 
 void Button::setImage(QPixmap image)
@@ -61,17 +59,22 @@ QSize Button::sizeHint() const
     return size;
 }
 
-void Button::setRestaurant(const Restaurant& rest)
+Restaurant* Button::getRestaurant()
 {
-    restaurant = &rest;
+    return restaurant;
 }
 
-const Restaurant& Button::getRestaurant() const
+Menu::Item* Button::getItem()
 {
-    return *restaurant;
+    return menuItem;
 }
 
-const Menu::Item& Button::getItem() const
+void Button::restaurantClicked()
 {
-    return *menuItem;
+    emit transmit_restaurantClicked(restaurant);
+}
+
+void Button::itemClicked()
+{
+    emit transmit_itemClicked(menuItem);
 }

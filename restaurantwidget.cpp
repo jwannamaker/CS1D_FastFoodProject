@@ -13,7 +13,7 @@ RestaurantWidget::RestaurantWidget(const Customer& user, QWidget *parent) :
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(1, new QTableWidgetItem("Distance"));
     //ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(0, new QTableWidgetItem("Subtotal"));
 
-    updateRestaurantButtons(globalRestaurantList, user.isAdmin());
+    updateRestaurantButtons(user.isAdmin());
 }
 
 RestaurantWidget::~RestaurantWidget()
@@ -86,17 +86,17 @@ void RestaurantWidget::restaurantClicked()
 {
     //Get the tile clicked and send to restaurant menu
     Button *clickedButton = qobject_cast<Button *>(sender());
-    emit transmit_viewRestMenu(clickedButton->getRestaurant());
+    emit transmit_viewRestMenu(*clickedButton->getRestaurant());
 }
 
 void RestaurantWidget::addRestaurants()
 {
     DatabaseHelper dbhelper;
     dbhelper.addRestaurants(":data/source_data2.txt");
-    updateRestaurantButtons(globalRestaurantList,false);
+    updateRestaurantButtons(false);
 }
 
-Button *RestaurantWidget::createButton(Restaurant rest, const char *member)
+Button *RestaurantWidget::createButton(Restaurant* rest, const char *member)
 {
     Button *button = new Button(rest);
     connect(button, SIGNAL(clicked()), this, member);
@@ -120,7 +120,7 @@ Restaurant RestaurantWidget::findRestaurant(QString restName)
     return temp;
 }
 
-void RestaurantWidget::updateRestaurantButtons(const std::vector<Restaurant>& restaurantList, bool isAdmin)
+void RestaurantWidget::updateRestaurantButtons(bool isAdmin)
 {
     //Create Grid for restaurant icons
     if(mainLayout != nullptr)
@@ -132,15 +132,15 @@ void RestaurantWidget::updateRestaurantButtons(const std::vector<Restaurant>& re
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
     //Create the restaurant buttons
-    for (size_t i = 0; i < restaurantList.size(); ++i)
-        restaurantButtons.append(createButton(restaurantList[i], SLOT(restaurantClicked())));
+    for (size_t i = 0; i < globalRestaurantList.size(); ++i)
+        restaurantButtons.append(createButton(&globalRestaurantList[i], SLOT(restaurantClicked())));
 
 
     //Add restaurants to window
     int row = 0;
     int col = 0;
 
-    for (size_t i = 0; i < restaurantList.size(); i++)
+    for (size_t i = 0; i < globalRestaurantList.size(); i++)
     {
         mainLayout->addWidget(restaurantButtons[i], row, col);
         col++;

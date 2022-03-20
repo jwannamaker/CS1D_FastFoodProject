@@ -59,7 +59,7 @@ public slots:
     /// \brief recieve_viewMenu
     /// \param Restaurant rest
     ///
-    void recieve_viewMenu(const Restaurant& rest);
+    void recieve_viewMenu(Restaurant& rest);
 
     ///
     /// \brief recieve_viewRevenue

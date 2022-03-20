@@ -10,15 +10,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    DatabaseHelper dbhelper;
-    dbhelper.populateRestaurants();
-
+    this->setFixedSize(1000, 600);
     // initializes the stacked widget with loginPage the first view
     stackedWidget = new QStackedWidget;
     setCentralWidget(stackedWidget);
     initializeNewUser();
-    initializeMainMenu();
 }
 
 MainWindow::~MainWindow()
@@ -55,14 +51,14 @@ void MainWindow::initializeMainMenu()
                      SIGNAL(transmit_revenueView()),
                      this,
                      SLOT(recieve_revenueView()));
+    stackedWidget->setCurrentWidget(mainMenuPage);
 }
 
 void MainWindow::recieve_loginSuccess(const Customer& newUser)
 {
-    stackedWidget->setCurrentWidget(mainMenuPage);
     currentUser = newUser;
-    mainMenuPage->updateMainMenu(newUser);
     loginPage->on_clearButton_pressed();
+    initializeMainMenu();
 }
 
 void MainWindow::recieve_logout()
@@ -71,7 +67,7 @@ void MainWindow::recieve_logout()
 }
 
 // new instance of restaurant widget is created upon calling of this method
-// so that most updated version of globalRestaurantList is used
+// so that most updated version of Restaurant::list is used
 void MainWindow::recieve_restaurantView()
 {
     // initializing restaurant page
@@ -82,26 +78,29 @@ void MainWindow::recieve_restaurantView()
                      this,
                      SLOT(recieve_mainMenu()));
     QObject::connect(restaurantPage,
-                     SIGNAL(transmit_viewRestMenu(const Restaurant&)),
+                     SIGNAL(transmit_viewRestMenu(Restaurant&)),
                      this,
-                     SLOT(recieve_viewMenu(const Restaurant&)));
+                     SLOT(recieve_viewMenu(Restaurant&)));
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
 void MainWindow::recieve_addRestaurantToTrip(Restaurant rest)
 {
+    qDebug()<< "Adding Restaurants to trip";
     restaurantPage->addRestaurantToTrip(rest);
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
 void MainWindow::recieve_mainMenu()
 {
-    stackedWidget->setCurrentWidget(mainMenuPage);
+    initializeMainMenu();
 }
 
-void MainWindow::recieve_viewMenu(const Restaurant& rest)
+void MainWindow::recieve_viewMenu(Restaurant& rest)
 {
     // initializing menu page
+    qDebug() << "recieve_viewMenu has been called for " << rest.getName() << "\n";
+
     menuPage = new MenuWidget(rest);
     stackedWidget->addWidget(menuPage);
     QObject::connect(menuPage,
@@ -112,6 +111,8 @@ void MainWindow::recieve_viewMenu(const Restaurant& rest)
                      SIGNAL(transmit_confirmOrder(Restaurant)),
                      this,
                      SLOT(recieve_addRestaurantToTrip(Restaurant)));
+
+    qDebug() << "The menu view has been initialized";
     stackedWidget->setCurrentWidget(menuPage);
 }
 

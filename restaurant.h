@@ -130,6 +130,8 @@ public:
     ///
     void createNewOrder();
 
+    void setDistanceAt(unsigned int index, double distance);
+
 private:
     int ID;
     QString name;
