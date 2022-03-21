@@ -8,7 +8,7 @@
 #include <QGraphicsPixmapItem>
 #include "customer.h"
 
-// linking global variable
+// linking usage of global variables
 extern Customer CurrentUser;
 
 namespace Ui {
@@ -27,33 +27,13 @@ class MainMenuWidget : public QWidget
     Q_OBJECT
 
 public:
-    ///
-    /// \brief MainMenuWidget
-    /// \param parent
-    ///
     explicit MainMenuWidget(QWidget *parent = nullptr);
     ~MainMenuWidget();
 
 signals:
-    ///
-    /// \brief transmit_logout
-    ///
     void transmit_logout();
-
-    ///
-    /// \brief transmit_restaurantView
-    ///
     void transmit_restaurantView();
-
-    ///
-    /// \brief transmit_revenueView
-    ///
     void transmit_revenueView();
-
-    ///
-    /// \brief transmit_adminView
-    ///
-    void transmit_adminView();
 
 private slots:
     ///
@@ -70,11 +50,6 @@ private slots:
     /// \brief on_revenueButton_pressed
     ///
     void on_revenueButton_pressed();
-
-    ///
-    /// \brief on_adminButton_pressed
-    ///
-    void on_adminButton_pressed();
 
 private:
     Ui::MainMenuWidget*     ui;

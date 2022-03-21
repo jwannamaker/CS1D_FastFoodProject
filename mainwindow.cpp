@@ -1,11 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-// linking globals
-extern Customer CurrentUser;
-extern std::vector<Restaurant*> Restaurants;
-extern DatabaseHelper Database;
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)

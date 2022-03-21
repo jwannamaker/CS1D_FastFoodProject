@@ -1,5 +1,4 @@
 #include "databasehelper.h"
-#include "header.h"
 
 // linking usage of globals
 extern std::vector<Restaurant*> Restaurants;

@@ -26,7 +26,6 @@ HEADERS += \
     button.h \
     customer.h \
     databasehelper.h \
-    header.h \
     item.h \
     loginwidget.h \
     mainmenuwidget.h \

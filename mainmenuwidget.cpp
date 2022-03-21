@@ -1,9 +1,6 @@
 #include "mainmenuwidget.h"
 #include "ui_mainmenuwidget.h"
 
-// linking usage of global variables
-extern Customer CurrentUser;
-
 MainMenuWidget::MainMenuWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainMenuWidget)

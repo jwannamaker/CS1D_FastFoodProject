@@ -3,11 +3,9 @@
 #include <QObject>
 
 // global variables
-Customer CurrentUser;
-DatabaseHelper Database;
-std::vector<Restaurant> RestaurantList;
-Restaurant NULL_RESTAURANT = Restaurant();
-Item NULL_ITEM = Item();
+Customer CurrentUser = Customer();
+DatabaseHelper Database = DatabaseHelper();
+std::vector<Restaurant*> Restaurants = std::vector<Restaurant*>();
 
 int main(int argc, char *argv[])
 {

@@ -12,6 +12,11 @@
 #include "restaurantwidget.h"
 #include "revenuewidget.h"
 
+// linking globals
+extern Customer CurrentUser;
+extern std::vector<Restaurant*> Restaurants;
+extern DatabaseHelper Database;
+
 namespace Ui {
 class MainWindow;
 }

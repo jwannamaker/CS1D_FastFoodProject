@@ -19,6 +19,11 @@ extern Customer CurrentUser;
 extern DatabaseHelper Database;
 extern std::vector<Restaurant> RestaurantList;
 
+// linking usage of globals
+extern Customer CurrentUser;
+extern DatabaseHelper Database;
+extern std::vector<Restaurant*> Restaurants;
+
 QT_BEGIN_NAMESPACE
 class QLineEdit;
 QT_END_NAMESPACE
