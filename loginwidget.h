@@ -1,9 +1,7 @@
 #ifndef LOGINWIDGET_H
 #define LOGINWIDGET_H
-
 #include <QWidget>
 #include "customer.h"
-#include "databasehelper.h"
 
 namespace Ui {
 class LoginWidget;
@@ -26,12 +24,18 @@ public:
     ~LoginWidget();
 
 signals:
-    void transmit_validUser(Customer newUser);
+    void transmit_validUser(Customer* newUser);
     void transmit_invalidUser();
 
 public slots:
+    ///
+    /// \brief on_logInButton_pressed
+    ///
     void on_logInButton_pressed();
 
+    ///
+    /// \brief on_clearButton_pressed
+    ///
     void on_clearButton_pressed();
 
 private:

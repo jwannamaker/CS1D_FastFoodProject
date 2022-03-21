@@ -8,7 +8,6 @@ Item::Item()
 }
 
 Item::Item(QString name, double price)
-    : name{name}, price{price}, quantity{0}
 {
     this->name = name;
     this->price = price;

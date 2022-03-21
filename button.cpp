@@ -6,7 +6,7 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     topText = new QLabel(top);
     bottomText = new QLabel(bottom);
-    setImage(QPixmap(":images/food_image.png"));
+    setImage(QPixmap(":images/plus_icon.png"));
 }
 
 Button::Button(Restaurant* rest, QWidget* parent)

@@ -1,8 +1,5 @@
 #include "restaurant.h"
 
-// Allocating the memory for a vector of Restaurant objects
-std::vector<Restaurant> Restaurant::list = std::vector<Restaurant>();
-
 Restaurant::Restaurant()
 {
     menu = Menu();
@@ -13,7 +10,6 @@ Restaurant::Restaurant(int ID, QString name)
 {
     this->ID = ID;
     this->name = name;
-
 }
 
 void Restaurant::setName(QString name)

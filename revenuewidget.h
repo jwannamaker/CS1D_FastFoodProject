@@ -1,17 +1,20 @@
 #ifndef REVENUEWIDGET_H
 #define REVENUEWIDGET_H
+
 #include <QWidget>
 #include "restaurant.h"
+#include "databasehelper.h"
+#include "menuwidget.h"
 
-// linking globals
-extern std::vector<Restaurant> RestaurantList;
+// linking usage of globals
+extern std::vector<Restaurant*> Restaurants;
 
 namespace Ui {
 class RevenueWidget;
 }
 
 ///
-/// \class RevenueWidget
+/// \class RevenueWidget.
 /// \brief The RevenueWidget class
 ///
 class RevenueWidget : public QWidget
@@ -19,27 +22,21 @@ class RevenueWidget : public QWidget
     Q_OBJECT
 
 public:
-    ///
-    /// \brief RevenueWidget
-    /// \param parent
-    ///
     explicit RevenueWidget(QWidget *parent = nullptr);
     ~RevenueWidget();
 
     ///
     /// \brief populateTableWidget
     ///
-    void populateTable();
+    void populateTableWidget();
 
     ///
     /// \brief getTotalRevenue
+    /// \return
     ///
-    void populateTotalRevenue();
+    double getTotalRevenue();
 
 signals:
-    ///
-    /// \brief transmit_cancel
-    ///
     void transmit_cancel();
 
 private slots:

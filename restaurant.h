@@ -22,14 +22,6 @@ class Restaurant
 {
 public:
     ///
-    /// \brief list
-    ///
-    /// Static member of Restaurant, contains every Restuarant object created
-    /// throughout the program.
-    ///
-    static std::vector<Restaurant> list;
-
-    ///
     /// \brief Restaurant
     ///
     /// Default constructor. No arguments passed.
@@ -146,6 +138,8 @@ public:
     /// \return
     ///
     double getRevenue() const;
+
+    void setDistanceAt(unsigned int index, double distance);
 
 private:
     int                 ID;

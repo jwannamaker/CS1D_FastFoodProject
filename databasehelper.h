@@ -25,12 +25,11 @@ public:
     ~DatabaseHelper();
 
     ///
-    /// \brief populateRestaurants
-    /// This method parses the sourceFile (default value is "source_data1.txt"), and
-    /// stores the relevant data into a vector of restaurants containing every Restaurant
-    /// instance. The vector is then returned.
+    /// \brief addRestaurants
+    /// This method parses the source file specified by filename, and stores the relevant
+    /// data into the global vector of restaurants.
     ///
-    void populateRestaurants();
+    void addRestaurants(QString filename);
 
     ///
     /// \brief loadRestaurantsFromDatabase
@@ -40,9 +39,14 @@ public:
     ///
     /// \brief AuthenticateUser
     /// \param user
-    /// \return bool
     ///
-    bool authenticateUser(Customer user);
+    void authenticateUser(Customer& user);
+
+    ///
+    /// \brief updateRestaurantDistances
+    /// \param newRestaurant
+    ///
+    void updateRestaurantDistances(const Restaurant& newRestaurant);
 
     ///
     /// \brief createRestaurantTable

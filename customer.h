@@ -6,6 +6,9 @@
 #define CUSTOMER_H
 #include <QString>
 
+// forward declaration
+class Customer;
+
 ///
 /// \class Customer.
 /// \brief The Customer class represents the current user of the Fast Food Fantasy App.
@@ -31,7 +34,7 @@ public:
     /// \param username QString
     /// \param password QString
     ///
-    Customer(const QString& username, const QString& password);
+    Customer(QString username, QString password);
 
     ///
     /// \brief isAdmin.
@@ -70,13 +73,6 @@ public:
     /// \return
     ///
     QString getPassword() const;
-
-    ///
-    /// \brief operator ==
-    /// \param other
-    /// \return
-    ///
-    bool operator==(Customer other);
 
 private:
     QString     username;

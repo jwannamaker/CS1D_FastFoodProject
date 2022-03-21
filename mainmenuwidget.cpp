@@ -1,66 +1,40 @@
 #include "mainmenuwidget.h"
 #include "ui_mainmenuwidget.h"
+#include "header.h"
 
-///
-/// \brief MainMenuWidget::MainMenuWidget
-/// \param parent
-///
+// linking usage of global variables
+extern Customer CurrentUser;
+
 MainMenuWidget::MainMenuWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainMenuWidget)
 {
     ui->setupUi(this);
+    ui->welcomeLabel->setText("Welcome, " + CurrentUser.getUsername());
     QGraphicsScene* mainMenuScene = new QGraphicsScene();
-    mainMenuScene->addPixmap(QPixmap(":images/03.jpg"));
+    mainMenuScene->addPixmap(QPixmap(":images/rest_menu_icon.png"));
     ui->graphicsView->setScene(mainMenuScene);
     ui->graphicsView->setBaseSize(250, 250);
     ui->graphicsView->show();
-
-    // checking current user info for menu options
-    ui->welcomeLabel->setText("Welcome, " + CurrentUser.getUsername());
-    if (CurrentUser.isAdmin())
-        ui->adminButton->setHidden(false);
-    else
-        ui->adminButton->setHidden(true);
 }
 
-///
-/// \brief MainMenuWidget::~MainMenuWidget
-///
 MainMenuWidget::~MainMenuWidget()
 {
     delete ui;
 }
 
-///
-/// \brief MainMenuWidget::on_logOutButton_pressed
-///
 void MainMenuWidget::on_logOutButton_pressed()
 {
     emit transmit_logout();
 }
 
-///
-/// \brief MainMenuWidget::on_restaurantsButton_pressed
-///
 void MainMenuWidget::on_restaurantsButton_pressed()
 {
     emit transmit_restaurantView();
 }
 
-///
-/// \brief MainMenuWidget::on_revenueButton_pressed
-///
 void MainMenuWidget::on_revenueButton_pressed()
 {
     emit transmit_revenueView();
-}
-
-///
-/// \brief MainMenuWidget::on_adminButton_pressed
-///
-void MainMenuWidget::on_adminButton_pressed()
-{
-    emit transmit_adminView();
 }
 

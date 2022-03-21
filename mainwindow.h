@@ -6,7 +6,6 @@
 #include <QPushButton>
 #include <QObject>
 #include <QStackedWidget>
-#include "databasehelper.h"
 #include "loginwidget.h"
 #include "mainmenuwidget.h"
 #include "menuwidget.h"
@@ -17,6 +16,10 @@ namespace Ui {
 class MainWindow;
 }
 
+///
+/// \class MainWindow.
+/// \brief The MainWindow class
+///
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -40,7 +43,12 @@ public slots:
     /// \brief recieve_loginSuccess
     /// \param newUser
     ///
-    void recieve_loginSuccess(Customer newUser);
+    void recieve_loginSuccess(Customer& newUser);
+
+    ///
+    /// \brief recieve_loginFail
+    ///
+    void recieve_loginFail();
 
     ///
     /// \brief recieve_logout
@@ -55,8 +63,9 @@ public slots:
 
     ///
     /// \brief recieve_addRestaurantToTrip
+    /// \param Restaurant rest
     ///
-    void recieve_addRestaurantToTrip(Restaurant*);
+    void recieve_addRestaurantToTrip(Restaurant* rest);
 
     ///
     /// \brief recieve_mainMenu
@@ -75,7 +84,6 @@ public slots:
     void recieve_revenueView();
 
 private:
-    Customer            currentUser;
     Ui::MainWindow*     ui;
     QStackedWidget*     stackedWidget;
     LoginWidget*        loginPage;

@@ -20,10 +20,9 @@ LoginWidget::~LoginWidget()
 ///
 void LoginWidget::on_logInButton_pressed()
 {
-    DatabaseHelper dbHelper;
-    Customer newUser = Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
+    Customer* newUser = new Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
 
-    if (dbHelper.authenticateUser(newUser))
+    if (newUser->isValid())
         emit transmit_validUser(newUser);
     else
         emit transmit_invalidUser();

@@ -1,9 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "restaurantwidget.h"
-#include "mainmenuwidget.h"
-#include "menuwidget.h"
-#include "loginwidget.h"
+#include "header.h"
+
+// linking globals
+extern Customer CurrentUser;
+extern std::vector<Restaurant*> Restaurants;
+extern DatabaseHelper Database;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,12 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(1000, 600);
 
-    DatabaseHelper dbhelper;
-    dbhelper.populateRestaurants();
+    Database.addRestaurants(":data/source_data1.txt");
 
     stackedWidget = new QStackedWidget;
     setCentralWidget(stackedWidget);
-    initializeNewUser();// initializes the stacked widget with loginPage the first view
+    initializeNewUser();    // initializes the stacked widget with loginPage as the first view
 }
 
 MainWindow::~MainWindow()
@@ -31,9 +32,13 @@ void MainWindow::initializeNewUser()
     loginPage = new LoginWidget();
     stackedWidget->addWidget(loginPage);
     QObject::connect(loginPage,
-                     SIGNAL(transmit_validUser(Customer)),
+                     SIGNAL(transmit_validUser(Customer&)),
                      this,
-                     SLOT(recieve_loginSuccess(Customer)));
+                     SLOT(recieve_loginSuccess(Customer&)));
+    QObject::connect(loginPage,
+                     SIGNAL(transmit_invalidUser()),
+                     this,
+                     SLOT(recieve_loginFail()));
     stackedWidget->setCurrentWidget(loginPage);
 }
 
@@ -57,11 +62,16 @@ void MainWindow::initializeMainMenu()
     stackedWidget->setCurrentWidget(mainMenuPage);
 }
 
-void MainWindow::recieve_loginSuccess(Customer newUser)
+void MainWindow::recieve_loginSuccess(Customer& newUser)
 {
-    currentUser = newUser;
+    CurrentUser = newUser;
     loginPage->on_clearButton_pressed();
     initializeMainMenu();
+}
+
+void MainWindow::recieve_loginFail()
+{
+    CurrentUser = Customer();
 }
 
 void MainWindow::recieve_logout()
@@ -116,7 +126,7 @@ void MainWindow::recieve_viewMenu(Restaurant* rest)
 void MainWindow::recieve_revenueView()
 {
     // initializing the revenue page
-    revenuePage = new RevenueWidget(Restaurant::list);
+    revenuePage = new RevenueWidget();
     stackedWidget->addWidget(revenuePage);
     QObject::connect(revenuePage,
                      SIGNAL(transmit_cancel()),
