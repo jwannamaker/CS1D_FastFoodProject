@@ -130,6 +130,11 @@ public:
     ///
     void createNewOrder();
 
+    static bool compareR(Restaurant r1, Restaurant r2)
+    {
+        return (r1.getDistance(r1) < r2.getDistance(r1));
+    }
+
 private:
     int ID;
     QString name;

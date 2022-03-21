@@ -59,6 +59,8 @@ private:
     //Creates a button for a menu item
     Button *createButton(Menu::Item item, const char *member);
 
+    Button *createDeleteButton(Menu::Item item, const char *member);
+
     //data members
     QVector<Button*> itemButtons;
 

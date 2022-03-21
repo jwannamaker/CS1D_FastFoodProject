@@ -71,11 +71,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="initialLocationLineEdit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
+        <widget class="QComboBox" name="comboBox_restaurants"/>
        </item>
       </layout>
      </item>

@@ -5,31 +5,17 @@ RestaurantWidget::RestaurantWidget(const std::vector<Restaurant>& restaurantList
     ui(new Ui::RestaurantWidget)
 {
     ui->setupUi(this);
-    ui->initialLocationLineEdit->setText("Saddleback");
-
-    //Create the restaurant buttons
-    for (size_t i = 0; i < restaurantList.size(); ++i)
-        restaurantButtons.append(createButton(restaurantList[i], SLOT(restaurantClicked())));
+    restVec = restaurantList;
 
     //Create Grid for restaurant icons
-    QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_restaurants);
+    mainLayout = new QGridLayout(ui->scrollArea_restaurants);
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
-    //Add restaurants to window
-    int row = 0;
-    int col = 0;
+    //Add restaurants to combo box
+    ui->comboBox_restaurants->addItem("Saddleback");
+    for (size_t i = 0; i < restaurantList.size(); ++i)
+        ui->comboBox_restaurants->addItem(restaurantList[i].getName());
 
-    for (size_t i = 0; i < restaurantList.size(); i++)
-    {
-        mainLayout->addWidget(restaurantButtons[i], row, col);
-        col++;
-
-        if (col >= MAX_COL)
-        {
-            row++;
-            col = 0;
-        }
-    }
 }
 
 RestaurantWidget::~RestaurantWidget()
@@ -84,7 +70,7 @@ void RestaurantWidget::restaurantClicked()
 
 Button *RestaurantWidget::createButton(Restaurant rest, const char *member)
 {
-    Button *button = new Button(rest);
+    Button *button = new Button(rest, findRestaurant(ui->comboBox_restaurants->currentText()));
     connect(button, SIGNAL(clicked()), this, member);
     return button;
 }
@@ -99,12 +85,89 @@ Restaurant RestaurantWidget::findRestaurant(QString restName)
             return Restaurant::list[i];
         }
     }
-
     qDebug() << "Restaurant not found \n";
-    Restaurant temp;
-
+    Restaurant temp(-1,"error");
     return temp;
 }
 
+void RestaurantWidget::on_comboBox_restaurants_currentTextChanged(const QString &arg1)
+{
+    if(arg1 == "Saddleback")
+    {
+        Restaurant temp(9999, "Saddleback");
+        updateButtons(temp);
+    }
+    else
+    {
+        Restaurant temp = findRestaurant(arg1);
+        updateButtons(temp);
+    }
+
+}
+
+void RestaurantWidget::updateButtons(Restaurant rest)
+{
+    //Remove Button widgets if there are any present
+    for (int i = 0; i < restaurantButtons.size(); i++)
+        mainLayout->removeWidget(restaurantButtons[i]);
+
+    //clear the vector of restaurant buttons
+    restaurantButtons.clear();
+
+    std::vector restList = restVec;
+    Restaurant temp = rest;
+
+    size_t i,j;
+    //if restaurant is saddleback
+    if(rest.getID() == 9999)
+    {
+        for(i = 0; i < (restList.size()-1); i++)
+        {
+            for(j = 0; j < (restList.size()-i-1); j++)
+            {
+                if(restList[j].getDistance(0)>restList[j+1].getDistance(0))
+                {
+                    temp = restList[j];
+                    restList[j] = restList[j+1];
+                    restList[j+1] = temp;
+                }
+            }
+         }
+    }
+    else
+    {
+        for(i = 0; i < (restList.size()-1); i++)
+        {
+            for(j = 0; j < (restList.size()-i-1); j++)
+            {
+                if(restList[j].getDistance(rest)>restList[j+1].getDistance(rest))
+                {
+                    temp = restList[j];
+                    restList[j] = restList[j+1];
+                    restList[j+1] = temp;
+                }
+            }
+         }
+    }
+
+    //Add new restauant button widgets
+    for (size_t i = 0; i < restList.size(); ++i)
+        restaurantButtons.append(createButton(restList[i], SLOT(restaurantClicked())));
+
+    int row = 0;
+    int col = 0;
+    for (int i = 0; i < restaurantButtons.size(); i++)
+    {
+        mainLayout->addWidget(restaurantButtons[i], row, col);
+        col++;
+
+        if (col >= MAX_COL)
+        {
+            row++;
+            col = 0;
+        }
+    }
+
+}
 
 

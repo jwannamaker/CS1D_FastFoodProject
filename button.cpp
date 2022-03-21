@@ -9,12 +9,16 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
     setImage(QPixmap(":images/food_image.png"));
 }
 
-Button::Button(const Restaurant& rest, QWidget* parent)
+Button::Button(const Restaurant& rest, const Restaurant& restComboBox, QWidget* parent)
     : QPushButton(parent)
 {
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     topText = new QLabel(rest.getName());
-    bottomText = new QLabel(QString::number(rest.getDistance(0)) + " miles away");
+
+    if (restComboBox.getID() == 9999)
+        bottomText = new QLabel(QString::number(rest.getDistance(0)) + " miles away");
+    else
+        bottomText = new QLabel(QString::number(rest.getDistance(restComboBox)) + " miles away");
     this->setImage(QPixmap(":images/food_icon.png"));
 }
 
@@ -26,6 +30,16 @@ Button::Button(const Menu::Item& item, QString itemName, QWidget* parent)
     bottomText = new QLabel(QString::number(item.getPrice()));
     this->itemName = itemName;
     this->setImage(QPixmap(":images/rest_menu_icon.png"));
+}
+
+Button::Button(const Menu::Item& item, QWidget* parent)
+    : QPushButton(parent)
+{
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+    topText = new QLabel("");
+    bottomText = new QLabel("");
+    this->itemName = item.getName();
+    this->setImage(QPixmap(":images/delete_icon.png"));
 }
 
 void Button::setImage(QPixmap image)

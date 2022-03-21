@@ -20,8 +20,9 @@ class Button : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit Button(const Restaurant& rest, QWidget *parent = nullptr);
+    explicit Button(const Restaurant& rest,const Restaurant& restComboBox, QWidget *parent = nullptr);
     explicit Button(const Menu::Item& item, QString itemName, QWidget *parent = nullptr);
+    explicit Button(const Menu::Item& item, QWidget *parent = nullptr);
     explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
     ///

@@ -105,7 +105,7 @@ void MenuWidget::itemClicked()
         ui->tableWidget_menuItems->setItem(menuItemsAdded, 1, itemQuantity);
 
         //Create a button to delete ordered food item
-        deleteItemButtons.append(createButton(orderItem, SLOT(deleteItemClicked())));
+        deleteItemButtons.append(createDeleteButton(orderItem, SLOT(deleteItemClicked())));
         QHBoxLayout *l = new QHBoxLayout();
         l->addWidget(deleteItemButtons[menuItemsAdded]);
         QWidget *w = new QWidget();
@@ -151,6 +151,14 @@ Button *MenuWidget::createButton(Menu::Item item, const char *member)
     Button *button = new Button(item, item.getName());
     connect(button, SIGNAL(clicked()), this, member);
     return button;
+}
+
+Button *MenuWidget::createDeleteButton(Menu::Item item, const char *member)
+{
+    Button *button = new Button(item);
+    connect(button, SIGNAL(clicked()), this, member);
+    return button;
+
 }
 
 Restaurant MenuWidget::GetCurrentRestuarant()

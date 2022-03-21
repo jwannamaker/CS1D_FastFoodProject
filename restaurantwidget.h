@@ -43,6 +43,9 @@ public:
     ///
     double getTripDistance() const;
 
+    //takes in a restaurant and sorts the restaurants based off the distances from each other
+    void updateButtons(Restaurant rest);
+
 signals:
     void transmit_cancel();
     void transmit_viewRestMenu(Restaurant rest);
@@ -54,17 +57,23 @@ private slots:
 
     void restaurantClicked();
 
+    void on_comboBox_restaurants_currentTextChanged(const QString &arg1);
+
 private:
     //Number of restaurnts per row
     const int MAX_COL = 5;
 
     Ui::RestaurantWidget *ui;
 
+    QGridLayout *mainLayout;
+
     //Creates a button for restaurant
     Button *createButton(Restaurant rest, const char *member);
 
     //data members
     QVector<Button*> restaurantButtons;
+
+    std::vector<Restaurant> restVec;
 };
 
 
