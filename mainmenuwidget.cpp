@@ -1,6 +1,5 @@
 #include "mainmenuwidget.h"
 #include "ui_mainmenuwidget.h"
-#include "header.h"
 
 // linking usage of global variables
 extern Customer CurrentUser;

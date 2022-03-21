@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include "customer.h"
 
 // linking global variable
 extern Customer CurrentUser;

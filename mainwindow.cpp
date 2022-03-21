@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "header.h"
 
 // linking globals
 extern Customer CurrentUser;
