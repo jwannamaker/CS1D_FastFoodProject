@@ -43,7 +43,7 @@ public:
     /// list of restaurants in the listWidget.
     /// \return Double indicating the total miles in a Customer's trip.
     ///
-    double getTripDistance() const;
+    double getTripDistance(std::vector<Restaurant>& visitedList) const;
 
     ///
     /// \brief addRestaurantToTrip
