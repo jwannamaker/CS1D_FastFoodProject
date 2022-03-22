@@ -140,5 +140,14 @@ Restaurant RestaurantWidget::findRestaurant(QString restName)
     return temp;
 }
 
-
-
+double RestaurantWidget::getTripDistance(std::vector<Restaurant>& visitedList) const
+{
+	double totalDistance = 0;
+	
+	for(int i = 0; i < visitedList.size() - 1; ++i)
+	{
+		totalDistance += visitedList[i].getDistance(visitedList[i+1]);
+	}
+	
+	return totalDistance;
+}
