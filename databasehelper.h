@@ -29,7 +29,7 @@ public:
     /// This method parses the source file specified by filename, and stores the relevant
     /// data into the global vector of restaurants.
     ///
-    void addRestaurants(QString filename);
+    void addRestaurants(QString filename = ":/data/source_data1.txt");
 
     ///
     /// \brief loadRestaurantsFromDatabase

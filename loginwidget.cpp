@@ -20,9 +20,10 @@ LoginWidget::~LoginWidget()
 ///
 void LoginWidget::on_logInButton_pressed()
 {
-    Customer* newUser = new Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
+    Customer newUser = Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
+    Database.authenticateUser(newUser);
 
-    if (newUser->isValid())
+    if (newUser.isValid())
         emit transmit_validUser(newUser);
     else
         emit transmit_invalidUser();
@@ -38,4 +39,3 @@ void LoginWidget::on_clearButton_pressed()
     ui->usernameLineEdit->clear();
     ui->passwordLineEdit->clear();
 }
-

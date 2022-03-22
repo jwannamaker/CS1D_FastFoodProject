@@ -2,15 +2,19 @@
 #define LOGINWIDGET_H
 #include <QWidget>
 #include "customer.h"
+#include "databasehelper.h"
+
+// linking global
+extern DatabaseHelper Database;
 
 namespace Ui {
 class LoginWidget;
 }
 
 ///
-/// \class Login
+/// \class LoginWidget
 ///
-/// \brief The Login class
+/// \brief The LoginWidget class
 ///
 /// A widget for the login page of the app.
 ///
@@ -24,7 +28,7 @@ public:
     ~LoginWidget();
 
 signals:
-    void transmit_validUser(Customer* newUser);
+    void transmit_validUser(Customer newUser);
     void transmit_invalidUser();
 
 public slots:

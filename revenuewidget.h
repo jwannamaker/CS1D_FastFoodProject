@@ -7,7 +7,7 @@
 #include "menuwidget.h"
 
 // linking usage of globals
-extern std::vector<Restaurant*> Restaurants;
+extern std::vector<Restaurant> Restaurants;
 
 namespace Ui {
 class RevenueWidget;

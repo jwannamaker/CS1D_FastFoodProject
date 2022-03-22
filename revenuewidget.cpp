@@ -22,8 +22,8 @@ RevenueWidget::~RevenueWidget()
 double RevenueWidget::getTotalRevenue()
 {
     double total = 0;
-    for (Restaurant* rest : Restaurants)
-        total += rest->getRevenue();
+    for (const Restaurant rest : Restaurants)
+        total += rest.getRevenue();
     return total;
 }
 
@@ -37,9 +37,9 @@ void RevenueWidget::populateTableWidget()
     // initializing contents of the table
     for(unsigned int index = 0; index < Restaurants.size(); index++)
     {
-        QTableWidgetItem* restaurantName = new QTableWidgetItem(Restaurants[index]->getName());
+        QTableWidgetItem* restaurantName = new QTableWidgetItem(Restaurants[index].getName());
         ui->tableWidget->setItem(index, 0, restaurantName);
-        QTableWidgetItem* restaurantRevenue = new QTableWidgetItem("$" + QString::number(Restaurants[index]->getRevenue(),'f',2));
+        QTableWidgetItem* restaurantRevenue = new QTableWidgetItem("$" + QString::number(Restaurants[index].getRevenue(),'f',2));
         ui->tableWidget->setItem(index, 1, restaurantRevenue);
         ui->tableWidget->item(index, 1)->setTextAlignment(Qt::AlignRight);
     }

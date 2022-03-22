@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(1000, 600);
 
-    Database.addRestaurants(":data/source_data1.txt");
+    Database.addRestaurants();
 
     stackedWidget = new QStackedWidget;
     setCentralWidget(stackedWidget);
@@ -26,9 +26,9 @@ void MainWindow::initializeNewUser()
     loginPage = new LoginWidget();
     stackedWidget->addWidget(loginPage);
     QObject::connect(loginPage,
-                     SIGNAL(transmit_validUser(Customer&)),
+                     SIGNAL(transmit_validUser(Customer)),
                      this,
-                     SLOT(recieve_loginSuccess(Customer&)));
+                     SLOT(recieve_loginSuccess(Customer)));
     QObject::connect(loginPage,
                      SIGNAL(transmit_invalidUser()),
                      this,
@@ -56,7 +56,7 @@ void MainWindow::initializeMainMenu()
     stackedWidget->setCurrentWidget(mainMenuPage);
 }
 
-void MainWindow::recieve_loginSuccess(Customer& newUser)
+void MainWindow::recieve_loginSuccess(Customer newUser)
 {
     CurrentUser = newUser;
     loginPage->on_clearButton_pressed();
@@ -85,13 +85,13 @@ void MainWindow::recieve_restaurantView()
                      this,
                      SLOT(recieve_mainMenu()));
     QObject::connect(restaurantPage,
-                     SIGNAL(transmit_viewRestMenu(Restaurant*)),
+                     SIGNAL(transmit_viewRestMenu(Restaurant&)),
                      this,
-                     SLOT(recieve_viewMenu(Restaurant*)));
+                     SLOT(recieve_viewMenu(Restaurant&)));
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
-void MainWindow::recieve_addRestaurantToTrip(Restaurant *rest)
+void MainWindow::recieve_addRestaurantToTrip(Restaurant rest)
 {
     restaurantPage->addRestaurantToTrip(rest);
     stackedWidget->setCurrentWidget(restaurantPage);
@@ -113,7 +113,7 @@ void MainWindow::recieve_viewMenu(Restaurant* rest)
     QObject::connect(menuPage,
                      SIGNAL(transmit_confirmOrder(Restaurant*)),
                      this,
-                     SLOT(recieve_addRestaurantToTrip(Restaurant*)));
+                     SLOT(recieve_addRestaurantToTrip(Restaurant)));
     stackedWidget->setCurrentWidget(menuPage);
 }
 

@@ -5,7 +5,7 @@
 // global variables
 Customer CurrentUser = Customer();
 DatabaseHelper Database = DatabaseHelper();
-std::vector<Restaurant*> Restaurants = std::vector<Restaurant*>();
+std::vector<Restaurant> Restaurants = std::vector<Restaurant>();
 
 int main(int argc, char *argv[])
 {

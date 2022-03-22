@@ -11,16 +11,39 @@
 #include <QLayoutItem>
 #include <QObject>
 #include <QSize>
+#include <QDebug>
 #include "restaurant.h"
 
-const int TILE_SIZE = 50;
-
+///
+/// \class Button.
+/// \brief The Button class
+///
 class Button : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit Button(Restaurant* rest, QWidget *parent = nullptr);
+    ///
+    /// \brief Button
+    /// \param rest
+    /// \param initialID
+    /// \param parent
+    ///
+    explicit Button(Restaurant* rest, int initialID, QWidget *parent = nullptr);
+
+    ///
+    /// \brief Button
+    /// \param rest
+    /// \param item
+    /// \param parent
+    ///
     explicit Button(Restaurant* rest, Item* item, QWidget *parent = nullptr);
+
+    ///
+    /// \brief Button
+    /// \param topText
+    /// \param bottomText
+    /// \param parent
+    ///
     explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
     ///
@@ -48,7 +71,14 @@ public:
     Item* getItem();
 
 signals:
+    ///
+    /// \brief transmit_restaurantClicked
+    ///
     void transmit_restaurantClicked(Restaurant*);
+
+    ///
+    /// \brief transmit_itemClicked
+    ///
     void transmit_itemClicked(Item*);
 
 public slots:
@@ -56,6 +86,7 @@ public slots:
     void itemClicked();
 
 private:
+    const int TILE_SIZE = 100;
     Restaurant*           restaurant;
     Item*           menuItem;
     QLabel*               topText;

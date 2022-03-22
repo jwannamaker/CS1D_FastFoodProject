@@ -9,16 +9,15 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
     setImage(QPixmap(":images/plus_icon.png"));
 }
 
-Button::Button(Restaurant* rest, QWidget* parent)
+Button::Button(Restaurant* rest, int initialID, QWidget* parent)
     : QPushButton(parent)
 {
     restaurant = rest;
     menuItem = nullptr;
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     topText = new QLabel(rest->getName());
-    bottomText = new QLabel(QString::number(rest->getDistance(3)) + " miles away");
+    bottomText = new QLabel(QString::number(rest->getDistance(initialID)) + " miles away");
     this->setImage(QPixmap(":images/food_icon.png"));
-
     QObject::connect(this,
                      SIGNAL(clicked()),
                      this,

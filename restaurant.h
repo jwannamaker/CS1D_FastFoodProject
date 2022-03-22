@@ -9,8 +9,8 @@
 #include "item.h"
 
 // type aliases
-using Menu = std::vector<Item*>;
-using OrderList = std::vector<std::vector<Item*>>;
+using Menu = std::vector<Item>;
+using OrderList = std::vector<std::vector<Item>>;
 
 ///
 /// \class Restaurant.
@@ -100,7 +100,7 @@ public:
     /// \brief addMenuItem
     /// \param newItem
     ///
-    void addMenuItem(Item* newItem);
+    void addMenuItem(Item newItem);
 
     ///
     /// \brief getMenuSize
@@ -113,13 +113,13 @@ public:
     /// \param index
     /// \return
     ///
-    Item* getMenuItem(int index);
+    Item& getMenuItem(int index);
 
     ///
     /// \brief saveOrder
     /// \param newOrder
     ///
-    void addOrder(std::vector<Item*> newOrder);
+    void addOrder(std::vector<Item> newOrder);
 
     ///
     /// \brief setRevenue
@@ -138,8 +138,6 @@ public:
     /// \return
     ///
     double getRevenue() const;
-
-    void setDistanceAt(unsigned int index, double distance);
 
 private:
     int                 ID;

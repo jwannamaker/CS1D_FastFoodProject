@@ -6,9 +6,6 @@
 #define CUSTOMER_H
 #include <QString>
 
-// forward declaration
-class Customer;
-
 ///
 /// \class Customer.
 /// \brief The Customer class represents the current user of the Fast Food Fantasy App.

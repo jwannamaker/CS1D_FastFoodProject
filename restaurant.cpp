@@ -62,7 +62,7 @@ void Restaurant::setMenu(Menu menu)
     this->menu = menu;
 }
 
-void Restaurant::addMenuItem(Item* newItem)
+void Restaurant::addMenuItem(Item newItem)
 {
     menu.push_back(newItem);
 }
@@ -72,7 +72,7 @@ int Restaurant::getMenuSize() const
     return menu.size();
 }
 
-Item* Restaurant::getMenuItem(int index)
+Item& Restaurant::getMenuItem(int index)
 {
     // warning: must pass a valid index
     return menu.at(index);

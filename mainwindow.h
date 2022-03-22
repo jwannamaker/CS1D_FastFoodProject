@@ -14,7 +14,7 @@
 
 // linking globals
 extern Customer CurrentUser;
-extern std::vector<Restaurant*> Restaurants;
+extern std::vector<Restaurant> Restaurants;
 extern DatabaseHelper Database;
 
 namespace Ui {
@@ -48,7 +48,7 @@ public slots:
     /// \brief recieve_loginSuccess
     /// \param newUser
     ///
-    void recieve_loginSuccess(Customer& newUser);
+    void recieve_loginSuccess(Customer newUser);
 
     ///
     /// \brief recieve_loginFail
@@ -70,7 +70,7 @@ public slots:
     /// \brief recieve_addRestaurantToTrip
     /// \param Restaurant rest
     ///
-    void recieve_addRestaurantToTrip(Restaurant* rest);
+    void recieve_addRestaurantToTrip(Restaurant rest);
 
     ///
     /// \brief recieve_mainMenu
