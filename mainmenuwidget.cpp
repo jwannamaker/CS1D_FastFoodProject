@@ -18,11 +18,6 @@ MainMenuWidget::~MainMenuWidget()
     delete ui;
 }
 
-void MainMenuWidget::updateMainMenu(const Customer& user)
-{
-    ui->welcomeLabel->setText("Welcome, " + user.getUsername());
-}
-
 void MainMenuWidget::on_logOutButton_pressed()
 {
     emit transmit_logout();

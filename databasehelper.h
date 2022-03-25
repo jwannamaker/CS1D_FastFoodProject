@@ -1,15 +1,16 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-#include <QtSql>
+#include <QFile>
 #include <QSqlDatabase>
 #include <QSqlQuery>
-#include <QFile>
-#include "restaurant.h"
+#include <QtSql>
 #include "customer.h"
-#include "menu.h"
+#include "restaurant.h"
 
-extern std::vector<Restaurant> globalRestaurantList;
+// linking globals
+extern Customer CurrentUser;
+extern std::vector<Restaurant> RestaurantList;
 
 ///
 /// \class Database
@@ -28,28 +29,21 @@ public:
     ~DatabaseHelper();
 
     ///
-    /// \brief populateRestaurants
-    /// This method parses the sourceFile (default value is "source_data1.txt"), and
-    /// stores the relevant data into a vector of restaurants containing every Restaurant
-    /// instance. The vector is then returned.
+    /// \brief authenticateUser
     ///
-    void populateRestaurants();
+    void authenticateUser();
+
+    ///
+    /// \brief addRestaurants
+    /// This method parses the source file specified by filename, and stores the relevant
+    /// data into the global vector of restaurants.
+    ///
+    void addRestaurants(QString filename = ":data/source_data1.txt");
 
     ///
     /// \brief loadRestaurantsFromDatabase
     ///
     void loadRestaurantsFromDatabase();
-
-    ///
-    /// \brief AuthenticateUser
-    /// \param user
-    /// \return bool
-    ///
-    bool authenticateUser(Customer& user);
-
-    void updateRestaurantDistances(const Restaurant& newRestaurant);
-
-    void addRestaurants(QString filename);
 
     ///
     /// \brief createRestaurantTable

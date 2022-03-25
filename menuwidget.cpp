@@ -1,40 +1,52 @@
 #include "menuwidget.h"
-#include "QTableWidget"
 
+///
+/// \brief MenuWidget::MenuWidget
+/// \param inputRestaurant
+/// \param parent
+///
 MenuWidget::MenuWidget(Restaurant& inputRestaurant, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::MenuWidget)
+    QWidget(parent), ui(new Ui::MenuWidget), currentRestaurant(inputRestaurant)
 {
     ui->setupUi(this);
-    itemButtons = QVector<Button*>();
-    orderedItems = QVector<Menu::Item*>();
-    ui->subtotalLineEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
     ui->tableWidget_orderItems->setColumnCount(4);
     ui->tableWidget_orderItems->setHorizontalHeaderItem(0, new QTableWidgetItem("Item"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(1, new QTableWidgetItem("Quantity"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(2, new QTableWidgetItem("Subtotal"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(3, new QTableWidgetItem("Delete"));
+
+    createButtons();
     updateTableWidget();
+    updateOrderTotal();
+}
 
-    //Save the restaurant passed in to menu widget class member
-    currentRestaurant = &inputRestaurant;
+///
+/// \brief MenuWidget::~MenuWidget
+///
+MenuWidget::~MenuWidget()
+{
+    delete ui;
+}
 
+///
+/// \brief MenuWidget::createButtons
+///
+void MenuWidget::createButtons()
+{
     //Create the menu item buttons
-    std::vector<Menu::Item> menuItems = currentRestaurant->getMenu().getItems();
-    for (size_t i = 0; i < menuItems.size(); ++i)
-        itemButtons.push_back(createButton(&menuItems[i]));
+    for (unsigned int i = 0; i < currentRestaurant.getMenuSize(); ++i)
+        itemButtons.push_back(createButton(currentRestaurant.getMenuItem(i)));
 
     //Create Grid for menu item icons
-    QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_menu);
-    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+    buttonLayout = new QGridLayout(ui->scrollArea_menu);
 
     //Add menu items to window
     int row = 0;
     int col = 0;
 
-    for (size_t i = 0; i < menuItems.size(); i++)
+    for (unsigned int i = 0; i < currentRestaurant.getMenuSize(); i++)
     {
-        mainLayout->addWidget(itemButtons[i], row, col);
+        buttonLayout->addWidget(itemButtons[i], row, col);
         col++;
 
         if (col >= MAX_COL)
@@ -45,68 +57,81 @@ MenuWidget::MenuWidget(Restaurant& inputRestaurant, QWidget *parent) :
     }
 }
 
-MenuWidget::~MenuWidget()
-{
-    delete ui;
-}
-
-//
+///
+/// \brief MenuWidget::updateOrderTotal
+///
 void MenuWidget::updateOrderTotal()
 {
     double grandTotal = 0;
-    for (Menu::Item* item : orderedItems)
-        grandTotal += item->getPrice() * item->getQuantity();
-    ui->subtotalLineEdit->setText(QString::number(grandTotal));
+    for (Item& item : orderedItems)
+        grandTotal += item.getPrice() * item.getQuantity();
+    ui->totalLineEdit->setText(QString::number(grandTotal));
 }
 
+///
+/// \brief MenuWidget::updateTableWidget
+///
 void MenuWidget::updateTableWidget()
 {
     ui->tableWidget_orderItems->setRowCount(orderedItems.size());
     for (unsigned int index = 0; index < orderedItems.size(); index++)
     {
-        QTableWidgetItem* itemName = new QTableWidgetItem(orderedItems[index]->getName());
+        QTableWidgetItem* itemName = new QTableWidgetItem(orderedItems[index].getName());
         ui->tableWidget_orderItems->setItem(index, 0, itemName);
-        QTableWidgetItem* itemQuantity = new QTableWidgetItem(orderedItems[index]->getQuantity());
+        QTableWidgetItem* itemQuantity = new QTableWidgetItem(QString::number(orderedItems[index].getQuantity()));
         ui->tableWidget_orderItems->setItem(index, 1, itemQuantity);
         // should it be unit price or actual price?
-        QTableWidgetItem* itemPrice = new QTableWidgetItem(QString::number(orderedItems[index]->getPrice()));
+        QTableWidgetItem* itemPrice = new QTableWidgetItem(QString::number(orderedItems[index].getPrice()));
         ui->tableWidget_orderItems->setItem(index, 2, itemPrice);
         ui->tableWidget_orderItems->item(index, 2)->setTextAlignment(Qt::AlignRight);
         QPixmap deleteButton = QPixmap(":images/trashbin_icon.png");
         ui->tableWidget_orderItems->setItem(index, 3, new QTableWidgetItem(QIcon(deleteButton), "Delete"));
     }
-    updateOrderTotal();
 }
 
-Restaurant MenuWidget::getCurrentRestuarant() const
-{
-    return *currentRestaurant;
-}
-
+///
+/// \brief MenuWidget::on_confirmButton_pressed
+///
 void MenuWidget::on_confirmButton_pressed()
 {
-    updateTableWidget();
-    currentRestaurant->setRevenue(currentRestaurant->getRevenue() + ui->subtotalLineEdit->text().toDouble());
+    currentRestaurant.addOrder(orderedItems);
     emit transmit_confirmOrder(currentRestaurant);
 }
 
+///
+/// \brief MenuWidget::on_cancelButton_pressed
+///
 void MenuWidget::on_cancelButton_pressed()
 {
-    // make sure that the quantity of each item is reverted back to 0
+    currentRestaurant.setRevenue(0);
     emit transmit_cancelOrder();
 }
 
-void MenuWidget::recieve_itemClicked()
+///
+/// \brief MenuWidget::recieve_itemClicked
+/// \param item
+///
+void MenuWidget::recieve_itemClicked(Item& item)
 {
-    //Get the tile clicked and send to restaurant menu
-    Button *clickedButton = qobject_cast<Button *>(sender());
-    orderedItems.push_back(clickedButton->getItem());
+    orderedItems.push_back(item);
     updateTableWidget();
+    updateOrderTotal();
 }
 
-Button *MenuWidget::createButton(Menu::Item* item)
+///
+/// \brief MenuWidget::createButton
+/// \param item
+/// \return
+///
+Button *MenuWidget::createButton(Item& item)
 {
     Button *button = new Button(currentRestaurant, item, this);
-    connect(button, SIGNAL(clicked()), this, SLOT(itemClicked()));
+    QObject::connect(button,
+                     SIGNAL(transmit_itemClicked(Item&)),
+                     this,
+                     SLOT(recieve_itemClicked(Item&)));
     return button;
 }
+
+
+

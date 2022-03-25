@@ -1,99 +1,32 @@
 #include "databasehelper.h"
 
-std::vector<Restaurant> globalRestaurantList;
-
+///
+/// \brief DatabaseHelper::DatabaseHelper
+///
 DatabaseHelper::DatabaseHelper()
 {
     database = QSqlDatabase::addDatabase("QSQLITE");
     database.setDatabaseName("restaurant_data.sqlite");
 
-    if(database.open())
-        qDebug() << "Opened database Successfully";
+    if (database.open())
+        qDebug() << "Database connection success";
     else
-        qDebug() << "Did not open database successfully";
+        qDebug() << "Database connection fail";
 }
 
+///
+/// \brief DatabaseHelper::~DatabaseHelper
+///
 DatabaseHelper::~DatabaseHelper()
 {
     database.close();
     database.removeDatabase("SQLITE");
 }
 
-void DatabaseHelper::populateRestaurants()
-{
-    QFile file(":data/source_data1.txt");
-    std::vector<Restaurant> restaurantList;
-
-    if(file.open(QIODevice::ReadOnly))
-    {
-        QTextStream inputStream(&file);
-        QString line;
-        int id;
-        double distance,price;
-        int numOfMenuItems,numOfResturantDists;
-        Restaurant newRestaurant;
-
-        while(!inputStream.atEnd())
-        {
-            Menu newMenu;
-
-            //Gets name of the resturant
-            line = inputStream.readLine();
-            newRestaurant.setName(line.mid(30));
-
-            //Gets ID of the resturant
-            line = inputStream.readLine();
-            newRestaurant.setID(line.remove(QRegularExpression("\\D+")).toInt());
-
-            //Gets number of resturant locations.
-            line = inputStream.readLine();
-            numOfResturantDists = line.remove(QRegularExpression("\\D+")).toInt();
-
-            std::vector<double> listOfDistances(numOfResturantDists+1,0.0);
-            for(int index = 1; index <= numOfResturantDists; index++) //Repeat based on the number of resturant locations.
-            {
-                //Places distances into vector
-                inputStream >> id >> distance;
-                listOfDistances[index] = distance;
-            }
-            inputStream.skipWhiteSpace();
-
-            //Sets index[0] of list to dist to saddleback.
-            line = inputStream.readLine();
-            listOfDistances[0] = line.remove(QRegularExpression("\\s\\D+")).toDouble();
-
-            //Gets number of menu items.
-            line = inputStream.readLine();
-            numOfMenuItems = line.remove(QRegularExpression("\\D+")).toInt();
-            for(int index = 0; index < numOfMenuItems; index++) //Repeat based on the number of menu items.
-            {
-                //Adds items to the menu
-                line = inputStream.readLine();
-                inputStream >> price;
-                newMenu.addItem(Menu::Item(line,price));
-                inputStream.skipWhiteSpace();
-            }
-            newRestaurant.setMenu(newMenu);
-            newRestaurant.setDistances(listOfDistances);
-            inputStream.skipWhiteSpace();
-
-            //Adds resturant to general list of resturants
-            restaurantList.push_back(newRestaurant);
-        }
-        file.close();
-    }
-    globalRestaurantList.resize(restaurantList.size());
-    globalRestaurantList = std::vector<Restaurant>(restaurantList);
-}
-
-void DatabaseHelper::loadRestaurantsFromDatabase()
-{
-    //This function will populate the static restaurant vector.
-    //Note: Ignore id 0 of table parent when inserting restaurants into the
-    //vector since it isn't technically a restaurant.
-}
-
-bool DatabaseHelper::authenticateUser(Customer& user)
+///
+/// \brief DatabaseHelper::authenticateUser
+///
+void DatabaseHelper::authenticateUser()
 {
     QSqlQuery query(database);
 
@@ -106,37 +39,31 @@ bool DatabaseHelper::authenticateUser(Customer& user)
 
     if(query.exec("SELECT * FROM users"))
         while(query.next())
-            if(query.value(0).toString() == user.getUsername() && query.value(1).toString() == user.getPassword())
+            if(query.value(0).toString() == CurrentUser.getUsername() && query.value(1).toString() == CurrentUser.getPassword())
             {
-                user.setAdmin(query.value(2).toBool());
-                return true;
+                qDebug() << "user is valid";
+                CurrentUser.setValid(true);
+                CurrentUser.setAdmin(query.value(2).toBool());
             }
-
-    return false;
 }
 
-void DatabaseHelper::updateRestaurantDistances(const Restaurant& newRestaurant)
-{
-
-    //Iterates through already existing restaurants and adds the distance to new restaurant
-    for(Restaurant& oldRestaurant : globalRestaurantList)
-    {
-        oldRestaurant.setDistanceAt(newRestaurant.getID(),newRestaurant.getDistance(oldRestaurant.getID()));
-    }
-}
-
+///
+/// \brief DatabaseHelper::addRestaurants
+/// \param filename
+///
 void DatabaseHelper::addRestaurants(QString filename)
 {
     QFile file(filename);
-
     if(file.open(QIODevice::ReadOnly))
     {
         QTextStream inputStream(&file);
         QString line;
         int id;
-        double distance,price;
-        int numOfMenuItems,numOfResturantDists;
-        Restaurant newRestaurant;
+        double distance;
+        double price;
+        int numOfMenuItems;
+        int numOfResturantDists;
+        Restaurant newResturant;
 
         while(!inputStream.atEnd())
         {
@@ -144,17 +71,17 @@ void DatabaseHelper::addRestaurants(QString filename)
 
             //Gets name of the resturant
             line = inputStream.readLine();
-            newRestaurant.setName(line.mid(30));
+            newResturant.setName(line.mid(30));
 
             //Gets ID of the resturant
             line = inputStream.readLine();
-            newRestaurant.setID(line.remove(QRegularExpression("\\D+")).toInt());
+            newResturant.setID(line.remove(QRegularExpression("\\D+")).toInt());
 
             //Gets number of resturant locations.
             line = inputStream.readLine();
             numOfResturantDists = line.remove(QRegularExpression("\\D+")).toInt();
 
-            std::vector<double> listOfDistances(numOfResturantDists+1,0.0);
+            std::vector<double> listOfDistances(numOfResturantDists + 1, 0.0);
             for(int index = 1; index <= numOfResturantDists; index++) //Repeat based on the number of resturant locations.
             {
                 //Places distances into vector
@@ -175,21 +102,35 @@ void DatabaseHelper::addRestaurants(QString filename)
                 //Adds items to the menu
                 line = inputStream.readLine();
                 inputStream >> price;
-                newMenu.addItem(Menu::Item(line,price));
+                newMenu.push_back(Item(line, price));
                 inputStream.skipWhiteSpace();
             }
-            newRestaurant.setMenu(newMenu);
-            newRestaurant.setDistances(listOfDistances);
+            newResturant.setMenu(newMenu);
+            newResturant.setDistances(listOfDistances);
             inputStream.skipWhiteSpace();
 
+            qDebug() << "new restaurant added: " << newResturant.getName();
+
             //Adds resturant to general list of resturants
-            updateRestaurantDistances(newRestaurant);
-            globalRestaurantList.push_back(newRestaurant);
+            RestaurantList.push_back(newResturant);
         }
         file.close();
     }
 }
 
+///
+/// \brief DatabaseHelper::loadRestaurantsFromDatabase
+///
+void DatabaseHelper::loadRestaurantsFromDatabase()
+{
+    //This function will populate the static restaurant vector.
+    //Note: Ignore id 0 of table parent when inserting restaurants into the
+    //vector since it isn't technically a restaurant.
+}
+
+///
+/// \brief DatabaseHelper::createRestaurantTable
+///
 void DatabaseHelper::createRestaurantTable()
 {
     QSqlQuery query(database);
@@ -197,49 +138,48 @@ void DatabaseHelper::createRestaurantTable()
 
     //Inserts Saddleback as Restaurant index[0]
     query.exec("INSERT INTO parent VALUES ('0', 'Saddleback')");
-    for (const Restaurant& insert : globalRestaurantList)
-    {
+    for (Restaurant insert : RestaurantList)
         //Inserts Restaurants and their corresponding IDs
         query.exec("INSERT INTO parent VALUES (" + QString::number(insert.getID()) + ", '" +
                                                 insert.getName() + "')");
-    }
 }
 
+///
+/// \brief DatabaseHelper::createDistancesTable
+///
 void DatabaseHelper::createDistancesTable()
 {
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS distances ( ParentID int, ToID int, Distance numeric, UNIQUE('ParentID', 'ToID', 'Distance'))");
 
-    for (const Restaurant& insert : globalRestaurantList)
+    for (Restaurant insert : RestaurantList)
     {
         //Gets distance to saddleback.
         query.exec("INSERT INTO distances VALUES ("+ QString::number(insert.getID()) +
                                                   ", '0', "+
                                                   QString::number(insert.getDistance(0)) +")");
         //Gets distance to every restaurant.
-        for(unsigned int index = 0; index < globalRestaurantList.size(); index++)
+        for(unsigned int index = 0; index < RestaurantList.size(); index++)
         {
             query.exec("INSERT INTO distances VALUES (" + QString::number(insert.getID()) + ", " +
-                                                      QString::number(globalRestaurantList.at(index).getID()) + ", " +
-                                                      QString::number(insert.getDistance(index+1)) + ")");
+                                                      QString::number(RestaurantList[index].getID()) + ", " +
+                                                      QString::number(insert.getDistance(index + 1)) + ")");
         }
     }
 }
 
+///
+/// \brief DatabaseHelper::createMenuTable
+///
 void DatabaseHelper::createMenuTable()
 {
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS menu ( ParentID int, Name varchar(255), Price numeric, UNIQUE('ParentID', 'Name', 'Price'))");
 
-    for (const Restaurant& insert : globalRestaurantList)
-    {
-        Menu readMenu = insert.getMenu();
-        for (unsigned int index = 0; index < readMenu.getItems().size(); index++)
-        {
+    for (Restaurant insert : RestaurantList)
+        for (int index = 0; index < insert.getMenuSize(); index++)
             //Inserts the menu items for each corresponding restaurant
             query.exec("INSERT INTO menu VALUES ("+ QString::number(insert.getID()) +
-                       ", '"+ readMenu.getItems().at(index).getName() +
-                       "', "+ QString::number(readMenu.getItems().at(index).getPrice()) +")");
-        }
-    }
+                       ", '"+ insert.getMenuItem(index).getName() +
+                       "', "+ QString::number(insert.getMenuItem(index).getPrice()) +")");
 }
