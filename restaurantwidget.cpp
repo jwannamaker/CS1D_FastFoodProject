@@ -24,7 +24,34 @@ RestaurantWidget::~RestaurantWidget()
 void RestaurantWidget::addRestaurantToTrip(Restaurant rest)
 {
     visitedRestaurants.push_back(rest);
+    optimizeRestaurantDistance();
     updateTableWidget();
+}
+
+void RestaurantWidget::optimizeRestaurantDistance()
+{
+    QVector<Restaurant> newRestaurants = visitedRestaurants;
+    Restaurant currentRestaurant = initialRestaurant;
+    visitedRestaurants.clear();
+
+    //Searches for optimial route from the inital restaurant
+    while(newRestaurants.size() > 0)
+    {
+        //Switches index0 to closest restaurant to the current.
+        for(int index = 1; index < newRestaurants.size(); index++)
+        {
+            if(newRestaurants[index].getDistance(currentRestaurant) < newRestaurants[0].getDistance(currentRestaurant))
+            {
+                newRestaurants.swapItemsAt(0,index);
+            }
+        }
+
+        //Switch current restaurant the closest one, and push it to the visitedRestaurants vector
+        //Repeats until every restaurant has been added back to the visitedRestaurants vector
+        currentRestaurant = newRestaurants[0];
+        visitedRestaurants.push_back(currentRestaurant);
+        newRestaurants.removeFirst();
+    }
 }
 
 void RestaurantWidget::setInitialRestaurant(Restaurant initial)
@@ -40,7 +67,7 @@ void RestaurantWidget::updateTableWidget()
     {
         QTableWidgetItem* restaurantName = new QTableWidgetItem(visitedRestaurants[index].getName());
         ui->tableWidget_tripRestaurants->setItem(index, 0, restaurantName);
-        QTableWidgetItem* restaurantDistance = new QTableWidgetItem(QString::number(visitedRestaurants[index].getDistance(initialRestaurant.getID())));
+        QTableWidgetItem* restaurantDistance = new QTableWidgetItem(QString::number(visitedRestaurants[index].getDistance(initialRestaurant)));
         ui->tableWidget_tripRestaurants->setItem(index, 1, restaurantDistance);
         ui->tableWidget_tripRestaurants->item(index, 1)->setTextAlignment(Qt::AlignRight);
 //        QTableWidgetItem* restaurantSubtotal = new QTableWidgetItem(QString::number(0.00));

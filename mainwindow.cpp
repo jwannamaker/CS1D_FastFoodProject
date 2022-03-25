@@ -84,10 +84,10 @@ void MainWindow::recieve_restaurantView()
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
-void MainWindow::recieve_addRestaurantToTrip(Restaurant rest)
+void MainWindow::recieve_addRestaurantToTrip(Restaurant* rest)
 {
     qDebug()<< "Adding Restaurants to trip";
-    restaurantPage->addRestaurantToTrip(rest);
+    restaurantPage->addRestaurantToTrip(*rest);
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
@@ -108,9 +108,9 @@ void MainWindow::recieve_viewMenu(Restaurant& rest)
                      this,
                      SLOT(recieve_restaurantView()));
     QObject::connect(menuPage,
-                     SIGNAL(transmit_confirmOrder(Restaurant)),
+                     SIGNAL(transmit_confirmOrder(Restaurant*)),
                      this,
-                     SLOT(recieve_addRestaurantToTrip(Restaurant)));
+                     SLOT(recieve_addRestaurantToTrip(Restaurant*)));
 
     qDebug() << "The menu view has been initialized";
     stackedWidget->setCurrentWidget(menuPage);

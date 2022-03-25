@@ -48,7 +48,7 @@ public slots:
     ///
     /// \brief recieve_addRestaurantToTrip
     ///
-    void recieve_addRestaurantToTrip(Restaurant);
+    void recieve_addRestaurantToTrip(Restaurant*);
 
     ///
     /// \brief recieve_mainMenu

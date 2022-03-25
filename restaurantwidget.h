@@ -54,6 +54,11 @@ public:
     void addRestaurantToTrip(Restaurant rest);
 
     ///
+    /// \brief optimizeRestaurantDistance
+    ///
+    void optimizeRestaurantDistance();
+
+    ///
     /// \brief updateTableWidget
     ///
     void updateTableWidget();
