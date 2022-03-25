@@ -12,23 +12,48 @@
 #include <QObject>
 #include <QSize>
 #include "restaurant.h"
-#include "menu.h"
 
-const int TILE_SIZE = 50;
+// linking globals
+extern Restaurant NULL_RESTAURANT;
+extern Item NULL_ITEM;
 
+///
+/// \class Button.
+/// \brief The Button class
+///
 class Button : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit Button(Restaurant* rest, QWidget *parent = nullptr);
-    explicit Button(Restaurant* rest, Menu::Item* item, QWidget *parent = nullptr);
+    ///
+    /// \brief Button
+    /// \param rest
+    /// \param initialID
+    /// \param parent
+    ///
+    explicit Button(Restaurant& rest, int initialID, QWidget *parent = nullptr);
+
+    ///
+    /// \brief Button
+    /// \param rest
+    /// \param item
+    /// \param parent
+    ///
+    explicit Button(Restaurant& rest, Item& item, QWidget *parent = nullptr);
+
+    ///
+    /// \brief Button
+    /// \param topText
+    /// \param bottomText
+    /// \param parent
+    ///
     explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
     ///
-    /// \brief setImage
+    /// \brief setLayout
     /// \param image
     ///
-    void setImage(QPixmap image);
+    void setLayout(QPixmap image);
 
     ///
     /// \brief sizeHint
@@ -40,25 +65,41 @@ public:
     /// \brief getRestaurant
     /// \return
     ///
-    Restaurant* getRestaurant();
+    Restaurant& getRestaurant();
 
     ///
     /// \brief getItem
     /// \return
     ///
-    Menu::Item* getItem();
+    Item& getItem();
 
 signals:
-    void transmit_restaurantClicked(Restaurant*);
-    void transmit_itemClicked(Menu::Item*);
+    ///
+    /// \brief transmit_restaurantClicked
+    ///
+    void transmit_restaurantClicked(Restaurant&);
+
+    ///
+    /// \brief transmit_itemClicked
+    ///
+    void transmit_itemClicked(Item&);
 
 public slots:
+    ///
+    /// \brief restaurantClicked
+    ///
     void restaurantClicked();
+
+    ///
+    /// \brief itemClicked
+    ///
     void itemClicked();
 
 private:
-    Restaurant*           restaurant;
-    Menu::Item*           menuItem;
+    const int TILE_SIZE = 100;
+    Restaurant&           restaurant;
+    Item&                 menuItem;
+    QVBoxLayout*          layout;
     QLabel*               topText;
     QLabel*               bottomText;
 };

@@ -7,16 +7,26 @@
 #include <QObject>
 #include <QStackedWidget>
 #include "databasehelper.h"
+#include "customer.h"
 #include "restaurantwidget.h"
 #include "mainmenuwidget.h"
 #include "menuwidget.h"
 #include "revenuewidget.h"
-#include "login.h"
+#include "loginwidget.h"
+
+// linking gloabals
+extern Customer CurrentUser;
+extern DatabaseHelper Database;
+extern std::vector<Restaurant> RestaurantList;
 
 namespace Ui {
 class MainWindow;
 }
 
+///
+/// \class MainWindow
+/// \brief The MainWindow class
+///
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -40,7 +50,7 @@ public slots:
     /// \brief recieve_loginSuccess
     /// \param newUser
     ///
-    void recieve_loginSuccess(Customer newUser);
+    void recieve_loginSuccess();
 
     ///
     /// \brief recieve_logout
@@ -56,7 +66,7 @@ public slots:
     ///
     /// \brief recieve_addRestaurantToTrip
     ///
-    void recieve_addRestaurantToTrip(Restaurant);
+    void recieve_addRestaurantToTrip(Restaurant&);
 
     ///
     /// \brief recieve_mainMenu
@@ -78,7 +88,7 @@ private:
     Customer            currentUser;
     Ui::MainWindow*     ui;
     QStackedWidget*     stackedWidget;
-    Login*              loginPage;
+    LoginWidget*        loginPage;
     MainMenuWidget*     mainMenuPage;
     MenuWidget*         menuPage;
     RestaurantWidget*   restaurantPage;

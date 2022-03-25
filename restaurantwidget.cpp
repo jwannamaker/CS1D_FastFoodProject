@@ -1,33 +1,62 @@
 #include "restaurantwidget.h"
 
-RestaurantWidget::RestaurantWidget(std::vector<Restaurant>& restaurantList, QWidget *parent) :
+///
+/// \brief RestaurantWidget::RestaurantWidget
+/// \param parent
+///
+RestaurantWidget::RestaurantWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RestaurantWidget)
 {
     ui->setupUi(this);
-
-    visitedRestaurants = QVector<Restaurant>();
-    setInitialRestaurant(restaurantList.at(0));
     ui->tableWidget_tripRestaurants->setColumnCount(3);
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(1, new QTableWidgetItem("Distance"));
-    ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(2, new QTableWidgetItem("Subtotal"));
+    ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(2, new QTableWidgetItem("Order Total"));
 
-    //Create the restaurant buttons
-    for (size_t i = 0; i < restaurantList.size(); ++i)
-        restaurantButtons.append(createButton(&restaurantList[i]));
+    setInitialID(0);
 
-    //Create Grid for restaurant icons
-    QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_restaurants);
-    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+    //Initialize Grid for restaurant icons
+    buttonLayout = new QGridLayout(ui->scrollArea_restaurants);
+    createButtons();
+}
 
-    //Add restaurants to window
+///
+/// \brief RestaurantWidget::~RestaurantWidget
+///
+RestaurantWidget::~RestaurantWidget()
+{
+    delete ui;
+}
+
+///
+/// \brief RestaurantWidget::setInitialID
+/// \param initialID
+///
+void RestaurantWidget::setInitialID(int initialID)
+{
+    this->initialID = initialID;
+
+}
+
+///
+/// \brief RestaurantWidget::createButtons
+///
+void RestaurantWidget::createButtons()
+{
+    for (size_t i = 0; i < RestaurantList.size(); i++)
+        restaurantButtons.push_back(createButton(RestaurantList[i]));
+
+    if (CurrentUser.isAdmin())
+        qDebug() << "create Add Restaurants button";
+
+
     int row = 0;
     int col = 0;
 
-    for (size_t i = 0; i < restaurantList.size(); i++)
+    for (unsigned int i = 0; i < restaurantButtons.size(); i++)
     {
-        mainLayout->addWidget(restaurantButtons[i], row, col);
+        buttonLayout->addWidget(restaurantButtons[i], row, col);
         col++;
 
         if (col >= MAX_COL)
@@ -38,23 +67,20 @@ RestaurantWidget::RestaurantWidget(std::vector<Restaurant>& restaurantList, QWid
     }
 }
 
-RestaurantWidget::~RestaurantWidget()
-{
-    delete ui;
-}
-
-void RestaurantWidget::addRestaurantToTrip(Restaurant rest)
+///
+/// \brief RestaurantWidget::addRestaurantToTrip
+/// \param rest
+///
+void RestaurantWidget::addRestaurantToTrip(Restaurant& rest)
 {
     visitedRestaurants.push_back(rest);
     updateTableWidget();
+    updateTripDistance();
 }
 
-void RestaurantWidget::setInitialRestaurant(Restaurant initial)
-{
-    this->initialRestaurant = initial;
-    ui->initialLocationLineEdit->setText(initialRestaurant.getName());
-}
-
+///
+/// \brief RestaurantWidget::updateTableWidget
+///
 void RestaurantWidget::updateTableWidget()
 {
     ui->tableWidget_tripRestaurants->setRowCount(visitedRestaurants.size());
@@ -62,36 +88,34 @@ void RestaurantWidget::updateTableWidget()
     {
         QTableWidgetItem* restaurantName = new QTableWidgetItem(visitedRestaurants[index].getName());
         ui->tableWidget_tripRestaurants->setItem(index, 0, restaurantName);
-        QTableWidgetItem* restaurantDistance = new QTableWidgetItem(QString::number(visitedRestaurants[index].getDistance(initialRestaurant.getID())));
+        QTableWidgetItem* restaurantDistance = new QTableWidgetItem(QString::number(visitedRestaurants[index].getDistance(initialID)));
         ui->tableWidget_tripRestaurants->setItem(index, 1, restaurantDistance);
         ui->tableWidget_tripRestaurants->item(index, 1)->setTextAlignment(Qt::AlignRight);
-        QTableWidgetItem* restaurantSubtotal = new QTableWidgetItem(QString::number(visitedRestaurants[index].getRevenue()));
+        QTableWidgetItem* restaurantSubtotal = new QTableWidgetItem(QString::number(visitedRestaurants[index].getRevenue())); // may need to create method for getting the total for the last confirmed order
         ui->tableWidget_tripRestaurants->setItem(index, 2, restaurantSubtotal);
         ui->tableWidget_tripRestaurants->item(index, 2)->setTextAlignment(Qt::AlignRight);
     }
-    // update the distance traveled
+}
+
+///
+/// \brief RestaurantWidget::updateTripDistance
+///
+void RestaurantWidget::updateTripDistance()
+{
+    double totalDistance = 0;
+    for (unsigned int i = 0; i < visitedRestaurants.size() - 1; i++)
+        totalDistance += visitedRestaurants[i].getDistance(visitedRestaurants[i + 1]);
+    ui->totalDistanceLineEdit->setText(QString::number(totalDistance));
 }
 
 ///
 /// \brief RestaurantWidget::on_confirmButton_pressed
 ///
-/// User pressed the "Confirm Trip" button meaning
-///     1. The contents of ui->listView must be traversed and saved to the Customer's history,
-///        the Restaurants' history, and the database.
-///     2. The index of MainWindow->ui->stackedWidget->setCurrentIndex(1) to return back to the
-///        main menu page
-///     3. The contents of ui->listView must be cleared, and anything else from the last trip
-///        must be reset
+/// User pressed the "Confirm Trip" button
 ///
 void RestaurantWidget::on_confirmButton_pressed()
 {
-// A quick cancel/confirm popup, could be expanded on later include a brief summary of their trip
-//    QDialog confirmTrip = QDialog("Are you sure?");
-//    confirmTrip.set("Are you sure?");
-//    confirmTrip.setModal(true);
-//    confirmTrip.setWindowTitle("Confirm");
-//    confirmTrip.show();
-
+    // confirm the trip
 
     emit transmit_cancel();
 }
@@ -106,16 +130,28 @@ void RestaurantWidget::on_cancelButton_pressed()
     emit transmit_cancel();
 }
 
-void RestaurantWidget::recieve_restaurantClicked(Restaurant* rest)
+///
+/// \brief RestaurantWidget::recieve_restaurantClicked
+/// \param rest
+///
+void RestaurantWidget::recieve_restaurantClicked(Restaurant& rest)
 {
-    qDebug() << "Restaurant clicked: " << rest->getName() << "\n";
-    emit transmit_viewRestMenu(*rest);
+    qDebug() << "Restaurant clicked: " << rest.getName();
+    emit transmit_viewRestMenu(rest);
 }
 
-Button *RestaurantWidget::createButton(Restaurant* rest)
+///
+/// \brief RestaurantWidget::createButton
+/// \param rest
+/// \return
+///
+Button *RestaurantWidget::createButton(Restaurant& rest)
 {
-    Button *button = new Button(rest, this);
-    QObject::connect(button, SIGNAL(transmit_restaurantClicked(Restaurant*)), this, SLOT(recieve_restaurantClicked(Restaurant*)));
+    Button *button = new Button(rest, initialID, this);
+    QObject::connect(button,
+                     SIGNAL(transmit_restaurantClicked(Restaurant&)),
+                     this,
+                     SLOT(recieve_restaurantClicked(Restaurant&)));
     return button;
 }
 

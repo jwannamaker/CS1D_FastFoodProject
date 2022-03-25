@@ -1,34 +1,37 @@
 #ifndef MENUWIDGET_H
 #define MENUWIDGET_H
-
 #include <QWidget>
 #include <QTableWidget>
 #include <QTableWidgetItem>
 #include "button.h"
 #include "restaurant.h"
-#include "menu.h"
 #include "ui_menuwidget.h"
-#include "menu.h"
-#include "button.h"
-#include "restaurantwidget.h"
 
 namespace Ui {
 class MenuWidget;
 }
 
+///
+/// \class MenuWidget.
+/// \brief The MenuWidget class
+///
 class MenuWidget : public QWidget
 {
     Q_OBJECT
 
 public:
+    ///
+    /// \brief MenuWidget
+    /// \param currentRestaurant
+    /// \param parent
+    ///
     explicit MenuWidget(Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
 
     ///
-    /// \brief getCurrentRestuarant
-    /// \return
+    /// \brief createButtons
     ///
-    Restaurant getCurrentRestuarant() const;
+    void createButtons();
 
     ///
     /// \brief updateOrderTotal
@@ -41,25 +44,41 @@ public:
     void updateTableWidget();
 
 signals:
-    void transmit_confirmOrder(Restaurant);
+    ///
+    /// \brief transmit_confirmOrder
+    ///
+    void transmit_confirmOrder(Restaurant&);
+
+    ///
+    /// \brief transmit_cancelOrder
+    ///
     void transmit_cancelOrder();
-//    void transmit_addToOrder(Menu::Item);
 
 private slots:
+    ///
+    /// \brief on_confirmButton_pressed
+    ///
     void on_confirmButton_pressed();
 
+    ///
+    /// \brief on_cancelButton_pressed
+    ///
     void on_cancelButton_pressed();
 
-    void itemClicked();
+    ///
+    /// \brief itemClicked
+    ///
+    void recieve_itemClicked(Item&);
 
 private:
     const int MAX_COL = 5;
 
     Ui::MenuWidget *ui;
-    Button *createButton(Menu::Item* item); //Creates a button for a menu item
+    Button *createButton(Item item); //Creates a button for a menu item
+    QGridLayout* buttonLayout;
     QVector<Button*> itemButtons;//data members
-    QVector<Menu::Item*> orderedItems;
-    Restaurant* currentRestaurant; //Current restaurant on the widget
+    std::vector<Item> orderedItems;
+    Restaurant& currentRestaurant; //Current restaurant on the widget
 };
 
 #endif // MENUWIDGET_H
