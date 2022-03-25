@@ -110,6 +110,34 @@ double Restaurant::getDistance(int otherID) const
 }
 
 ///
+/// \brief Restaurant::getShortestDistanceID
+/// \return
+///
+int Restaurant::getShortestDistanceID() const
+{
+    double shortestDistance = 100;
+    int shortestID = -1;
+
+    for (int otherID = 0; otherID < RestaurantList.size(); otherID++)
+        if (getDistance(otherID) < shortestDistance)
+        {
+            shortestDistance = getDistance(otherID);
+            shortestID = otherID;
+        }
+
+    return shortestID;
+}
+
+///
+/// \brief Restaurant::getClosestRestaurant
+/// \return
+///
+Restaurant &Restaurant::getClosestRestaurant()
+{
+    return RestaurantList[getShortestDistanceID()];
+}
+
+///
 /// \brief Restaurant::setMenu
 /// \param menu
 ///
@@ -148,6 +176,16 @@ Item& Restaurant::getMenuItem(int index)
 }
 
 ///
+/// \brief Restaurant::addOrder
+/// \param newOrder
+///
+void Restaurant::addOrder(std::vector<Item> newOrder)
+{
+    orders.push_back(newOrder);
+    updateRevenue();
+}
+
+///
 /// \brief Restaurant::setRevenue
 /// \param revenue
 ///
@@ -163,6 +201,16 @@ void Restaurant::setRevenue(double revenue)
 void Restaurant::addRevenue(double revenue)
 {
     this->revenue += revenue;
+}
+
+///
+/// \brief Restaurant::updateRevenue
+///
+void Restaurant::updateRevenue()
+{
+    for (int i = 0; i < orders.size(); i++)
+        for (int j = 0; j < orders[i].size(); j++)
+            revenue += orders[i][j].getPrice() * orders[i][j].getQuantity();
 }
 
 ///

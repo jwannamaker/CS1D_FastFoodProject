@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -32,7 +33,7 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QLabel *label_2;
-    QLineEdit *initialLocationLineEdit;
+    QComboBox *comboBox_initialLocation;
     QTableWidget *tableWidget_tripRestaurants;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_3;
@@ -57,25 +58,30 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         label_2 = new QLabel(RestaurantWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy);
+        label_2->setMinimumSize(QSize(80, 0));
 
         horizontalLayout->addWidget(label_2);
 
-        initialLocationLineEdit = new QLineEdit(RestaurantWidget);
-        initialLocationLineEdit->setObjectName(QString::fromUtf8("initialLocationLineEdit"));
-        initialLocationLineEdit->setReadOnly(true);
+        comboBox_initialLocation = new QComboBox(RestaurantWidget);
+        comboBox_initialLocation->setObjectName(QString::fromUtf8("comboBox_initialLocation"));
 
-        horizontalLayout->addWidget(initialLocationLineEdit);
+        horizontalLayout->addWidget(comboBox_initialLocation);
 
 
         verticalLayout->addLayout(horizontalLayout);
 
         tableWidget_tripRestaurants = new QTableWidget(RestaurantWidget);
         tableWidget_tripRestaurants->setObjectName(QString::fromUtf8("tableWidget_tripRestaurants"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(tableWidget_tripRestaurants->sizePolicy().hasHeightForWidth());
-        tableWidget_tripRestaurants->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(tableWidget_tripRestaurants->sizePolicy().hasHeightForWidth());
+        tableWidget_tripRestaurants->setSizePolicy(sizePolicy1);
         tableWidget_tripRestaurants->setMinimumSize(QSize(250, 0));
         tableWidget_tripRestaurants->setFrameShape(QFrame::NoFrame);
         tableWidget_tripRestaurants->setFrameShadow(QFrame::Plain);
@@ -92,6 +98,7 @@ public:
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         label_3 = new QLabel(RestaurantWidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setMinimumSize(QSize(80, 0));
 
         horizontalLayout_2->addWidget(label_3);
 
@@ -124,8 +131,11 @@ public:
 
         scrollArea_restaurants = new QScrollArea(RestaurantWidget);
         scrollArea_restaurants->setObjectName(QString::fromUtf8("scrollArea_restaurants"));
-        sizePolicy.setHeightForWidth(scrollArea_restaurants->sizePolicy().hasHeightForWidth());
-        scrollArea_restaurants->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(scrollArea_restaurants->sizePolicy().hasHeightForWidth());
+        scrollArea_restaurants->setSizePolicy(sizePolicy2);
         scrollArea_restaurants->setMinimumSize(QSize(600, 0));
         scrollArea_restaurants->setMaximumSize(QSize(600, 16777215));
         scrollArea_restaurants->setFrameShape(QFrame::NoFrame);
@@ -150,7 +160,7 @@ public:
     void retranslateUi(QWidget *RestaurantWidget)
     {
         RestaurantWidget->setWindowTitle(QCoreApplication::translate("RestaurantWidget", "Form", nullptr));
-        label_2->setText(QCoreApplication::translate("RestaurantWidget", "Starting From", nullptr));
+        label_2->setText(QCoreApplication::translate("RestaurantWidget", "Initial Location", nullptr));
         label_3->setText(QCoreApplication::translate("RestaurantWidget", "Total Distance ", nullptr));
         confirmButton->setText(QCoreApplication::translate("RestaurantWidget", "Confirm Trip", nullptr));
         cancelButton->setText(QCoreApplication::translate("RestaurantWidget", "Cancel Trip", nullptr));

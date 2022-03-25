@@ -33,6 +33,10 @@ Button::Button(Restaurant& rest, int initialID, QWidget* parent)
                      SIGNAL(clicked()),
                      this,
                      SLOT(restaurantClicked()));
+    QObject::connect(checkBox,
+                     SIGNAL(stateChanged(int)),
+                     this,
+                     SLOT(restaurantChecked()));
 }
 
 ///
@@ -44,10 +48,11 @@ Button::Button(Restaurant& rest, int initialID, QWidget* parent)
 Button::Button(Restaurant& rest, Item& item, QWidget* parent)
     : QPushButton(parent), restaurant(rest), menuItem(item)
 {
-    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+    setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     topText = new QLabel(item.getName());
     bottomText = new QLabel(QString::number(item.getPrice()));
     setLayout(QPixmap(":images/rest_menu_icon.png"));
+    checkBox->setHidden(true);
 
     QObject::connect(this,
                      SIGNAL(clicked()),
@@ -62,12 +67,25 @@ Button::Button(Restaurant& rest, Item& item, QWidget* parent)
 void Button::setLayout(QPixmap image)
 {
     layout = new QVBoxLayout;
+    checkBox = new QCheckBox();
+    layout->addWidget(checkBox, Qt::AlignmentFlag(Qt::AlignHCenter));
     layout->addWidget(topText, Qt::AlignmentFlag(Qt::AlignHCenter));
     layout->addWidget(bottomText, Qt::AlignmentFlag(Qt::AlignHCenter));
+
     layout->setSpacing(10);
     setIcon(image);
-    setIconSize(QSize(50, 50));
+    setIconSize(QSize(40, 40));
     QPushButton::setLayout(layout);
+}
+
+///
+/// \brief Button::setDistanceShown
+/// \param otherID
+///
+void Button::setDistanceShown(int otherID)
+{
+    bottomText->setText(QString::number(restaurant.getDistance(otherID)) + " miles away");
+    layout->update();
 }
 
 ///
@@ -101,11 +119,29 @@ Item& Button::getItem()
 }
 
 ///
+/// \brief Button::isChecked
+/// \return
+///
+bool Button::isChecked()
+{
+    return checkBox->isChecked();
+}
+
+///
 /// \brief Button::restaurantClicked
 ///
 void Button::restaurantClicked()
 {
+    checkBox->setChecked(true);
     emit transmit_restaurantClicked(restaurant);
+}
+
+///
+/// \brief Button::restaurantChecked
+///
+void Button::restaurantChecked()
+{
+    emit transmit_restaurantChecked(restaurant);
 }
 
 ///

@@ -78,7 +78,7 @@ void MenuWidget::updateTableWidget()
     {
         QTableWidgetItem* itemName = new QTableWidgetItem(orderedItems[index].getName());
         ui->tableWidget_orderItems->setItem(index, 0, itemName);
-        QTableWidgetItem* itemQuantity = new QTableWidgetItem(orderedItems[index].getQuantity());
+        QTableWidgetItem* itemQuantity = new QTableWidgetItem(QString::number(orderedItems[index].getQuantity()));
         ui->tableWidget_orderItems->setItem(index, 1, itemQuantity);
         // should it be unit price or actual price?
         QTableWidgetItem* itemPrice = new QTableWidgetItem(QString::number(orderedItems[index].getPrice()));
@@ -94,9 +94,7 @@ void MenuWidget::updateTableWidget()
 ///
 void MenuWidget::on_confirmButton_pressed()
 {
-    updateTableWidget();
-    updateOrderTotal();
-    currentRestaurant.addRevenue(ui->totalLineEdit->text().toDouble());
+    currentRestaurant.addOrder(orderedItems);
     emit transmit_confirmOrder(currentRestaurant);
 }
 

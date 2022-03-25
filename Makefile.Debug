@@ -320,6 +320,8 @@ debug/moc_button.cpp: button.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
@@ -1136,6 +1138,7 @@ debug/moc_mainwindow.cpp: mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHeaderView \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qheaderview.h \
@@ -1152,6 +1155,8 @@ debug/moc_mainwindow.cpp: mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QIcon \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QPixmap \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayout \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		mainmenuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
@@ -1342,6 +1347,8 @@ debug/moc_menuwidget.cpp: menuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
@@ -1572,6 +1579,8 @@ debug/moc_restaurantwidget.cpp: restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHeaderView \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qheaderview.h \
@@ -1591,6 +1600,8 @@ debug/moc_restaurantwidget.cpp: restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QIcon \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QPixmap \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayout \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
@@ -1722,7 +1733,6 @@ debug/moc_restaurantwidget.cpp: restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstyleditemdelegate.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistview.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqlrelationaltablemodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqltablemodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqlresult.h \
@@ -2058,6 +2068,8 @@ debug/button.o: button.cpp button.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
@@ -3113,6 +3125,7 @@ debug/main.o: main.cpp mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHeaderView \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qheaderview.h \
@@ -3129,6 +3142,8 @@ debug/main.o: main.cpp mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QIcon \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QPixmap \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayout \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		mainmenuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
@@ -3662,6 +3677,7 @@ debug/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHeaderView \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qheaderview.h \
@@ -3678,6 +3694,8 @@ debug/mainwindow.o: mainwindow.cpp mainwindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QIcon \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QPixmap \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayout \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		mainmenuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGraphicsItem \
@@ -3867,6 +3885,8 @@ debug/menuwidget.o: menuwidget.cpp menuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
@@ -4179,6 +4199,8 @@ debug/restaurantwidget.o: restaurantwidget.cpp restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHeaderView \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qheaderview.h \
@@ -4198,6 +4220,8 @@ debug/restaurantwidget.o: restaurantwidget.cpp restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QIcon \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QPixmap \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayout \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
@@ -4329,7 +4353,6 @@ debug/restaurantwidget.o: restaurantwidget.cpp restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstyleditemdelegate.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistview.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqlrelationaltablemodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqltablemodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtSql/qsqlresult.h \

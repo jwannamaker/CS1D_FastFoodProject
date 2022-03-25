@@ -7,6 +7,7 @@
 #include <QIcon>
 #include <QPixmap>
 #include <QLayout>
+#include <QCheckBox>
 #include <QVBoxLayout>
 #include <QLayoutItem>
 #include <QObject>
@@ -56,6 +57,12 @@ public:
     void setLayout(QPixmap image);
 
     ///
+    /// \brief setDistanceTo
+    /// \param otherID
+    ///
+    void setDistanceShown(int otherID);
+
+    ///
     /// \brief sizeHint
     /// \return
     ///
@@ -73,11 +80,22 @@ public:
     ///
     Item& getItem();
 
+    ///
+    /// \brief isChecked
+    /// \return
+    ///
+    bool isChecked();
+
 signals:
     ///
     /// \brief transmit_restaurantClicked
     ///
     void transmit_restaurantClicked(Restaurant&);
+
+    ///
+    /// \brief transmit_restaurantChecked
+    ///
+    void transmit_restaurantChecked(Restaurant&);
 
     ///
     /// \brief transmit_itemClicked
@@ -91,15 +109,21 @@ public slots:
     void restaurantClicked();
 
     ///
+    /// \brief restaurantChecked
+    ///
+    void restaurantChecked();
+
+    ///
     /// \brief itemClicked
     ///
     void itemClicked();
 
 private:
-    const int TILE_SIZE = 100;
+    const int TILE_SIZE = 60;
     Restaurant&           restaurant;
     Item&                 menuItem;
     QVBoxLayout*          layout;
+    QCheckBox*            checkBox;
     QLabel*               topText;
     QLabel*               bottomText;
 };

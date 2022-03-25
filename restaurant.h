@@ -8,6 +8,11 @@
 #include "cassert"
 #include "item.h"
 
+class Restaurant;
+
+// linking global
+extern std::vector<Restaurant> RestaurantList;
+
 // type aliases
 using Menu = std::vector<Item>;
 using OrderList = std::vector<std::vector<Item>>;
@@ -86,9 +91,21 @@ public:
     /// \brief getDistance
     ///
     /// get the distance from the current restaurant to the specified restaurant id
-    /// \return double containg
+    /// \return double containing
     ///
     double getDistance(int otherID) const;
+
+    ///
+    /// \brief getShortestDistanceID
+    /// \return
+    ///
+    int getShortestDistanceID() const;
+
+    ///
+    /// \brief getClosestRestaurant
+    /// \return
+    ///
+    Restaurant& getClosestRestaurant();
 
     ///
     /// \brief setMenu
@@ -132,6 +149,11 @@ public:
     /// \param revenue
     ///
     void addRevenue(double revenue);
+
+    ///
+    /// \brief updateRevenue
+    ///
+    void updateRevenue();
 
     ///
     /// \brief getRevenue
