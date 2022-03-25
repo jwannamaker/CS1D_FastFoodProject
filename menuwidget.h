@@ -74,7 +74,7 @@ private:
     const int MAX_COL = 5;
 
     Ui::MenuWidget *ui;
-    Button *createButton(Item item); //Creates a button for a menu item
+    Button *createButton(Item& item); //Creates a button for a menu item
     QGridLayout* buttonLayout;
     QVector<Button*> itemButtons;//data members
     std::vector<Item> orderedItems;

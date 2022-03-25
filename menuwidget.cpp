@@ -125,7 +125,7 @@ void MenuWidget::recieve_itemClicked(Item& item)
 /// \param item
 /// \return
 ///
-Button *MenuWidget::createButton(Item item)
+Button *MenuWidget::createButton(Item& item)
 {
     Button *button = new Button(currentRestaurant, item, this);
     QObject::connect(button,
