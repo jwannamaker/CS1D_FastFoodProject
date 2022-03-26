@@ -22,6 +22,7 @@ public:
     /// \param price
     ///
     Item(QString name, double price);
+
     ///
     /// \brief getName
     /// \return
@@ -75,3 +76,4 @@ private:
 };
 
 #endif // ITEM_H
+

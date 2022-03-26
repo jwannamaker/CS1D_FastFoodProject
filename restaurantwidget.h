@@ -44,6 +44,11 @@ public:
     ~RestaurantWidget();
 
     ///
+    /// \brief populateComboBox
+    ///
+    void populateComboBox();
+
+    ///
     /// \brief setInitialRestaurant
     /// \param initial
     ///
@@ -53,6 +58,16 @@ public:
     /// \brief createButtons
     ///
     void createButtons();
+
+    ///
+    /// \brief addButtonsToLayout
+    ///
+    void addButtonsToLayout();
+
+    ///
+    /// \brief addCheckboxToLayout
+    ///
+    void addCheckboxToLayout();
 
     ///
     /// \brief updateTableWidget
@@ -67,6 +82,24 @@ public:
     /// \return Double indicating the total miles in a Customer's trip.
     ///
     void updateTripDistance();
+
+    ///
+    /// \brief optimizeRestaurantDistance
+    ///
+    void optimizeRestaurantDistance();
+
+    ///
+    /// \brief compareDistance
+    /// \param a
+    /// \param b
+    /// \return
+    ///
+    bool compareDistance(Button* a, Button* b);
+
+    ///
+    /// \brief updateRestaurantSequence
+    ///
+    void updateButtonSequence();
 
 signals:
     ///
@@ -103,6 +136,12 @@ private slots:
     ///
     void recieve_restaurantClicked(Restaurant&);
 
+    ///
+    /// \brief on_comboBox_initialLocation_currentIndexChanged
+    /// \param index
+    ///
+    void on_comboBox_initialLocation_currentIndexChanged(int index);
+
 private:
     ///
     /// \brief createButton
@@ -112,7 +151,7 @@ private:
     Button *createButton(Restaurant& rest);
 
     Ui::RestaurantWidget *ui;
-    int initialID;   // ID of the initial restaurant for the current trip
+    int initialID = 0;   // ID of the initial restaurant for the current trip
     const int MAX_COL = 5;  //Number of restaurant buttons per row
     QGridLayout* buttonLayout; // layout for the buttons
     QVector<Restaurant> visitedRestaurants; // restaurants in the trip
