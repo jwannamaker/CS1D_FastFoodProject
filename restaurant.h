@@ -108,10 +108,10 @@ public:
     Restaurant& getClosestRestaurant();
 
     ///
-    /// \brief getMenuSize
-    /// \return
+    /// \brief setMenu
+    /// \param newMenu
     ///
-    int getMenuSize() const;
+    void setMenu(Menu menu);
 
     ///
     /// \brief addMenuItem
