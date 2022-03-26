@@ -216,7 +216,7 @@ Button *MenuWidget::createDeleteButton(Item& item, const char *member)
 
 int MenuWidget::GetMenuItemIndex(QString itemName)
 {
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < currentRestaurant.getMenuSize(); i++)
         if(orderedItems[i].getName() == itemName) return i;
 
     qDebug() << "Item doesn't exist";
