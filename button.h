@@ -12,24 +12,49 @@
 #include <QObject>
 #include <QSize>
 #include "restaurant.h"
-#include "menu.h"
 
-const int TILE_SIZE = 50;
+// linking globals
+extern Restaurant NULL_RESTAURANT;
+extern Item NULL_ITEM;
 
+///
+/// \class Button.
+/// \brief The Button class
+///
 class Button : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit Button(const Restaurant& rest,const Restaurant& restComboBox, QWidget *parent = nullptr);
-    explicit Button(const Menu::Item& item, QString itemName, QWidget *parent = nullptr);
-    explicit Button(const Menu::Item& item, QWidget *parent = nullptr);
+    ///
+    /// \brief Button
+    /// \param rest
+    /// \param initialID
+    /// \param parent
+    ///
+    explicit Button(Restaurant& rest, int initialID, QWidget *parent = nullptr);
+
+    ///
+    /// \brief Button
+    /// \param rest
+    /// \param item
+    /// \param parent
+    ///
+    explicit Button(Restaurant& rest, Item& item, QWidget *parent = nullptr);
+
+    ///
+    /// \brief Button
+    /// \param topText
+    /// \param bottomText
+    /// \param parent
+    ///
     explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
     ///
-    /// \brief setImage
+    /// \brief setLayout
     /// \param image
     ///
-    void setImage(QPixmap image);
+    explicit Button(Item& item, QWidget* parent = nullptr);
+    void setLayout(QPixmap image);
 
     ///
     /// \brief sizeHint
@@ -37,14 +62,47 @@ public:
     ///
     QSize sizeHint() const override;
 
-    QLabel *getTopText() const;
+    ///
+    /// \brief getRestaurant
+    /// \return
+    ///
+    Restaurant& getRestaurant();
 
-    QString getItemName() const;
+    ///
+    /// \brief getItem
+    /// \return
+    ///
+    Item& getItem();
+
+signals:
+    ///
+    /// \brief transmit_restaurantClicked
+    ///
+    void transmit_restaurantClicked(Restaurant&);
+
+    ///
+    /// \brief transmit_itemClicked
+    ///
+    void transmit_itemClicked(Item&);
+
+public slots:
+    ///
+    /// \brief restaurantClicked
+    ///
+    void restaurantClicked();
+
+    ///
+    /// \brief itemClicked
+    ///
+    void itemClicked();
 
 private:
-    QLabel*     topText;
-    QLabel*     bottomText;
-    QString itemName;
+    const int TILE_SIZE = 100;
+    Restaurant&           restaurant;
+    Item&                 menuItem;
+    QVBoxLayout*          layout;
+    QLabel*               topText;
+    QLabel*               bottomText;
 };
 
 #endif // BUTTON_H

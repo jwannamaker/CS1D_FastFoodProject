@@ -6,74 +6,118 @@
 #include <QGridLayout>
 #include <QLineEdit>
 #include <QDialog>
-#include "restaurant.h"
-#include "button.h"
-#include "databasehelper.h"
+#include <QTableWidgetItem>
+#include <QTableWidget>
 #include "ui_restaurantwidget.h"
-#include "menuwidget.h"
+#include "button.h"
+#include "customer.h"
+#include "restaurant.h"
+#include "databasehelper.h"
+
+// linking globals
+extern Customer CurrentUser;
+extern DatabaseHelper Database;
+extern std::vector<Restaurant> RestaurantList;
 
 QT_BEGIN_NAMESPACE
 class QLineEdit;
 QT_END_NAMESPACE
 
-class Button;
-
 namespace Ui {
 class RestaurantWidget;
 }
 
+///
+/// \class RestaurantWidget.
+/// \brief The RestaurantWidget class
+///
 class RestaurantWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit RestaurantWidget(const std::vector<Restaurant>& restaurantList, QWidget *parent = nullptr);
+    ///
+    /// \brief RestaurantWidget
+    /// \param parent
+    ///
+    explicit RestaurantWidget(QWidget *parent = nullptr);
     ~RestaurantWidget();
 
-    //Function takes restaurant name input and checks if the restaurant
-    //is on restaurantListCopy
-    Restaurant findRestaurant(QString restName);
+    ///
+    /// \brief setInitialRestaurant
+    /// \param initial
+    ///
+    void setInitialID(int initialID);
 
     ///
-    /// \brief getTripDistance
+    /// \brief createButtons
+    ///
+    void createButtons();
+
+    ///
+    /// \brief updateTableWidget
+    ///
+    void updateTableWidget();
+
+    ///
+    /// \brief updateTripDistance
     ///
     /// Calculates the distance this Customer has traveled so far by traversing the
     /// list of restaurants in the listWidget.
     /// \return Double indicating the total miles in a Customer's trip.
     ///
-    double getTripDistance() const;
-
-    //takes in a restaurant and sorts the restaurants based off the distances from each other
-    void updateButtons(Restaurant rest);
+    void updateTripDistance();
 
 signals:
+    ///
+    /// \brief transmit_cancel
+    ///
     void transmit_cancel();
-    void transmit_viewRestMenu(Restaurant rest);
+
+    ///
+    /// \brief transmit_viewRestMenu
+    /// \param rest
+    ///
+    void transmit_viewRestMenu(Restaurant& rest);
+
+public slots:
+    ///
+    /// \brief addRestaurantToTrip
+    /// \param rest
+    ///
+    void addRestaurantToTrip(Restaurant& rest);
 
 private slots:
+    ///
+    /// \brief on_confirmButton_pressed
+    ///
     void on_confirmButton_pressed();
 
+    ///
+    /// \brief on_cancelButton_pressed
+    ///
     void on_cancelButton_pressed();
 
-    void restaurantClicked();
-
-    void on_comboBox_restaurants_currentTextChanged(const QString &arg1);
+    ///
+    /// \brief recieve_restaurantClicked
+    ///
+    void recieve_restaurantClicked(Restaurant&);
 
 private:
-    //Number of restaurnts per row
-    const int MAX_COL = 5;
+    ///
+    /// \brief createButton
+    /// \param rest
+    /// \return
+    ///
+    Button *createButton(Restaurant& rest);
 
     Ui::RestaurantWidget *ui;
+    int initialID;   // ID of the initial restaurant for the current trip
+    const int MAX_COL = 5;  //Number of restaurant buttons per row
+    QGridLayout* buttonLayout; // layout for the buttons
+    QVector<Restaurant> visitedRestaurants; // restaurants in the trip
+    QVector<Button*> restaurantButtons; // buttons for each restaurant available to visit
 
-    QGridLayout *mainLayout;
-
-    //Creates a button for restaurant
-    Button *createButton(Restaurant rest, const char *member);
-
-    //data members
-    QVector<Button*> restaurantButtons;
-
-    std::vector<Restaurant> restVec;
 };
 
 

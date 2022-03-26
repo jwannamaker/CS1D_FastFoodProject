@@ -12,11 +12,11 @@ SOURCES += \
     button.cpp \
     customer.cpp \
     databasehelper.cpp \
-    login.cpp \
+    item.cpp \
+    loginwidget.cpp \
     main.cpp \
     mainmenuwidget.cpp \
     mainwindow.cpp \
-    menu.cpp \
     menuwidget.cpp \
     restaurant.cpp \
     restaurantwidget.cpp \
@@ -26,17 +26,17 @@ HEADERS += \
     button.h \
     customer.h \
     databasehelper.h \
-    login.h \
+    item.h \
+    loginwidget.h \
     mainmenuwidget.h \
     mainwindow.h \
-    menu.h \
     menuwidget.h \
     restaurant.h \
     restaurantwidget.h \
     revenuewidget.h
 
 FORMS += \
-    login.ui \
+    loginwidget.ui \
     mainmenuwidget.ui \
     mainwindow.ui \
     menuwidget.ui \

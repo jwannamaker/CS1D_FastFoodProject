@@ -4,9 +4,13 @@
 
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
-#include <vector>
 #include <QDebug>
-#include "menu.h"
+#include "cassert"
+#include "item.h"
+
+// type aliases
+using Menu = std::vector<Item>;
+using OrderList = std::vector<std::vector<Item>>;
 
 ///
 /// \class Restaurant.
@@ -17,14 +21,6 @@
 class Restaurant
 {
 public:
-    ///
-    /// \brief list
-    ///
-    /// Static member of Restaurant, contains every Restuarant object created
-    /// throughout the program.
-    ///
-    static std::vector<Restaurant> list;
-
     ///
     /// \brief Restaurant
     ///
@@ -48,7 +44,7 @@ public:
 
     ///
     /// \brief getName
-    /// \return
+    /// \return QString
     ///
     QString getName() const;
 
@@ -60,15 +56,22 @@ public:
 
     ///
     /// \brief getID
-    /// \return
+    /// \return int
     ///
     int getID() const;
 
     ///
     /// \brief setDistances
-    /// \param dists
+    /// \param distances
     ///
-    void setDistances(std::vector<double> distances);
+    void setDistances(const std::vector<double>& distances);
+
+    ///
+    /// \brief addDistance
+    /// \param otherID
+    /// \param otherDistance
+    ///
+    void addDistance(int otherID, double otherDistance);
 
     ///
     /// \brief getDistance
@@ -88,26 +91,35 @@ public:
     double getDistance(int otherID) const;
 
     ///
-    /// \brief getTripDistance
-    ///
-    /// Calculates the distance this Customer has traveled so far by traversing the
-    /// list of visited restaurants.
-    /// \param tripIDList is a vector of integers containing the IDs of the restaurants visited.
-    /// \return Double indicating the total miles in a Customer's trip.
-    ///
-    double getTripDistance(std::vector<int> tripIDList) const;
-
-    ///
     /// \brief setMenu
     /// \param newMenu
     ///
     void setMenu(Menu menu);
 
     ///
-    /// \brief getMenu
+    /// \brief addMenuItem
+    /// \param newItem
+    ///
+    void addMenuItem(Item newItem);
+
+    ///
+    /// \brief getMenuSize
     /// \return
     ///
-    Menu getMenu() const;
+    int getMenuSize() const;
+
+    ///
+    /// \brief getMenuItem
+    /// \param index
+    /// \return
+    ///
+    Item& getMenuItem(int index);
+
+    ///
+    /// \brief saveOrder
+    /// \param newOrder
+    ///
+    void addOrder(std::vector<Item> newOrder);
 
     ///
     /// \brief setRevenue
@@ -116,31 +128,24 @@ public:
     void setRevenue(double revenue);
 
     ///
+    /// \brief addRevenue
+    /// \param revenue
+    ///
+    void addRevenue(double revenue);
+
+    ///
     /// \brief getRevenue
     /// \return
     ///
     double getRevenue() const;
 
-    ///
-    /// \brief createNewOrder.
-    ///
-    /// Functionality to create a new order for the current user.
-    /// Adds the passed Restaurant to the list of Restaurants the current
-    /// user has already visited.
-    ///
-    void createNewOrder();
-
-    static bool compareR(Restaurant r1, Restaurant r2)
-    {
-        return (r1.getDistance(r1) < r2.getDistance(r1));
-    }
-
 private:
-    int ID;
-    QString name;
+    int                 ID;
+    QString             name;
     std::vector<double> distances;
-    Menu menu;
-    double revenue;
+    Menu                menu;
+    OrderList           orders;
+    double              revenue;
 };
 
 #endif // RESTAURANT_H

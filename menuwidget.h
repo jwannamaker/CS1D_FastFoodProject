@@ -1,53 +1,76 @@
 #ifndef MENUWIDGET_H
 #define MENUWIDGET_H
-
 #include <QWidget>
+#include <QTableWidget>
+#include <QTableWidgetItem>
 #include "button.h"
 #include "restaurant.h"
-#include "menu.h"
 #include "ui_menuwidget.h"
-#include "menu.h"
-#include "button.h"
-#include "restaurantwidget.h"
-
-//Max menu items displayed per column
-const int MAX_ITEMS_COLS = 4;
-
-//Most unique menu items you can order (temp)
-const int MAX_MENU_ITEMS = 8;
 
 namespace Ui {
 class MenuWidget;
 }
 
+///
+/// \class MenuWidget.
+/// \brief The MenuWidget class
+///
 class MenuWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MenuWidget(QWidget *parent = nullptr);
-    explicit MenuWidget(const Restaurant& currentRestaurant, QWidget *parent = nullptr);
+    ///
+    /// \brief MenuWidget
+    /// \param currentRestaurant
+    /// \param parent
+    ///
+    explicit MenuWidget(Restaurant& currentRestaurant, QWidget *parent = nullptr);
     ~MenuWidget();
 
-    //Gets the current restaurnt from the menu being displayed
-    Restaurant GetCurrentRestuarant();
+    ///
+    /// \brief createButtons
+    ///
+    void createButtons();
 
-    //Gets the index of a menu item if it exists.
-    //Returns -1, if it does not exist
+    ///
+    /// \brief updateOrderTotal
+    ///
+    void updateOrderTotal();
+
+    ///
+    /// \brief updateTableWidget
+    ///
+    void updateTableWidget();
+
     int GetMenuItemIndex(QString itemName);
 
 signals:
-    void transmit_confirmOrder(std::vector<Menu::Item> order);
+    ///
+    /// \brief transmit_confirmOrder
+    ///
+    void transmit_confirmOrder(Restaurant&);
+
+    ///
+    /// \brief transmit_cancelOrder
+    ///
     void transmit_cancelOrder();
 
 private slots:
+    ///
+    /// \brief on_confirmButton_pressed
+    ///
     void on_confirmButton_pressed();
 
-    void on_editButton_pressed();
-
+    ///
+    /// \brief on_cancelButton_pressed
+    ///
     void on_cancelButton_pressed();
 
-    void itemClicked();
+    ///
+    /// \brief itemClicked
+    ///
+    void recieve_itemClicked(Item&);
 
     void deleteItemClicked();
 
@@ -55,30 +78,14 @@ private:
     const int MAX_COL = 5;
 
     Ui::MenuWidget *ui;
+    Button *createButton(Item& item); //Creates a button for a menu item
+    Button *createDeleteButton(Item& item, const char *member);
 
-    //Creates a button for a menu item
-    Button *createButton(Menu::Item item, const char *member);
-
-    Button *createDeleteButton(Menu::Item item, const char *member);
-
-    //data members
-    QVector<Button*> itemButtons;
-
-    //Buttons used to remove an item from an order
+    QGridLayout* buttonLayout;
+    QVector<Button*> itemButtons;//data members
     QVector<Button*> deleteItemButtons;
-
-    //Current restaurant on the widget
-    Restaurant currentRestaurant;
-
-    //Keeps track of the subtotatl when user is ordering food
-    double subTotal;
-
-    //Keeps track of the menu items added.
-    int menuItemsAdded;
-
-    //Stores all the items ordered
-    std::vector<Menu::Item> order;
-
+    std::vector<Item> orderedItems;
+    Restaurant& currentRestaurant; //Current restaurant on the widget
 };
 
 #endif // MENUWIDGET_H

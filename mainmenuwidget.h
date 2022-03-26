@@ -34,8 +34,6 @@ signals:
 private slots:
     void on_logOutButton_pressed();
 
-    void on_orderHistoryButton_pressed();
-
     void on_restaurantsButton_pressed();
 
     void on_revenueButton_pressed();

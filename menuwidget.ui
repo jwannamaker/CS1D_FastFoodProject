@@ -26,39 +26,10 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableWidget" name="tableWidget_menuItems">
-         <property name="rowCount">
-          <number>8</number>
+        <widget class="QTableWidget" name="tableWidget_orderItems">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
          </property>
-         <property name="columnCount">
-          <number>3</number>
-         </property>
-         <attribute name="horizontalHeaderVisible">
-          <bool>false</bool>
-         </attribute>
-         <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>120</number>
-         </attribute>
-         <attribute name="horizontalHeaderStretchLastSection">
-          <bool>false</bool>
-         </attribute>
-         <attribute name="verticalHeaderVisible">
-          <bool>false</bool>
-         </attribute>
-         <attribute name="verticalHeaderDefaultSectionSize">
-          <number>50</number>
-         </attribute>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <column/>
-         <column/>
-         <column/>
         </widget>
        </item>
        <item>
@@ -66,12 +37,12 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Subtotal</string>
+            <string>Total</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="subtotalLineEdit">
+          <widget class="QLineEdit" name="totalLineEdit">
            <property name="readOnly">
             <bool>true</bool>
            </property>
@@ -103,13 +74,6 @@
         <widget class="QPushButton" name="confirmButton">
          <property name="text">
           <string>Confirm Order</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="editButton">
-         <property name="text">
-          <string>Edit Order</string>
          </property>
         </widget>
        </item>
@@ -159,7 +123,7 @@
         <x>0</x>
         <y>0</y>
         <width>550</width>
-        <height>478</height>
+        <height>482</height>
        </rect>
       </property>
      </widget>

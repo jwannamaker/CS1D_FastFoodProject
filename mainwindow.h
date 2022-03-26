@@ -7,16 +7,26 @@
 #include <QObject>
 #include <QStackedWidget>
 #include "databasehelper.h"
+#include "customer.h"
 #include "restaurantwidget.h"
 #include "mainmenuwidget.h"
 #include "menuwidget.h"
 #include "revenuewidget.h"
-#include "login.h"
+#include "loginwidget.h"
+
+// linking gloabals
+extern Customer CurrentUser;
+extern DatabaseHelper Database;
+extern std::vector<Restaurant> RestaurantList;
 
 namespace Ui {
 class MainWindow;
 }
 
+///
+/// \class MainWindow
+/// \brief The MainWindow class
+///
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -24,10 +34,23 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    ///
+    /// \brief initializeNewUser
+    ///
     void initializeNewUser();
 
+    ///
+    /// \brief initializeMainMenu
+    ///
+    void initializeMainMenu();
+
 public slots:
-    void recieve_loginSuccess(Customer);
+    ///
+    /// \brief recieve_loginSuccess
+    /// \param newUser
+    ///
+    void recieve_loginSuccess();
 
     ///
     /// \brief recieve_logout
@@ -41,6 +64,11 @@ public slots:
     void recieve_restaurantView();
 
     ///
+    /// \brief recieve_addRestaurantToTrip
+    ///
+    void recieve_addRestaurantToTrip(Restaurant&);
+
+    ///
     /// \brief recieve_mainMenu
     ///
     void recieve_mainMenu();
@@ -49,7 +77,7 @@ public slots:
     /// \brief recieve_viewMenu
     /// \param Restaurant rest
     ///
-    void recieve_viewMenu(Restaurant rest);
+    void recieve_viewMenu(Restaurant& rest);
 
     ///
     /// \brief recieve_viewRevenue
@@ -57,11 +85,10 @@ public slots:
     void recieve_revenueView();
 
 private:
-    DatabaseHelper      dbHelper;
-    Customer            user;
+    Customer            currentUser;
     Ui::MainWindow*     ui;
     QStackedWidget*     stackedWidget;
-    Login*              loginPage;
+    LoginWidget*        loginPage;
     MainMenuWidget*     mainMenuPage;
     MenuWidget*         menuPage;
     RestaurantWidget*   restaurantPage;

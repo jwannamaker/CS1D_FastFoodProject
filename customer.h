@@ -4,7 +4,7 @@
 
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
-#include "restaurant.h"
+#include <QString>
 
 ///
 /// \class Customer.
@@ -31,7 +31,7 @@ public:
     /// \param username QString
     /// \param password QString
     ///
-    Customer(QString username, QString password);
+    Customer(const QString& username, const QString& password);
 
     ///
     /// \brief isAdmin.
@@ -39,7 +39,25 @@ public:
     /// Determines if the current user is logged in as an admin or not.
     /// \return True if the current user is an Admin, otherwise False.
     ///
-    bool isAdmin();
+    bool isAdmin() const;
+
+    ///
+    /// \brief setAdmin
+    /// \param admin
+    ///
+    void setAdmin(bool admin);
+
+    ///
+    /// \brief isValid
+    /// \return
+    ///
+    bool isValid() const;
+
+    ///
+    /// \brief setValid
+    /// \param valid
+    ///
+    void setValid(bool valid);
 
     ///
     /// \brief getUsername
@@ -56,6 +74,8 @@ public:
 private:
     QString     username;
     QString     password;
+    bool        valid;
+    bool        admin;
 };
 
 #endif // CUSTOMER_H

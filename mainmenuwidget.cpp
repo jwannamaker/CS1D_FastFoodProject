@@ -23,12 +23,6 @@ void MainMenuWidget::on_logOutButton_pressed()
     emit transmit_logout();
 }
 
-
-void MainMenuWidget::on_orderHistoryButton_pressed()
-{
-
-}
-
 void MainMenuWidget::on_restaurantsButton_pressed()
 {
     emit transmit_restaurantView();
