@@ -62,6 +62,10 @@ public:
         tableWidget_orderItems = new QTableWidget(MenuWidget);
         tableWidget_orderItems->setObjectName(QString::fromUtf8("tableWidget_orderItems"));
         tableWidget_orderItems->setFrameShape(QFrame::NoFrame);
+        tableWidget_orderItems->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidget_orderItems->setSelectionMode(QAbstractItemView::NoSelection);
+        tableWidget_orderItems->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableWidget_orderItems->verticalHeader()->setVisible(false);
 
         verticalLayout_2->addWidget(tableWidget_orderItems);
 

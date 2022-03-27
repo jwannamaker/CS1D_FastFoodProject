@@ -79,6 +79,7 @@ void RestaurantWidget::addRestaurantsFromFile()
     restaurantButtons.clear();
     createButtons();
     populateComboBox();
+    adminAddButton = nullptr;
 }
 
 ///

@@ -31,10 +31,11 @@ void DatabaseHelper::authenticateUser()
     QSqlQuery query(database);
 
     //If the users table hasn't been added yet to the database, it will add it and insert a generic login
-    if(query.exec("CREATE TABLE IF NOT EXISTS users ( Username varchar(255) UNIQUE, Password varchar(255), IsAdmin bool )"))
+    if(query.exec("CREATE TABLE users ( Username varchar(255) UNIQUE, Password varchar(255), IsAdmin bool )"))
     {
-        query.exec("INSERT INTO users VALUES ('username', 'password', 1)");
-        query.exec("INSERT INTO users VALUES ('nonadmin', 'password', 0)");
+        query.exec("INSERT INTO users VALUES ('username', 'password', 0)");
+        query.exec("INSERT INTO users VALUES ('admin', 'password', 1)");
+        query.exec("INSERT INTO users VALUES ('guest', 'password', 0)");
     }
 
     if(query.exec("SELECT * FROM users"))

@@ -1,3 +1,4 @@
+debug/adminwidget.o
 debug/button.o
 debug/customer.o
 debug/databasehelper.o
@@ -11,6 +12,7 @@ debug/restaurant.o
 debug/restaurantwidget.o
 debug/revenuewidget.o
 debug/qrc_resource.o
+debug/moc_adminwidget.o
 debug/moc_button.o
 debug/moc_loginwidget.o
 debug/moc_mainmenuwidget.o

@@ -1,3 +1,4 @@
+release/adminwidget.o
 release/button.o
 release/customer.o
 release/databasehelper.o
@@ -11,6 +12,7 @@ release/restaurant.o
 release/restaurantwidget.o
 release/revenuewidget.o
 release/qrc_resource.o
+release/moc_adminwidget.o
 release/moc_button.o
 release/moc_loginwidget.o
 release/moc_mainmenuwidget.o

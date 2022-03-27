@@ -29,6 +29,7 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *welcomeLabel;
     QSpacerItem *verticalSpacer;
+    QPushButton *adminButton;
     QPushButton *restaurantsButton;
     QPushButton *revenueButton;
     QPushButton *logOutButton;
@@ -65,6 +66,11 @@ public:
 
         verticalLayout->addItem(verticalSpacer);
 
+        adminButton = new QPushButton(MainMenuWidget);
+        adminButton->setObjectName(QString::fromUtf8("adminButton"));
+
+        verticalLayout->addWidget(adminButton);
+
         restaurantsButton = new QPushButton(MainMenuWidget);
         restaurantsButton->setObjectName(QString::fromUtf8("restaurantsButton"));
 
@@ -93,6 +99,7 @@ public:
     {
         MainMenuWidget->setWindowTitle(QCoreApplication::translate("MainMenuWidget", "Form", nullptr));
         welcomeLabel->setText(QCoreApplication::translate("MainMenuWidget", "Welcome, Guest", nullptr));
+        adminButton->setText(QCoreApplication::translate("MainMenuWidget", "Admin", nullptr));
         restaurantsButton->setText(QCoreApplication::translate("MainMenuWidget", "Restaurants", nullptr));
         revenueButton->setText(QCoreApplication::translate("MainMenuWidget", "Revenue", nullptr));
         logOutButton->setText(QCoreApplication::translate("MainMenuWidget", "Log Out", nullptr));

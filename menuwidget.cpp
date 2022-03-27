@@ -12,7 +12,7 @@ MenuWidget::MenuWidget(Restaurant& inputRestaurant, QWidget *parent) :
     ui->tableWidget_orderItems->setColumnCount(4);
     ui->tableWidget_orderItems->setHorizontalHeaderItem(0, new QTableWidgetItem("Item"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(1, new QTableWidgetItem("Quantity"));
-    ui->tableWidget_orderItems->setHorizontalHeaderItem(2, new QTableWidgetItem("Subtotal"));
+    ui->tableWidget_orderItems->setHorizontalHeaderItem(2, new QTableWidgetItem("Price"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(3, new QTableWidgetItem("Delete"));
 
     createButtons();

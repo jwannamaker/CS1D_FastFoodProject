@@ -12,7 +12,12 @@ MainMenuWidget::MainMenuWidget(QWidget *parent) :
     ui->graphicsView->setBaseSize(250, 250);
     ui->graphicsView->show();
 
+    // checking current user info for menu options
     ui->welcomeLabel->setText("Welcome, " + CurrentUser.getUsername());
+    if (CurrentUser.isAdmin())
+        ui->adminButton->setHidden(false);
+    else
+        ui->adminButton->setHidden(true);
 }
 
 MainMenuWidget::~MainMenuWidget()
@@ -33,5 +38,11 @@ void MainMenuWidget::on_restaurantsButton_pressed()
 void MainMenuWidget::on_revenueButton_pressed()
 {
     emit transmit_revenueView();
+}
+
+
+void MainMenuWidget::on_adminButton_pressed()
+{
+    emit transmit_adminView();
 }
 
