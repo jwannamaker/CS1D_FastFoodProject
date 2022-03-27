@@ -6,16 +6,19 @@
 #define RESTAURANT_H
 #include <QDebug>
 #include "cassert"
+#include "customer.h"
 #include "item.h"
 
 class Restaurant;
 
-// linking global
+// linking globals
+extern Customer CurrentUser;
 extern std::vector<Restaurant> RestaurantList;
 
 // type aliases
 using Menu = std::vector<Item>;
-using OrderList = std::vector<std::vector<Item>>;
+using Order = std::pair<Customer, std::vector<Item>>;
+using OrderList = std::vector<Order>;
 
 ///
 /// \class Restaurant.
@@ -133,10 +136,16 @@ public:
     Item& getMenuItem(int index);
 
     ///
-    /// \brief saveOrder
+    /// \brief addOrder
     /// \param newOrder
     ///
-    void addOrder(std::vector<Item> newOrder);
+    void addOrder(std::vector<Item> orderItems = std::vector<Item>());
+
+    ///
+    /// \brief getLastOrder
+    /// \return
+    ///
+    std::vector<Item>& getCurrentOrder();
 
     ///
     /// \brief setRevenue

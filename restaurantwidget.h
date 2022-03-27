@@ -155,13 +155,19 @@ private:
     ///
     Button *createButton(Restaurant& rest);
 
+    ///
+    /// \brief createAddButton
+    /// \return
+    ///
+    Button *createAddButton();
+
     Ui::RestaurantWidget *ui;
     int initialID = 0;   // ID of the initial restaurant for the current trip
     const int MAX_COL = 5;  //Number of restaurant buttons per row
     QGridLayout* buttonLayout; // layout for the buttons
     QVector<Restaurant> visitedRestaurants; // restaurants in the trip
     QVector<Button*> restaurantButtons; // buttons for each restaurant available to visit
-
+    Button* adminAddButton = nullptr; // the admin button to add restaurants from source_data2.txt
 };
 
 

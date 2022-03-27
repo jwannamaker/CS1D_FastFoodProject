@@ -326,8 +326,9 @@ release/moc_button.cpp: button.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
-		item.h \
+		customer.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
+		item.h \
 		release/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
 	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include E:/CS1D_FastFoodProject/FastFoodApp/release/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IE:/CS1D_FastFoodProject/FastFoodApp -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtSql -IC:/Qt/6.2.2/mingw_64/include/QtCore -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include button.h -o release\moc_button.cpp
@@ -805,6 +806,8 @@ release/moc_mainmenuwidget.cpp: mainmenuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
+		customer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
 		release/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
 	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include E:/CS1D_FastFoodProject/FastFoodApp/release/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IE:/CS1D_FastFoodProject/FastFoodApp -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtSql -IC:/Qt/6.2.2/mingw_64/include/QtCore -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include mainmenuwidget.h -o release\moc_mainmenuwidget.cpp
@@ -1353,8 +1356,9 @@ release/moc_menuwidget.cpp: menuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
-		item.h \
+		customer.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
+		item.h \
 		ui_menuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
@@ -1605,9 +1609,9 @@ release/moc_restaurantwidget.cpp: restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
-		item.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
 		customer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
+		item.h \
 		databasehelper.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QFile \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qfile.h \
@@ -1873,8 +1877,9 @@ release/moc_revenuewidget.cpp: revenuewidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
-		item.h \
+		customer.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
+		item.h \
 		release/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
 	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include E:/CS1D_FastFoodProject/FastFoodApp/release/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IE:/CS1D_FastFoodProject/FastFoodApp -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtSql -IC:/Qt/6.2.2/mingw_64/include/QtCore -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include revenuewidget.h -o release\moc_revenuewidget.cpp
@@ -2074,8 +2079,9 @@ release/button.o: button.cpp button.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
-		item.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QString
+		customer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
+		item.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\button.o button.cpp
 
 release/customer.o: customer.cpp customer.h \
@@ -3302,6 +3308,8 @@ release/mainmenuwidget.o: mainmenuwidget.cpp mainmenuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
+		customer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
 		ui_mainmenuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
@@ -3891,8 +3899,9 @@ release/menuwidget.o: menuwidget.cpp menuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
-		item.h \
+		customer.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
+		item.h \
 		ui_menuwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
@@ -4009,8 +4018,9 @@ release/restaurant.o: restaurant.cpp restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qproperty.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qbindingstorage.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qpropertyprivate.h \
-		item.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QString
+		customer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
+		item.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\restaurant.o restaurant.cpp
 
 release/restaurantwidget.o: restaurantwidget.cpp restaurantwidget.h \
@@ -4225,9 +4235,9 @@ release/restaurantwidget.o: restaurantwidget.cpp restaurantwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLayoutItem \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
-		item.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
 		customer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
+		item.h \
 		databasehelper.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QFile \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qfile.h \
@@ -4491,8 +4501,9 @@ release/revenuewidget.o: revenuewidget.cpp revenuewidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		restaurant.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
-		item.h \
+		customer.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
+		item.h \
 		ui_revenuewidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \

@@ -71,6 +71,13 @@ public:
     ///
     QString getPassword() const;
 
+    ///
+    /// \brief operator ==
+    /// \param other
+    /// \return
+    ///
+    bool operator==(Customer other);
+
 private:
     QString     username;
     QString     password;

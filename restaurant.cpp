@@ -118,7 +118,7 @@ int Restaurant::getShortestDistanceID() const
     double shortestDistance = 100;
     int shortestID = -1;
 
-    for (int otherID = 0; otherID < RestaurantList.size(); otherID++)
+    for (unsigned int otherID = 0; otherID < RestaurantList.size(); otherID++)
         if (getDistance(otherID) < shortestDistance)
         {
             shortestDistance = getDistance(otherID);
@@ -177,12 +177,29 @@ Item& Restaurant::getMenuItem(int index)
 
 ///
 /// \brief Restaurant::addOrder
-/// \param newOrder
+/// \param orderItems
 ///
-void Restaurant::addOrder(std::vector<Item> newOrder)
+void Restaurant::addOrder(std::vector<Item> orderItems)
 {
+    Order newOrder = Order(CurrentUser, orderItems);
     orders.push_back(newOrder);
     updateRevenue();
+}
+
+///
+/// \brief Restaurant::getLastOrder
+/// \return
+///
+std::vector<Item> &Restaurant::getCurrentOrder()
+{
+    // find if the current user has an order
+    for (int i = 0; i < orders.size(); i++)
+        if (orders[i].first == CurrentUser)
+            return orders[i].second;
+
+    // if no order is found, create a new one with CurrentUser and return it
+    addOrder();
+    return orders.end()->second;
 }
 
 ///
@@ -208,9 +225,12 @@ void Restaurant::addRevenue(double revenue)
 ///
 void Restaurant::updateRevenue()
 {
-    for (int i = 0; i < orders.size(); i++)
-        for (int j = 0; j < orders[i].size(); j++)
-            revenue += orders[i][j].getPrice() * orders[i][j].getQuantity();
+    for (unsigned int order = 0; order < orders.size(); order++)
+        for (unsigned int item = 0; item < orders[order].second.size(); item++)
+        {
+            Item currentItem = orders[order].second[item];
+            addRevenue(currentItem.getPrice() * currentItem.getQuantity());
+        }
 }
 
 ///

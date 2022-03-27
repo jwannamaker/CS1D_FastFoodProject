@@ -28,6 +28,14 @@ class Button : public QPushButton
 public:
     ///
     /// \brief Button
+    /// \param topText
+    /// \param bottomText
+    /// \param parent
+    ///
+    explicit Button(const QString &topText = " ", const QString &bottomText = " ", QWidget *parent = nullptr);
+
+    ///
+    /// \brief Button
     /// \param rest
     /// \param initialID
     /// \param parent
@@ -41,14 +49,6 @@ public:
     /// \param parent
     ///
     explicit Button(Restaurant& rest, Item& item, QWidget *parent = nullptr);
-
-    ///
-    /// \brief Button
-    /// \param topText
-    /// \param bottomText
-    /// \param parent
-    ///
-    explicit Button(const QString &topText, const QString &bottomText, QWidget *parent = nullptr);
 
     ///
     /// \brief setLayout

@@ -13,6 +13,7 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
     topText = new QLabel(top);
     bottomText = new QLabel(bottom);
     setLayout(QPixmap(":images/plus_icon.png"));
+    checkBox->setHidden(true);
 }
 
 ///

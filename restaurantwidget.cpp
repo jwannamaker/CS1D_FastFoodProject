@@ -65,11 +65,7 @@ void RestaurantWidget::createButtons()
 
     //Checks if the restaurant list already added the new restaurants
     if (CurrentUser.isAdmin() && RestaurantList.size() < 11)
-    {
-        Button *adminAddButton = new Button("Add Restaurant","source_data2.txt");
-        connect(adminAddButton, SIGNAL(clicked()), this, SLOT(addRestaurantsFromFile()));
-        restaurantButtons.push_back(adminAddButton);
-    }
+        createAddButton();
 
     addButtonsToLayout();
 }
@@ -93,9 +89,14 @@ void RestaurantWidget::addButtonsToLayout()
     int row = 0;
     int col = 0;
 
-    for (unsigned int i = 0; i < restaurantButtons.size(); i++)
+    for (unsigned int i = 0; i < restaurantButtons.size() + 1; i++)
     {
-        buttonLayout->addWidget(restaurantButtons[i], row, col);
+        if (i < restaurantButtons.size())
+            buttonLayout->addWidget(restaurantButtons[i], row, col);
+
+        if (adminAddButton)
+            buttonLayout->addWidget(adminAddButton, row, col);
+
         col++;
 
         if (col >= MAX_COL)
@@ -245,6 +246,20 @@ Button *RestaurantWidget::createButton(Restaurant& rest)
                      this,
                      SLOT(addRestaurantToTrip(Restaurant&)));
     return button;
+}
+
+///
+/// \brief RestaurantWidget::createAddButton
+/// \return
+///
+Button *RestaurantWidget::createAddButton()
+{
+    adminAddButton = new Button("Add Restaurants");
+    QObject::connect(adminAddButton,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(addRestaurantsFromFile()));
+    buttonLayout->addWidget(adminAddButton);
 }
 
 ///

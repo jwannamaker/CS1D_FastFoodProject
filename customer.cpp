@@ -73,3 +73,14 @@ QString Customer::getPassword() const
 {
     return password;
 }
+
+///
+/// \brief Customer::operator ==
+/// \param other
+/// \return
+///
+bool Customer::operator==(Customer other)
+{
+    return username == other.getUsername() && password == other.getPassword() &&
+           valid == other.isValid() && admin == other.isAdmin();
+}
