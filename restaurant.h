@@ -4,13 +4,21 @@
 
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
-#include <QVector>
 #include <QDebug>
+#include "cassert"
+#include "customer.h"
 #include "item.h"
+
+class Restaurant;
+
+// linking globals
+extern Customer CurrentUser;
+extern std::vector<Restaurant> RestaurantList;
 
 // type aliases
 using Menu = std::vector<Item>;
-using OrderList = std::vector<std::vector<Item>>;
+using Order = std::pair<Customer, std::vector<Item>>;
+using OrderList = std::vector<Order>;
 
 ///
 /// \class Restaurant.
@@ -86,9 +94,21 @@ public:
     /// \brief getDistance
     ///
     /// get the distance from the current restaurant to the specified restaurant id
-    /// \return double containg
+    /// \return double containing
     ///
     double getDistance(int otherID) const;
+
+    ///
+    /// \brief getShortestDistanceID
+    /// \return
+    ///
+    int getShortestDistanceID() const;
+
+    ///
+    /// \brief getClosestRestaurant
+    /// \return
+    ///
+    Restaurant& getClosestRestaurant();
 
     ///
     /// \brief setMenu
@@ -116,10 +136,16 @@ public:
     Item& getMenuItem(int index);
 
     ///
-    /// \brief saveOrder
+    /// \brief addOrder
     /// \param newOrder
     ///
-    void addOrder(std::vector<Item> newOrder);
+    void addOrder(std::vector<Item> orderItems = std::vector<Item>());
+
+    ///
+    /// \brief getLastOrder
+    /// \return
+    ///
+    std::vector<Item>& getCurrentOrder();
 
     ///
     /// \brief setRevenue
@@ -134,10 +160,28 @@ public:
     void addRevenue(double revenue);
 
     ///
+    /// \brief updateRevenue
+    ///
+    void updateRevenue();
+
+    ///
     /// \brief getRevenue
     /// \return
     ///
     double getRevenue() const;
+
+    ///
+    /// \brief setDistanceAt
+    /// \param otherID
+    /// \param otherDistance
+    ///
+    void setDistanceAt(unsigned int otherID, double otherDistance);
+
+    ///
+    /// \brief getOrderList
+    /// \return
+    ///
+    OrderList getOrderList() const;
 
 private:
     int                 ID;
