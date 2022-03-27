@@ -255,3 +255,12 @@ void Restaurant::setDistanceAt(unsigned int index, double distance)
     }
     distances[index] = distance;
 }
+
+///
+/// \brief getOrderList
+/// \return
+///
+OrderList Restaurant::getOrderList() const
+{
+    return orders;
+}

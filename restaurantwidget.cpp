@@ -77,9 +77,10 @@ void RestaurantWidget::addRestaurantsFromFile()
 {
     Database.addRestaurants(":data/source_data2.txt");
     restaurantButtons.clear();
+    delete adminAddButton;
+    adminAddButton = nullptr;
     createButtons();
     populateComboBox();
-    adminAddButton = nullptr;
 }
 
 ///

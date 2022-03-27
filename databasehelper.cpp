@@ -191,10 +191,46 @@ void DatabaseHelper::createMenuTable()
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS menu ( ParentID int, Name varchar(255), Price numeric, UNIQUE('ParentID', 'Name', 'Price'))");
 
+    //Delete contents of menu table
+    query.exec("DELETE FROM menu");
+
+    //Adds contents to menu table
     for (Restaurant insert : RestaurantList)
         for (int index = 0; index < insert.getMenuSize(); index++)
             //Inserts the menu items for each corresponding restaurant
             query.exec("INSERT INTO menu VALUES ("+ QString::number(insert.getID()) +
                        ", '"+ insert.getMenuItem(index).getName() +
                        "', "+ QString::number(insert.getMenuItem(index).getPrice()) +")");
+}
+
+///
+/// \brief createOrderTable
+/// This method creates and populates a table in the database ("restaurant_data.sqlite")
+///
+void DatabaseHelper::createOrderTable()
+{
+    QSqlQuery query(database);
+    query.exec("CREATE TABLE IF NOT EXISTS orders ( ParentID int, Username varchar(255), Itemname varchar(255), Quantity int, Price numeric )");
+
+    //Delete contents of orders table
+    query.exec("DELETE FROM orders");
+
+    //Iterates through each restaurant in the global vector
+    for (const Restaurant& insert : RestaurantList)
+    {
+        //Gets each order from the restaurant
+        for(const Order& order : insert.getOrderList())
+        {
+            //Iterates through the menu items of a corresponding order.
+            for(const Item& item : order.second)
+            {
+                //Inserts the items for each order
+                query.exec("INSERT INTO menu VALUES ("+ QString::number(insert.getID()) +
+                           ", '"+ order.first.getUsername() +
+                           "', '"+ item.getName() +
+                           "', " + QString::number(item.getQuantity()) +
+                           ", " + QString::number(item.getPrice()) + ")");
+            }
+        }
+    }
 }

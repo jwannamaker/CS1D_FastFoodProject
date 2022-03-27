@@ -177,6 +177,12 @@ public:
     ///
     void setDistanceAt(unsigned int otherID, double otherDistance);
 
+    ///
+    /// \brief getOrderList
+    /// \return
+    ///
+    OrderList getOrderList() const;
+
 private:
     int                 ID;
     QString             name;
