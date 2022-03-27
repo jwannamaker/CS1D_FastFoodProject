@@ -161,6 +161,13 @@ public:
     ///
     double getRevenue() const;
 
+    ///
+    /// \brief setDistanceAt
+    /// \param otherID
+    /// \param otherDistance
+    ///
+    void setDistanceAt(unsigned int otherID, double otherDistance);
+
 private:
     int                 ID;
     QString             name;

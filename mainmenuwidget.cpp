@@ -11,6 +11,8 @@ MainMenuWidget::MainMenuWidget(QWidget *parent) :
     ui->graphicsView->setScene(mainMenuScene);
     ui->graphicsView->setBaseSize(250, 250);
     ui->graphicsView->show();
+
+    ui->welcomeLabel->setText("Welcome, " + CurrentUser.getUsername());
 }
 
 MainMenuWidget::~MainMenuWidget()

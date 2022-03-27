@@ -221,3 +221,17 @@ double Restaurant::getRevenue() const
 {
     return revenue;
 }
+
+///
+/// \brief setDistanceAt
+/// \param otherID
+/// \param otherDistance
+///
+void Restaurant::setDistanceAt(unsigned int index, double distance)
+{
+    while(distances.size() <= index)
+    {
+        distances.push_back(0.0);
+    }
+    distances[index] = distance;
+}

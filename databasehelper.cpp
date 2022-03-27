@@ -48,6 +48,19 @@ void DatabaseHelper::authenticateUser()
 }
 
 ///
+/// \brief updateRestaurantDistances
+/// This method updates the distance vectors of the given restaurant.
+///
+void DatabaseHelper::updateRestaurantDistances(const Restaurant& newRestaurant)
+{
+    //Iterates through already existing restaurants and adds the distance to new restaurant
+    for(Restaurant& oldRestaurant : RestaurantList)
+    {
+        oldRestaurant.setDistanceAt(newRestaurant.getID(),newRestaurant.getDistance(oldRestaurant.getID()));
+    }
+}
+
+///
 /// \brief DatabaseHelper::addRestaurants
 /// \param filename
 ///
@@ -112,6 +125,7 @@ void DatabaseHelper::addRestaurants(QString filename)
             qDebug() << "new restaurant added: " << newResturant.getName();
 
             //Adds resturant to general list of resturants
+            updateRestaurantDistances(newResturant);
             RestaurantList.push_back(newResturant);
         }
         file.close();

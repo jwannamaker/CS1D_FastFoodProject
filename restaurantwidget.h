@@ -120,6 +120,11 @@ public slots:
     ///
     void addRestaurantToTrip(Restaurant& rest);
 
+    ///
+    /// \brief addRestaurantsFromFile
+    ///
+    void addRestaurantsFromFile();
+
 private slots:
     ///
     /// \brief on_confirmButton_pressed

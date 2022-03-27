@@ -34,6 +34,12 @@ public:
     void authenticateUser();
 
     ///
+    /// \brief updateRestaurantDistances
+    /// This method updates the distance vectors of the given restaurant.
+    ///
+    void updateRestaurantDistances(const Restaurant& newRestaurant);
+
+    ///
     /// \brief addRestaurants
     /// This method parses the source file specified by filename, and stores the relevant
     /// data into the global vector of restaurants.

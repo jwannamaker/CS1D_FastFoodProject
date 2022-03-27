@@ -34,6 +34,8 @@ RestaurantWidget::~RestaurantWidget()
 ///
 void RestaurantWidget::populateComboBox()
 {
+    //Clears combo box
+    ui->comboBox_initialLocation->clear();
     //Add restaurants to combo box
     ui->comboBox_initialLocation->addItem("Saddleback");
     for (size_t i = 0; i < RestaurantList.size(); ++i)
@@ -61,10 +63,26 @@ void RestaurantWidget::createButtons()
 
     updateButtonSequence();
 
-    if (CurrentUser.isAdmin())
-        qDebug() << "create Add Restaurants button";
+    //Checks if the restaurant list already added the new restaurants
+    if (CurrentUser.isAdmin() && RestaurantList.size() < 11)
+    {
+        Button *adminAddButton = new Button("Add Restaurant","source_data2.txt");
+        connect(adminAddButton, SIGNAL(clicked()), this, SLOT(addRestaurantsFromFile()));
+        restaurantButtons.push_back(adminAddButton);
+    }
 
     addButtonsToLayout();
+}
+
+///
+/// \brief RestaurantWidget::addRestaurantsFromFile
+///
+void RestaurantWidget::addRestaurantsFromFile()
+{
+    Database.addRestaurants(":data/source_data2.txt");
+    restaurantButtons.clear();
+    createButtons();
+    populateComboBox();
 }
 
 ///
@@ -235,12 +253,16 @@ Button *RestaurantWidget::createButton(Restaurant& rest)
 ///
 void RestaurantWidget::on_comboBox_initialLocation_currentIndexChanged(int index)
 {
-    qDebug() << "current index: " << index;
-    setInitialID(index);
-    optimizeRestaurantDistance();
-    updateTableWidget();
-    updateTripDistance();
-    updateButtonSequence();
-    addButtonsToLayout();
+    //Index would be -1 on reset or clear
+    if(index != -1)
+    {
+        qDebug() << "current index: " << index;
+        setInitialID(index);
+        optimizeRestaurantDistance();
+        updateTableWidget();
+        updateTripDistance();
+        updateButtonSequence();
+        addButtonsToLayout();
+    }
 }
 
