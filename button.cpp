@@ -61,6 +61,15 @@ Button::Button(Restaurant& rest, Item& item, QWidget* parent)
                      SLOT(itemClicked()));
 }
 
+Button::Button(Item& item, QWidget* parent)
+    : QPushButton(parent), restaurant(NULL_RESTAURANT), menuItem(item)
+{
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+    topText = new QLabel("");
+    bottomText = new QLabel("");
+    this->setIcon(QPixmap(":images/trashbin_icon.png"));
+}
+
 ///
 /// \brief Button::setLayout
 /// \param image

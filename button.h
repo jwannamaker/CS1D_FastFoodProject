@@ -54,7 +54,9 @@ public:
     /// \brief setLayout
     /// \param image
     ///
+    explicit Button(Item& item, QWidget* parent = nullptr);
     void setLayout(QPixmap image);
+
 
     ///
     /// \brief setDistanceTo

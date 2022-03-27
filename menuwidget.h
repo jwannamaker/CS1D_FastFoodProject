@@ -43,6 +43,8 @@ public:
     ///
     void updateTableWidget();
 
+    int GetMenuItemIndex(QString itemName);
+
 signals:
     ///
     /// \brief transmit_confirmOrder
@@ -70,13 +72,18 @@ private slots:
     ///
     void recieve_itemClicked(Item&);
 
+    void deleteItemClicked();
+
 private:
     const int MAX_COL = 5;
 
     Ui::MenuWidget *ui;
     Button *createButton(Item& item); //Creates a button for a menu item
+    Button *createDeleteButton(Item& item, const char *member);
+
     QGridLayout* buttonLayout;
     QVector<Button*> itemButtons;//data members
+    QVector<Button*> deleteItemButtons;
     std::vector<Item> orderedItems;
     Restaurant& currentRestaurant; //Current restaurant on the widget
 };
