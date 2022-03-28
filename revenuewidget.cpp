@@ -17,6 +17,11 @@ RevenueWidget::RevenueWidget(QWidget *parent) :
 
     populateTable();
     populateTotalRevenue();
+
+    QObject::connect(ui->tableWidget->horizontalHeader(),
+                     SIGNAL(sectionClicked(int)),
+                     this,
+                     SLOT(openDetailedView()));
 }
 
 ///
@@ -62,5 +67,13 @@ void RevenueWidget::populateTotalRevenue()
 void RevenueWidget::on_exitButton_pressed()
 {
     emit transmit_cancel();
+}
+
+///
+/// \brief RevenueWidget::transmit_openDetailedView
+///
+void RevenueWidget::openDetailedView()
+{
+    emit transmit_detailedRevenue(RestaurantList.at(ui->tableWidget->currentRow()));
 }
 

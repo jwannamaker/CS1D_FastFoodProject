@@ -43,6 +43,11 @@ public:
     ///
     void updateTableWidget();
 
+    ///
+    /// \brief GetMenuItemIndex
+    /// \param itemName
+    /// \return
+    ///
     int GetMenuItemIndex(QString itemName);
 
 signals:
@@ -55,8 +60,6 @@ signals:
     /// \brief transmit_cancelOrder
     ///
     void transmit_cancelOrder();
-
-    void transmit_editMenu();
 
 private slots:
     ///
@@ -74,8 +77,14 @@ private slots:
     ///
     void recieve_itemClicked(Item&);
 
+    ///
+    /// \brief deleteItemClicked
+    ///
     void deleteItemClicked();
 
+    ///
+    /// \brief on_editButton_pressed
+    ///
     void on_editButton_pressed();
 
 private:

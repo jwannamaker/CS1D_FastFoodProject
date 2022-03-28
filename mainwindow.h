@@ -13,6 +13,7 @@
 #include "restaurantwidget.h"
 #include "menuwidget.h"
 #include "revenuewidget.h"
+#include "revenuedetailwidget.h"
 #include "adminwidget.h"
 
 // linking gloabals
@@ -86,20 +87,26 @@ public slots:
     void recieve_revenueView();
 
     ///
+    /// \brief recieve_detailedRevenue
+    ///
+    void recieve_detailedRevenue(Restaurant&);
+
+    ///
     /// \brief recieve_adminView
     ///
     void recieve_adminView();
 
 private:
-    Customer            currentUser;
-    Ui::MainWindow*     ui;
-    QStackedWidget*     stackedWidget;
-    LoginWidget*        loginPage;
-    MainMenuWidget*     mainMenuPage;
-    MenuWidget*         menuPage;
-    RestaurantWidget*   restaurantPage;
-    RevenueWidget*      revenuePage;
-    AdminWidget*        adminPage;
+    Customer                currentUser;
+    Ui::MainWindow*         ui;
+    QStackedWidget*         stackedWidget;
+    LoginWidget*            loginPage;
+    MainMenuWidget*         mainMenuPage;
+    MenuWidget*             menuPage;
+    RestaurantWidget*       restaurantPage;
+    RevenueWidget*          revenuePage;
+    RevenueDetailWidget*    detailPage;
+    AdminWidget*            adminPage;
 };
 
 #endif // MAINWINDOW_H

@@ -157,7 +157,26 @@ void MainWindow::recieve_revenueView()
                      SIGNAL(transmit_cancel()),
                      this,
                      SLOT(recieve_mainMenu()));
+    QObject::connect(revenuePage,
+                     SIGNAL(transmit_detailedRevenue(Restaurant&)),
+                     this,
+                     SLOT(recieve_detailedRevenue(Restaurant&)));
     stackedWidget->setCurrentWidget(revenuePage);
+}
+
+///
+/// \brief MainWindow::recieve_detailedRevenue
+///
+void MainWindow::recieve_detailedRevenue(Restaurant &rest)
+{
+    detailPage = new RevenueDetailWidget(rest);
+
+    stackedWidget->addWidget(detailWidget);
+    QObject::connect(detailPage,
+                     SIGNAL(transmit_exit()),
+                     this,
+                     SLOT(recieve_revenueView()));
+    stackedWidget->setCurrentWidget(detailPage);
 }
 
 ///

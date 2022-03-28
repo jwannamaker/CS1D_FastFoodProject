@@ -42,14 +42,25 @@ signals:
     ///
     void transmit_cancel();
 
+    ///
+    /// \brief transmit_detailedRevenue
+    ///
+    void transmit_detailedRevenue(Restaurant&);
+
 private slots:
     ///
     /// \brief on_exitButton_pressed
     ///
     void on_exitButton_pressed();
 
+    ///
+    /// \brief openDetailedView
+    ///
+    void openDetailedView();
+
 private:
     Ui::RevenueWidget *ui;
+
 };
 
 #endif // REVENUEWIDGET_H

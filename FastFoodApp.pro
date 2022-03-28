@@ -21,6 +21,7 @@ SOURCES += \
     menuwidget.cpp \
     restaurant.cpp \
     restaurantwidget.cpp \
+    revenuedetailwidget.cpp \
     revenuewidget.cpp
 
 HEADERS += \
@@ -35,6 +36,7 @@ HEADERS += \
     menuwidget.h \
     restaurant.h \
     restaurantwidget.h \
+    revenuedetailwidget.h \
     revenuewidget.h
 
 FORMS += \
@@ -44,6 +46,7 @@ FORMS += \
     mainwindow.ui \
     menuwidget.ui \
     restaurantwidget.ui \
+    revenuedetailwidget.ui \
     revenuewidget.ui
 
 # Default rules for deployment.

@@ -105,18 +105,10 @@ void MenuWidget::updateTableWidget()
 ///
 void MenuWidget::on_confirmButton_pressed()
 {
-    if(orderedItems.size() != 0)
-    {
-        updateTableWidget();
-        updateOrderTotal();
-        currentRestaurant.addOrder(orderedItems);
-        emit transmit_confirmOrder(currentRestaurant);
-    }
-    else
-    {
-        qDebug() << "Nothing has been ordered silly!";
-    }
-
+    updateTableWidget();
+    updateOrderTotal();
+    currentRestaurant.addOrder(orderedItems);
+    emit transmit_confirmOrder(currentRestaurant);
 }
 
 ///
@@ -161,6 +153,9 @@ void MenuWidget::recieve_itemClicked(Item& item)
 
 }
 
+///
+/// \brief MenuWidget::deleteItemClicked
+///
 void MenuWidget::deleteItemClicked()
 {
     Button *clickedButton = qobject_cast<Button *>(sender());
@@ -174,15 +169,13 @@ void MenuWidget::deleteItemClicked()
             orderedItems[menuIndex].decrementQuantity();
             orderedItems.erase(orderedItems.begin() + menuIndex);
             deleteItemButtons.erase(deleteItemButtons.begin() + menuIndex);
-            updateTableWidget();
-            updateOrderTotal();
         }
         else
         {
             orderedItems[menuIndex].decrementQuantity();
-            updateTableWidget();
-            updateOrderTotal();
         }
+        updateTableWidget();
+        updateOrderTotal();
     }
 }
 
@@ -206,7 +199,6 @@ Button *MenuWidget::createDeleteButton(Item& item, const char *member)
     Button *button = new Button(item);
     connect(button, SIGNAL(clicked()), this, member);
     return button;
-
 }
 
 int MenuWidget::GetMenuItemIndex(QString itemName)
@@ -216,13 +208,5 @@ int MenuWidget::GetMenuItemIndex(QString itemName)
 
     qDebug() << "Item doesn't exist";
     return -1;
-}
-
-///
-/// \brief MenuWidget::on_editButton_pressed
-///
-void MenuWidget::on_editButton_pressed()
-{
-    emit transmit_editMenu();
 }
 
