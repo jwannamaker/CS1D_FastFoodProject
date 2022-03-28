@@ -111,7 +111,6 @@ void MainWindow::recieve_restaurantView()
 ///
 void MainWindow::recieve_addRestaurantToTrip(Restaurant& rest)
 {
-    restaurantPage->addRestaurantToTrip(rest);
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 

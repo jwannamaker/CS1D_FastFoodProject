@@ -35,7 +35,7 @@ Button::Button(Restaurant& rest, int initialID, QWidget* parent)
                      this,
                      SLOT(restaurantClicked()));
     QObject::connect(checkBox,
-                     SIGNAL(stateChanged(int)),
+                     SIGNAL(toggled(bool)),
                      this,
                      SLOT(restaurantChecked()));
 }
@@ -61,6 +61,11 @@ Button::Button(Restaurant& rest, Item& item, QWidget* parent)
                      SLOT(itemClicked()));
 }
 
+///
+/// \brief Button::Button
+/// \param item
+/// \param parent
+///
 Button::Button(Item& item, QWidget* parent)
     : QPushButton(parent), restaurant(NULL_RESTAURANT), menuItem(item)
 {

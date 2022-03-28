@@ -142,6 +142,11 @@ private slots:
     void recieve_restaurantClicked(Restaurant&);
 
     ///
+    /// \brief recieve_restaurantChecked
+    ///
+    void recieve_restaurantChecked(Restaurant&);
+
+    ///
     /// \brief on_comboBox_initialLocation_currentIndexChanged
     /// \param index
     ///
