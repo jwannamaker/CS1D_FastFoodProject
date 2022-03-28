@@ -1,6 +1,10 @@
 #include "loginwidget.h"
 #include "ui_loginwidget.h"
 
+///
+/// \brief LoginWidget::LoginWidget
+/// \param parent
+///
 LoginWidget::LoginWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::LoginWidget)
@@ -8,6 +12,9 @@ LoginWidget::LoginWidget(QWidget *parent) :
     ui->setupUi(this);
 }
 
+///
+/// \brief LoginWidget::~LoginWidget
+///
 LoginWidget::~LoginWidget()
 {
     delete ui;
@@ -21,10 +28,10 @@ LoginWidget::~LoginWidget()
 void LoginWidget::on_logInButton_pressed()
 {
     Customer newUser = Customer(ui->usernameLineEdit->text(), ui->passwordLineEdit->text());
-    Database.authenticateUser(newUser);
+    Database.authenticateUser();
 
     if (newUser.isValid())
-        emit transmit_validUser(newUser);
+        emit transmit_validUser();
     else
         emit transmit_invalidUser();
 }
