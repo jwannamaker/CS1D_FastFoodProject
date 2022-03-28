@@ -255,3 +255,8 @@ void Restaurant::setDistanceAt(unsigned int index, double distance)
     }
     distances[index] = distance;
 }
+
+void Restaurant::RemoveMenuItem(int index)
+{
+    menu.erase(menu.begin() + index);
+}
