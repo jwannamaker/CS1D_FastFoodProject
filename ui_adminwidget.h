@@ -25,43 +25,67 @@ QT_BEGIN_NAMESPACE
 class Ui_AdminWidget
 {
 public:
-    QVBoxLayout *verticalLayout;
-    QTableWidget *tableWidget;
     QHBoxLayout *horizontalLayout;
-    QPushButton *exitButton;
-    QSpacerItem *horizontalSpacer;
+    QVBoxLayout *verticalLayout;
     QComboBox *comboBox_restaurant;
+    QSpacerItem *verticalSpacer;
+    QPushButton *addItemButton;
+    QPushButton *saveButton;
+    QPushButton *exitButton;
+    QTableWidget *tableWidget;
 
     void setupUi(QWidget *AdminWidget)
     {
         if (AdminWidget->objectName().isEmpty())
             AdminWidget->setObjectName(QString::fromUtf8("AdminWidget"));
         AdminWidget->resize(744, 482);
-        verticalLayout = new QVBoxLayout(AdminWidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        tableWidget = new QTableWidget(AdminWidget);
-        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-
-        verticalLayout->addWidget(tableWidget);
-
-        horizontalLayout = new QHBoxLayout();
+        horizontalLayout = new QHBoxLayout(AdminWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        comboBox_restaurant = new QComboBox(AdminWidget);
+        comboBox_restaurant->setObjectName(QString::fromUtf8("comboBox_restaurant"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(comboBox_restaurant->sizePolicy().hasHeightForWidth());
+        comboBox_restaurant->setSizePolicy(sizePolicy);
+        comboBox_restaurant->setMinimumSize(QSize(70, 0));
+
+        verticalLayout->addWidget(comboBox_restaurant);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer);
+
+        addItemButton = new QPushButton(AdminWidget);
+        addItemButton->setObjectName(QString::fromUtf8("addItemButton"));
+
+        verticalLayout->addWidget(addItemButton);
+
+        saveButton = new QPushButton(AdminWidget);
+        saveButton->setObjectName(QString::fromUtf8("saveButton"));
+
+        verticalLayout->addWidget(saveButton);
+
         exitButton = new QPushButton(AdminWidget);
         exitButton->setObjectName(QString::fromUtf8("exitButton"));
 
-        horizontalLayout->addWidget(exitButton);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
-        comboBox_restaurant = new QComboBox(AdminWidget);
-        comboBox_restaurant->setObjectName(QString::fromUtf8("comboBox_restaurant"));
-
-        horizontalLayout->addWidget(comboBox_restaurant);
+        verticalLayout->addWidget(exitButton);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        horizontalLayout->addLayout(verticalLayout);
+
+        tableWidget = new QTableWidget(AdminWidget);
+        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setEditTriggers(QAbstractItemView::DoubleClicked|QAbstractItemView::SelectedClicked);
+        tableWidget->setTabKeyNavigation(false);
+        tableWidget->setDragDropOverwriteMode(false);
+        tableWidget->setSelectionMode(QAbstractItemView::ContiguousSelection);
+        tableWidget->setGridStyle(Qt::NoPen);
+        tableWidget->verticalHeader()->setVisible(false);
+
+        horizontalLayout->addWidget(tableWidget);
 
 
         retranslateUi(AdminWidget);
@@ -72,6 +96,8 @@ public:
     void retranslateUi(QWidget *AdminWidget)
     {
         AdminWidget->setWindowTitle(QCoreApplication::translate("AdminWidget", "Form", nullptr));
+        addItemButton->setText(QCoreApplication::translate("AdminWidget", "Add Item", nullptr));
+        saveButton->setText(QCoreApplication::translate("AdminWidget", "Save Changes", nullptr));
         exitButton->setText(QCoreApplication::translate("AdminWidget", "Exit", nullptr));
     } // retranslateUi
 

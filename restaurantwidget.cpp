@@ -13,6 +13,7 @@ RestaurantWidget::RestaurantWidget(QWidget *parent) :
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(1, new QTableWidgetItem("Distance"));
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(2, new QTableWidgetItem("Order Total"));
+    ui->tableWidget_tripRestaurants->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     populateComboBox();
 
@@ -253,14 +254,13 @@ Button *RestaurantWidget::createButton(Restaurant& rest)
 /// \brief RestaurantWidget::createAddButton
 /// \return
 ///
-Button *RestaurantWidget::createAddButton()
+void RestaurantWidget::createAddButton()
 {
     adminAddButton = new Button("Add Restaurants");
     QObject::connect(adminAddButton,
                      SIGNAL(clicked()),
                      this,
                      SLOT(addRestaurantsFromFile()));
-    buttonLayout->addWidget(adminAddButton);
 }
 
 ///

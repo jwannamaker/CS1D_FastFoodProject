@@ -14,6 +14,7 @@ MenuWidget::MenuWidget(Restaurant& inputRestaurant, QWidget *parent) :
     ui->tableWidget_orderItems->setHorizontalHeaderItem(1, new QTableWidgetItem("Quantity"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(2, new QTableWidgetItem("Price"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(3, new QTableWidgetItem("Delete"));
+    ui->tableWidget_orderItems->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     createButtons();
     updateTableWidget();
@@ -94,7 +95,7 @@ void MenuWidget::updateTableWidget()
         l->addWidget(deleteItemButtons[index]);
         QWidget *w = new QWidget();
         w->setLayout(l);
-        ui->tableWidget_orderItems->setCellWidget(index,3, w);
+        ui->tableWidget_orderItems->setCellWidget(index, 3, w);
 
     }
 }
@@ -104,13 +105,11 @@ void MenuWidget::updateTableWidget()
 ///
 void MenuWidget::on_confirmButton_pressed()
 {
-
     if(orderedItems.size() != 0)
     {
-        qDebug() << "ayu";
         updateTableWidget();
         updateOrderTotal();
-        currentRestaurant.addRevenue(ui->totalLineEdit->text().toDouble());
+        currentRestaurant.addOrder(orderedItems);
         emit transmit_confirmOrder(currentRestaurant);
     }
     else
@@ -172,7 +171,6 @@ void MenuWidget::deleteItemClicked()
     {
         if (orderedItems[menuIndex].getQuantity() == 1)
         {
-            qDebug() <<"working on this";
             orderedItems[menuIndex].decrementQuantity();
             orderedItems.erase(orderedItems.begin() + menuIndex);
             deleteItemButtons.erase(deleteItemButtons.begin() + menuIndex);
@@ -185,10 +183,7 @@ void MenuWidget::deleteItemClicked()
             updateTableWidget();
             updateOrderTotal();
         }
-
     }
-    else
-        qDebug() << "something silly happened!";
 }
 
 ///

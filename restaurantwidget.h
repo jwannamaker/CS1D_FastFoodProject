@@ -159,7 +159,7 @@ private:
     /// \brief createAddButton
     /// \return
     ///
-    Button *createAddButton();
+    void createAddButton();
 
     Ui::RestaurantWidget *ui;
     int initialID = 0;   // ID of the initial restaurant for the current trip
