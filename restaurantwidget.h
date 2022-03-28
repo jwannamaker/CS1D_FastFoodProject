@@ -123,7 +123,7 @@ public slots:
     /// \brief addRestaurantToTrip
     /// \param rest
     ///
-    void addRestaurantToTrip(Restaurant& rest);
+    void addRestaurantToTrip(Restaurant& rest,bool checked = false);
 
     ///
     /// \brief addRestaurantsFromFile
@@ -163,7 +163,7 @@ private:
     /// \param rest
     /// \return
     ///
-    Button *createButton(Restaurant& rest);
+    Button *createButton(Restaurant& rest, bool checked = false);
 
     ///
     /// \brief createAddButton

@@ -105,8 +105,22 @@ double Restaurant::getDistance(int otherID) const
 {
     //Warning: This method can only be called if the vector of distances of the current
     //restaurant includes the distance to the other restaurant.
-    assert(otherID <= distances.size());
-    return distances.at(otherID);
+    if(distances.size() <= otherID)
+    {
+        for(Restaurant otherRestaurant : RestaurantList)
+        {
+            if(otherRestaurant.getID() == otherID)
+            {
+                return otherRestaurant.getDistance(ID);
+            }
+        }
+        assert(false);
+        return 0.0; //Fail
+    }
+    else
+    {
+        return distances.at(otherID);
+    }
 }
 
 ///
