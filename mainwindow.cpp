@@ -138,6 +138,10 @@ void MainWindow::recieve_viewMenu(Restaurant& rest)
                      SIGNAL(transmit_confirmOrder(Restaurant&)),
                      this,
                      SLOT(recieve_addRestaurantToTrip(Restaurant&)));
+    QObject::connect(menuPage,
+                     SIGNAL(transmit_editMenu()),
+                     this,
+                     SLOT(recieve_adminView()));
     stackedWidget->setCurrentWidget(menuPage);
 }
 

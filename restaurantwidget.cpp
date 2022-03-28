@@ -146,8 +146,14 @@ void RestaurantWidget::updateTableWidget()
 void RestaurantWidget::updateTripDistance()
 {
     double totalDistance = 0;
-    for (unsigned int i = 0; i < visitedRestaurants.size() - 1; i++)
-        totalDistance += visitedRestaurants[i].getDistance(visitedRestaurants[i + 1]);
+
+    if (visitedRestaurants.size() > 0)
+    {
+        totalDistance += visitedRestaurants[0].getDistance(ui->comboBox_initialLocation->currentIndex());
+        for (unsigned int i = 0; i < visitedRestaurants.size() - 1; i++)
+            totalDistance += visitedRestaurants[i].getDistance(visitedRestaurants[i + 1]);
+    }
+
     ui->totalDistanceLineEdit->setText(QString::number(totalDistance));
 }
 
@@ -229,6 +235,11 @@ void RestaurantWidget::recieve_restaurantClicked(Restaurant& rest)
 {
     qDebug() << "Restaurant clicked: " << rest.getName();
     emit transmit_viewRestMenu(rest);
+}
+
+void RestaurantWidget::recieve_restaurantChecked(Restaurant &rest)
+{
+    qDebug() << "restaurant checked: " << rest.getName();
 }
 
 ///

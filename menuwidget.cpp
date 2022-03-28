@@ -218,4 +218,11 @@ int MenuWidget::GetMenuItemIndex(QString itemName)
     return -1;
 }
 
+///
+/// \brief MenuWidget::on_editButton_pressed
+///
+void MenuWidget::on_editButton_pressed()
+{
+    emit transmit_editMenu();
+}
 

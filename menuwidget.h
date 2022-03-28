@@ -56,6 +56,8 @@ signals:
     ///
     void transmit_cancelOrder();
 
+    void transmit_editMenu();
+
 private slots:
     ///
     /// \brief on_confirmButton_pressed
@@ -73,6 +75,8 @@ private slots:
     void recieve_itemClicked(Item&);
 
     void deleteItemClicked();
+
+    void on_editButton_pressed();
 
 private:
     const int MAX_COL = 5;
