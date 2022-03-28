@@ -31,6 +31,11 @@ signals:
     void transmit_validUser(Customer newUser);
     void transmit_invalidUser();
 
+    ///
+    /// \brief transmit_invalidUser
+    ///
+    void transmit_invalidUser();
+
 public slots:
     ///
     /// \brief on_logInButton_pressed
