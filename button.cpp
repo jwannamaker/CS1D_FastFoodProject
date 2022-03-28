@@ -142,7 +142,7 @@ bool Button::isChecked()
 ///
 void Button::restaurantClicked()
 {
-    checkBox->setChecked(true);
+    setChecked(true);
     emit transmit_restaurantClicked(restaurant);
 }
 
@@ -151,7 +151,7 @@ void Button::restaurantClicked()
 ///
 void Button::restaurantChecked()
 {
-    emit transmit_restaurantChecked(restaurant);
+    emit transmit_restaurantChecked(restaurant,checkBox->isChecked());
 }
 
 ///
@@ -160,4 +160,9 @@ void Button::restaurantChecked()
 void Button::itemClicked()
 {
     emit transmit_itemClicked(menuItem);
+}
+
+void Button::setChecked(bool checked)
+{
+    checkBox->setChecked(checked);
 }
