@@ -6,6 +6,7 @@
 #include <QTableWidgetItem>
 #include "databasehelper.h"
 #include "restaurant.h"
+#include "button.h"
 
 // linking global variables
 extern DatabaseHelper Database;
@@ -40,6 +41,8 @@ public:
     ///
     void updateTableWidget();
 
+    //Button *createDeleteButton(Item& item, const char *member);
+
 signals:
     ///
     /// \brief transmit_cancel
@@ -65,19 +68,17 @@ private slots:
     /// to the admin's new specification, and sets the appropriate restaurant's
     /// menu to match.
     ///
-    void on_saveButton_pressed();
 
-    ///
-    /// \brief on_addItemButton_pressed
-    ///
-    /// Inserts a new row to the table widget that allows the admin to edit the
-    /// name and price.
-    ///
     void on_addItemButton_pressed();
+
+    void on_pushButton_delete_pressed();
+
+    void on_pushButton_editPrice_pressed();
 
 private:
     Ui::AdminWidget *ui;
     int currentID;
+    QVector<Button*> deleteItemButtons;
 };
 
 #endif // ADMINWIDGET_H
