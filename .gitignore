@@ -6,6 +6,9 @@
 !*.cpp
 !*.h
 !*.ui
+!*.png
+!*.qrc
+!*.txt
 
 # ...even if they are in subdirectories
 !*/
