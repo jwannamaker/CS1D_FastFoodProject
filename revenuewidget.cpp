@@ -11,7 +11,7 @@ RevenueWidget::RevenueWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->treeWidget->setHeaderHidden(true);
-    ui->tableWidget->setColumnCount(2);
+    ui->treeWidget->setColumnCount(2);
     populateTree();
     populateTotalRevenue();
 }
@@ -40,10 +40,12 @@ void RevenueWidget::populateTree()
         level->setText(1, "$" + QString::number(RestaurantList[index].getRevenue(), 'f', 2));
 
         level->addChild(child);
-
-        if (RestaurantList[index].getRevenue() <= 0)
-            ui->treeWidget->setItemWidget(child, 0, table);
+        ui->treeWidget->setItemWidget(child, 0, table);
         ui->treeWidget->addTopLevelItem(level);
+        if (RestaurantList[index].getRevenue() <= 0)
+            ui->treeWidget->topLevelItem(index)->setExpanded(false);
+        else
+            ui->treeWidget->topLevelItem(index)->setExpanded(true);
     }
 }
 

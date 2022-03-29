@@ -4,8 +4,13 @@
 #include <QTableWidget>
 #include <QTableWidgetItem>
 #include "button.h"
+#include "customer.h"
 #include "restaurant.h"
 #include "ui_menuwidget.h"
+
+// linking globals
+extern Customer CurrentUser;
+extern std::vector<Restaurant> RestaurantList;
 
 namespace Ui {
 class MenuWidget;

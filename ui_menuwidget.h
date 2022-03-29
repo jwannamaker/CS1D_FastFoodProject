@@ -38,6 +38,7 @@ public:
     QLineEdit *totalLineEdit;
     QVBoxLayout *verticalLayout;
     QSpacerItem *verticalSpacer;
+    QPushButton *editButton;
     QPushButton *confirmButton;
     QPushButton *cancelButton;
     QScrollArea *scrollArea_menu;
@@ -94,6 +95,11 @@ public:
 
         verticalLayout->addItem(verticalSpacer);
 
+        editButton = new QPushButton(MenuWidget);
+        editButton->setObjectName(QString::fromUtf8("editButton"));
+
+        verticalLayout->addWidget(editButton);
+
         confirmButton = new QPushButton(MenuWidget);
         confirmButton->setObjectName(QString::fromUtf8("confirmButton"));
 
@@ -138,6 +144,7 @@ public:
         MenuWidget->setWindowTitle(QCoreApplication::translate("MenuWidget", "Form", nullptr));
         label_2->setText(QCoreApplication::translate("MenuWidget", "Order Summary", nullptr));
         label->setText(QCoreApplication::translate("MenuWidget", "Total", nullptr));
+        editButton->setText(QCoreApplication::translate("MenuWidget", "Edit Menu", nullptr));
         confirmButton->setText(QCoreApplication::translate("MenuWidget", "Confirm Order", nullptr));
         cancelButton->setText(QCoreApplication::translate("MenuWidget", "Cancel Order", nullptr));
     } // retranslateUi

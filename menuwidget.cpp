@@ -193,6 +193,12 @@ Button *MenuWidget::createButton(Item& item)
     return button;
 }
 
+///
+/// \brief MenuWidget::createDeleteButton
+/// \param item
+/// \param member
+/// \return
+///
 Button *MenuWidget::createDeleteButton(Item& item, const char *member)
 {
     Button *button = new Button(item);
@@ -200,6 +206,11 @@ Button *MenuWidget::createDeleteButton(Item& item, const char *member)
     return button;
 }
 
+///
+/// \brief MenuWidget::getMenuItemIndex
+/// \param itemName
+/// \return
+///
 int MenuWidget::GetMenuItemIndex(QString itemName)
 {
     for (int i = 0; i < currentRestaurant.getMenuSize(); i++)
