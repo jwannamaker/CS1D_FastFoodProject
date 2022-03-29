@@ -148,6 +148,25 @@ public:
     std::vector<Item>& getCurrentOrder();
 
     ///
+    /// \brief getOrder
+    /// \param index
+    /// \return
+    ///
+    Order& getOrder(int index);
+
+    ///
+    /// \brief getOrderCount
+    /// \return
+    ///
+    int getOrderCount() const;
+
+    ///
+    /// \brief getOrderList
+    /// \return
+    ///
+    OrderList& getOrderList();
+
+    ///
     /// \brief setRevenue
     /// \param revenue
     ///

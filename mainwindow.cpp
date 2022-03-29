@@ -111,6 +111,7 @@ void MainWindow::recieve_restaurantView()
 ///
 void MainWindow::recieve_addRestaurantToTrip(Restaurant& rest)
 {
+    qDebug() << "adding " << rest.getName() << " to trip";
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
@@ -162,21 +163,6 @@ void MainWindow::recieve_revenueView()
                      this,
                      SLOT(recieve_detailedRevenue(Restaurant&)));
     stackedWidget->setCurrentWidget(revenuePage);
-}
-
-///
-/// \brief MainWindow::recieve_detailedRevenue
-///
-void MainWindow::recieve_detailedRevenue(Restaurant &rest)
-{
-    detailPage = new RevenueDetailWidget(rest);
-
-    stackedWidget->addWidget(detailWidget);
-    QObject::connect(detailPage,
-                     SIGNAL(transmit_exit()),
-                     this,
-                     SLOT(recieve_revenueView()));
-    stackedWidget->setCurrentWidget(detailPage);
 }
 
 ///

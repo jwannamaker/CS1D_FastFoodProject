@@ -128,8 +128,9 @@ public:
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
         tableWidget->setEditTriggers(QAbstractItemView::DoubleClicked|QAbstractItemView::SelectedClicked);
         tableWidget->setTabKeyNavigation(false);
+        tableWidget->setProperty("showDropIndicator", QVariant(false));
         tableWidget->setDragDropOverwriteMode(false);
-        tableWidget->setSelectionMode(QAbstractItemView::ContiguousSelection);
+        tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
         tableWidget->setGridStyle(Qt::NoPen);
         tableWidget->verticalHeader()->setVisible(false);
 

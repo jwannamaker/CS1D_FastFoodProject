@@ -18,7 +18,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,13 +27,13 @@ class Ui_RevenueWidget
 {
 public:
     QGridLayout *gridLayout;
-    QTableWidget *tableWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *exitButton;
     QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLineEdit *totalRevenueLineEdit;
+    QTreeWidget *treeWidget;
 
     void setupUi(QWidget *RevenueWidget)
     {
@@ -42,37 +42,6 @@ public:
         RevenueWidget->resize(787, 552);
         gridLayout = new QGridLayout(RevenueWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        tableWidget = new QTableWidget(RevenueWidget);
-        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
-        tableWidget->setSizePolicy(sizePolicy);
-        tableWidget->setFrameShape(QFrame::NoFrame);
-        tableWidget->setFrameShadow(QFrame::Plain);
-        tableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        tableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        tableWidget->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-        tableWidget->setAutoScroll(false);
-        tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        tableWidget->setProperty("showDropIndicator", QVariant(false));
-        tableWidget->setDragDropOverwriteMode(false);
-        tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
-        tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-        tableWidget->setShowGrid(false);
-        tableWidget->setGridStyle(Qt::SolidLine);
-        tableWidget->setCornerButtonEnabled(false);
-        tableWidget->setColumnCount(0);
-        tableWidget->horizontalHeader()->setVisible(true);
-        tableWidget->horizontalHeader()->setDefaultSectionSize(300);
-        tableWidget->horizontalHeader()->setStretchLastSection(true);
-        tableWidget->verticalHeader()->setVisible(false);
-        tableWidget->verticalHeader()->setDefaultSectionSize(37);
-        tableWidget->verticalHeader()->setHighlightSections(true);
-
-        gridLayout->addWidget(tableWidget, 0, 0, 1, 1);
-
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         exitButton = new QPushButton(RevenueWidget);
@@ -103,6 +72,30 @@ public:
 
 
         gridLayout->addLayout(horizontalLayout, 1, 0, 1, 1);
+
+        treeWidget = new QTreeWidget(RevenueWidget);
+        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
+        __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
+        treeWidget->setHeaderItem(__qtreewidgetitem);
+        treeWidget->setObjectName(QString::fromUtf8("treeWidget"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(treeWidget->sizePolicy().hasHeightForWidth());
+        treeWidget->setSizePolicy(sizePolicy);
+        treeWidget->setFrameShape(QFrame::NoFrame);
+        treeWidget->setFrameShadow(QFrame::Plain);
+        treeWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        treeWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        treeWidget->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        treeWidget->setAutoScroll(false);
+        treeWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        treeWidget->setProperty("showDropIndicator", QVariant(false));
+        treeWidget->setDragDropOverwriteMode(false);
+        treeWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+        treeWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+        gridLayout->addWidget(treeWidget, 0, 0, 1, 1);
 
 
         retranslateUi(RevenueWidget);

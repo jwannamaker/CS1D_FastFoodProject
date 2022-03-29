@@ -1,6 +1,16 @@
 #ifndef REVENUEWIDGET_H
 #define REVENUEWIDGET_H
 #include <QWidget>
+#include <QHeaderView>
+#include <QLayout>
+#include <QHBoxLayout>
+#include <QLayoutItem>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
+#include <QDataWidgetMapper>
+#include "restaurantwidget.h"
 #include "restaurant.h"
 
 // linking globals
@@ -27,9 +37,15 @@ public:
     ~RevenueWidget();
 
     ///
-    /// \brief populateTableWidget
+    /// \brief populateTree
     ///
-    void populateTable();
+    void populateTree();
+
+    ///
+    /// \brief createDetailWidget
+    /// \return
+    ///
+    QTableWidget* createDetailWidget(Restaurant&);
 
     ///
     /// \brief getTotalRevenue
@@ -42,21 +58,11 @@ signals:
     ///
     void transmit_cancel();
 
-    ///
-    /// \brief transmit_detailedRevenue
-    ///
-    void transmit_detailedRevenue(Restaurant&);
-
 private slots:
     ///
     /// \brief on_exitButton_pressed
     ///
     void on_exitButton_pressed();
-
-    ///
-    /// \brief openDetailedView
-    ///
-    void openDetailedView();
 
 private:
     Ui::RevenueWidget *ui;

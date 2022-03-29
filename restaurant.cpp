@@ -203,6 +203,34 @@ std::vector<Item> &Restaurant::getCurrentOrder()
 }
 
 ///
+/// \brief Restaurant::getOrder
+/// \param index
+/// \return
+///
+Order &Restaurant::getOrder(int index)
+{
+    return orders[index];
+}
+
+///
+/// \brief Restaurant::getOrderCount
+/// \return
+///
+int Restaurant::getOrderCount() const
+{
+    return orders.size();
+}
+
+///
+/// \brief Restaurant::getOrderList
+/// \return
+///
+OrderList &Restaurant::getOrderList()
+{
+    return orders;
+}
+
+///
 /// \brief Restaurant::setRevenue
 /// \param revenue
 ///

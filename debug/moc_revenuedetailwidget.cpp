@@ -1,20 +1,19 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'revenuewidget.h'
+** Meta object code from reading C++ file 'revenuedetailwidget.h'
 **
-** Created by: The Qt Meta Object Compiler version 68 (Qt 6.2.3)
+** Created by: The Qt Meta Object Compiler version 68 (Qt 6.2.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 #include <memory>
-#include "../revenuewidget.h"
-#include <QtGui/qtextcursor.h>
+#include "../revenuedetailwidget.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'revenuewidget.h' doesn't include <QObject>."
+#error "The header file 'revenuedetailwidget.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
-#error "This file was generated using the moc from 6.2.3. It"
+#error "This file was generated using the moc from 6.2.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -22,26 +21,26 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_RevenueWidget_t {
+struct qt_meta_stringdata_RevenueDetailWidget_t {
     const uint offsetsAndSize[8];
-    char stringdata0[53];
+    char stringdata0[57];
 };
 #define QT_MOC_LITERAL(ofs, len) \
-    uint(offsetof(qt_meta_stringdata_RevenueWidget_t, stringdata0) + ofs), len 
-static const qt_meta_stringdata_RevenueWidget_t qt_meta_stringdata_RevenueWidget = {
+    uint(offsetof(qt_meta_stringdata_RevenueDetailWidget_t, stringdata0) + ofs), len 
+static const qt_meta_stringdata_RevenueDetailWidget_t qt_meta_stringdata_RevenueDetailWidget = {
     {
-QT_MOC_LITERAL(0, 13), // "RevenueWidget"
-QT_MOC_LITERAL(14, 15), // "transmit_cancel"
-QT_MOC_LITERAL(30, 0), // ""
-QT_MOC_LITERAL(31, 21) // "on_exitButton_pressed"
+QT_MOC_LITERAL(0, 19), // "RevenueDetailWidget"
+QT_MOC_LITERAL(20, 13), // "transmit_exit"
+QT_MOC_LITERAL(34, 0), // ""
+QT_MOC_LITERAL(35, 21) // "on_exitButton_clicked"
 
     },
-    "RevenueWidget\0transmit_cancel\0\0"
-    "on_exitButton_pressed"
+    "RevenueDetailWidget\0transmit_exit\0\0"
+    "on_exitButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_RevenueWidget[] = {
+static const uint qt_meta_data_RevenueDetailWidget[] = {
 
  // content:
       10,       // revision
@@ -69,21 +68,21 @@ static const uint qt_meta_data_RevenueWidget[] = {
        0        // eod
 };
 
-void RevenueWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void RevenueDetailWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<RevenueWidget *>(_o);
+        auto *_t = static_cast<RevenueDetailWidget *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->transmit_cancel(); break;
-        case 1: _t->on_exitButton_pressed(); break;
+        case 0: _t->transmit_exit(); break;
+        case 1: _t->on_exitButton_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (RevenueWidget::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RevenueWidget::transmit_cancel)) {
+            using _t = void (RevenueDetailWidget::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RevenueDetailWidget::transmit_exit)) {
                 *result = 0;
                 return;
             }
@@ -92,14 +91,14 @@ void RevenueWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
     (void)_a;
 }
 
-const QMetaObject RevenueWidget::staticMetaObject = { {
+const QMetaObject RevenueDetailWidget::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_meta_stringdata_RevenueWidget.offsetsAndSize,
-    qt_meta_data_RevenueWidget,
+    qt_meta_stringdata_RevenueDetailWidget.offsetsAndSize,
+    qt_meta_data_RevenueDetailWidget,
     qt_static_metacall,
     nullptr,
-qt_incomplete_metaTypeArray<qt_meta_stringdata_RevenueWidget_t
-, QtPrivate::TypeAndForceComplete<RevenueWidget, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+qt_incomplete_metaTypeArray<qt_meta_stringdata_RevenueDetailWidget_t
+, QtPrivate::TypeAndForceComplete<RevenueDetailWidget, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 , QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
@@ -108,20 +107,20 @@ qt_incomplete_metaTypeArray<qt_meta_stringdata_RevenueWidget_t
 } };
 
 
-const QMetaObject *RevenueWidget::metaObject() const
+const QMetaObject *RevenueDetailWidget::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *RevenueWidget::qt_metacast(const char *_clname)
+void *RevenueDetailWidget::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_RevenueWidget.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_RevenueDetailWidget.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int RevenueWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int RevenueDetailWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -139,7 +138,7 @@ int RevenueWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void RevenueWidget::transmit_cancel()
+void RevenueDetailWidget::transmit_exit()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }

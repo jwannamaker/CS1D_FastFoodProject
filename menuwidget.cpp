@@ -13,7 +13,7 @@ MenuWidget::MenuWidget(Restaurant& inputRestaurant, QWidget *parent) :
     ui->tableWidget_orderItems->setHorizontalHeaderItem(0, new QTableWidgetItem("Item"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(1, new QTableWidgetItem("Quantity"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(2, new QTableWidgetItem("Price"));
-    ui->tableWidget_orderItems->setHorizontalHeaderItem(3, new QTableWidgetItem("Delete"));
+    ui->tableWidget_orderItems->setHorizontalHeaderItem(3, new QTableWidgetItem("Remove Item"));
     ui->tableWidget_orderItems->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     createButtons();
@@ -96,7 +96,6 @@ void MenuWidget::updateTableWidget()
         QWidget *w = new QWidget();
         w->setLayout(l);
         ui->tableWidget_orderItems->setCellWidget(index, 3, w);
-
     }
 }
 
