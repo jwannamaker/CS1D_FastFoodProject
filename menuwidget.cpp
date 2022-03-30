@@ -1,4 +1,5 @@
 #include "menuwidget.h"
+#include <QMessageBox>
 
 ///
 /// \brief MenuWidget::MenuWidget
@@ -136,6 +137,7 @@ void MenuWidget::recieve_itemClicked(Item& item)
 {
     QList<QTableWidgetItem *> items = ui->tableWidget_orderItems->findItems(item.getName(), Qt::MatchExactly);
 
+
     if (items.size() == 0)
     {
         orderedItems.push_back(item);
@@ -151,9 +153,17 @@ void MenuWidget::recieve_itemClicked(Item& item)
         //If menu is valid continute
         if( menuIndex != -1)
         {
-            orderedItems[menuIndex].incrementQuantity();
-            updateTableWidget();
-            updateOrderTotal();
+            if(orderedItems[menuIndex].getQuantity() > 99)
+            {
+                QMessageBox::information(this, "Tip", "Cant add more than 100 items");
+            }
+            else
+            {
+                orderedItems[menuIndex].incrementQuantity();
+                updateTableWidget();
+                updateOrderTotal();
+            }
+
         }
         else
             qDebug() << "An error has occured";
