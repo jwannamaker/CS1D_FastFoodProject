@@ -9,10 +9,10 @@ RestaurantWidget::RestaurantWidget(QWidget *parent) :
     ui(new Ui::RestaurantWidget)
 {
     ui->setupUi(this);
-    ui->tableWidget_tripRestaurants->setColumnCount(3);
+    ui->tableWidget_tripRestaurants->setColumnCount(2);
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(1, new QTableWidgetItem("Distance"));
-    ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(2, new QTableWidgetItem("Order Total"));
+
     ui->tableWidget_tripRestaurants->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     populateComboBox();
@@ -134,9 +134,9 @@ void RestaurantWidget::updateTableWidget()
         QTableWidgetItem* restaurantDistance = new QTableWidgetItem(QString::number(visitedRestaurants[index].getDistance(initialID)));
         ui->tableWidget_tripRestaurants->setItem(index, 1, restaurantDistance);
         ui->tableWidget_tripRestaurants->item(index, 1)->setTextAlignment(Qt::AlignRight);
-        QTableWidgetItem* restaurantSubtotal = new QTableWidgetItem(QString::number(visitedRestaurants[index].getRevenue())); // may need to create method for getting the total for the last confirmed order
-        ui->tableWidget_tripRestaurants->setItem(index, 2, restaurantSubtotal);
-        ui->tableWidget_tripRestaurants->item(index, 2)->setTextAlignment(Qt::AlignRight);
+//        QTableWidgetItem* restaurantSubtotal = new QTableWidgetItem(QString::number(visitedRestaurants[index].getRevenue())); // may need to create method for getting the total for the last confirmed order
+//        ui->tableWidget_tripRestaurants->setItem(index, 2, restaurantSubtotal);
+//        ui->tableWidget_tripRestaurants->item(index, 2)->setTextAlignment(Qt::AlignRight);
     }
 }
 
