@@ -1,10 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "restaurantwidget.h"
-#include "mainmenuwidget.h"
-#include "menuwidget.h"
-#include "loginwidget.h"
 
+///
+/// \brief MainWindow::MainWindow
+/// \param parent
+///
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -25,11 +25,17 @@ MainWindow::MainWindow(QWidget *parent) :
     initializeNewUser();
 }
 
+///
+/// \brief MainWindow::~MainWindow
+///
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+///
+/// \brief MainWindow::initializeNewUser
+///
 void MainWindow::initializeNewUser()
 {
     // initializing login page
@@ -42,6 +48,9 @@ void MainWindow::initializeNewUser()
     stackedWidget->setCurrentWidget(loginPage);
 }
 
+///
+/// \brief MainWindow::initializeMainMenu
+///
 void MainWindow::initializeMainMenu()
 {
     // initializing main menu page
@@ -59,15 +68,25 @@ void MainWindow::initializeMainMenu()
                      SIGNAL(transmit_revenueView()),
                      this,
                      SLOT(recieve_revenueView()));
+    QObject::connect(mainMenuPage,
+                     SIGNAL(transmit_adminView()),
+                     this,
+                     SLOT(recieve_adminView()));
     stackedWidget->setCurrentWidget(mainMenuPage);
 }
 
+///
+/// \brief MainWindow::recieve_loginSuccess
+///
 void MainWindow::recieve_loginSuccess()
 {
     loginPage->on_clearButton_pressed();
     initializeMainMenu();
 }
 
+///
+/// \brief MainWindow::recieve_logout
+///
 void MainWindow::recieve_logout()
 {
     stackedWidget->setCurrentWidget(loginPage);
@@ -91,22 +110,29 @@ void MainWindow::recieve_restaurantView()
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
+///
+/// \brief MainWindow::recieve_addRestaurantToTrip
+/// \param rest
+///
 void MainWindow::recieve_addRestaurantToTrip(Restaurant& rest)
 {
-    restaurantPage->addRestaurantToTrip(rest);
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
+///
+/// \brief MainWindow::recieve_mainMenu
+///
 void MainWindow::recieve_mainMenu()
 {
     initializeMainMenu();
 }
 
+///
+/// \brief MainWindow::recieve_viewMenu
+/// \param rest
+///
 void MainWindow::recieve_viewMenu(Restaurant& rest)
 {
-    // initializing menu page
-    qDebug() << "recieve_viewMenu has been called for " << rest.getName() << "\n";
-
     menuPage = new MenuWidget(rest);
     stackedWidget->addWidget(menuPage);
     QObject::connect(menuPage,
@@ -117,9 +143,16 @@ void MainWindow::recieve_viewMenu(Restaurant& rest)
                      SIGNAL(transmit_confirmOrder(Restaurant&)),
                      this,
                      SLOT(recieve_addRestaurantToTrip(Restaurant&)));
+    QObject::connect(menuPage,
+                     SIGNAL(transmit_editMenu()),
+                     this,
+                     SLOT(recieve_adminView()));
     stackedWidget->setCurrentWidget(menuPage);
 }
 
+///
+/// \brief MainWindow::recieve_revenueView
+///
 void MainWindow::recieve_revenueView()
 {
     // initializing the revenue page
@@ -130,4 +163,18 @@ void MainWindow::recieve_revenueView()
                      this,
                      SLOT(recieve_mainMenu()));
     stackedWidget->setCurrentWidget(revenuePage);
+}
+
+///
+/// \brief MainWindow::recieve_adminView
+///
+void MainWindow::recieve_adminView()
+{
+    adminPage = new AdminWidget();
+    stackedWidget->addWidget(adminPage);
+    QObject::connect(adminPage,
+                     SIGNAL(transmit_cancel()),
+                     this,
+                     SLOT(recieve_mainMenu()));
+    stackedWidget->setCurrentWidget(adminPage);
 }

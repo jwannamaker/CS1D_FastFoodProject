@@ -1,4 +1,5 @@
 #include "menuwidget.h"
+#include <QMessageBox>
 
 ///
 /// \brief MenuWidget::MenuWidget
@@ -14,6 +15,7 @@ MenuWidget::MenuWidget(Restaurant& inputRestaurant, QWidget *parent) :
     ui->tableWidget_orderItems->setHorizontalHeaderItem(1, new QTableWidgetItem("Quantity"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(2, new QTableWidgetItem("Price"));
     ui->tableWidget_orderItems->setHorizontalHeaderItem(3, new QTableWidgetItem("Delete"));
+    ui->tableWidget_orderItems->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     createButtons();
     updateTableWidget();
@@ -94,7 +96,7 @@ void MenuWidget::updateTableWidget()
         l->addWidget(deleteItemButtons[index]);
         QWidget *w = new QWidget();
         w->setLayout(l);
-        ui->tableWidget_orderItems->setCellWidget(index,3, w);
+        ui->tableWidget_orderItems->setCellWidget(index, 3, w);
 
     }
 }
@@ -105,18 +107,11 @@ void MenuWidget::updateTableWidget()
 void MenuWidget::on_confirmButton_pressed()
 {
 
-    if(orderedItems.size() != 0)
-    {
-        qDebug() << "ayu";
-        updateTableWidget();
-        updateOrderTotal();
-        currentRestaurant.addRevenue(ui->totalLineEdit->text().toDouble());
-        emit transmit_confirmOrder(currentRestaurant);
-    }
-    else
-    {
-        qDebug() << "Nothing has been ordered silly!";
-    }
+    updateTableWidget();
+    updateOrderTotal();
+    currentRestaurant.addOrder(orderedItems);
+    emit transmit_confirmOrder(currentRestaurant);
+
 
 }
 
@@ -137,6 +132,7 @@ void MenuWidget::recieve_itemClicked(Item& item)
 {
     QList<QTableWidgetItem *> items = ui->tableWidget_orderItems->findItems(item.getName(), Qt::MatchExactly);
 
+
     if (items.size() == 0)
     {
         orderedItems.push_back(item);
@@ -152,9 +148,17 @@ void MenuWidget::recieve_itemClicked(Item& item)
         //If menu is valid continute
         if( menuIndex != -1)
         {
-            orderedItems[menuIndex].incrementQuantity();
-            updateTableWidget();
-            updateOrderTotal();
+            if(orderedItems[menuIndex].getQuantity() > 99)
+            {
+                QMessageBox::information(this, "Tip", "Cant add more than 100 items");
+            }
+            else
+            {
+                orderedItems[menuIndex].incrementQuantity();
+                updateTableWidget();
+                updateOrderTotal();
+            }
+
         }
         else
             qDebug() << "An error has occured";
@@ -172,7 +176,6 @@ void MenuWidget::deleteItemClicked()
     {
         if (orderedItems[menuIndex].getQuantity() == 1)
         {
-            qDebug() <<"working on this";
             orderedItems[menuIndex].decrementQuantity();
             orderedItems.erase(orderedItems.begin() + menuIndex);
             deleteItemButtons.erase(deleteItemButtons.begin() + menuIndex);
@@ -185,10 +188,7 @@ void MenuWidget::deleteItemClicked()
             updateTableWidget();
             updateOrderTotal();
         }
-
     }
-    else
-        qDebug() << "something silly happened!";
 }
 
 ///
@@ -223,4 +223,11 @@ int MenuWidget::GetMenuItemIndex(QString itemName)
     return -1;
 }
 
+///
+/// \brief MenuWidget::on_editButton_pressed
+///
+void MenuWidget::on_editButton_pressed()
+{
+    emit transmit_editMenu();
+}
 

@@ -177,17 +177,7 @@ public:
     ///
     void setDistanceAt(unsigned int otherID, double otherDistance);
 
-    ///
-    /// \brief getOrderList
-    /// \return
-    ///
-    OrderList getOrderList() const;
-
-    ///
-    /// \brief setOrderList
-    /// \param newOrderList
-    ///
-    void setOrderList(OrderList newOrderList);
+    void RemoveMenuItem(int index);
 
 private:
     int                 ID;

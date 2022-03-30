@@ -9,16 +9,18 @@ RestaurantWidget::RestaurantWidget(QWidget *parent) :
     ui(new Ui::RestaurantWidget)
 {
     ui->setupUi(this);
-    ui->tableWidget_tripRestaurants->setColumnCount(3);
+    ui->tableWidget_tripRestaurants->setColumnCount(2);
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
     ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(1, new QTableWidgetItem("Distance"));
-    ui->tableWidget_tripRestaurants->setHorizontalHeaderItem(2, new QTableWidgetItem("Order Total"));
+
+    ui->tableWidget_tripRestaurants->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     populateComboBox();
 
     //Initialize Grid for restaurant icons
     buttonLayout = new QGridLayout(ui->scrollArea_restaurants);
     createButtons();
+    //
 }
 
 ///
@@ -167,9 +169,9 @@ void RestaurantWidget::updateTableWidget()
         QTableWidgetItem* restaurantDistance = new QTableWidgetItem(QString::number(visitedRestaurants[index].getDistance(initialID)));
         ui->tableWidget_tripRestaurants->setItem(index, 1, restaurantDistance);
         ui->tableWidget_tripRestaurants->item(index, 1)->setTextAlignment(Qt::AlignRight);
-        QTableWidgetItem* restaurantSubtotal = new QTableWidgetItem(QString::number(visitedRestaurants[index].getRevenue())); // may need to create method for getting the total for the last confirmed order
-        ui->tableWidget_tripRestaurants->setItem(index, 2, restaurantSubtotal);
-        ui->tableWidget_tripRestaurants->item(index, 2)->setTextAlignment(Qt::AlignRight);
+//        QTableWidgetItem* restaurantSubtotal = new QTableWidgetItem(QString::number(visitedRestaurants[index].getRevenue())); // may need to create method for getting the total for the last confirmed order
+//        ui->tableWidget_tripRestaurants->setItem(index, 2, restaurantSubtotal);
+//        ui->tableWidget_tripRestaurants->item(index, 2)->setTextAlignment(Qt::AlignRight);
     }
 }
 
@@ -179,8 +181,14 @@ void RestaurantWidget::updateTableWidget()
 void RestaurantWidget::updateTripDistance()
 {
     double totalDistance = 0;
-    for (unsigned int i = 0; i < visitedRestaurants.size() - 1; i++)
-        totalDistance += visitedRestaurants[i].getDistance(visitedRestaurants[i + 1]);
+
+    if (visitedRestaurants.size() > 0)
+    {
+        totalDistance += visitedRestaurants[0].getDistance(ui->comboBox_initialLocation->currentIndex());
+        for (unsigned int i = 0; i < visitedRestaurants.size() - 1; i++)
+            totalDistance += visitedRestaurants[i].getDistance(visitedRestaurants[i + 1]);
+    }
+
     ui->totalDistanceLineEdit->setText(QString::number(totalDistance));
 }
 
@@ -264,6 +272,11 @@ void RestaurantWidget::recieve_restaurantClicked(Restaurant& rest)
     emit transmit_viewRestMenu(rest);
 }
 
+void RestaurantWidget::recieve_restaurantChecked(Restaurant &rest)
+{
+    qDebug() << "restaurant checked: " << rest.getName();
+}
+
 ///
 /// \brief RestaurantWidget::createButton
 /// \param rest
@@ -288,14 +301,13 @@ Button *RestaurantWidget::createButton(Restaurant& rest, bool checked)
 /// \brief RestaurantWidget::createAddButton
 /// \return
 ///
-Button *RestaurantWidget::createAddButton()
+void RestaurantWidget::createAddButton()
 {
     adminAddButton = new Button("Add Restaurants");
     QObject::connect(adminAddButton,
                      SIGNAL(clicked()),
                      this,
                      SLOT(addRestaurantsFromFile()));
-    buttonLayout->addWidget(adminAddButton);
 }
 
 ///
@@ -316,4 +328,3 @@ void RestaurantWidget::on_comboBox_initialLocation_currentIndexChanged(int index
         addButtonsToLayout();
     }
 }
-

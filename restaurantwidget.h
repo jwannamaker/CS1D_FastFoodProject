@@ -142,6 +142,11 @@ private slots:
     void recieve_restaurantClicked(Restaurant&);
 
     ///
+    /// \brief recieve_restaurantChecked
+    ///
+    void recieve_restaurantChecked(Restaurant&);
+
+    ///
     /// \brief on_comboBox_initialLocation_currentIndexChanged
     /// \param index
     ///
@@ -159,7 +164,7 @@ private:
     /// \brief createAddButton
     /// \return
     ///
-    Button *createAddButton();
+    void createAddButton();
 
     Ui::RestaurantWidget *ui;
     int initialID = 0;   // ID of the initial restaurant for the current trip

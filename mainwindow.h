@@ -8,11 +8,12 @@
 #include <QStackedWidget>
 #include "databasehelper.h"
 #include "customer.h"
-#include "restaurantwidget.h"
+#include "loginwidget.h"
 #include "mainmenuwidget.h"
+#include "restaurantwidget.h"
 #include "menuwidget.h"
 #include "revenuewidget.h"
-#include "loginwidget.h"
+#include "adminwidget.h"
 
 // linking gloabals
 extern Customer CurrentUser;
@@ -84,6 +85,11 @@ public slots:
     ///
     void recieve_revenueView();
 
+    ///
+    /// \brief recieve_adminView
+    ///
+    void recieve_adminView();
+
 private:
     Customer            currentUser;
     Ui::MainWindow*     ui;
@@ -93,6 +99,7 @@ private:
     MenuWidget*         menuPage;
     RestaurantWidget*   restaurantPage;
     RevenueWidget*      revenuePage;
+    AdminWidget*        adminPage;
 };
 
 #endif // MAINWINDOW_H

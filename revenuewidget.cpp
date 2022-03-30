@@ -13,6 +13,8 @@ RevenueWidget::RevenueWidget(QWidget *parent) :
     ui->tableWidget->setColumnCount(2);
     ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Restaurant"));
     ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Revenue"));
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
     populateTable();
     populateTotalRevenue();
 }

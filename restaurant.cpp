@@ -105,22 +105,8 @@ double Restaurant::getDistance(int otherID) const
 {
     //Warning: This method can only be called if the vector of distances of the current
     //restaurant includes the distance to the other restaurant.
-    if(distances.size() <= otherID)
-    {
-        for(Restaurant otherRestaurant : RestaurantList)
-        {
-            if(otherRestaurant.getID() == otherID)
-            {
-                return otherRestaurant.getDistance(ID);
-            }
-        }
-        assert(false);
-        return 0.0; //Fail
-    }
-    else
-    {
-        return distances.at(otherID);
-    }
+    assert(otherID <= distances.size());
+    return distances.at(otherID);
 }
 
 ///
@@ -270,20 +256,7 @@ void Restaurant::setDistanceAt(unsigned int index, double distance)
     distances[index] = distance;
 }
 
-///
-/// \brief getOrderList
-/// \return
-///
-OrderList Restaurant::getOrderList() const
+void Restaurant::RemoveMenuItem(int index)
 {
-    return orders;
-}
-
-///
-/// \brief setOrderList
-/// \param newOrderList
-///
-void Restaurant::setOrderList(OrderList newOrderList)
-{
-    this->orders = newOrderList;
+    menu.erase(menu.begin() + index);
 }

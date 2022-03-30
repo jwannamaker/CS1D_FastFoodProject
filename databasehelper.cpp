@@ -274,7 +274,7 @@ void DatabaseHelper::createDistancesTable()
 void DatabaseHelper::createMenuTable()
 {
     QSqlQuery query(database);
-    query.exec("CREATE TABLE IF NOT EXISTS menu ( ParentID int, Name varchar(255), Price numeric, UNIQUE('ParentID', 'Name', 'Price'))");
+    query.exec("CREATE TABLE menu ( ParentID int, Name varchar(255), Price numeric, UNIQUE('ParentID', 'Name', 'Price'))");
 
     //Delete contents of menu table
     query.exec("DELETE FROM menu");
