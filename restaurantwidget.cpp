@@ -174,7 +174,7 @@ void RestaurantWidget::optimizeRestaurantDistance()
         {
             if(newRestaurants[index].getDistance(currentRestaurantID) < newRestaurants[0].getDistance(currentRestaurantID))
             {
-                //newRestaurants.swapItemsAt(0, index);
+                newRestaurants.swapItemsAt(0, index);
             }
         }
 
@@ -224,7 +224,7 @@ void RestaurantWidget::on_confirmButton_pressed()
 ///
 void RestaurantWidget::on_cancelButton_pressed()
 {
-    int visitedRestaurant_id;
+	int visitedRestaurant_id;
 
     // go through list of restaurants from current trip (visitedRestaurants)
     for (int i = 0; i < visitedRestaurants.size(); ++i)
@@ -241,31 +241,15 @@ void RestaurantWidget::on_cancelButton_pressed()
                 // get OrdersList from global restaurant
                 std::vector<Order>& orders = RestaurantList[j].getOrders();
 
-                int endIndexGlobalOrderList = orders.size() - 1;
+                // go to end of global restaurants order list and delete most recent order by current user
 
-                // qDebug() << "size of " << RestaurantList[j].getName() << "'s global order list " << endIndexGlobalOrderList+1 << endl;
-
-                // go backwards on global restaurants order lists and delete recent orders by current user
-                bool notCurrentUser = false;
-
-                for (int k = endIndexGlobalOrderList; k >= 0; --k)
+                if(orders.back().first.getUsername() == CurrentUser.getUsername())
                 {
-                    // if order is by current user then delete
-                    // NOTE: need a way to ONLY delete current user orders from THIS trip
-                    if(orders[k].first.getUsername() == CurrentUser.getUsername())
-                    {
-                        // qDebug() << "\nDELETING ORDER: User = " << orders[k].first.getUsername() << " First Item in Order = " << orders[k].second[0].getName() << "\n";
-                        orders.pop_back();
-                    }
-                    else
-                    {
-                        notCurrentUser = true;
-                        break; // hit an order in list from a different previous user
-                    }
+                    // qDebug() << "\nDELETING ORDER: User = " << orders.back().first.getUsername() << " First Item in Order = " << orders.back().second[0].getName() << "\n";
+                    orders.pop_back();
                 }
             }
         }
-
     }
 
     // clear current trip's vR
