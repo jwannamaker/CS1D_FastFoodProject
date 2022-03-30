@@ -12,6 +12,7 @@
         <file>03.jpg</file>
         <file>04.jpg</file>
         <file>05.jpg</file>
+        <file>plus_icon.png</file>
+        <file>trashbin_icon.png</file>
     </qresource>
-    <qresource prefix="/"/>
 </RCC>

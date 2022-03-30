@@ -106,17 +106,12 @@ void MenuWidget::updateTableWidget()
 ///
 void MenuWidget::on_confirmButton_pressed()
 {
-    if(orderedItems.size() != 0)
-    {
-        updateTableWidget();
-        updateOrderTotal();
-        currentRestaurant.addOrder(orderedItems);
-        emit transmit_confirmOrder(currentRestaurant);
-    }
-    else
-    {
-        qDebug() << "Nothing has been ordered silly!";
-    }
+
+    updateTableWidget();
+    updateOrderTotal();
+    currentRestaurant.addOrder(orderedItems);
+    emit transmit_confirmOrder(currentRestaurant);
+
 
 }
 

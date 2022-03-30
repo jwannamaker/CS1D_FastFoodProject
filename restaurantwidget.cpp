@@ -20,6 +20,7 @@ RestaurantWidget::RestaurantWidget(QWidget *parent) :
     //Initialize Grid for restaurant icons
     buttonLayout = new QGridLayout(ui->scrollArea_restaurants);
     createButtons();
+    //
 }
 
 ///
