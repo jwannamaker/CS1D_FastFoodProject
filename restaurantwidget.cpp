@@ -224,6 +224,53 @@ void RestaurantWidget::on_confirmButton_pressed()
 ///
 void RestaurantWidget::on_cancelButton_pressed()
 {
+    int visitedRestaurant_id;
+
+    // go through list of restaurants from current trip (visitedRestaurants)
+    for (int i = 0; i < visitedRestaurants.size(); ++i)
+    {
+        visitedRestaurant_id = visitedRestaurants[i].getID();
+
+        // go through global list of restaurants
+        for (int j = 0; j < RestaurantList.size(); ++j)
+        {
+            if(RestaurantList[j].getID() == visitedRestaurant_id) // found restaurant in global list
+            {
+                // qDebug() << RestaurantList[j].getName() << " found in global list\n";
+
+                // get OrdersList from global restaurant
+                std::vector<Order>& orders = RestaurantList[j].getOrders();
+
+                int endIndexGlobalOrderList = orders.size() - 1;
+
+                // qDebug() << "size of " << RestaurantList[j].getName() << "'s global order list " << endIndexGlobalOrderList+1 << endl;
+
+                // go backwards on global restaurants order lists and delete recent orders by current user
+                bool notCurrentUser = false;
+
+                for (int k = endIndexGlobalOrderList; k >= 0; --k)
+                {
+                    // if order is by current user then delete
+                    // NOTE: need a way to ONLY delete current user orders from THIS trip
+                    if(orders[k].first.getUsername() == CurrentUser.getUsername())
+                    {
+                        // qDebug() << "\nDELETING ORDER: User = " << orders[k].first.getUsername() << " First Item in Order = " << orders[k].second[0].getName() << "\n";
+                        orders.pop_back();
+                    }
+                    else
+                    {
+                        notCurrentUser = true;
+                        break; // hit an order in list from a different previous user
+                    }
+                }
+            }
+        }
+
+    }
+
+    // clear current trip's vR
+    visitedRestaurants.clear();
+
     emit transmit_cancel();
 }
 

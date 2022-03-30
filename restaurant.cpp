@@ -243,6 +243,15 @@ double Restaurant::getRevenue() const
 }
 
 ///
+/// \brief Restaurant::getRevenue
+/// \return
+///
+OrderList& Restaurant::getOrders()
+{
+    return orders;
+}
+
+///
 /// \brief setDistanceAt
 /// \param otherID
 /// \param otherDistance

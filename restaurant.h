@@ -171,6 +171,12 @@ public:
     double getRevenue() const;
 
     ///
+    /// \brief getOrders
+    /// \return
+    ///
+    OrderList& getOrders();
+
+    ///
     /// \brief setDistanceAt
     /// \param otherID
     /// \param otherDistance
