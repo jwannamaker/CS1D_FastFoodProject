@@ -18,10 +18,7 @@ MainMenuWidget::MainMenuWidget(QWidget *parent) :
 
     // checking current user info for menu options
     ui->welcomeLabel->setText("Welcome, " + CurrentUser.getUsername());
-    if (CurrentUser.isAdmin())
-        ui->adminButton->setHidden(false);
-    else
-        ui->adminButton->setHidden(true);
+    ui->adminButton->setHidden(!CurrentUser.isAdmin());
 }
 
 ///

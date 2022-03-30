@@ -78,6 +78,7 @@ public:
 
         totalLineEdit = new QLineEdit(MenuWidget);
         totalLineEdit->setObjectName(QString::fromUtf8("totalLineEdit"));
+        totalLineEdit->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         totalLineEdit->setReadOnly(true);
 
         horizontalLayout->addWidget(totalLineEdit);

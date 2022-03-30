@@ -30,8 +30,7 @@ void LoginWidget::on_logInButton_pressed()
 
     if (CurrentUser.isValid())
         emit transmit_validUser();
-    else
-        on_clearButton_pressed();
+    on_clearButton_pressed();
 }
 
 ///
