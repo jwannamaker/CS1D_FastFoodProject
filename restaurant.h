@@ -220,30 +220,6 @@ public:
     ///
     double getRevenue() const;
 
-<<<<<<< Updated upstream
-    ///
-    /// \brief setDistanceAt
-    /// \param otherID
-    /// \param otherDistance
-    ///
-    void setDistanceAt(unsigned int otherID, double otherDistance);
-
-    void RemoveMenuItem(int index);
-
-    ///
-    /// \brief getOrderList
-    /// \return
-    ///
-    OrderList getOrderList() const;
-
-    ///
-    /// \brief setOrderList
-    /// \param newOrderList
-    ///
-    void setOrderList(OrderList newOrderList);
-
-=======
->>>>>>> Stashed changes
 private:
     int                 ID;
     QString             name;
