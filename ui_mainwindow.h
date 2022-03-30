@@ -28,6 +28,11 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(800, 600);
+        MainWindow->setStyleSheet(QString::fromUtf8("border-color: rgb(85, 85, 127);\n"
+"background-color: rgb(131, 137, 255);\n"
+"gridline-color: rgb(255, 255, 255);\n"
+"selection-color: rgb(76, 153, 113);\n"
+"alternate-background-color: rgb(255, 253, 193);"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         gridLayout = new QGridLayout(centralwidget);

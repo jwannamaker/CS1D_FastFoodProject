@@ -1,6 +1,13 @@
 #ifndef REVENUEWIDGET_H
 #define REVENUEWIDGET_H
 #include <QWidget>
+#include <QHeaderView>
+#include <QLayout>
+#include <QHBoxLayout>
+#include <QLayoutItem>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include "restaurantwidget.h"
 #include "restaurant.h"
 
 // linking globals
@@ -27,9 +34,15 @@ public:
     ~RevenueWidget();
 
     ///
-    /// \brief populateTableWidget
+    /// \brief populateTable
     ///
     void populateTable();
+
+    ///
+    /// \brief createDetailWidget
+    /// \return
+    ///
+    QTableWidget* createDetailWidget(Restaurant&);
 
     ///
     /// \brief getTotalRevenue
@@ -38,14 +51,9 @@ public:
 
 signals:
     ///
-    /// \brief transmit_cancel
+    /// \brief transmit_exit
     ///
-    void transmit_cancel();
-
-    ///
-    /// \brief transmit_detailedRevenue
-    ///
-    void transmit_detailedRevenue(Restaurant&);
+    void transmit_exit();
 
 private slots:
     ///
@@ -54,9 +62,9 @@ private slots:
     void on_exitButton_pressed();
 
     ///
-    /// \brief openDetailedView
+    /// \brief on_tableWidget_itemSelectionChanged
     ///
-    void openDetailedView();
+    void on_tableWidget_itemSelectionChanged();
 
 private:
     Ui::RevenueWidget *ui;

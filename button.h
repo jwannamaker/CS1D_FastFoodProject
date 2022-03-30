@@ -51,12 +51,17 @@ public:
     explicit Button(Restaurant& rest, Item& item, QWidget *parent = nullptr);
 
     ///
+    /// \brief Button
+    /// \param item
+    /// \param parent
+    ///
+    explicit Button(Item& item, QWidget* parent = nullptr);
+
+    ///
     /// \brief setLayout
     /// \param image
     ///
-    explicit Button(Item& item, QWidget* parent = nullptr);
     void setLayout(QPixmap image);
-
 
     ///
     /// \brief setDistanceTo
@@ -120,6 +125,9 @@ public slots:
     ///
     void itemClicked();
 
+    ///
+    /// \brief addClicked
+    ///
     void addClicked();
 
 private:

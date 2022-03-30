@@ -10,7 +10,6 @@ debug/mainwindow.o
 debug/menuwidget.o
 debug/restaurant.o
 debug/restaurantwidget.o
-debug/revenuedetailwidget.o
 debug/revenuewidget.o
 debug/qrc_resource.o
 debug/moc_adminwidget.o
@@ -20,5 +19,4 @@ debug/moc_mainmenuwidget.o
 debug/moc_mainwindow.o
 debug/moc_menuwidget.o
 debug/moc_restaurantwidget.o
-debug/moc_revenuedetailwidget.o
 debug/moc_revenuewidget.o

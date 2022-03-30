@@ -82,11 +82,6 @@ private slots:
     ///
     void deleteItemClicked();
 
-    ///
-    /// \brief on_editButton_pressed
-    ///
-    void on_editButton_pressed();
-
 private:
     const int MAX_COL = 5;
 

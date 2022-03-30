@@ -41,7 +41,10 @@ public:
     ///
     void updateTableWidget();
 
-    //Button *createDeleteButton(Item& item, const char *member);
+    ///
+    /// \brief saveMenu
+    ///
+    void saveMenu();
 
 signals:
     ///
@@ -68,17 +71,26 @@ private slots:
     /// to the admin's new specification, and sets the appropriate restaurant's
     /// menu to match.
     ///
+    void on_saveButton_pressed();
 
-    void on_addItemButton_pressed();
+    ///
+    /// \brief on_deleteButton_pressed
+    ///
+    void on_deleteButton_pressed();
 
-    void on_pushButton_delete_pressed();
+    ///
+    /// \brief on_addButton_pressed
+    ///
+    void on_addButton_pressed();
 
-    void on_pushButton_editPrice_pressed();
+    ///
+    /// \brief on_tableWidget_itemSelectionChanged
+    ///
+    void on_tableWidget_itemSelectionChanged();
 
 private:
     Ui::AdminWidget *ui;
     int currentID;
-    QVector<Button*> deleteItemButtons;
 };
 
 #endif // ADMINWIDGET_H

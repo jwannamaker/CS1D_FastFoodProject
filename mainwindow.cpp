@@ -12,7 +12,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(1000, 600);
 
-    Database.addRestaurants();
+    Database.loadRestaurantsFromDatabase();
+    if(RestaurantList.size() <= 0)
+    {
+        qDebug() << "Loading from .txt file";
+        Database.addRestaurants();
+    }
 
     // initializes the stacked widget with loginPage the first view
     stackedWidget = new QStackedWidget;
@@ -25,6 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
 ///
 MainWindow::~MainWindow()
 {
+    Database.createRestaurantTable();
+    Database.createDistancesTable();
+    Database.createMenuTable();
+    Database.createOrderTable();
     delete ui;
 }
 
@@ -154,29 +163,10 @@ void MainWindow::recieve_revenueView()
     revenuePage = new RevenueWidget();
     stackedWidget->addWidget(revenuePage);
     QObject::connect(revenuePage,
-                     SIGNAL(transmit_cancel()),
-                     this,
-                     SLOT(recieve_mainMenu()));
-    QObject::connect(revenuePage,
-                     SIGNAL(transmit_detailedRevenue(Restaurant&)),
-                     this,
-                     SLOT(recieve_detailedRevenue(Restaurant&)));
-    stackedWidget->setCurrentWidget(revenuePage);
-}
-
-///
-/// \brief MainWindow::recieve_detailedRevenue
-///
-void MainWindow::recieve_detailedRevenue(Restaurant &rest)
-{
-    detailPage = new RevenueDetailWidget(rest);
-
-    stackedWidget->addWidget(detailWidget);
-    QObject::connect(detailPage,
                      SIGNAL(transmit_exit()),
                      this,
-                     SLOT(recieve_revenueView()));
-    stackedWidget->setCurrentWidget(detailPage);
+                     SLOT(recieve_mainMenu()));
+    stackedWidget->setCurrentWidget(revenuePage);
 }
 
 ///

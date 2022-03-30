@@ -75,6 +75,13 @@ public:
     void setDistances(const std::vector<double>& distances);
 
     ///
+    /// \brief setDistanceAt
+    /// \param otherID
+    /// \param otherDistance
+    ///
+    void setDistanceAt(unsigned int otherID, double otherDistance);
+
+    ///
     /// \brief addDistance
     /// \param otherID
     /// \param otherDistance
@@ -129,11 +136,23 @@ public:
     int getMenuSize() const;
 
     ///
+    /// \brief getMenu
+    /// \return
+    ///
+    Menu getMenu() const;
+
+    ///
     /// \brief getMenuItem
     /// \param index
     /// \return
     ///
     Item& getMenuItem(int index);
+
+    ///
+    /// \brief RemoveMenuItem
+    /// \param index
+    ///
+    void removeMenuItem(int index);
 
     ///
     /// \brief addOrder
@@ -146,6 +165,37 @@ public:
     /// \return
     ///
     std::vector<Item>& getCurrentOrder();
+
+    ///
+    /// \brief getCurrentOrderSubtotal
+    /// \return
+    ///
+    double getCurrentOrderSubtotal() const;
+
+    ///
+    /// \brief getOrder
+    /// \param index
+    /// \return
+    ///
+    Order& getOrder(int index);
+
+    ///
+    /// \brief getOrderCount
+    /// \return
+    ///
+    int getOrderCount() const;
+
+    ///
+    /// \brief getLastOrder
+    /// \return
+    ///
+    Order getLastOrder();
+
+    ///
+    /// \brief getOrderList
+    /// \return
+    ///
+    OrderList& getOrderList();
 
     ///
     /// \brief setRevenue
@@ -170,6 +220,7 @@ public:
     ///
     double getRevenue() const;
 
+<<<<<<< Updated upstream
     ///
     /// \brief setDistanceAt
     /// \param otherID
@@ -179,6 +230,20 @@ public:
 
     void RemoveMenuItem(int index);
 
+    ///
+    /// \brief getOrderList
+    /// \return
+    ///
+    OrderList getOrderList() const;
+
+    ///
+    /// \brief setOrderList
+    /// \param newOrderList
+    ///
+    void setOrderList(OrderList newOrderList);
+
+=======
+>>>>>>> Stashed changes
 private:
     int                 ID;
     QString             name;

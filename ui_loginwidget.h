@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'loginwidget.ui'
 **
-** Created by: Qt User Interface Compiler version 6.2.3
+** Created by: Qt User Interface Compiler version 6.2.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -86,6 +86,11 @@ public:
 
         graphicsView = new QGraphicsView(LoginWidget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(graphicsView->sizePolicy().hasHeightForWidth());
+        graphicsView->setSizePolicy(sizePolicy);
 
         gridLayout->addWidget(graphicsView, 0, 1, 4, 1);
 

@@ -57,7 +57,7 @@ Button::Button(Restaurant& rest, Item& item, QWidget* parent)
 {
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     topText = new QLabel(item.getName());
-    bottomText = new QLabel(QString::number(item.getPrice()));
+    bottomText = new QLabel(QString::number(item.getPrice(), 'f', 2));
     setLayout(QPixmap(":images/rest_menu_icon.png"));
     checkBox->setHidden(true);
 
@@ -165,11 +165,8 @@ void Button::restaurantChecked()
 {
     if(checkBox->isChecked())
         emit transmit_restaurantChecked(restaurant);
-
     checkBox->setEnabled(false);
-
 }
-//test
 
 ///
 /// \brief Button::itemClicked
@@ -179,6 +176,9 @@ void Button::itemClicked()
     emit transmit_itemClicked(menuItem);
 }
 
+///
+/// \brief Button::addClicked
+///
 void Button::addClicked()
 {
     hide();

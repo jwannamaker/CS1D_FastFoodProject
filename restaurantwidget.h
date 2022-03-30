@@ -8,6 +8,7 @@
 #include <QDialog>
 #include <QTableWidgetItem>
 #include <QTableWidget>
+#include <QDialog>
 #include "ui_restaurantwidget.h"
 #include "button.h"
 #include "customer.h"
