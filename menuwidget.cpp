@@ -97,7 +97,6 @@ void MenuWidget::updateTableWidget()
         QWidget *w = new QWidget();
         w->setLayout(l);
         ui->tableWidget_orderItems->setCellWidget(index, 3, w);
-
     }
 }
 
@@ -106,13 +105,11 @@ void MenuWidget::updateTableWidget()
 ///
 void MenuWidget::on_confirmButton_pressed()
 {
-
     updateTableWidget();
     updateOrderTotal();
+    qDebug() << "ordered items: " << orderedItems[0].getName();
     currentRestaurant.addOrder(orderedItems);
     emit transmit_confirmOrder(currentRestaurant);
-
-
 }
 
 ///
@@ -131,7 +128,6 @@ void MenuWidget::on_cancelButton_pressed()
 void MenuWidget::recieve_itemClicked(Item& item)
 {
     QList<QTableWidgetItem *> items = ui->tableWidget_orderItems->findItems(item.getName(), Qt::MatchExactly);
-
 
     if (items.size() == 0)
     {

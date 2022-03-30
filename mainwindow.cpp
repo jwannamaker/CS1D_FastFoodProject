@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(1000, 600);
 
-    Database.loadRestaurantsFromDatabase();
+    //Database.loadRestaurantsFromDatabase();
     if(RestaurantList.size() <= 0)
     {
         qDebug() << "Loading from .txt file";
@@ -30,10 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
 ///
 MainWindow::~MainWindow()
 {
-    Database.createRestaurantTable();
-    Database.createDistancesTable();
-    Database.createMenuTable();
-    Database.createOrderTable();
+//    Database.createRestaurantTable();
+//    Database.createDistancesTable();
+//    Database.createMenuTable();
+//    Database.createOrderTable();
     delete ui;
 }
 
@@ -120,6 +120,7 @@ void MainWindow::recieve_restaurantView()
 ///
 void MainWindow::recieve_addRestaurantToTrip(Restaurant& rest)
 {
+    qDebug() << "adding restaurant " << rest.getName() << " to trip";
     stackedWidget->setCurrentWidget(restaurantPage);
 }
 
@@ -147,10 +148,6 @@ void MainWindow::recieve_viewMenu(Restaurant& rest)
                      SIGNAL(transmit_confirmOrder(Restaurant&)),
                      this,
                      SLOT(recieve_addRestaurantToTrip(Restaurant&)));
-    QObject::connect(menuPage,
-                     SIGNAL(transmit_editMenu()),
-                     this,
-                     SLOT(recieve_adminView()));
     stackedWidget->setCurrentWidget(menuPage);
 }
 

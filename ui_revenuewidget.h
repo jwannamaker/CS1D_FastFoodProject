@@ -34,6 +34,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLineEdit *totalRevenueLineEdit;
+    QTableWidget *detailedTable;
 
     void setupUi(QWidget *RevenueWidget)
     {
@@ -103,6 +104,19 @@ public:
 
 
         gridLayout->addLayout(horizontalLayout, 1, 0, 1, 1);
+
+        detailedTable = new QTableWidget(RevenueWidget);
+        detailedTable->setObjectName(QString::fromUtf8("detailedTable"));
+        detailedTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        detailedTable->setProperty("showDropIndicator", QVariant(false));
+        detailedTable->setDragDropOverwriteMode(false);
+        detailedTable->setSelectionMode(QAbstractItemView::NoSelection);
+        detailedTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+        detailedTable->setShowGrid(false);
+        detailedTable->setGridStyle(Qt::NoPen);
+        detailedTable->verticalHeader()->setVisible(false);
+
+        gridLayout->addWidget(detailedTable, 0, 1, 1, 1);
 
 
         retranslateUi(RevenueWidget);

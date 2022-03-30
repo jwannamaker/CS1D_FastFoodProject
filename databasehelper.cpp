@@ -302,7 +302,7 @@ void DatabaseHelper::createOrderTable()
 
 
     //Iterates through each restaurant in the global vector
-    for (const Restaurant& insert : RestaurantList)
+    for (Restaurant insert : RestaurantList)
     {
         //Gets each order from the restaurant
         for(const Order& order : insert.getOrderList())

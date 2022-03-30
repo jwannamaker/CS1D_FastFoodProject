@@ -45,36 +45,31 @@ void RevenueWidget::populateTable()
 /// \brief RevenueWidget::createDetailWidget
 /// \return
 ///
-QTableWidget *RevenueWidget::createDetailWidget(Restaurant &currentRestaurant)
+void RevenueWidget::populateDetailedTable(Restaurant currentRestaurant)
 {
-    QTableWidget* table = new QTableWidget();
-    table->setColumnCount(5);
-    table->setHorizontalHeaderItem(0, new QTableWidgetItem("Customer"));
-    table->setHorizontalHeaderItem(1, new QTableWidgetItem("Item"));
-    table->setHorizontalHeaderItem(2, new QTableWidgetItem("Unit Price"));
-    table->setHorizontalHeaderItem(3, new QTableWidgetItem("Quantity Ordered"));
-    table->setHorizontalHeaderItem(4, new QTableWidgetItem("Subtotal"));
-    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->detailedTable->setColumnCount(5);
+    ui->detailedTable->setHorizontalHeaderItem(0, new QTableWidgetItem("Customer"));
+    ui->detailedTable->setHorizontalHeaderItem(1, new QTableWidgetItem("Item"));
+    ui->detailedTable->setHorizontalHeaderItem(2, new QTableWidgetItem("Price"));
+    ui->detailedTable->setHorizontalHeaderItem(3, new QTableWidgetItem("Quantity Ordered"));
+    ui->detailedTable->setHorizontalHeaderItem(4, new QTableWidgetItem("Subtotal"));
 
-    table->verticalHeader()->setHidden(true);
-    table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    table->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->detailedTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->detailedTable->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->detailedTable->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     for (int i = 0; i < currentRestaurant.getOrderCount(); i++)
     {
         Order currentOrder = currentRestaurant.getOrder(i);
         for (size_t j = 0; j < currentOrder.second.size(); j++)
         {
-            table->setItem(i, 0, new QTableWidgetItem(currentOrder.first.getUsername()));
-            table->setItem(i, 1, new QTableWidgetItem(currentOrder.second[j].getName()));
-            table->setItem(i, 2, new QTableWidgetItem(QString::number(currentOrder.second[j].getPrice(), 'f', 2)));
-            table->setItem(i, 3, new QTableWidgetItem(QString::number(currentOrder.second[j].getQuantity())));
-            table->setItem(i, 4, new QTableWidgetItem(QString::number(currentOrder.second[j].getPrice() * currentOrder.second[j].getQuantity(), 'f', 2)));
+            ui->detailedTable->setItem(i, 0, new QTableWidgetItem(currentOrder.first.getUsername()));
+            ui->detailedTable->setItem(i, 1, new QTableWidgetItem(currentOrder.second[j].getName()));
+            ui->detailedTable->setItem(i, 2, new QTableWidgetItem(QString::number(currentOrder.second[j].getPrice(), 'f', 2)));
+            ui->detailedTable->setItem(i, 3, new QTableWidgetItem(QString::number(currentOrder.second[j].getQuantity())));
+            ui->detailedTable->setItem(i, 4, new QTableWidgetItem(QString::number(currentOrder.second[j].getPrice() * currentOrder.second[j].getQuantity(), 'f', 2)));
         }
     }
-
-    return table;
 }
 
 ///
@@ -101,7 +96,7 @@ void RevenueWidget::on_exitButton_pressed()
 ///
 void RevenueWidget::on_tableWidget_itemSelectionChanged()
 {
-    QModelIndex currentIndex = ui->tableWidget->currentIndex();
-    qDebug() << "popup new table detailed revenue";
+    QModelIndex index = ui->tableWidget->currentIndex();
+    populateDetailedTable(RestaurantList[index.row()]);
 }
 

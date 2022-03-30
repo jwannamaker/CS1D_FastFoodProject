@@ -158,13 +158,7 @@ public:
     /// \brief addOrder
     /// \param newOrder
     ///
-    void addOrder(std::vector<Item> orderItems = std::vector<Item>());
-
-    ///
-    /// \brief getLastOrder
-    /// \return
-    ///
-    std::vector<Item>& getCurrentOrder();
+    void addOrder(std::vector<Item> orderItems);
 
     ///
     /// \brief getCurrentOrderSubtotal
@@ -195,7 +189,12 @@ public:
     /// \brief getOrderList
     /// \return
     ///
-    OrderList& getOrderList();
+    OrderList getOrderList();
+
+    ///
+    /// \brief setOrderList
+    ///
+    void setOrderList(OrderList);
 
     ///
     /// \brief setRevenue

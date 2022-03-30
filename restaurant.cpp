@@ -222,22 +222,6 @@ void Restaurant::addOrder(std::vector<Item> orderItems)
 }
 
 ///
-/// \brief Restaurant::getLastOrder
-/// \return
-///
-std::vector<Item> &Restaurant::getCurrentOrder()
-{
-    // find if the current user has an order
-    for (unsigned int i = 0; i < orders.size(); i++)
-        if (orders[i].first == CurrentUser)
-            return orders[i].second;
-
-    // if no order is found, create a new one with CurrentUser and return it
-    addOrder();
-    return orders.end()->second;
-}
-
-///
 /// \brief Restaurant::getCurrentOrderSubtotal
 /// \return
 ///
@@ -284,7 +268,7 @@ Order Restaurant::getLastOrder()
 /// \brief Restaurant::getOrderList
 /// \return
 ///
-OrderList &Restaurant::getOrderList()
+OrderList Restaurant::getOrderList()
 {
     return orders;
 }
@@ -327,35 +311,6 @@ void Restaurant::updateRevenue()
 double Restaurant::getRevenue() const
 {
     return revenue;
-<<<<<<< Updated upstream
-}
-
-///
-/// \brief setDistanceAt
-/// \param otherID
-/// \param otherDistance
-///
-void Restaurant::setDistanceAt(unsigned int index, double distance)
-{
-    while(distances.size() <= index)
-    {
-        distances.push_back(0.0);
-    }
-    distances[index] = distance;
-}
-
-void Restaurant::RemoveMenuItem(int index)
-{
-    menu.erase(menu.begin() + index);
-}
-
-///
-/// \brief getOrderList
-/// \return
-///
-OrderList Restaurant::getOrderList() const
-{
-    return orders;
 }
 
 ///
@@ -366,6 +321,3 @@ void Restaurant::setOrderList(OrderList newOrderList)
 {
     this->orders = newOrderList;
 }
-=======
-}
->>>>>>> Stashed changes

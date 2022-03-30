@@ -42,7 +42,7 @@ public:
     /// \brief createDetailWidget
     /// \return
     ///
-    QTableWidget* createDetailWidget(Restaurant&);
+    void populateDetailedTable(Restaurant);
 
     ///
     /// \brief getTotalRevenue
