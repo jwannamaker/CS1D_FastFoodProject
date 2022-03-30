@@ -70,11 +70,6 @@ public:
     void addButtonsToLayout();
 
     ///
-    /// \brief addCheckboxToLayout
-    ///
-    void addCheckboxToLayout();
-
-    ///
     /// \brief updateTableWidget
     ///
     void updateTableWidget();
@@ -163,7 +158,7 @@ private:
     /// \param rest
     /// \return
     ///
-    Button *createButton(Restaurant& rest, bool checked = false);
+    Button *createButton(Restaurant& rest);
 
     ///
     /// \brief createAddButton

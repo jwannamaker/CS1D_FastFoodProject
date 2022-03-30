@@ -71,6 +71,7 @@ public:
     /// This method creates and populates a table in the database ("restaurant_data.sqlite")
     ///
     void createOrderTable();
+
 private:
     QSqlDatabase database;
 };

@@ -59,30 +59,8 @@ void RestaurantWidget::setInitialID(int initialID)
 ///
 void RestaurantWidget::createButtons()
 {
-    QVector<Button*> newButtons;
-
-    if(adminAddButton != nullptr)
-    {
-        delete adminAddButton;
-        adminAddButton = nullptr;
-    }
-
     for (size_t i = 0; i < RestaurantList.size(); i++)
-    {
-        bool isChecked = false;
-        for(Button* old : restaurantButtons)
-        {
-            if(old->getRestaurant().getID() == RestaurantList[i].getID())
-            {
-                isChecked = old->isChecked();
-            }
-        }
-
-        newButtons.push_back(createButton(RestaurantList[i],isChecked));
-    }
-
-    restaurantButtons.clear();
-    restaurantButtons = newButtons;
+            restaurantButtons.push_back(createButton(RestaurantList[i]));
 
     updateButtonSequence();
 
@@ -101,6 +79,7 @@ void RestaurantWidget::addRestaurantsFromFile()
     Database.addRestaurants(":data/source_data2.txt");
     createButtons();
     populateComboBox();
+    adminAddButton->setHidden(true);
 }
 
 ///
@@ -116,7 +95,7 @@ void RestaurantWidget::addButtonsToLayout()
         if (i < restaurantButtons.size())
             buttonLayout->addWidget(restaurantButtons[i], row, col);
 
-        if (adminAddButton)
+        if (!adminAddButton->isHidden())
             buttonLayout->addWidget(adminAddButton, row, col);
 
         col++;
@@ -277,22 +256,30 @@ void RestaurantWidget::recieve_restaurantChecked(Restaurant &rest)
 }
 
 ///
+/// \brief RestaurantWidget::recieve_restaurantChecked
+///
+void RestaurantWidget::recieve_restaurantChecked(Restaurant &rest)
+{
+    qDebug() << "Restaurant checked: " << rest.getName();
+    addRestaurantToTrip(rest);
+}
+
+///
 /// \brief RestaurantWidget::createButton
 /// \param rest
 /// \return
 ///
-Button *RestaurantWidget::createButton(Restaurant& rest, bool checked)
+Button *RestaurantWidget::createButton(Restaurant& rest)
 {
     Button *button = new Button(rest, initialID, this);
-    button->setChecked(checked);
     QObject::connect(button,
                      SIGNAL(transmit_restaurantClicked(Restaurant&)),
                      this,
                      SLOT(recieve_restaurantClicked(Restaurant&)));
     QObject::connect(button,
-                     SIGNAL(transmit_restaurantChecked(Restaurant&,bool)),
+                     SIGNAL(transmit_restaurantChecked(Restaurant&)),
                      this,
-                     SLOT(addRestaurantToTrip(Restaurant&,bool)));
+                     SLOT(recieve_restaurantChecked(Restaurant&)));
     return button;
 }
 

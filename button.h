@@ -51,10 +51,16 @@ public:
     explicit Button(Restaurant& rest, Item& item, QWidget *parent = nullptr);
 
     ///
+    /// \brief Button
+    /// \param item
+    /// \param parent
+    ///
+    explicit Button(Item& item, QWidget* parent = nullptr);
+
+    ///
     /// \brief setLayout
     /// \param image
     ///
-    explicit Button(Item& item, QWidget* parent = nullptr);
     void setLayout(QPixmap image);
 
 
@@ -103,7 +109,7 @@ signals:
     ///
     /// \brief transmit_restaurantChecked
     ///
-    void transmit_restaurantChecked(Restaurant&, bool);
+    void transmit_restaurantChecked(Restaurant&);
 
     ///
     /// \brief transmit_itemClicked
