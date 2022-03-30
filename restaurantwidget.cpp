@@ -292,4 +292,3 @@ void RestaurantWidget::on_comboBox_initialLocation_currentIndexChanged(int index
         addButtonsToLayout();
     }
 }
-
