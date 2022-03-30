@@ -168,6 +168,7 @@ void Button::restaurantChecked()
     checkBox->setEnabled(false);
 
 }
+//test
 
 ///
 /// \brief Button::itemClicked
