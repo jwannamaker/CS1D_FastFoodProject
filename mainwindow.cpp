@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(1000, 600);
 
-    Database.loadRestaurantsFromDatabase();
+    //Database.loadRestaurantsFromDatabase();
     if(RestaurantList.size() <= 0)
     {
         qDebug() << "Loading from .txt file";
