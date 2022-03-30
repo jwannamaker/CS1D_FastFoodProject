@@ -14,6 +14,12 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
     bottomText = new QLabel(bottom);
     setLayout(QPixmap(":images/plus_icon.png"));
     checkBox->setHidden(true);
+
+    QObject::connect(this,
+                     SIGNAL(clicked()),
+                     this,
+                     SLOT(addClicked()));
+
 }
 
 ///
@@ -165,4 +171,9 @@ void Button::restaurantChecked()
 void Button::itemClicked()
 {
     emit transmit_itemClicked(menuItem);
+}
+
+void Button::addClicked()
+{
+    hide();
 }
