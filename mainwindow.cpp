@@ -12,7 +12,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(1000, 600);
 
-    Database.addRestaurants();
+    Database.loadRestaurantsFromDatabase();
+    if(RestaurantList.size() <= 0)
+    {
+        qDebug() << "Loading from .txt file";
+        Database.addRestaurants();
+    }
 
     // initializes the stacked widget with loginPage the first view
     stackedWidget = new QStackedWidget;

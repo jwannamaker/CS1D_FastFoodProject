@@ -183,6 +183,12 @@ public:
     ///
     OrderList getOrderList() const;
 
+    ///
+    /// \brief setOrderList
+    /// \param newOrderList
+    ///
+    void setOrderList(OrderList newOrderList);
+
 private:
     int                 ID;
     QString             name;

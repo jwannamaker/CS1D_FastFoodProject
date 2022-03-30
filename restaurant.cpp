@@ -278,3 +278,12 @@ OrderList Restaurant::getOrderList() const
 {
     return orders;
 }
+
+///
+/// \brief setOrderList
+/// \param newOrderList
+///
+void Restaurant::setOrderList(OrderList newOrderList)
+{
+    this->orders = newOrderList;
+}

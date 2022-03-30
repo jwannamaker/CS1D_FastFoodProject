@@ -138,9 +138,88 @@ void DatabaseHelper::addRestaurants(QString filename)
 ///
 void DatabaseHelper::loadRestaurantsFromDatabase()
 {
-    //This function will populate the static restaurant vector.
-    //Note: Ignore id 0 of table parent when inserting restaurants into the
-    //vector since it isn't technically a restaurant.
+    QSqlQuery queryParent(database);
+    QSqlQuery queryDistances(database);
+    QSqlQuery queryMenu(database);
+    QSqlQuery queryOrder(database);
+
+    if(queryParent.exec("SELECT * FROM parent"))
+    {
+        while(queryParent.next())
+        {
+            int restaurantID = queryParent.value(0).toInt();
+
+            if(restaurantID != 0)
+            {
+                Restaurant newResturant(restaurantID,queryParent.value(1).toString());
+
+                //Fetches distance information for this specific restaurant
+                if(queryDistances.exec("SELECT * FROM distances WHERE ParentID = " + QString::number(restaurantID)))
+                {
+                    //Inserts the distances for the restaurant to other restaurants
+                    while(queryDistances.next())
+                    {
+                        newResturant.setDistanceAt(queryDistances.value(1).toInt(),queryDistances.value(2).toDouble());
+                    }
+                }
+
+                //Fetches menu item information for this specific restaurant
+                if(queryMenu.exec("SELECT * FROM menu WHERE ParentID = " + QString::number(restaurantID)))
+                {
+                    //Inserts the data about the menu item names/prices for the restaurant
+                    while(queryMenu.next())
+                    {
+                        newResturant.addMenuItem(Item(queryMenu.value(1).toString(), queryMenu.value(2).toDouble()));
+                    }
+                }
+
+                //Fetches history of orders for this specific restaurant (May not work)
+                if(queryOrder.exec("SELECT * FROM orders WHERE ParentID = " + QString::number(restaurantID)))
+                {
+                    //Places all unique customer usernames into the QVector
+                    QVector<QString> customers;
+                    while(queryOrder.next())
+                    {
+                        if(!customers.contains(queryOrder.value(1).toString()))
+                        {
+                            customers.push_back(queryOrder.value(1).toString());
+                        }
+                    }
+
+                    //Generate a new order list for this restaurant based on each individual user
+                    OrderList newOrderList;
+                    for(int index = 0; index < customers.size(); index++)
+                    {
+                        if(queryOrder.exec("SELECT * FROM orders WHERE ParentID = " + QString::number(restaurantID) +
+                                           " AND Username = '" + customers[index] + "'"))
+                        {
+                            std::vector<Item> orderItems;
+
+                            //Inserts all of the items into the order
+                            while(queryOrder.next())
+                            {
+                                Item newItem(queryOrder.value(2).toString(),queryOrder.value(4).toDouble());
+                                newItem.setQuantity(queryOrder.value(3).toInt());
+
+                                orderItems.push_back(newItem);
+                            }
+
+                            //Generates order pair and pushes to newOrderList
+                            newOrderList.push_back(Order(Customer(customers[index],"unknown"),orderItems));
+                        }
+                    }
+
+                    //Places all the history of orders into the restaurant and updates revenue
+                    newResturant.setOrderList(newOrderList);
+                    newResturant.updateRevenue();
+                }
+
+                //Inserts new restaurant into the global vector
+                //qDebug() << "new restaurant added: " << newResturant.getName();
+                RestaurantList.push_back(newResturant);
+            }
+        }
+    }
 }
 
 ///
@@ -150,6 +229,9 @@ void DatabaseHelper::createRestaurantTable()
 {
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS parent ( ID int PRIMARY KEY, Name varchar(255) )");
+
+    //Delete contents of parent table
+    //query.exec("DELETE FROM parent");
 
     //Inserts Saddleback as Restaurant index[0]
     query.exec("INSERT INTO parent VALUES ('0', 'Saddleback')");
@@ -166,6 +248,9 @@ void DatabaseHelper::createDistancesTable()
 {
     QSqlQuery query(database);
     query.exec("CREATE TABLE IF NOT EXISTS distances ( ParentID int, ToID int, Distance numeric, UNIQUE('ParentID', 'ToID', 'Distance'))");
+
+    //Delete contents of distances table
+    //query.exec("DELETE FROM distances");
 
     for (Restaurant insert : RestaurantList)
     {
@@ -215,6 +300,7 @@ void DatabaseHelper::createOrderTable()
     //Delete contents of orders table
     query.exec("DELETE FROM orders");
 
+
     //Iterates through each restaurant in the global vector
     for (const Restaurant& insert : RestaurantList)
     {
@@ -225,7 +311,7 @@ void DatabaseHelper::createOrderTable()
             for(const Item& item : order.second)
             {
                 //Inserts the items for each order
-                query.exec("INSERT INTO menu VALUES ("+ QString::number(insert.getID()) +
+                query.exec("INSERT INTO orders VALUES ("+ QString::number(insert.getID()) +
                            ", '"+ order.first.getUsername() +
                            "', '"+ item.getName() +
                            "', " + QString::number(item.getQuantity()) +
