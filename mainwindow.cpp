@@ -30,6 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
 ///
 MainWindow::~MainWindow()
 {
+    Database.createRestaurantTable();
+    Database.createDistancesTable();
+    Database.createMenuTable();
+    Database.createOrderTable();
     delete ui;
 }
 
