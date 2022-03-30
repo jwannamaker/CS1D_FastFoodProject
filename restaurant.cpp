@@ -268,7 +268,7 @@ Order Restaurant::getLastOrder()
 /// \brief Restaurant::getOrderList
 /// \return
 ///
-OrderList Restaurant::getOrderList()
+OrderList& Restaurant::getOrderList()
 {
     return orders;
 }

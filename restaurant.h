@@ -189,7 +189,7 @@ public:
     /// \brief getOrderList
     /// \return
     ///
-    OrderList getOrderList();
+    OrderList& getOrderList();
 
     ///
     /// \brief setOrderList
