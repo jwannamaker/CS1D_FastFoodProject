@@ -162,8 +162,13 @@ void Button::restaurantClicked()
 ///
 void Button::restaurantChecked()
 {
-    emit transmit_restaurantChecked(restaurant);
+    if(checkBox->isChecked())
+        emit transmit_restaurantChecked(restaurant);
+
+    checkBox->setEnabled(false);
+
 }
+//test
 
 ///
 /// \brief Button::itemClicked
