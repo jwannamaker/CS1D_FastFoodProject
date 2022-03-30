@@ -6,8 +6,7 @@
 /// \param parent
 ///
 RevenueDetailWidget::RevenueDetailWidget(Restaurant& currentRestaurant, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::RevenueDetailWidget)
+    QWidget(parent), ui(new Ui::RevenueDetailWidget), currentRestaurant(currentRestaurant)
 {
     ui->setupUi(this);
     ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Item"));
@@ -16,7 +15,6 @@ RevenueDetailWidget::RevenueDetailWidget(Restaurant& currentRestaurant, QWidget 
     ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Customer"));
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    this->currentRestaurant = currentRestaurant;
     populateTable();
 }
 
@@ -46,7 +44,7 @@ void RevenueDetailWidget::populateTable()
 
     for (size_t i = 0; i < currentRestaurant.getMenuSize(); i++)
     {
-        QTa
+        qDebug() << "populate menu table";
     }
 }
 

@@ -10,6 +10,7 @@ release/mainwindow.o
 release/menuwidget.o
 release/restaurant.o
 release/restaurantwidget.o
+release/revenuedetailwidget.o
 release/revenuewidget.o
 release/qrc_resource.o
 release/moc_adminwidget.o
@@ -19,4 +20,5 @@ release/moc_mainmenuwidget.o
 release/moc_mainwindow.o
 release/moc_menuwidget.o
 release/moc_restaurantwidget.o
+release/moc_revenuedetailwidget.o
 release/moc_revenuewidget.o
