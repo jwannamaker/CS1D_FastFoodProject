@@ -46,6 +46,33 @@
       </spacer>
      </item>
      <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_menuItem">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Price</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="doubleSpinBox_itemPrice"/>
+     </item>
+     <item>
       <widget class="QPushButton" name="addItemButton">
        <property name="text">
         <string>Add Item</string>
@@ -53,11 +80,50 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="saveButton">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>30</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_delete">
        <property name="text">
-        <string>Save Changes</string>
+        <string>Delete Item</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_editPrice">
+       <property name="text">
+        <string>Edit Price</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>30</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <widget class="QPushButton" name="exitButton">
@@ -71,7 +137,7 @@
    <item>
     <widget class="QTableWidget" name="tableWidget">
      <property name="editTriggers">
-      <set>QAbstractItemView::DoubleClicked|QAbstractItemView::SelectedClicked</set>
+      <set>QAbstractItemView::NoEditTriggers</set>
      </property>
      <property name="tabKeyNavigation">
       <bool>false</bool>

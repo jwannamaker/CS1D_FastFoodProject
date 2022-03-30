@@ -177,6 +177,8 @@ public:
     ///
     void setDistanceAt(unsigned int otherID, double otherDistance);
 
+    void RemoveMenuItem(int index);
+
 private:
     int                 ID;
     QString             name;

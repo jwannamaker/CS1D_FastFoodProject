@@ -1,4 +1,5 @@
 #include "menuwidget.h"
+#include <QMessageBox>
 
 ///
 /// \brief MenuWidget::MenuWidget
@@ -105,10 +106,13 @@ void MenuWidget::updateTableWidget()
 ///
 void MenuWidget::on_confirmButton_pressed()
 {
+
     updateTableWidget();
     updateOrderTotal();
     currentRestaurant.addOrder(orderedItems);
     emit transmit_confirmOrder(currentRestaurant);
+
+
 }
 
 ///
@@ -128,6 +132,7 @@ void MenuWidget::recieve_itemClicked(Item& item)
 {
     QList<QTableWidgetItem *> items = ui->tableWidget_orderItems->findItems(item.getName(), Qt::MatchExactly);
 
+
     if (items.size() == 0)
     {
         orderedItems.push_back(item);
@@ -143,9 +148,17 @@ void MenuWidget::recieve_itemClicked(Item& item)
         //If menu is valid continute
         if( menuIndex != -1)
         {
-            orderedItems[menuIndex].incrementQuantity();
-            updateTableWidget();
-            updateOrderTotal();
+            if(orderedItems[menuIndex].getQuantity() > 99)
+            {
+                QMessageBox::information(this, "Tip", "Cant add more than 100 items");
+            }
+            else
+            {
+                orderedItems[menuIndex].incrementQuantity();
+                updateTableWidget();
+                updateOrderTotal();
+            }
+
         }
         else
             qDebug() << "An error has occured";
@@ -153,9 +166,6 @@ void MenuWidget::recieve_itemClicked(Item& item)
 
 }
 
-///
-/// \brief MenuWidget::deleteItemClicked
-///
 void MenuWidget::deleteItemClicked()
 {
     Button *clickedButton = qobject_cast<Button *>(sender());
@@ -169,13 +179,15 @@ void MenuWidget::deleteItemClicked()
             orderedItems[menuIndex].decrementQuantity();
             orderedItems.erase(orderedItems.begin() + menuIndex);
             deleteItemButtons.erase(deleteItemButtons.begin() + menuIndex);
+            updateTableWidget();
+            updateOrderTotal();
         }
         else
         {
             orderedItems[menuIndex].decrementQuantity();
+            updateTableWidget();
+            updateOrderTotal();
         }
-        updateTableWidget();
-        updateOrderTotal();
     }
 }
 
@@ -199,6 +211,7 @@ Button *MenuWidget::createDeleteButton(Item& item, const char *member)
     Button *button = new Button(item);
     connect(button, SIGNAL(clicked()), this, member);
     return button;
+
 }
 
 int MenuWidget::GetMenuItemIndex(QString itemName)
@@ -208,5 +221,13 @@ int MenuWidget::GetMenuItemIndex(QString itemName)
 
     qDebug() << "Item doesn't exist";
     return -1;
+}
+
+///
+/// \brief MenuWidget::on_editButton_pressed
+///
+void MenuWidget::on_editButton_pressed()
+{
+    emit transmit_editMenu();
 }
 

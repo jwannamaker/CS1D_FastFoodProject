@@ -120,6 +120,8 @@ public slots:
     ///
     void itemClicked();
 
+    void addClicked();
+
 private:
     const int TILE_SIZE = 60;
     Restaurant&           restaurant;

@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RestaurantWidget_t {
-    const uint offsetsAndSize[26];
-    char stringdata0[245];
+    const uint offsetsAndSize[28];
+    char stringdata0[271];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_RestaurantWidget_t, stringdata0) + ofs), len 
@@ -41,8 +41,9 @@ QT_MOC_LITERAL(93, 22), // "addRestaurantsFromFile"
 QT_MOC_LITERAL(116, 24), // "on_confirmButton_pressed"
 QT_MOC_LITERAL(141, 23), // "on_cancelButton_pressed"
 QT_MOC_LITERAL(165, 25), // "recieve_restaurantClicked"
-QT_MOC_LITERAL(191, 47), // "on_comboBox_initialLocation_c..."
-QT_MOC_LITERAL(239, 5) // "index"
+QT_MOC_LITERAL(191, 25), // "recieve_restaurantChecked"
+QT_MOC_LITERAL(217, 47), // "on_comboBox_initialLocation_c..."
+QT_MOC_LITERAL(265, 5) // "index"
 
     },
     "RestaurantWidget\0transmit_cancel\0\0"
@@ -51,6 +52,7 @@ QT_MOC_LITERAL(239, 5) // "index"
     "addRestaurantsFromFile\0on_confirmButton_pressed\0"
     "on_cancelButton_pressed\0"
     "recieve_restaurantClicked\0"
+    "recieve_restaurantChecked\0"
     "on_comboBox_initialLocation_currentIndexChanged\0"
     "index"
 };
@@ -62,7 +64,7 @@ static const uint qt_meta_data_RestaurantWidget[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -70,16 +72,17 @@ static const uint qt_meta_data_RestaurantWidget[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   62,    2, 0x06,    1 /* Public */,
-       3,    1,   63,    2, 0x06,    2 /* Public */,
+       1,    0,   68,    2, 0x06,    1 /* Public */,
+       3,    1,   69,    2, 0x06,    2 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       6,    1,   66,    2, 0x0a,    4 /* Public */,
-       7,    0,   69,    2, 0x0a,    6 /* Public */,
-       8,    0,   70,    2, 0x08,    7 /* Private */,
-       9,    0,   71,    2, 0x08,    8 /* Private */,
-      10,    1,   72,    2, 0x08,    9 /* Private */,
-      11,    1,   75,    2, 0x08,   11 /* Private */,
+       6,    1,   72,    2, 0x0a,    4 /* Public */,
+       7,    0,   75,    2, 0x0a,    6 /* Public */,
+       8,    0,   76,    2, 0x08,    7 /* Private */,
+       9,    0,   77,    2, 0x08,    8 /* Private */,
+      10,    1,   78,    2, 0x08,    9 /* Private */,
+      11,    1,   81,    2, 0x08,   11 /* Private */,
+      12,    1,   84,    2, 0x08,   13 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -91,7 +94,8 @@ static const uint qt_meta_data_RestaurantWidget[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 4,    2,
-    QMetaType::Void, QMetaType::Int,   12,
+    QMetaType::Void, 0x80000000 | 4,    2,
+    QMetaType::Void, QMetaType::Int,   13,
 
        0        // eod
 };
@@ -109,7 +113,8 @@ void RestaurantWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 4: _t->on_confirmButton_pressed(); break;
         case 5: _t->on_cancelButton_pressed(); break;
         case 6: _t->recieve_restaurantClicked((*reinterpret_cast< Restaurant(*)>(_a[1]))); break;
-        case 7: _t->on_comboBox_initialLocation_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 7: _t->recieve_restaurantChecked((*reinterpret_cast< Restaurant(*)>(_a[1]))); break;
+        case 8: _t->on_comboBox_initialLocation_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -139,7 +144,7 @@ const QMetaObject RestaurantWidget::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_RestaurantWidget_t
 , QtPrivate::TypeAndForceComplete<RestaurantWidget, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
 >,
@@ -166,13 +171,13 @@ int RestaurantWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }
