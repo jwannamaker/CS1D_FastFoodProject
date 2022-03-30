@@ -154,6 +154,7 @@ bool Button::isChecked()
 void Button::restaurantClicked()
 {
     checkBox->setChecked(true);
+    setEnabled(false);
     emit transmit_restaurantClicked(restaurant);
 }
 
