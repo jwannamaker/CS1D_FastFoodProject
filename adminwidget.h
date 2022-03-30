@@ -4,12 +4,10 @@
 #include <QWidget>
 #include <QTableWidget>
 #include <QTableWidgetItem>
-#include "databasehelper.h"
 #include "restaurant.h"
 #include "button.h"
 
 // linking global variables
-extern DatabaseHelper Database;
 extern std::vector<Restaurant> RestaurantList;
 
 namespace Ui {
@@ -28,13 +26,8 @@ public:
     /// \brief AdminWidget
     /// \param parent
     ///
-    explicit AdminWidget(QWidget *parent = nullptr);
+    explicit AdminWidget(Restaurant& currentRestaurant, Menu originalMenu, QWidget *parent = nullptr);
     ~AdminWidget();
-
-    ///
-    /// \brief populateComboBox
-    ///
-    void populateComboBox();
 
     ///
     /// \brief updateTableWidget
@@ -49,17 +42,16 @@ signals:
     ///
     void transmit_cancel();
 
+    ///
+    /// \brief transmit_submitChanges
+    ///
+    void transmit_submitChanges();
+
 private slots:
     ///
     /// \brief on_exitButton_pressed
     ///
     void on_exitButton_pressed();
-
-    ///
-    /// \brief on_comboBox_restaurant_currentIndexChanged
-    /// \param index
-    ///
-    void on_comboBox_restaurant_currentIndexChanged(int index);
 
     ///
     /// \brief on_saveButton_pressed
@@ -68,17 +60,27 @@ private slots:
     /// to the admin's new specification, and sets the appropriate restaurant's
     /// menu to match.
     ///
+    void on_saveButton_pressed();
 
+    ///
+    /// \brief on_addItemButton_pressed
+    ///
     void on_addItemButton_pressed();
 
+    ///
+    /// \brief on_pushButton_delete_pressed
+    ///
     void on_pushButton_delete_pressed();
 
-    void on_pushButton_editPrice_pressed();
+    ///
+    /// \brief updateEditFields
+    ///
+    void updateEditFields();
 
 private:
     Ui::AdminWidget *ui;
-    int currentID;
-    QVector<Button*> deleteItemButtons;
+    Restaurant& currentRestaurant;
+    Menu menu;
 };
 
 #endif // ADMINWIDGET_H

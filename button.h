@@ -28,6 +28,13 @@ class Button : public QPushButton
 public:
     ///
     /// \brief Button
+    /// \param item
+    /// \param parent
+    ///
+    explicit Button(Item& item, QWidget* parent = nullptr);
+
+    ///
+    /// \brief Button
     /// \param topText
     /// \param bottomText
     /// \param parent
@@ -54,9 +61,7 @@ public:
     /// \brief setLayout
     /// \param image
     ///
-    explicit Button(Item& item, QWidget* parent = nullptr);
     void setLayout(QPixmap image);
-
 
     ///
     /// \brief setDistanceTo
@@ -119,6 +124,11 @@ public slots:
     /// \brief itemClicked
     ///
     void itemClicked();
+
+    ///
+    /// \brief addClicked
+    ///
+    void addClicked();
 
 private:
     const int TILE_SIZE = 60;

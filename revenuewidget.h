@@ -54,9 +54,9 @@ public:
 
 signals:
     ///
-    /// \brief transmit_cancel
+    /// \brief transmit_exit
     ///
-    void transmit_cancel();
+    void transmit_exit();
 
 private slots:
     ///

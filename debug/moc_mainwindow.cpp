@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    const uint offsetsAndSize[24];
-    char stringdata0[188];
+    const uint offsetsAndSize[26];
+    char stringdata0[207];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs), len 
@@ -40,15 +40,17 @@ QT_MOC_LITERAL(99, 11), // "Restaurant&"
 QT_MOC_LITERAL(111, 16), // "recieve_mainMenu"
 QT_MOC_LITERAL(128, 16), // "recieve_viewMenu"
 QT_MOC_LITERAL(145, 4), // "rest"
-QT_MOC_LITERAL(150, 19), // "recieve_revenueView"
-QT_MOC_LITERAL(170, 17) // "recieve_adminView"
+QT_MOC_LITERAL(150, 18), // "recieve_backToMenu"
+QT_MOC_LITERAL(169, 19), // "recieve_revenueView"
+QT_MOC_LITERAL(189, 17) // "recieve_adminView"
 
     },
     "MainWindow\0recieve_loginSuccess\0\0"
     "recieve_logout\0recieve_restaurantView\0"
     "recieve_addRestaurantToTrip\0Restaurant&\0"
     "recieve_mainMenu\0recieve_viewMenu\0"
-    "rest\0recieve_revenueView\0recieve_adminView"
+    "rest\0recieve_backToMenu\0recieve_revenueView\0"
+    "recieve_adminView"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +60,7 @@ static const uint qt_meta_data_MainWindow[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,14 +68,15 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   62,    2, 0x0a,    1 /* Public */,
-       3,    0,   63,    2, 0x0a,    2 /* Public */,
-       4,    0,   64,    2, 0x0a,    3 /* Public */,
-       5,    1,   65,    2, 0x0a,    4 /* Public */,
-       7,    0,   68,    2, 0x0a,    6 /* Public */,
-       8,    1,   69,    2, 0x0a,    7 /* Public */,
-      10,    0,   72,    2, 0x0a,    9 /* Public */,
-      11,    0,   73,    2, 0x0a,   10 /* Public */,
+       1,    0,   68,    2, 0x0a,    1 /* Public */,
+       3,    0,   69,    2, 0x0a,    2 /* Public */,
+       4,    0,   70,    2, 0x0a,    3 /* Public */,
+       5,    1,   71,    2, 0x0a,    4 /* Public */,
+       7,    0,   74,    2, 0x0a,    6 /* Public */,
+       8,    1,   75,    2, 0x0a,    7 /* Public */,
+      10,    0,   78,    2, 0x0a,    9 /* Public */,
+      11,    0,   79,    2, 0x0a,   10 /* Public */,
+      12,    1,   80,    2, 0x0a,   11 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -84,6 +87,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, 0x80000000 | 6,    9,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 6,    2,
 
        0        // eod
 };
@@ -100,8 +104,9 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->recieve_addRestaurantToTrip((*reinterpret_cast< Restaurant(*)>(_a[1]))); break;
         case 4: _t->recieve_mainMenu(); break;
         case 5: _t->recieve_viewMenu((*reinterpret_cast< Restaurant(*)>(_a[1]))); break;
-        case 6: _t->recieve_revenueView(); break;
-        case 7: _t->recieve_adminView(); break;
+        case 6: _t->recieve_backToMenu(); break;
+        case 7: _t->recieve_revenueView(); break;
+        case 8: _t->recieve_adminView((*reinterpret_cast< Restaurant(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -115,7 +120,7 @@ const QMetaObject MainWindow::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_MainWindow_t
 , QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Restaurant &, std::false_type>
 
 
 >,
@@ -142,13 +147,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

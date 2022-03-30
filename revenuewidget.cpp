@@ -10,8 +10,20 @@ RevenueWidget::RevenueWidget(QWidget *parent) :
     ui(new Ui::RevenueWidget)
 {
     ui->setupUi(this);
-    ui->treeWidget->setHeaderHidden(true);
-    ui->treeWidget->setColumnCount(2);
+    ui->treeWidget->setColumnCount(1);
+
+    QLabel* firstHeader = new QLabel("Restaurant");
+    QLabel* secondHeader = new QLabel("Revenue");
+    QHBoxLayout* headerLayout = new QHBoxLayout();
+    headerLayout->addWidget(firstHeader, 0, Qt::AlignLeft);
+    headerLayout->addWidget(secondHeader, 0, Qt::AlignRight);
+    QHeaderView* headerView = new QHeaderView(Qt::Horizontal);
+    headerView->setLayout(headerLayout);
+
+    QTreeWidgetItem* item = new QTreeWidgetItem();
+    ui->treeWidget->setHeaderItem(item);
+    ui->treeWidget->setItemWidget(item, 0, headerView);
+    ui->treeWidget->setColumnWidth(0, this->width());
     populateTree();
     populateTotalRevenue();
 }
@@ -38,14 +50,14 @@ void RevenueWidget::populateTree()
 
         level->setText(0, RestaurantList[index].getName());
         level->setText(1, "$" + QString::number(RestaurantList[index].getRevenue(), 'f', 2));
+        level->setTextAlignment(1, Qt::AlignRight);
 
         level->addChild(child);
         ui->treeWidget->setItemWidget(child, 0, table);
         ui->treeWidget->addTopLevelItem(level);
-        if (RestaurantList[index].getRevenue() <= 0)
-            ui->treeWidget->topLevelItem(index)->setExpanded(false);
-        else
-            ui->treeWidget->topLevelItem(index)->setExpanded(true);
+
+        // what even is a qmodelindex
+        ui->treeWidget->setExpanded(ui->treeWidget->currentIndex(), RestaurantList[index].getRevenue() <= 0);
     }
 }
 
@@ -101,6 +113,6 @@ void RevenueWidget::populateTotalRevenue()
 ///
 void RevenueWidget::on_exitButton_pressed()
 {
-    emit transmit_cancel();
+    emit transmit_exit();
 }
 

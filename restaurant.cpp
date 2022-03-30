@@ -74,6 +74,20 @@ void Restaurant::setDistances(const std::vector<double>& distances)
 }
 
 ///
+/// \brief setDistanceAt
+/// \param otherID
+/// \param otherDistance
+///
+void Restaurant::setDistanceAt(unsigned int index, double distance)
+{
+    while(distances.size() <= index)
+    {
+        distances.push_back(0.0);
+    }
+    distances[index] = distance;
+}
+
+///
 /// \brief Restaurant::addDistance
 /// \param otherID
 /// \param distance
@@ -165,6 +179,15 @@ int Restaurant::getMenuSize() const
 }
 
 ///
+/// \brief Restaurant::getMenu
+/// \return
+///
+Menu Restaurant::getMenu() const
+{
+    return menu;
+}
+
+///
 /// \brief Restaurant::getMenuItem
 /// \param index
 /// \return
@@ -176,12 +199,24 @@ Item& Restaurant::getMenuItem(int index)
 }
 
 ///
+/// \brief Restaurant::RemoveMenuItem
+/// \param index
+///
+void Restaurant::removeMenuItem(int index)
+{
+    menu.erase(menu.begin() + index);
+}
+
+
+///
 /// \brief Restaurant::addOrder
 /// \param orderItems
 ///
 void Restaurant::addOrder(std::vector<Item> orderItems)
 {
-    Order newOrder = Order(CurrentUser, orderItems);
+    Order newOrder = Order();
+    newOrder.first = CurrentUser;
+    newOrder.second = orderItems;
     orders.push_back(newOrder);
     updateRevenue();
 }
@@ -193,13 +228,28 @@ void Restaurant::addOrder(std::vector<Item> orderItems)
 std::vector<Item> &Restaurant::getCurrentOrder()
 {
     // find if the current user has an order
-    for (int i = 0; i < orders.size(); i++)
+    for (unsigned int i = 0; i < orders.size(); i++)
         if (orders[i].first == CurrentUser)
             return orders[i].second;
 
     // if no order is found, create a new one with CurrentUser and return it
     addOrder();
     return orders.end()->second;
+}
+
+///
+/// \brief Restaurant::getCurrentOrderSubtotal
+/// \return
+///
+double Restaurant::getCurrentOrderSubtotal() const
+{
+    double orderTotal = 0;
+    for (int i = 0; i < getOrderCount(); i++)
+        if (orders[i].first.getUsername() == CurrentUser.getUsername())
+            for (Item item : orders[i].second)
+                orderTotal += item.getPrice() * item.getQuantity();
+
+    return orderTotal;
 }
 
 ///
@@ -219,6 +269,15 @@ Order &Restaurant::getOrder(int index)
 int Restaurant::getOrderCount() const
 {
     return orders.size();
+}
+
+///
+/// \brief Restaurant::getLastOrder
+/// \return
+///
+Order Restaurant::getLastOrder()
+{
+    return orders.back();
 }
 
 ///
@@ -268,23 +327,4 @@ void Restaurant::updateRevenue()
 double Restaurant::getRevenue() const
 {
     return revenue;
-}
-
-///
-/// \brief setDistanceAt
-/// \param otherID
-/// \param otherDistance
-///
-void Restaurant::setDistanceAt(unsigned int index, double distance)
-{
-    while(distances.size() <= index)
-    {
-        distances.push_back(0.0);
-    }
-    distances[index] = distance;
-}
-
-void Restaurant::RemoveMenuItem(int index)
-{
-    menu.erase(menu.begin() + index);
 }

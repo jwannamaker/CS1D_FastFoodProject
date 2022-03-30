@@ -11,8 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -30,17 +30,15 @@ class Ui_AdminWidget
 public:
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
-    QComboBox *comboBox_restaurant;
-    QSpacerItem *verticalSpacer;
+    QFormLayout *formLayout;
     QLabel *label;
     QLineEdit *lineEdit_menuItem;
     QLabel *label_2;
     QDoubleSpinBox *doubleSpinBox_itemPrice;
-    QPushButton *addItemButton;
     QSpacerItem *verticalSpacer_2;
+    QPushButton *addItemButton;
     QPushButton *pushButton_delete;
-    QPushButton *pushButton_editPrice;
-    QSpacerItem *verticalSpacer_3;
+    QPushButton *saveButton;
     QPushButton *exitButton;
     QTableWidget *tableWidget;
 
@@ -53,68 +51,54 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        comboBox_restaurant = new QComboBox(AdminWidget);
-        comboBox_restaurant->setObjectName(QString::fromUtf8("comboBox_restaurant"));
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(comboBox_restaurant->sizePolicy().hasHeightForWidth());
-        comboBox_restaurant->setSizePolicy(sizePolicy);
-        comboBox_restaurant->setMinimumSize(QSize(70, 0));
-
-        verticalLayout->addWidget(comboBox_restaurant);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer);
-
+        formLayout = new QFormLayout();
+        formLayout->setObjectName(QString::fromUtf8("formLayout"));
         label = new QLabel(AdminWidget);
         label->setObjectName(QString::fromUtf8("label"));
 
-        verticalLayout->addWidget(label);
+        formLayout->setWidget(0, QFormLayout::LabelRole, label);
 
         lineEdit_menuItem = new QLineEdit(AdminWidget);
         lineEdit_menuItem->setObjectName(QString::fromUtf8("lineEdit_menuItem"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(lineEdit_menuItem->sizePolicy().hasHeightForWidth());
-        lineEdit_menuItem->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(lineEdit_menuItem->sizePolicy().hasHeightForWidth());
+        lineEdit_menuItem->setSizePolicy(sizePolicy);
 
-        verticalLayout->addWidget(lineEdit_menuItem);
+        formLayout->setWidget(0, QFormLayout::FieldRole, lineEdit_menuItem);
 
         label_2 = new QLabel(AdminWidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        verticalLayout->addWidget(label_2);
+        formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
 
         doubleSpinBox_itemPrice = new QDoubleSpinBox(AdminWidget);
         doubleSpinBox_itemPrice->setObjectName(QString::fromUtf8("doubleSpinBox_itemPrice"));
 
-        verticalLayout->addWidget(doubleSpinBox_itemPrice);
+        formLayout->setWidget(1, QFormLayout::FieldRole, doubleSpinBox_itemPrice);
+
+
+        verticalLayout->addLayout(formLayout);
+
+        verticalSpacer_2 = new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        verticalLayout->addItem(verticalSpacer_2);
 
         addItemButton = new QPushButton(AdminWidget);
         addItemButton->setObjectName(QString::fromUtf8("addItemButton"));
 
         verticalLayout->addWidget(addItemButton);
 
-        verticalSpacer_2 = new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Fixed);
-
-        verticalLayout->addItem(verticalSpacer_2);
-
         pushButton_delete = new QPushButton(AdminWidget);
         pushButton_delete->setObjectName(QString::fromUtf8("pushButton_delete"));
 
         verticalLayout->addWidget(pushButton_delete);
 
-        pushButton_editPrice = new QPushButton(AdminWidget);
-        pushButton_editPrice->setObjectName(QString::fromUtf8("pushButton_editPrice"));
+        saveButton = new QPushButton(AdminWidget);
+        saveButton->setObjectName(QString::fromUtf8("saveButton"));
 
-        verticalLayout->addWidget(pushButton_editPrice);
-
-        verticalSpacer_3 = new QSpacerItem(20, 30, QSizePolicy::Minimum, QSizePolicy::Fixed);
-
-        verticalLayout->addItem(verticalSpacer_3);
+        verticalLayout->addWidget(saveButton);
 
         exitButton = new QPushButton(AdminWidget);
         exitButton->setObjectName(QString::fromUtf8("exitButton"));
@@ -126,11 +110,16 @@ public:
 
         tableWidget = new QTableWidget(AdminWidget);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setEditTriggers(QAbstractItemView::DoubleClicked|QAbstractItemView::SelectedClicked);
+        tableWidget->setFrameShape(QFrame::NoFrame);
+        tableWidget->setFrameShadow(QFrame::Plain);
+        tableWidget->setLineWidth(0);
+        tableWidget->setEditTriggers(QAbstractItemView::CurrentChanged|QAbstractItemView::DoubleClicked|QAbstractItemView::SelectedClicked);
         tableWidget->setTabKeyNavigation(false);
         tableWidget->setProperty("showDropIndicator", QVariant(false));
         tableWidget->setDragDropOverwriteMode(false);
         tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+        tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableWidget->setShowGrid(false);
         tableWidget->setGridStyle(Qt::NoPen);
         tableWidget->verticalHeader()->setVisible(false);
 
@@ -148,8 +137,8 @@ public:
         label->setText(QCoreApplication::translate("AdminWidget", "Name", nullptr));
         label_2->setText(QCoreApplication::translate("AdminWidget", "Price", nullptr));
         addItemButton->setText(QCoreApplication::translate("AdminWidget", "Add Item", nullptr));
-        pushButton_delete->setText(QCoreApplication::translate("AdminWidget", "Delete Item", nullptr));
-        pushButton_editPrice->setText(QCoreApplication::translate("AdminWidget", "Edit Price", nullptr));
+        pushButton_delete->setText(QCoreApplication::translate("AdminWidget", "Delete", nullptr));
+        saveButton->setText(QCoreApplication::translate("AdminWidget", "Save", nullptr));
         exitButton->setText(QCoreApplication::translate("AdminWidget", "Exit", nullptr));
     } // retranslateUi
 

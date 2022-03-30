@@ -50,11 +50,6 @@ signals:
     ///
     void transmit_revenueView();
 
-    ///
-    /// \brief transmit_adminView
-    ///
-    void transmit_adminView();
-
 private slots:
     ///
     /// \brief on_logOutButton_pressed
@@ -70,11 +65,6 @@ private slots:
     /// \brief on_revenueButton_pressed
     ///
     void on_revenueButton_pressed();
-
-    ///
-    /// \brief on_adminButton_pressed
-    ///
-    void on_adminButton_pressed();
 
 private:
     Ui::MainMenuWidget*     ui;

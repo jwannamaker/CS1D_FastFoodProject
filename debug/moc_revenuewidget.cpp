@@ -24,19 +24,19 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RevenueWidget_t {
     const uint offsetsAndSize[8];
-    char stringdata0[53];
+    char stringdata0[51];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_RevenueWidget_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_RevenueWidget_t qt_meta_stringdata_RevenueWidget = {
     {
 QT_MOC_LITERAL(0, 13), // "RevenueWidget"
-QT_MOC_LITERAL(14, 15), // "transmit_cancel"
-QT_MOC_LITERAL(30, 0), // ""
-QT_MOC_LITERAL(31, 21) // "on_exitButton_pressed"
+QT_MOC_LITERAL(14, 13), // "transmit_exit"
+QT_MOC_LITERAL(28, 0), // ""
+QT_MOC_LITERAL(29, 21) // "on_exitButton_pressed"
 
     },
-    "RevenueWidget\0transmit_cancel\0\0"
+    "RevenueWidget\0transmit_exit\0\0"
     "on_exitButton_pressed"
 };
 #undef QT_MOC_LITERAL
@@ -75,7 +75,7 @@ void RevenueWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         auto *_t = static_cast<RevenueWidget *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->transmit_cancel(); break;
+        case 0: _t->transmit_exit(); break;
         case 1: _t->on_exitButton_pressed(); break;
         default: ;
         }
@@ -83,7 +83,7 @@ void RevenueWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (RevenueWidget::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RevenueWidget::transmit_cancel)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RevenueWidget::transmit_exit)) {
                 *result = 0;
                 return;
             }
@@ -139,7 +139,7 @@ int RevenueWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void RevenueWidget::transmit_cancel()
+void RevenueWidget::transmit_exit()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }

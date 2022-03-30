@@ -81,6 +81,11 @@ public slots:
     void recieve_viewMenu(Restaurant& rest);
 
     ///
+    /// \brief recieve_backToMenu
+    ///
+    void recieve_backToMenu();
+
+    ///
     /// \brief recieve_viewRevenue
     ///
     void recieve_revenueView();
@@ -88,10 +93,9 @@ public slots:
     ///
     /// \brief recieve_adminView
     ///
-    void recieve_adminView();
+    void recieve_adminView(Restaurant&);
 
 private:
-    Customer                currentUser;
     Ui::MainWindow*         ui;
     QStackedWidget*         stackedWidget;
     LoginWidget*            loginPage;

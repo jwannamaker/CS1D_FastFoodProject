@@ -5,9 +5,10 @@
 /// \param inputRestaurant
 /// \param parent
 ///
-MenuWidget::MenuWidget(Restaurant& inputRestaurant, QWidget *parent) :
-    QWidget(parent), ui(new Ui::MenuWidget), currentRestaurant(inputRestaurant)
+MenuWidget::MenuWidget(Restaurant& inputRestaurant, std::vector<Item>& currentOrder, QWidget *parent) :
+    QWidget(parent), ui(new Ui::MenuWidget), orderedItems(currentOrder), currentRestaurant(inputRestaurant)
 {
+    qDebug() << "menu widget constructor";
     ui->setupUi(this);
     ui->tableWidget_orderItems->setColumnCount(4);
     ui->tableWidget_orderItems->setHorizontalHeaderItem(0, new QTableWidgetItem("Item"));
@@ -16,9 +17,14 @@ MenuWidget::MenuWidget(Restaurant& inputRestaurant, QWidget *parent) :
     ui->tableWidget_orderItems->setHorizontalHeaderItem(3, new QTableWidgetItem("Remove Item"));
     ui->tableWidget_orderItems->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    //Create Grid for menu item icons
+    buttonLayout = new QGridLayout(ui->scrollArea_menu);
+
+    //ui->editButton->setHidden(CurrentUser.isAdmin());
     createButtons();
     updateTableWidget();
     updateOrderTotal();
+    qDebug() << "end of menu widget constructor";
 }
 
 ///
@@ -34,19 +40,21 @@ MenuWidget::~MenuWidget()
 ///
 void MenuWidget::createButtons()
 {
+    qDebug() << "creating item buttons";
     //Create the menu item buttons
     for (int i = 0; i < currentRestaurant.getMenuSize(); ++i)
+    {
+        qDebug() << "creating new item button for " << currentRestaurant.getMenuItem(i).getName();
         itemButtons.push_back(createButton(currentRestaurant.getMenuItem(i)));
-
-    //Create Grid for menu item icons
-    buttonLayout = new QGridLayout(ui->scrollArea_menu);
+    }
 
     //Add menu items to window
     int row = 0;
     int col = 0;
 
-    for (int i = 0; i < currentRestaurant.getMenuSize(); i++)
+    for (unsigned int i = 0; i < itemButtons.size(); i++)
     {
+        qDebug() << "adding button to layout";
         buttonLayout->addWidget(itemButtons[i], row, col);
         col++;
 
@@ -64,12 +72,8 @@ void MenuWidget::createButtons()
 void MenuWidget::updateOrderTotal()
 {
     double grandTotal = 0;
-
     for (size_t i = 0; i < orderedItems.size(); i++)
-    {
         grandTotal += orderedItems[i].getPrice() * orderedItems[i].getQuantity();
-    }
-
     ui->totalLineEdit->setText(QString::number(grandTotal));
 }
 
@@ -91,11 +95,11 @@ void MenuWidget::updateTableWidget()
         ui->tableWidget_orderItems->setItem(index, 2, itemPrice);
         ui->tableWidget_orderItems->item(index, 2)->setTextAlignment(Qt::AlignRight);
         //set delete button
-        QHBoxLayout *l = new QHBoxLayout();
-        l->addWidget(deleteItemButtons[index]);
-        QWidget *w = new QWidget();
-        w->setLayout(l);
-        ui->tableWidget_orderItems->setCellWidget(index, 3, w);
+        QHBoxLayout *layout = new QHBoxLayout();
+        layout->addWidget(deleteItemButtons[index]);
+        QWidget *widget = new QWidget();
+        widget->setLayout(layout);
+        ui->tableWidget_orderItems->setCellWidget(index, 3, deleteItemButtons[index]);
     }
 }
 
@@ -106,7 +110,7 @@ void MenuWidget::on_confirmButton_pressed()
 {
     updateTableWidget();
     updateOrderTotal();
-    currentRestaurant.addOrder(orderedItems);
+
     emit transmit_confirmOrder(currentRestaurant);
 }
 
@@ -130,15 +134,15 @@ void MenuWidget::recieve_itemClicked(Item& item)
     if (items.size() == 0)
     {
         orderedItems.push_back(item);
-        int menuIndex  = GetMenuItemIndex(item.getName());
+        int menuIndex  = getMenuItemIndex(item.getName());
         orderedItems[menuIndex].incrementQuantity();
-        deleteItemButtons.append(createDeleteButton(item,SLOT (deleteItemClicked())));
+        deleteItemButtons.append(createDeleteButton(item, SLOT(deleteItemClicked())));
         updateTableWidget();
         updateOrderTotal();
     }
     else
     {
-        int menuIndex  = GetMenuItemIndex(item.getName());
+        int menuIndex  = getMenuItemIndex(item.getName());
         //If menu is valid continute
         if( menuIndex != -1)
         {
@@ -159,7 +163,7 @@ void MenuWidget::deleteItemClicked()
 {
     Button *clickedButton = qobject_cast<Button *>(sender());
 
-    int menuIndex = GetMenuItemIndex(clickedButton->getItem().getName());
+    int menuIndex = getMenuItemIndex(clickedButton->getItem().getName());
 
     if( menuIndex != -1)
     {
@@ -183,7 +187,7 @@ void MenuWidget::deleteItemClicked()
 /// \param item
 /// \return
 ///
-Button *MenuWidget::createButton(Item& item)
+Button *MenuWidget::createButton(Item item)
 {
     Button *button = new Button(currentRestaurant, item, this);
     QObject::connect(button,
@@ -199,10 +203,13 @@ Button *MenuWidget::createButton(Item& item)
 /// \param member
 /// \return
 ///
-Button *MenuWidget::createDeleteButton(Item& item, const char *member)
+Button *MenuWidget::createDeleteButton(Item& item)
 {
     Button *button = new Button(item);
-    connect(button, SIGNAL(clicked()), this, member);
+    connect(button,
+            SIGNAL(clicked()),
+            this,
+            SLOT(deleteItemClicked());
     return button;
 }
 
@@ -211,12 +218,21 @@ Button *MenuWidget::createDeleteButton(Item& item, const char *member)
 /// \param itemName
 /// \return
 ///
-int MenuWidget::GetMenuItemIndex(QString itemName)
+int MenuWidget::getMenuItemIndex(QString itemName)
 {
     for (int i = 0; i < currentRestaurant.getMenuSize(); i++)
-        if(orderedItems[i].getName() == itemName) return i;
+        if(orderedItems[i].getName() == itemName)
+            return i;
 
     qDebug() << "Item doesn't exist";
     return -1;
+}
+
+///
+/// \brief MenuWidget::on_editButton_pressed
+///
+void MenuWidget::on_editButton_pressed()
+{
+    emit transmit_adminView();
 }
 

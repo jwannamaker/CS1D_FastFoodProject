@@ -6,6 +6,7 @@
 #include "button.h"
 #include "customer.h"
 #include "restaurant.h"
+#include "adminwidget.h"
 #include "ui_menuwidget.h"
 
 // linking globals
@@ -28,9 +29,10 @@ public:
     ///
     /// \brief MenuWidget
     /// \param currentRestaurant
+    /// \param currentOrder
     /// \param parent
     ///
-    explicit MenuWidget(Restaurant& currentRestaurant, QWidget *parent = nullptr);
+    explicit MenuWidget(Restaurant& currentRestaurant, std::vector<Item>& currentOrder, QWidget *parent = nullptr);
     ~MenuWidget();
 
     ///
@@ -53,7 +55,7 @@ public:
     /// \param itemName
     /// \return
     ///
-    int GetMenuItemIndex(QString itemName);
+    int getMenuItemIndex(QString itemName);
 
 signals:
     ///
@@ -65,6 +67,11 @@ signals:
     /// \brief transmit_cancelOrder
     ///
     void transmit_cancelOrder();
+
+    ///
+    /// \brief transmit_adminView
+    ///
+    void transmit_adminView();
 
 private slots:
     ///
@@ -85,19 +92,24 @@ private slots:
     ///
     /// \brief deleteItemClicked
     ///
-    void deleteItemClicked();
+    void deleteItemClicked(Item&);
+
+    ///
+    /// \brief on_editButton_pressed
+    ///
+    void on_editButton_pressed();
 
 private:
     const int MAX_COL = 5;
 
     Ui::MenuWidget *ui;
     Button *createButton(Item& item); //Creates a button for a menu item
-    Button *createDeleteButton(Item& item, const char *member);
+    Button *createDeleteButton(Item& item);
 
     QGridLayout* buttonLayout;
     QVector<Button*> itemButtons;//data members
     QVector<Button*> deleteItemButtons;
-    std::vector<Item> orderedItems;
+    std::vector<Item>& orderedItems;
     Restaurant& currentRestaurant; //Current restaurant on the widget
 };
 

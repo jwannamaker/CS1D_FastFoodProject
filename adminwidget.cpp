@@ -6,9 +6,9 @@
 /// \brief AdminWidget::AdminWidget
 /// \param parent
 ///
-AdminWidget::AdminWidget(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::AdminWidget)
+AdminWidget::AdminWidget(Restaurant& currentRestaurant, Menu menu, QWidget *parent) :
+    QWidget(parent), ui(new Ui::AdminWidget), currentRestaurant(currentRestaurant)
+
 {
     ui->setupUi(this);
     ui->tableWidget->setColumnCount(2);
@@ -16,8 +16,20 @@ AdminWidget::AdminWidget(QWidget *parent) :
     ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Price"));
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    populateComboBox();
+    this->menu = menu;
     updateTableWidget();
+    QObject::connect(ui->tableWidget,
+                     SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
+                     this,
+                     SLOT(updateEditFields()));
+    QObject::connect(ui->tableWidget,
+                     SIGNAL(clicked(QModelIndex)),
+                     this,
+                     SLOT(updateEditFields()));
+    QObject::connect(ui->tableWidget,
+                     SIGNAL(doubleClicked(QModelIndex)),
+                     this,
+                     SLOT(updateEditFields()));
 }
 
 ///
@@ -29,29 +41,18 @@ AdminWidget::~AdminWidget()
 }
 
 ///
-/// \brief AdminWidget::populateComboBox
-///
-void AdminWidget::populateComboBox()
-{
-    //Add restaurants to combo box
-    for (size_t i = 0; i < RestaurantList.size(); ++i)
-        ui->comboBox_restaurant->addItem(RestaurantList[i].getName());
-}
-
-///
 /// \brief AdminWidget::updateTableWidget
 ///
 void AdminWidget::updateTableWidget()
 {
-    ui->tableWidget->setRowCount(RestaurantList[currentID].getMenuSize());
+    ui->tableWidget->setRowCount(menu.size());
 
     // initializing contents of the table
-    for(int index = 0; index < RestaurantList[currentID].getMenuSize(); index++)
+    for(size_t index = 0; index < menu.size(); index++)
     {
-        QTableWidgetItem* itemName = new QTableWidgetItem(RestaurantList[currentID].getMenuItem(index).getName());
-        ui->tableWidget->setItem(index, 0, itemName);
-        QTableWidgetItem* unitPrice = new QTableWidgetItem(QString::number(RestaurantList[currentID].getMenuItem(index).getPrice(), 'f', 2));
-        ui->tableWidget->setItem(index, 1, unitPrice);
+        ui->tableWidget->setItem(index, 0, new QTableWidgetItem(menu[index].getName()));
+        ui->tableWidget->currentItem()->setFlags(Qt::NoItemFlags);
+        ui->tableWidget->setItem(index, 1, new QTableWidgetItem(QString::number(menu[index].getPrice(), 'f', 2)));
         ui->tableWidget->item(index, 1)->setTextAlignment(Qt::AlignRight);
     }
 }
@@ -65,21 +66,6 @@ void AdminWidget::on_exitButton_pressed()
 }
 
 ///
-/// \brief AdminWidget::on_comboBox_restaurant_currentIndexChanged
-/// \param index
-///
-void AdminWidget::on_comboBox_restaurant_currentIndexChanged(int index)
-{
-    currentID = index;
-    updateTableWidget();
-}
-
-///
-/// \brief AdminWidget::on_saveButton_pressed
-///
-
-
-///
 /// \brief AdminWidget::on_addItemButton_pressed
 ///
 void AdminWidget::on_addItemButton_pressed()
@@ -90,64 +76,38 @@ void AdminWidget::on_addItemButton_pressed()
     }
     else
     {
-        Item item(ui->lineEdit_menuItem->text(), ui->doubleSpinBox_itemPrice->value());
-        RestaurantList[currentID].addMenuItem(item);
-        updateTableWidget();
+        ui->tableWidget->insertRow(ui->tableWidget->rowCount() + 1);
+        ui->tableWidget->setItem(ui->tableWidget->rowCount(), 0, new QTableWidgetItem(ui->lineEdit_menuItem->text()));
+        ui->tableWidget->setItem(ui->tableWidget->rowCount(), 1, new QTableWidgetItem(ui->doubleSpinBox_itemPrice->value()));
     }
-
+    ui->lineEdit_menuItem->selectAll();
 }
 
+///
+/// \brief AdminWidget::on_pushButton_delete_pressed
+///
 void AdminWidget::on_pushButton_delete_pressed()
 {
-    //Look for selected rows and remove the items selected
-    QModelIndexList indexList = ui->tableWidget->selectionModel()->selectedIndexes();
-
-    if(indexList.size() > 0)
-    {
-        foreach (QModelIndex index, indexList)
-        {
-            if(RestaurantList[currentID].getMenuSize() > 0)
-                RestaurantList[currentID].RemoveMenuItem(index.row());
-
-        }
-        updateTableWidget();
-    }
-    else
-        QMessageBox::information(this, "Tip", "You must select an item to delete");
-
-
+    ui->tableWidget->removeRow(ui->tableWidget->currentRow());
 }
 
-
-void AdminWidget::on_pushButton_editPrice_pressed()
+///
+/// \brief AdminWidget::updateEditFields
+///
+void AdminWidget::updateEditFields()
 {
+    QModelIndex index = ui->tableWidget->currentIndex();
+    QVariant currentName = QVariant::fromValue(index.siblingAtColumn(0).data(Qt::DisplayRole));
+    QVariant currentPrice = QVariant::fromValue(index.siblingAtColumn(1).data(Qt::DisplayRole));
+    ui->lineEdit_menuItem->setText(currentName.toString());
+    ui->doubleSpinBox_itemPrice->setValue(currentPrice.toDouble());
+}
 
-    QModelIndexList indexList = ui->tableWidget->selectionModel()->selectedIndexes();
-
-    if(indexList.size() > 0)
-    {
-        //Open dialog window
-        QMessageBox msgBox;
-        QDoubleSpinBox* b = new QDoubleSpinBox();
-        //set the spin box to selected item price for admin qol
-        b->setValue(RestaurantList[currentID].getMenuItem(indexList[0].row()).getPrice());
-
-        if (msgBox.layout())
-          msgBox.layout()->addWidget(b);
-        msgBox.setText("Enter the price you want.");
-        msgBox.exec();
-
-        //Look for selected rows and edit the price of the selected item
-        foreach (QModelIndex index, indexList)
-            RestaurantList[currentID].getMenuItem(index.row()).setPrice(b->value());
-
-        updateTableWidget();
-    }
-    else
-    {
-        QMessageBox::information(this, "Tip", "You must select an item to edit the price");
-    }
-
+///
+/// \brief AdminWidget::on_saveButton_pressed
+///
+void AdminWidget::on_saveButton_pressed()
+{
 
 }
 

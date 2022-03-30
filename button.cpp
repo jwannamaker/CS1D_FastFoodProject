@@ -2,6 +2,26 @@
 
 ///
 /// \brief Button::Button
+/// \param item
+/// \param parent
+///
+Button::Button(Item& item, QWidget* parent)
+    : QPushButton(parent), restaurant(NULL_RESTAURANT), menuItem(item)
+{
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+    topText = new QLabel("");
+    bottomText = new QLabel("");
+    setLayout(QPixmap(":images/trashbin_icon.png"));
+    checkBox->setHidden(true);
+
+    QObject::connect(this,
+                     SIGNAL(clicked()),
+                     parent,
+                     SLOT(deleteClicked()));
+}
+
+///
+/// \brief Button::Button
 /// \param top
 /// \param bottom
 /// \param parent
@@ -14,6 +34,11 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
     bottomText = new QLabel(bottom);
     setLayout(QPixmap(":images/plus_icon.png"));
     checkBox->setHidden(true);
+
+    QObject::connect(this,
+                     SIGNAL(clicked(bool)),
+                     this,
+                     SLOT(addClicked()));
 }
 
 ///
@@ -35,7 +60,7 @@ Button::Button(Restaurant& rest, int initialID, QWidget* parent)
                      this,
                      SLOT(restaurantClicked()));
     QObject::connect(checkBox,
-                     SIGNAL(toggled(bool)),
+                     SIGNAL(stateChanged(int)),
                      this,
                      SLOT(restaurantChecked()));
 }
@@ -59,20 +84,6 @@ Button::Button(Restaurant& rest, Item& item, QWidget* parent)
                      SIGNAL(clicked()),
                      this,
                      SLOT(itemClicked()));
-}
-
-///
-/// \brief Button::Button
-/// \param item
-/// \param parent
-///
-Button::Button(Item& item, QWidget* parent)
-    : QPushButton(parent), restaurant(NULL_RESTAURANT), menuItem(item)
-{
-    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
-    topText = new QLabel("");
-    bottomText = new QLabel("");
-    this->setIcon(QPixmap(":images/trashbin_icon.png"));
 }
 
 ///
@@ -147,7 +158,7 @@ bool Button::isChecked()
 ///
 void Button::restaurantClicked()
 {
-    checkBox->setChecked(true);
+//    checkBox->setChecked(true);
     emit transmit_restaurantClicked(restaurant);
 }
 
@@ -165,4 +176,12 @@ void Button::restaurantChecked()
 void Button::itemClicked()
 {
     emit transmit_itemClicked(menuItem);
+}
+
+///
+/// \brief Button::addClicked
+///
+void Button::addClicked()
+{
+    hide();
 }

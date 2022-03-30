@@ -18,10 +18,6 @@ MainMenuWidget::MainMenuWidget(QWidget *parent) :
 
     // checking current user info for menu options
     ui->welcomeLabel->setText("Welcome, " + CurrentUser.getUsername());
-    if (CurrentUser.isAdmin())
-        ui->adminButton->setHidden(false);
-    else
-        ui->adminButton->setHidden(true);
 }
 
 ///
@@ -55,12 +51,3 @@ void MainMenuWidget::on_revenueButton_pressed()
 {
     emit transmit_revenueView();
 }
-
-///
-/// \brief MainMenuWidget::on_adminButton_pressed
-///
-void MainMenuWidget::on_adminButton_pressed()
-{
-    emit transmit_adminView();
-}
-

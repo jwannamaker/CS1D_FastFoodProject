@@ -75,6 +75,13 @@ public:
     void setDistances(const std::vector<double>& distances);
 
     ///
+    /// \brief setDistanceAt
+    /// \param otherID
+    /// \param otherDistance
+    ///
+    void setDistanceAt(unsigned int otherID, double otherDistance);
+
+    ///
     /// \brief addDistance
     /// \param otherID
     /// \param otherDistance
@@ -129,11 +136,23 @@ public:
     int getMenuSize() const;
 
     ///
+    /// \brief getMenu
+    /// \return
+    ///
+    Menu getMenu() const;
+
+    ///
     /// \brief getMenuItem
     /// \param index
     /// \return
     ///
     Item& getMenuItem(int index);
+
+    ///
+    /// \brief RemoveMenuItem
+    /// \param index
+    ///
+    void removeMenuItem(int index);
 
     ///
     /// \brief addOrder
@@ -148,6 +167,12 @@ public:
     std::vector<Item>& getCurrentOrder();
 
     ///
+    /// \brief getCurrentOrderSubtotal
+    /// \return
+    ///
+    double getCurrentOrderSubtotal() const;
+
+    ///
     /// \brief getOrder
     /// \param index
     /// \return
@@ -159,6 +184,12 @@ public:
     /// \return
     ///
     int getOrderCount() const;
+
+    ///
+    /// \brief getLastOrder
+    /// \return
+    ///
+    Order getLastOrder();
 
     ///
     /// \brief getOrderList
@@ -188,15 +219,6 @@ public:
     /// \return
     ///
     double getRevenue() const;
-
-    ///
-    /// \brief setDistanceAt
-    /// \param otherID
-    /// \param otherDistance
-    ///
-    void setDistanceAt(unsigned int otherID, double otherDistance);
-
-    void RemoveMenuItem(int index);
 
 private:
     int                 ID;

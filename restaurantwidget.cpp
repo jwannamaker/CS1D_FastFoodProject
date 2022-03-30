@@ -116,6 +116,8 @@ void RestaurantWidget::addButtonsToLayout()
 void RestaurantWidget::addRestaurantToTrip(Restaurant& rest)
 {
     visitedRestaurants.push_back(rest);
+    Button *button = qobject_cast<Button *>(sender());
+    button->setChecked(true);
     optimizeRestaurantDistance();
     updateTableWidget();
     updateTripDistance();
@@ -129,14 +131,17 @@ void RestaurantWidget::updateTableWidget()
     ui->tableWidget_tripRestaurants->setRowCount(visitedRestaurants.size());
     for (unsigned int index = 0; index < visitedRestaurants.size(); index++)
     {
-        QTableWidgetItem* restaurantName = new QTableWidgetItem(visitedRestaurants[index].getName());
-        ui->tableWidget_tripRestaurants->setItem(index, 0, restaurantName);
-        QTableWidgetItem* restaurantDistance = new QTableWidgetItem(QString::number(visitedRestaurants[index].getDistance(initialID)));
-        ui->tableWidget_tripRestaurants->setItem(index, 1, restaurantDistance);
-        ui->tableWidget_tripRestaurants->item(index, 1)->setTextAlignment(Qt::AlignRight);
-        QTableWidgetItem* restaurantSubtotal = new QTableWidgetItem(QString::number(visitedRestaurants[index].getRevenue())); // may need to create method for getting the total for the last confirmed order
-        ui->tableWidget_tripRestaurants->setItem(index, 2, restaurantSubtotal);
-        ui->tableWidget_tripRestaurants->item(index, 2)->setTextAlignment(Qt::AlignRight);
+        // place some sort of check to ensure the correct restaurant instance is getting added to the table widget
+
+            QTableWidgetItem* restaurantName = new QTableWidgetItem(visitedRestaurants[index].getName());
+            ui->tableWidget_tripRestaurants->setItem(index, 0, restaurantName);
+            QTableWidgetItem* restaurantDistance = new QTableWidgetItem(QString::number(visitedRestaurants[index].getDistance(initialID)));
+            ui->tableWidget_tripRestaurants->setItem(index, 1, restaurantDistance);
+            ui->tableWidget_tripRestaurants->item(index, 1)->setTextAlignment(Qt::AlignRight);
+            QTableWidgetItem* restaurantSubtotal = new QTableWidgetItem(QString::number(visitedRestaurants[index].getCurrentOrderSubtotal())); // may need to create method for getting the total for the last confirmed order
+            ui->tableWidget_tripRestaurants->setItem(index, 2, restaurantSubtotal);
+            ui->tableWidget_tripRestaurants->item(index, 2)->setTextAlignment(Qt::AlignRight);
+
     }
 }
 
@@ -237,9 +242,15 @@ void RestaurantWidget::recieve_restaurantClicked(Restaurant& rest)
     emit transmit_viewRestMenu(rest);
 }
 
+///
+/// \brief RestaurantWidget::recieve_restaurantChecked
+/// \param rest
+///
 void RestaurantWidget::recieve_restaurantChecked(Restaurant &rest)
 {
-    qDebug() << "restaurant checked: " << rest.getName();
+    Button *button = qobject_cast<Button *>(sender());
+    if (button->isChecked())
+        qDebug() << "restaurant checked: " << rest.getName();
 }
 
 ///
