@@ -7,11 +7,7 @@
         <file alias="rest_menu_icon.png">rest_menu_icon.png</file>
         <file alias="food_icon.png">food_icon.png</file>
         <file alias="food_image.png">food_image.png</file>
-        <file>01.jpg</file>
-        <file>02.jpg</file>
-        <file>03.jpg</file>
-        <file>04.jpg</file>
-        <file>05.jpg</file>
+        <file alias="trashbin_icon.png">trashbin_icon.png</file>
+        <file alias="plus_icon.png">plus_icon.png</file>
     </qresource>
-    <qresource prefix="/"/>
 </RCC>

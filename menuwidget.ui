@@ -30,6 +30,18 @@
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::NoSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
         </widget>
        </item>
        <item>
@@ -37,12 +49,12 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Subtotal</string>
+            <string>Total</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="subtotalLineEdit">
+          <widget class="QLineEdit" name="totalLineEdit">
            <property name="readOnly">
             <bool>true</bool>
            </property>
@@ -69,6 +81,13 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="editButton">
+         <property name="text">
+          <string>Edit Menu</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="confirmButton">

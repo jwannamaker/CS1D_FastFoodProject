@@ -4,9 +4,21 @@
 
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
-#include <vector>
 #include <QDebug>
-#include "menu.h"
+#include "cassert"
+#include "customer.h"
+#include "item.h"
+
+class Restaurant;
+
+// linking globals
+extern Customer CurrentUser;
+extern std::vector<Restaurant> RestaurantList;
+
+// type aliases
+using Menu = std::vector<Item>;
+using Order = std::pair<Customer, std::vector<Item>>;
+using OrderList = std::vector<Order>;
 
 ///
 /// \class Restaurant.
@@ -17,14 +29,6 @@
 class Restaurant
 {
 public:
-    ///
-    /// \brief list
-    ///
-    /// Static member of Restaurant, contains every Restuarant object created
-    /// throughout the program.
-    ///
-    static std::vector<Restaurant> list;
-
     ///
     /// \brief Restaurant
     ///
@@ -48,7 +52,7 @@ public:
 
     ///
     /// \brief getName
-    /// \return
+    /// \return QString
     ///
     QString getName() const;
 
@@ -60,15 +64,22 @@ public:
 
     ///
     /// \brief getID
-    /// \return
+    /// \return int
     ///
     int getID() const;
 
     ///
     /// \brief setDistances
-    /// \param dists
+    /// \param distances
     ///
-    void setDistances(std::vector<double> distances);
+    void setDistances(const std::vector<double>& distances);
+
+    ///
+    /// \brief addDistance
+    /// \param otherID
+    /// \param otherDistance
+    ///
+    void addDistance(int otherID, double otherDistance);
 
     ///
     /// \brief getDistance
@@ -83,19 +94,21 @@ public:
     /// \brief getDistance
     ///
     /// get the distance from the current restaurant to the specified restaurant id
-    /// \return double containg
+    /// \return double containing
     ///
     double getDistance(int otherID) const;
 
     ///
-    /// \brief getTripDistance
+    /// \brief getShortestDistanceID
+    /// \return
     ///
-    /// Calculates the distance this Customer has traveled so far by traversing the
-    /// list of visited restaurants.
-    /// \param tripIDList is a vector of integers containing the IDs of the restaurants visited.
-    /// \return Double indicating the total miles in a Customer's trip.
+    int getShortestDistanceID() const;
+
     ///
-    double getTripDistance(std::vector<int> tripIDList) const;
+    /// \brief getClosestRestaurant
+    /// \return
+    ///
+    Restaurant& getClosestRestaurant();
 
     ///
     /// \brief setMenu
@@ -104,10 +117,35 @@ public:
     void setMenu(Menu menu);
 
     ///
-    /// \brief getMenu
+    /// \brief addMenuItem
+    /// \param newItem
+    ///
+    void addMenuItem(Item newItem);
+
+    ///
+    /// \brief getMenuSize
     /// \return
     ///
-    Menu getMenu() const;
+    int getMenuSize() const;
+
+    ///
+    /// \brief getMenuItem
+    /// \param index
+    /// \return
+    ///
+    Item& getMenuItem(int index);
+
+    ///
+    /// \brief addOrder
+    /// \param newOrder
+    ///
+    void addOrder(std::vector<Item> orderItems = std::vector<Item>());
+
+    ///
+    /// \brief getLastOrder
+    /// \return
+    ///
+    std::vector<Item>& getCurrentOrder();
 
     ///
     /// \brief setRevenue
@@ -116,26 +154,38 @@ public:
     void setRevenue(double revenue);
 
     ///
+    /// \brief addRevenue
+    /// \param revenue
+    ///
+    void addRevenue(double revenue);
+
+    ///
+    /// \brief updateRevenue
+    ///
+    void updateRevenue();
+
+    ///
     /// \brief getRevenue
     /// \return
     ///
     double getRevenue() const;
 
     ///
-    /// \brief createNewOrder.
+    /// \brief setDistanceAt
+    /// \param otherID
+    /// \param otherDistance
     ///
-    /// Functionality to create a new order for the current user.
-    /// Adds the passed Restaurant to the list of Restaurants the current
-    /// user has already visited.
-    ///
-    void createNewOrder();
+    void setDistanceAt(unsigned int otherID, double otherDistance);
+
+    void RemoveMenuItem(int index);
 
 private:
-    int ID;
-    QString name;
+    int                 ID;
+    QString             name;
     std::vector<double> distances;
-    Menu menu;
-    double revenue;
+    Menu                menu;
+    OrderList           orders;
+    double              revenue;
 };
 
 #endif // RESTAURANT_H

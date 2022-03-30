@@ -1,52 +1,57 @@
 #include "menuwidget.h"
-#include "QTableWidget"
+#include <QMessageBox>
 
-MenuWidget::MenuWidget(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::MenuWidget)
+///
+/// \brief MenuWidget::MenuWidget
+/// \param inputRestaurant
+/// \param parent
+///
+MenuWidget::MenuWidget(Restaurant& inputRestaurant, QWidget *parent) :
+    QWidget(parent), ui(new Ui::MenuWidget), currentRestaurant(inputRestaurant)
 {
     ui->setupUi(this);
-    ui->subtotalLineEdit->setText(QString::number(0.00));
-    ui->subtotalLineEdit->setAlignment(Qt::AlignmentFlag::AlignRight);
-    ui->tableWidget_orderItems->setColumnCount(2);
-    ui->tableWidget_orderItems->setRowCount(8);
+    ui->tableWidget_orderItems->setColumnCount(4);
+    ui->tableWidget_orderItems->setHorizontalHeaderItem(0, new QTableWidgetItem("Item"));
+    ui->tableWidget_orderItems->setHorizontalHeaderItem(1, new QTableWidgetItem("Quantity"));
+    ui->tableWidget_orderItems->setHorizontalHeaderItem(2, new QTableWidgetItem("Price"));
+    ui->tableWidget_orderItems->setHorizontalHeaderItem(3, new QTableWidgetItem("Delete"));
+    ui->tableWidget_orderItems->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    createButtons();
+    updateTableWidget();
+    updateOrderTotal();
 }
 
-MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::MenuWidget)
+///
+/// \brief MenuWidget::~MenuWidget
+///
+MenuWidget::~MenuWidget()
 {
-    //Save the restaurant passed in to menu widget class member
-    this->currentRestaurant = currentRestaurant;
+    delete ui;
+}
 
-    //ui->tableWidget_menuItems->setColumnCount(3);
-
-    subTotal = 0;
-    menuItemsAdded = 0;
-
-    std::vector<Menu::Item> menuItems = currentRestaurant.getMenu().getItems();
-
-    ui->setupUi(this);
-
+///
+/// \brief MenuWidget::createButtons
+///
+void MenuWidget::createButtons()
+{
     //Create the menu item buttons
-    for (size_t i = 0; i < menuItems.size(); ++i)
-        itemButtons.append(createButton(menuItems[i], SLOT(itemClicked())));
+    for (int i = 0; i < currentRestaurant.getMenuSize(); ++i)
+        itemButtons.push_back(createButton(currentRestaurant.getMenuItem(i)));
 
     //Create Grid for menu item icons
-    QGridLayout *mainLayout = new QGridLayout(ui->scrollArea_menu);
-    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+    buttonLayout = new QGridLayout(ui->scrollArea_menu);
 
     //Add menu items to window
     int row = 0;
     int col = 0;
 
-    for (size_t i = 0; i < menuItems.size(); i++)
+    for (int i = 0; i < currentRestaurant.getMenuSize(); i++)
     {
-        mainLayout->addWidget(itemButtons[i], row, col);
+        buttonLayout->addWidget(itemButtons[i], row, col);
         col++;
 
-        if (col >= MAX_ITEMS_COLS)
+        if (col >= MAX_COL)
         {
             row++;
             col = 0;
@@ -54,72 +59,180 @@ MenuWidget::MenuWidget(const Restaurant& currentRestaurant, QWidget *parent) :
     }
 }
 
-MenuWidget::~MenuWidget()
+///
+/// \brief MenuWidget::updateOrderTotal
+///
+void MenuWidget::updateOrderTotal()
 {
-    delete ui;
+    double grandTotal = 0;
+
+    for (size_t i = 0; i < orderedItems.size(); i++)
+    {
+        grandTotal += orderedItems[i].getPrice() * orderedItems[i].getQuantity();
+    }
+
+    ui->totalLineEdit->setText(QString::number(grandTotal));
 }
 
+///
+/// \brief MenuWidget::updateTableWidget
+///
+void MenuWidget::updateTableWidget()
+{
+    ui->tableWidget_orderItems->setRowCount(orderedItems.size());
+    for (unsigned int index = 0; index < orderedItems.size(); index++)
+    {
+        QTableWidgetItem* itemName = new QTableWidgetItem(orderedItems[index].getName());
+        ui->tableWidget_orderItems->setItem(index, 0, itemName);
+        QString s = QString::number(orderedItems[index].getQuantity());
+        QTableWidgetItem* itemQuantity = new QTableWidgetItem(s);
+        ui->tableWidget_orderItems->setItem(index, 1, itemQuantity);
+        // should it be unit price or actual price?
+        QTableWidgetItem* itemPrice = new QTableWidgetItem(QString::number(orderedItems[index].getPrice()));
+        ui->tableWidget_orderItems->setItem(index, 2, itemPrice);
+        ui->tableWidget_orderItems->item(index, 2)->setTextAlignment(Qt::AlignRight);
+        //set delete button
+        QHBoxLayout *l = new QHBoxLayout();
+        l->addWidget(deleteItemButtons[index]);
+        QWidget *w = new QWidget();
+        w->setLayout(l);
+        ui->tableWidget_orderItems->setCellWidget(index, 3, w);
+
+    }
+}
+
+///
+/// \brief MenuWidget::on_confirmButton_pressed
+///
 void MenuWidget::on_confirmButton_pressed()
 {
-    // go through listWidget and update restuarant's revenue with total from order
+    if(orderedItems.size() != 0)
+    {
+        updateTableWidget();
+        updateOrderTotal();
+        currentRestaurant.addOrder(orderedItems);
+        emit transmit_confirmOrder(currentRestaurant);
+    }
+    else
+    {
+        qDebug() << "Nothing has been ordered silly!";
+    }
 
-    emit transmit_confirmOrder(currentRestaurant);
 }
 
+///
+/// \brief MenuWidget::on_cancelButton_pressed
+///
 void MenuWidget::on_cancelButton_pressed()
 {
+    currentRestaurant.setRevenue(0);
     emit transmit_cancelOrder();
 }
 
-void MenuWidget::itemClicked()
+///
+/// \brief MenuWidget::recieve_itemClicked
+/// \param item
+///
+void MenuWidget::recieve_itemClicked(Item& item)
 {
-    //keeps track of row where menu item is added
-    int row = 1;
-    //Get the tile clicked and send to restaurant menu
-    Button *clickedButton = qobject_cast<Button *>(sender());
-    qDebug() << "Menu button Clicked: " << clickedButton->getTopText()->text();
-
-    QString menuItemText = clickedButton->getTopText()->text();
-    QTableWidgetItem *menuItem = new QTableWidgetItem(menuItemText);
-    QList<QTableWidgetItem *> items = ui->tableWidget_orderItems->findItems(menuItemText, Qt::MatchExactly);
-    ui->tableWidget_orderItems->setColumnCount(3);
+    QList<QTableWidgetItem *> items = ui->tableWidget_orderItems->findItems(item.getName(), Qt::MatchExactly);
 
 
     if (items.size() == 0)
     {
-        //ui->table_menuItems->addItem(menuItem);
-        ui->tableWidget_orderItems->setRowCount(menuItemsAdded + 1);
-        ui->tableWidget_orderItems->setItem(menuItemsAdded, 0, menuItem);
-        menuItemsAdded++;
-
-        //update subtotal get item price
-        subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);
-        QString valueAsString = QString::number(subTotal);
-        ui->subtotalLineEdit->setText(valueAsString);
+        orderedItems.push_back(item);
+        int menuIndex  = GetMenuItemIndex(item.getName());
+        orderedItems[menuIndex].incrementQuantity();
+        deleteItemButtons.append(createDeleteButton(item,SLOT (deleteItemClicked())));
+        updateTableWidget();
+        updateOrderTotal();
     }
     else
     {
-        //update quantity of item selected
-        subTotal += currentRestaurant.getMenu().getItemPrice(menuItemText);
-        QString valueAsString = QString::number(subTotal);
-        ui->subtotalLineEdit->setText(valueAsString);
-        qDebug() << "Menu item already added, updating quantity";
+        int menuIndex  = GetMenuItemIndex(item.getName());
+        //If menu is valid continute
+        if( menuIndex != -1)
+        {
+            if(orderedItems[menuIndex].getQuantity() > 99)
+            {
+                QMessageBox::information(this, "Tip", "Cant add more than 100 items");
+            }
+            else
+            {
+                orderedItems[menuIndex].incrementQuantity();
+                updateTableWidget();
+                updateOrderTotal();
+            }
+
+        }
+        else
+            qDebug() << "An error has occured";
     }
 
 }
 
-Button *MenuWidget::createButton(Menu::Item item, const char *member)
+void MenuWidget::deleteItemClicked()
+{
+    Button *clickedButton = qobject_cast<Button *>(sender());
+
+    int menuIndex = GetMenuItemIndex(clickedButton->getItem().getName());
+
+    if( menuIndex != -1)
+    {
+        if (orderedItems[menuIndex].getQuantity() == 1)
+        {
+            orderedItems[menuIndex].decrementQuantity();
+            orderedItems.erase(orderedItems.begin() + menuIndex);
+            deleteItemButtons.erase(deleteItemButtons.begin() + menuIndex);
+            updateTableWidget();
+            updateOrderTotal();
+        }
+        else
+        {
+            orderedItems[menuIndex].decrementQuantity();
+            updateTableWidget();
+            updateOrderTotal();
+        }
+    }
+}
+
+///
+/// \brief MenuWidget::createButton
+/// \param item
+/// \return
+///
+Button *MenuWidget::createButton(Item& item)
+{
+    Button *button = new Button(currentRestaurant, item, this);
+    QObject::connect(button,
+                     SIGNAL(transmit_itemClicked(Item&)),
+                     this,
+                     SLOT(recieve_itemClicked(Item&)));
+    return button;
+}
+
+Button *MenuWidget::createDeleteButton(Item& item, const char *member)
 {
     Button *button = new Button(item);
     connect(button, SIGNAL(clicked()), this, member);
     return button;
+
 }
 
-Restaurant MenuWidget::GetCurrentRestuarant()
+int MenuWidget::GetMenuItemIndex(QString itemName)
 {
-    return currentRestaurant;
+    for (int i = 0; i < currentRestaurant.getMenuSize(); i++)
+        if(orderedItems[i].getName() == itemName) return i;
+
+    qDebug() << "Item doesn't exist";
+    return -1;
 }
 
-
-
+///
+/// \brief MenuWidget::on_editButton_pressed
+///
+void MenuWidget::on_editButton_pressed()
+{
+    emit transmit_editMenu();
+}
 
