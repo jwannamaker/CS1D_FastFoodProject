@@ -88,12 +88,6 @@ public:
     ///
     bool isChecked();
 
-    ///
-    /// \brief isChecked
-    /// \return
-    ///
-    void setChecked(bool checked);
-
 signals:
     ///
     /// \brief transmit_restaurantClicked
@@ -103,7 +97,7 @@ signals:
     ///
     /// \brief transmit_restaurantChecked
     ///
-    void transmit_restaurantChecked(Restaurant&, bool);
+    void transmit_restaurantChecked(Restaurant&);
 
     ///
     /// \brief transmit_itemClicked

@@ -260,3 +260,21 @@ void Restaurant::RemoveMenuItem(int index)
 {
     menu.erase(menu.begin() + index);
 }
+
+///
+/// \brief getOrderList
+/// \return
+///
+OrderList Restaurant::getOrderList() const
+{
+    return orders;
+}
+
+///
+/// \brief setOrderList
+/// \param newOrderList
+///
+void Restaurant::setOrderList(OrderList newOrderList)
+{
+    this->orders = newOrderList;
+}

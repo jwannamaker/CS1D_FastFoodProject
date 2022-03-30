@@ -118,7 +118,7 @@ public slots:
     /// \brief addRestaurantToTrip
     /// \param rest
     ///
-    void addRestaurantToTrip(Restaurant& rest,bool checked = false);
+    void addRestaurantToTrip(Restaurant& rest);
 
     ///
     /// \brief addRestaurantsFromFile
@@ -158,7 +158,7 @@ private:
     /// \param rest
     /// \return
     ///
-    Button *createButton(Restaurant& rest, bool checked = false);
+    Button *createButton(Restaurant& rest);
 
     ///
     /// \brief createAddButton
