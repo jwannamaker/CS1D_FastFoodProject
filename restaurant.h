@@ -1,5 +1,6 @@
 ///
 /// \file restaurant.h.
+/// \authors Erik Nguyen, Johnny Wannamaker, Dante Vazquez
 ///
 
 #ifndef RESTAURANT_H

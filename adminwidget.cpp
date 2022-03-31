@@ -1,14 +1,18 @@
+/// 
+/// \file adminwidget.cpp
+/// \brief Implementation of the AdminWidget interface.
+/// 
+/// \authors Dante Vasquez, Johnny Wannamaker
+/// 
 #include "adminwidget.h"
 #include "ui_adminwidget.h"
-#include <QMessageBox>
 
 ///
 /// \brief AdminWidget::AdminWidget
 /// \param parent
 ///
-AdminWidget::AdminWidget(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::AdminWidget)
+AdminWidget::AdminWidget(QWidget *parent) : QWidget(parent),
+                                            ui(new Ui::AdminWidget)
 {
     ui->setupUi(this);
     ui->tableWidget->setColumnCount(2);
@@ -33,7 +37,7 @@ AdminWidget::~AdminWidget()
 ///
 void AdminWidget::populateComboBox()
 {
-    //Add restaurants to combo box
+    // Add restaurants to combo box
     for (size_t i = 0; i < RestaurantList.size(); ++i)
         ui->comboBox_restaurant->addItem(RestaurantList[i].getName());
 }
@@ -46,11 +50,11 @@ void AdminWidget::updateTableWidget()
     ui->tableWidget->setRowCount(RestaurantList[currentID].getMenuSize());
 
     // initializing contents of the table
-    for(int index = 0; index < RestaurantList[currentID].getMenuSize(); index++)
+    for (int index = 0; index < RestaurantList[currentID].getMenuSize(); index++)
     {
-        QTableWidgetItem* itemName = new QTableWidgetItem(RestaurantList[currentID].getMenuItem(index).getName());
+        QTableWidgetItem *itemName = new QTableWidgetItem(RestaurantList[currentID].getMenuItem(index).getName());
         ui->tableWidget->setItem(index, 0, itemName);
-        QTableWidgetItem* unitPrice = new QTableWidgetItem(QString::number(RestaurantList[currentID].getMenuItem(index).getPrice(), 'f', 2));
+        QTableWidgetItem *unitPrice = new QTableWidgetItem(QString::number(RestaurantList[currentID].getMenuItem(index).getPrice(), 'f', 2));
         ui->tableWidget->setItem(index, 1, unitPrice);
         ui->tableWidget->item(index, 1)->setTextAlignment(Qt::AlignRight);
     }
@@ -134,4 +138,3 @@ void AdminWidget::on_tableWidget_itemSelectionChanged()
     ui->lineEdit_itemName->setText(itemName);
     ui->doubleSpinBox_itemPrice->setValue(itemPrice.toDouble());
 }
-

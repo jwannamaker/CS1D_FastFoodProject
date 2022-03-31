@@ -1,3 +1,7 @@
+///
+/// \file mainmenuwidget.h
+/// \author Johnny Wannamaker
+///
 #ifndef MAINMENUWIDGET_H
 #define MAINMENUWIDGET_H
 

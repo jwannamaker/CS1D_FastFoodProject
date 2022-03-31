@@ -1,3 +1,7 @@
+///
+/// \file menuwidget.h
+/// \authors Dante Vazquez, Johnny Wannamaker
+///
 #ifndef MENUWIDGET_H
 #define MENUWIDGET_H
 #include <QWidget>
@@ -86,11 +90,25 @@ private:
     const int MAX_COL = 5;
 
     Ui::MenuWidget *ui;
+
+    ///
+    /// \brief createButton
+    /// \param item
+    /// \return
+    ///
     Button *createButton(Item& item); //Creates a button for a menu item
+
+    ///
+    /// \brief createDeleteButton
+    /// \param item
+    /// \param member
+    /// \return
+    ///
     Button *createDeleteButton(Item& item, const char *member);
 
+    // data members
     QGridLayout* buttonLayout;
-    QVector<Button*> itemButtons;//data members
+    QVector<Button*> itemButtons;
     QVector<Button*> deleteItemButtons;
     std::vector<Item> orderedItems;
     Restaurant& currentRestaurant; //Current restaurant on the widget

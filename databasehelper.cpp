@@ -63,6 +63,7 @@ void DatabaseHelper::updateRestaurantDistances(const Restaurant& newRestaurant)
 
 ///
 /// \brief DatabaseHelper::addRestaurants
+/// \details Updates the contents of the global restaurant list from the specified file
 /// \param filename
 ///
 void DatabaseHelper::addRestaurants(QString filename)

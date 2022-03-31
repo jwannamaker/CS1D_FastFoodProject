@@ -162,6 +162,9 @@ void MenuWidget::recieve_itemClicked(Item& item)
 
 }
 
+///
+/// \brief MenuWidget::deleteItemClicked
+///
 void MenuWidget::deleteItemClicked()
 {
     Button *clickedButton = qobject_cast<Button *>(sender());
@@ -202,6 +205,12 @@ Button *MenuWidget::createButton(Item& item)
     return button;
 }
 
+///
+/// \brief MenuWidget::createDeleteButton
+/// \param item
+/// \param member
+/// \return
+///
 Button *MenuWidget::createDeleteButton(Item& item, const char *member)
 {
     Button *button = new Button(item);
@@ -210,6 +219,11 @@ Button *MenuWidget::createDeleteButton(Item& item, const char *member)
 
 }
 
+///
+/// \brief MenuWidget::GetMenuItemIndex
+/// \param itemName
+/// \return
+///
 int MenuWidget::GetMenuItemIndex(QString itemName)
 {
     for (int i = 0; i < currentRestaurant.getMenuSize(); i++)

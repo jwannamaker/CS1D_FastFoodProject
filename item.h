@@ -1,3 +1,7 @@
+///
+/// \file item.h
+/// \author Johnny Wannamaker
+///
 #ifndef ITEM_H
 #define ITEM_H
 #include <QString>

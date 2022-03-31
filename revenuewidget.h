@@ -1,3 +1,7 @@
+///
+/// \file revenuewidget.h
+/// \authors Erik Nguyen, Johnny Wannamaker
+///
 #ifndef REVENUEWIDGET_H
 #define REVENUEWIDGET_H
 #include <QWidget>

@@ -1,3 +1,8 @@
+///
+/// \file databasehelper.h
+///
+/// \author Erik Nguyen
+///
 #ifndef DATABASE_H
 #define DATABASE_H
 
@@ -15,7 +20,7 @@ extern std::vector<Restaurant> RestaurantList;
 ///
 /// \class Database
 /// \brief The Database class
-/// Manages a connection to the database (.sqlite)
+/// Manages a connection to the database file (.sqlite)
 ///
 class DatabaseHelper
 {

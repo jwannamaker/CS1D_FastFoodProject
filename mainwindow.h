@@ -1,3 +1,7 @@
+///
+/// \file mainwindow.h
+/// \author Johnny Wannamaker
+///
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

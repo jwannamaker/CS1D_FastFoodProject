@@ -1,3 +1,9 @@
+///
+/// \file button.cpp
+/// \brief
+///
+/// \author Johnny Wannamaker
+///
 #include "button.h"
 
 ///
@@ -15,6 +21,7 @@ Button::Button(const QString &top, const QString& bottom, QWidget *parent)
     setLayout(QPixmap(":images/plus_icon.png"));
     checkBox->setHidden(true);
 
+    /// \brief appropriate signals for the add restaurant button
     QObject::connect(this,
                      SIGNAL(clicked()),
                      this,
@@ -36,6 +43,7 @@ Button::Button(Restaurant& rest, int initialID, QWidget* parent)
     bottomText = new QLabel(QString::number(rest.getDistance(initialID)) + " miles away");
     setLayout(QPixmap(":images/food_icon.png"));
 
+    // appropriate signals for a restaurant button
     QObject::connect(this,
                      SIGNAL(clicked()),
                      this,
@@ -61,6 +69,7 @@ Button::Button(Restaurant& rest, Item& item, QWidget* parent)
     setLayout(QPixmap(":images/rest_menu_icon.png"));
     checkBox->setHidden(true);
 
+    // appropriate signals for an item being clicked
     QObject::connect(this,
                      SIGNAL(clicked()),
                      this,

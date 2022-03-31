@@ -1,3 +1,9 @@
+/// 
+/// \file adminwidget.h
+/// \brief 
+/// 
+/// \author Johnny Wannamaker
+/// 
 #ifndef ADMINWIDGET_H
 #define ADMINWIDGET_H
 
@@ -16,9 +22,10 @@ namespace Ui {
 class AdminWidget;
 }
 
-///
-/// \brief The AdminWidget class
-///
+/// \class AdminWidget
+/// \authors Dante Vasquez, Johnny Wannamaker
+/// \brief This class provides the ability to interact with the administrative
+/// features of the application.
 class AdminWidget : public QWidget
 {
     Q_OBJECT
@@ -29,6 +36,11 @@ public:
     /// \param parent
     ///
     explicit AdminWidget(QWidget *parent = nullptr);
+
+    /// 
+    /// \brief Destroy the Admin Widget object.
+    /// 
+    /// 
     ~AdminWidget();
 
     ///
@@ -67,10 +79,6 @@ private slots:
     ///
     /// \brief on_saveButton_pressed
     ///
-    /// Takes the contents of the table widget, creates a new menu according
-    /// to the admin's new specification, and sets the appropriate restaurant's
-    /// menu to match.
-    ///
     void on_saveButton_pressed();
 
     ///
@@ -89,7 +97,10 @@ private slots:
     void on_tableWidget_itemSelectionChanged();
 
 private:
-    Ui::AdminWidget *ui;
+    /// \memberof AdminWidget
+    Ui::AdminWidget *ui;    
+
+    /// \memberof AdminWidget
     int currentID;
 };
 

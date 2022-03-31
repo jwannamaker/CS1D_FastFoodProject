@@ -1,3 +1,9 @@
+///
+/// \file button.h
+/// \brief The basis for the viewing of restaurants and menu items.
+///
+/// \author Johnny Wannamaker
+///
 #ifndef BUTTON_H
 #define BUTTON_H
 
@@ -28,6 +34,7 @@ class Button : public QPushButton
 public:
     ///
     /// \brief Button
+    /// \details A constructor
     /// \param topText
     /// \param bottomText
     /// \param parent
@@ -36,8 +43,9 @@ public:
 
     ///
     /// \brief Button
-    /// \param rest
-    /// \param initialID
+    /// \details A constructor for a restaurant button
+    /// \param rest the restaurant being represented
+    /// \param initialID an int used to determine the distance to be displayed
     /// \param parent
     ///
     explicit Button(Restaurant& rest, int initialID, QWidget *parent = nullptr);
@@ -71,25 +79,25 @@ public:
 
     ///
     /// \brief sizeHint
-    /// \return
+    /// \return Qsize
     ///
     QSize sizeHint() const override;
 
     ///
     /// \brief getRestaurant
-    /// \return
+    /// \return Reference of a restaurant
     ///
     Restaurant& getRestaurant();
 
     ///
     /// \brief getItem
-    /// \return
+    /// \return Reference of an item
     ///
     Item& getItem();
 
     ///
     /// \brief isChecked
-    /// \return
+    /// \return boolean
     ///
     bool isChecked();
 

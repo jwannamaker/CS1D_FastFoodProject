@@ -1,3 +1,7 @@
+///
+/// \file restaurantwidget.h
+/// \authors Dante Vazquez, Erik Nguyen, Johnny Wannamaker
+///
 #ifndef RESTAURANTWIDGET_H
 #define RESTAURANTWIDGET_H
 
